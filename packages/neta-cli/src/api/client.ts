@@ -129,10 +129,19 @@ export const apiClient = {
     };
     const size = aspectMap[params.aspect] || [576, 768];
 
+    // rawPrompt 必须包含至少一个 freetext token
+    const rawPrompt = [
+      {
+        type: "freetext" as const,
+        value: params.prompt,
+        weight: 1,
+      },
+    ];
+
     const payload = {
       storyId: "DO_NOT_USE",
       jobType: "universal",
-      rawPrompt: [],
+      rawPrompt,
       width: size[0],
       height: size[1],
       meta: {
@@ -154,8 +163,17 @@ export const apiClient = {
       model_w: "wan26",
     };
 
+    // rawPrompt 必须包含至少一个 freetext token
+    const rawPrompt = [
+      {
+        type: "freetext" as const,
+        value: params.prompt,
+        weight: 1,
+      },
+    ];
+
     const payload = {
-      rawPrompt: [],
+      rawPrompt,
       image_url: params.image_source,
       work_flow_text: params.prompt,
       work_flow_model: modelMap[params.model],
@@ -171,8 +189,17 @@ export const apiClient = {
 
   // Make Song
   async makeSong(params: MakeSongV1Parameters): Promise<TaskResult> {
+    // rawPrompt 必须包含至少一个 freetext token
+    const rawPrompt = [
+      {
+        type: "freetext" as const,
+        value: params.prompt,
+        weight: 1,
+      },
+    ];
+
     const payload = {
-      prompt: params.prompt,
+      rawPrompt,
       lyrics: params.lyrics,
       meta: {
         entrance: "SONG,VERSE",
