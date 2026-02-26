@@ -35,7 +35,7 @@ const createClient = (): AxiosInstance => {
   const client = axios.create({
     baseURL: BASE_URL,
     headers: {
-      Authorization: `Bearer ${getToken()}`,
+      "x-token": getToken(),
       "Content-Type": "application/json",
       "x-platform": "nieta-app/web",
     },
