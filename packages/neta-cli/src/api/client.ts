@@ -37,7 +37,7 @@ const createClient = (): AxiosInstance => {
     headers: {
       Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
-      "x-platform": "neta-app",
+      "x-platform": "nieta-app/web",
     },
   });
 
