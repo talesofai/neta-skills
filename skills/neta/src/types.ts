@@ -62,6 +62,36 @@ export type ElementumAssign = {
   avatar_img?: string | null;
 };
 
+// TCP Profile - Response from /v2/travel/parent/:uuid/profile
+export type TcpProfileResult =
+  | {
+      type: 'oc' | 'official';
+      uuid: string;
+      name: string;
+      oc_bio?: {
+        age?: string | null;
+        interests?: string | null;
+        persona?: string | null;
+        description?: string | null;
+        occupation?: string | null;
+      } | null;
+      config?: {
+        avatar_img?: string | null;
+        header_img?: string | null;
+      } | null;
+    }
+  | {
+      type: 'elementum';
+      uuid: string;
+      name: string;
+      oc_bio?: {
+        description?: string | null;
+      } | null;
+      config?: {
+        avatar_img?: string | null;
+      } | null;
+    };
+
 // Make Image
 export const makeImageV1Parameters = z.object({
   prompt: z.string(),

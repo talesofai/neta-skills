@@ -20,5 +20,11 @@
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
+  },
+  "scripts": {
+    "validate:skill": "cd skills/neta && npm run validate",
+    "lint:skill": "cd skills/neta && npm run lint",
+    "typecheck:skill": "cd skills/neta && npm run typecheck",
+    "check": "npm run validate:skill && npm run lint:skill && npm run typecheck:skill"
   }
 }

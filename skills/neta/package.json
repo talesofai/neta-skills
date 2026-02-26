@@ -18,7 +18,9 @@
   "scripts": {
     "start": "tsx src/cli.ts",
     "lint": "biome check src",
-    "typecheck": "tsc --noEmit"
+    "lint:fix": "biome check --write src",
+    "typecheck": "tsc --noEmit",
+    "validate": "bash scripts/validate-skill.sh"
   },
   "dependencies": {
     "axios": "^1.7.9",

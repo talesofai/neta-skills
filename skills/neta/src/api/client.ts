@@ -15,6 +15,7 @@ import type {
   SearchCharacterOrElementumV1Parameters,
   SearchCharacterOrElementumV1Result,
   TaskResult,
+  TcpProfileResult,
 } from '../types.ts';
 
 const BASE_URL = process.env.NETA_BASE_URL || 'https://api.talesofai.cn';
@@ -302,7 +303,7 @@ export const apiClient = {
   async requestCharacterOrElementum(
     params: RequestCharacterOrElementumV1Parameters,
   ): Promise<RequestCharacterOrElementumV1Result> {
-    let tcp: any;
+    let tcp: TcpProfileResult;
 
     if (params.uuid) {
       tcp = await this.tcpProfile(params.uuid);

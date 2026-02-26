@@ -1,7 +1,6 @@
 ---
 name: neta
 description: Neta API 交互技能 - 生成图片、视频、歌曲，搜索角色/元素，管理标签内容。当需要创作 AI 内容、查询角色信息、获取标签数据时使用此技能。
-compatibility: 需要设置 NETA_TOKEN 环境变量
 ---
 
 # Neta Skill
