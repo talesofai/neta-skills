@@ -13,7 +13,7 @@ compatibility: 需要设置 NETA_TOKEN 环境变量
 ## 使用方法
 
 ```bash
-pnpm neta get-hashtag-characters --hashtag "标签名"
+npm run neta -- get-hashtag-characters --hashtag "标签名"
 ```
 
 ## 参数

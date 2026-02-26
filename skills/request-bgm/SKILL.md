@@ -13,7 +13,7 @@ compatibility: 需要设置 NETA_TOKEN 环境变量
 ## 使用方法
 
 ```bash
-pnpm neta request-bgm
+npm run neta -- request-bgm
 ```
 
 ## 参数

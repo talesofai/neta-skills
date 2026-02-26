@@ -13,7 +13,7 @@ compatibility: 需要设置 NETA_TOKEN 环境变量
 ## 使用方法
 
 ```bash
-pnpm neta remove-background --input-image "artifact-uuid"
+npm run neta -- remove-background --input-image "artifact-uuid"
 ```
 
 ## 参数

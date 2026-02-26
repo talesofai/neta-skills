@@ -13,7 +13,7 @@ compatibility: 需要设置 NETA_TOKEN 环境变量
 ## 使用方法
 
 ```bash
-pnpm neta make-video --image-source "https://example.com/image.jpg" --prompt "让图片动起来" --model "model_s"
+npm run neta -- make-video --image-source "https://example.com/image.jpg" --prompt "让图片动起来" --model "model_s"
 ```
 
 ## 参数

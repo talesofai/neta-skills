@@ -13,7 +13,7 @@ compatibility: 需要设置 NETA_TOKEN 环境变量
 ## 使用方法
 
 ```bash
-pnpm neta merge-video --input "合并指令"
+npm run neta -- merge-video --input "合并指令"
 ```
 
 ## 参数

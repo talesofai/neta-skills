@@ -14,10 +14,10 @@ compatibility: 需要设置 NETA_TOKEN 环境变量
 
 ```bash
 # 通过名称查询
-pnpm neta request-character-or-style --name "角色名"
+npm run neta -- request-character-or-style --name "角色名"
 
 # 通过 UUID 查询
-pnpm neta request-character-or-style --uuid "uuid-xxx"
+npm run neta -- request-character-or-style --uuid "uuid-xxx"
 ```
 
 ## 参数

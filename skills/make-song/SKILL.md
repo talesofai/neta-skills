@@ -13,7 +13,7 @@ compatibility: 需要设置 NETA_TOKEN 环境变量
 ## 使用方法
 
 ```bash
-pnpm neta make-song --prompt "欢快的流行音乐" --lyrics "这里是歌词内容..."
+npm run neta -- make-song --prompt "欢快的流行音乐" --lyrics "这里是歌词内容..."
 ```
 
 ## 参数
