@@ -89,17 +89,25 @@ neta-skills/
 ├── skills/
 │   └── neta/                   # Unified skill with full CLI
 │       ├── SKILL.md            # Skill documentation
-│       ├── README.md           # Usage guide
 │       ├── package.json        # Dependencies
 │       ├── src/
 │       │   ├── cli.ts          # CLI entry point
 │       │   ├── api/            # API client
 │       │   ├── commands/       # Command definitions
 │       │   └── types.ts        # TypeScript types
-│       └── references/         # Reference docs
+│       └── references/         # Best practices & workflow guides
 ├── .env.example                # Environment template
 └── package.json                # Root config
 ```
+
+## 📖 Best Practices & Workflows (References)
+
+The `skills/neta/references/` directory contains detailed **best practice workflows**. These guides are designed to help AI agents (and developers) understand how to combine multiple commands to achieve complex goals effectively. 
+
+Agents use these references to learn the optimal sequence of actions, parameter tuning, and standard operating procedures for specific NETA Art workflows, such as:
+- **Image & Video Generation:** Best practices for chaining prompts, generating assets, and assembling videos.
+- **Song & MV Creation:** Workflows for composing songs and creating music videos with synchronized visuals.
+- **Character & Hashtag Research:** Processes for finding trending content, searching characters, and utilizing community trends.
 
 ## 📝 Environment Variables
 
