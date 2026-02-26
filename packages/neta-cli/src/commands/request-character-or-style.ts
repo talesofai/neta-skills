@@ -9,18 +9,8 @@ export const requestCharacterOrStyleCommand = new Command("request-character-or-
   .action(async (options) => {
     try {
       if (!options.name && !options.uuid) {
-        console.error("错误：必须提供 --name 或 --uuid 参数之一");
-        process.exit(1);
+        throw new Error("必须提供 --name 或 --uuid 参数之一");
       }
-
-      console.log(`正在获取详情...`);
-      if (options.name) {
-        console.log(`名称：${options.name}`);
-      }
-      if (options.uuid) {
-        console.log(`UUID: ${options.uuid}`);
-      }
-      console.log(`类型：${options.parent_type}`);
 
       const result = await apiClient.requestCharacterOrElementum({
         name: options.name,
@@ -28,10 +18,14 @@ export const requestCharacterOrStyleCommand = new Command("request-character-or-
         parent_type: options.parent_type,
       });
 
-      console.log("\n详情:");
       console.log(JSON.stringify(result, null, 2));
     } catch (error) {
-      console.error("获取详情失败:", error instanceof Error ? error.message : error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(JSON.stringify({
+        error: {
+          message: errorMessage,
+        },
+      }, null, 2));
       process.exit(1);
     }
   });

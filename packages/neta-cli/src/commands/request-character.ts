@@ -6,9 +6,6 @@ export const requestCharacterCommand = new Command("request-character")
   .requiredOption("-n, --name <string>", "角色名称")
   .action(async (options) => {
     try {
-      console.log(`正在获取角色详情：${options.name}`);
-
-      // 先搜索角色
       const searchResult = await apiClient.searchTCPs({
         keywords: options.name,
         page_index: 0,
@@ -18,19 +15,13 @@ export const requestCharacterCommand = new Command("request-character")
       });
 
       if (searchResult.list.length === 0) {
-        console.error(`未找到角色：${options.name}`);
-        process.exit(1);
+        throw new Error(`未找到角色：${options.name}`);
       }
 
-      const firstMatch = searchResult.list[0];
-      console.log(`找到角色：${firstMatch.name}`);
-
-      // 获取详细信息
-      const tcp = await apiClient.tcpProfile(firstMatch.uuid);
+      const tcp = await apiClient.tcpProfile(searchResult.list[0].uuid);
 
       if (!tcp) {
-        console.error("无法获取角色详情");
-        process.exit(1);
+        throw new Error("无法获取角色详情");
       }
 
       const result = {
@@ -48,10 +39,14 @@ export const requestCharacterCommand = new Command("request-character")
         },
       };
 
-      console.log("\n角色详情:");
       console.log(JSON.stringify(result, null, 2));
     } catch (error) {
-      console.error("获取角色详情失败:", error instanceof Error ? error.message : error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(JSON.stringify({
+        error: {
+          message: errorMessage,
+        },
+      }, null, 2));
       process.exit(1);
     }
   });

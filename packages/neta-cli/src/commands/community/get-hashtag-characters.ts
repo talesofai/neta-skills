@@ -10,10 +10,6 @@ export const getHashtagCharactersCommand = new Command("get-hashtag-characters")
   .option("--parent-type <string>", "类型 (oc/elementum)", "")
   .action(async (options) => {
     try {
-      console.log(`正在获取标签角色：${options.hashtag}`);
-      console.log(`页码：${options.pageIndex}, 每页：${options.pageSize}`);
-      console.log(`排序：${options.sortBy}`);
-
       const result = await apiClient.fetchCharactersByHashtag({
         hashtag: options.hashtag,
         page_index: parseInt(options.pageIndex),
@@ -22,27 +18,14 @@ export const getHashtagCharactersCommand = new Command("get-hashtag-characters")
         parent_type: options.parentType as "oc" | "elementum" | undefined,
       });
 
-      console.log(`\n搜索结果：共 ${result.total} 条`);
-      console.log(`当前页：${result.page_index}, 每页：${result.page_size}`);
-      console.log(`是否有下一页：${result.has_next}`);
-
-      if (result.list.length > 0) {
-        console.log("\n角色列表:");
-        result.list.forEach((char, index) => {
-          console.log(`\n${index + 1}. ${char.name} (${char.short_name})`);
-          console.log(`   UUID: ${char.uuid}`);
-          console.log(`   创建者：${char.creator_name}`);
-          console.log(`   创建时间：${char.ctime}`);
-          if (char.avatar_img) {
-            console.log(`   头像：${char.avatar_img}`);
-          }
-        });
-      }
-
-      console.log("\n完整结果:");
       console.log(JSON.stringify(result, null, 2));
     } catch (error) {
-      console.error("获取标签角色失败:", error instanceof Error ? error.message : error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(JSON.stringify({
+        error: {
+          message: errorMessage,
+        },
+      }, null, 2));
       process.exit(1);
     }
   });
