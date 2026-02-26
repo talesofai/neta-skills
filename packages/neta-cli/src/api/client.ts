@@ -119,14 +119,15 @@ export const apiClient = {
 
   // Make Image
   async makeImage(params: MakeImageV1Parameters): Promise<TaskResult> {
+    // 使用原项目的尺寸映射（生成尺寸，不是结果尺寸）
     const aspectMap: Record<string, [number, number]> = {
-      "1:1": [1024, 1024],
-      "3:4": [896, 1152],
-      "4:3": [1152, 896],
-      "9:16": [768, 1344],
-      "16:9": [1344, 768],
+      "1:1": [512, 512],
+      "3:4": [576, 768],
+      "4:3": [768, 576],
+      "9:16": [576, 1024],
+      "16:9": [1024, 576],
     };
-    const size = aspectMap[params.aspect] || [896, 1152];
+    const size = aspectMap[params.aspect] || [576, 768];
 
     const payload = {
       storyId: "DO_NOT_USE",
