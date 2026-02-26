@@ -32,19 +32,45 @@ const getToken = (): string => {
 };
 
 const createClient = (): AxiosInstance => {
+  const token = getToken();
+  
   const client = axios.create({
     baseURL: BASE_URL,
     headers: {
-      "x-token": getToken(),
+      "x-token": token,
       "Content-Type": "application/json",
       "x-platform": "nieta-app/web",
     },
   });
 
+  // Request interceptor for logging
+  client.interceptors.request.use((config) => {
+    console.log("\n=== API Request ===");
+    console.log("URL:", config.baseURL + config.url);
+    console.log("Method:", config.method?.toUpperCase());
+    console.log("Headers:", JSON.stringify(config.headers, null, 2));
+    if (config.data) {
+      console.log("Payload:", JSON.stringify(config.data, null, 2));
+    }
+    console.log("=================\n");
+    return config;
+  });
+
   client.interceptors.response.use(
-    (response) => response,
+    (response) => {
+      console.log("=== API Response ===");
+      console.log("Status:", response.status);
+      console.log("Data:", typeof response.data === 'string' ? response.data : JSON.stringify(response.data, null, 2));
+      console.log("====================\n");
+      return response;
+    },
     (error) => {
       if (error.response?.status) {
+        console.log("=== API Error Response ===");
+        console.log("Status:", error.response.status);
+        console.log("Data:", error.response.data);
+        console.log("========================\n");
+        
         const message =
           error.response.data?.message ||
           error.response.data?.msg ||
