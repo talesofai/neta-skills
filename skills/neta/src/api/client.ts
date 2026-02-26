@@ -17,7 +17,7 @@ import type {
   TaskResult,
 } from '../types.ts';
 
-const BASE_URL = process.env.NETA_API_URL || 'https://api.talesofai.cn';
+const BASE_URL = process.env.NETA_BASE_URL || 'https://api.talesofai.cn';
 
 const getToken = (): string => {
   const TOKEN = process.env.NETA_TOKEN;
