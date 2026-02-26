@@ -1,0 +1,35 @@
+{
+  "name": "neta-skill",
+  "version": "0.1.0",
+  "description": "A skill for interacting with Neta API to generate images, videos, songs, and manage characters/elements.",
+  "type": "module",
+  "main": "src/cli.ts",
+  "author": "Neta Team",
+  "license": "MIT",
+  "keywords": ["neta", "api", "skill", "pi-agent", "image-generation", "video-generation", "ai"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/talesofai/neta-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/talesofai/neta-skills/issues"
+  },
+  "homepage": "https://github.com/talesofai/neta-skills#readme",
+  "scripts": {
+    "start": "tsx src/cli.ts",
+    "lint": "biome check src",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.7",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "latest",
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}

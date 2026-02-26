@@ -20,70 +20,64 @@
 
 The primary way to use this project is by installing the skills into your AI agent environment.
 
-### Installation via `skills.sh`
-You can easily install these skills into your agent using the [skills.sh](https://skills.sh/docs) CLI:
+### Installation
+
+Install the unified [`neta`](skills/neta/SKILL.md) skill into your agent:
 
 ```bash
-npx skills add talesofai/neta-skills
+npx skills add neta-skills/skills/neta
 ```
-*(Note: Depending on your agent setup, you may need to specify individual skill paths or configurations).*
 
-### Available Skills
+### Available Commands
 
-All skills are located in the `skills/` directory. Each skill contains a `SKILL.md` file detailing its capabilities, inputs, and outputs.
+The skill includes 12 commands for various tasks:
 
-| Category | Skill | Description |
-|----------|-------|-------------|
-| **Creation** | [`make-image`](skills/make-image/SKILL.md) | Generate images from text prompts. |
-| | [`make-video`](skills/make-video/SKILL.md) | Generate videos from images and prompts. |
-| | [`make-song`](skills/make-song/SKILL.md) | Compose songs with custom prompts and lyrics. |
-| | [`remove-background`](skills/remove-background/SKILL.md) | Remove the background from an image. |
-| | [`merge-video`](skills/merge-video/SKILL.md) | Merge multiple media assets into a single video. |
-| **Characters**| [`search-tcp`](skills/search-tcp/SKILL.md) | Search for characters and style elements. |
-| | [`request-character`](skills/request-character/SKILL.md) | Fetch character details by name. |
-| | [`request-character-or-style`](skills/request-character-or-style/SKILL.md)| Fetch character/style details by name or UUID. |
-| | [`request-bgm`](skills/request-bgm/SKILL.md) | Fetch background music. |
-| **Community**| [`get-hashtag-info`](skills/community/get-hashtag-info/SKILL.md)| Get details about a specific hashtag. |
-| | [`get-hashtag-characters`](skills/community/get-hashtag-characters/SKILL.md)| Get a list of characters under a hashtag. |
-| | [`get-hashtag-collections`](skills/community/get-hashtag-collections/SKILL.md)| Get curated collections under a hashtag. |
+| Category | Command | Description |
+|----------|---------|-------------|
+| **Creation** | `make-image` | Generate images from text prompts |
+| | `make-video` | Generate videos from images and prompts |
+| | `make-song` | Compose songs with custom prompts and lyrics |
+| | `remove-background` | Remove the background from an image |
+| | `merge-video` | Merge multiple media assets into a single video |
+| **Characters**| `search-tcp` | Search for characters and style elements |
+| | `request-character` | Fetch character details by name |
+| | `request-character-or-style` | Fetch character/style details by name or UUID |
+| | `request-bgm` | Fetch background music |
+| **Community**| `get-hashtag-info` | Get details about a specific hashtag |
+| | `get-hashtag-characters` | Get a list of characters under a hashtag |
+| | `get-hashtag-collections` | Get curated collections under a hashtag |
 
 ---
 
-## 🛠️ CLI Usage (Optional)
+## 🛠️ CLI Usage
 
-While primarily designed as agent skills, the underlying CLI tools can also be executed manually for testing, automation, or integration into CI/CD pipelines.
-
-### Prerequisites
-- **Node.js**: `>= 20.0.0`
-- **npm**: `>= 10.0.0`
+The unified skill includes a built-in CLI for testing and automation.
 
 ### Setup
 
 ```bash
 # 1. Clone & Install
-git clone https://github.com/talesofai/neta-skills.git
-cd neta-skills
+git clone https://github.com/neta-skills.git
+cd neta-skills/skills/neta
 npm install
 
 # 2. Configure Environment
-cp .env.example .env
-# Open .env and set your NETA_TOKEN
+# Set NETA_TOKEN in your environment or create a .env file
+export NETA_TOKEN=your_token_here
 ```
 
 ### Running Commands
 
-You can execute tools via the `npm run neta` command.
-
 ```bash
 # Get general help or specific command help
-npm run neta -- --help
-npm run neta -- make-image --help
+npm start --help
+npm start make-image --help
 
 # Example: Generate an image
-npm run neta -- make-image --prompt "A cyberpunk cityscape at night" --aspect "16:9"
+npm start make-image -p "A cyberpunk cityscape at night" -a "16:9"
 
 # Example: Search for characters
-npm run neta -- search-tcp --keywords "fantasy"
+npm start search-tcp -k "fantasy"
 ```
 
 ---
@@ -92,20 +86,19 @@ npm run neta -- search-tcp --keywords "fantasy"
 
 ```text
 neta-skills/
-├── skills/                 # AI agent skills directory (SKILL.md files)
-│   ├── make-image/
-│   ├── make-video/
-│   ├── community/
-│   └── ...
-├── packages/
-│   └── neta-cli/           # Core CLI implementation backing the skills
+├── skills/
+│   └── neta/                   # Unified skill with full CLI
+│       ├── SKILL.md            # Skill documentation
+│       ├── README.md           # Usage guide
+│       ├── package.json        # Dependencies
 │       ├── src/
-│       │   ├── api/        # Neta Art API client
-│       │   ├── commands/   # CLI command logic
-│       │   └── index.ts    # CLI entry point
-│       └── package.json
-├── .env.example            # Environment template
-└── package.json            # Root workspace config
+│       │   ├── cli.ts          # CLI entry point
+│       │   ├── api/            # API client
+│       │   ├── commands/       # Command definitions
+│       │   └── types.ts        # TypeScript types
+│       └── references/         # Reference docs
+├── .env.example                # Environment template
+└── package.json                # Root config
 ```
 
 ## 📝 Environment Variables
@@ -115,21 +108,25 @@ Both the AI agent skills and the CLI require the following environment configura
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `NETA_TOKEN` | ✅ | - | Your Neta Art API access token. |
-| `NETA_API_URL` | ❌ | `https://api.talesofai.cn` | Base URL for the Neta Art API. |
+| `NETA_API_URL` | ❌ | `https://api.neta.art` | Base URL for the Neta Art API. |
 
 ## 🔧 Development
 
-This project uses npm workspaces. To develop and test locally:
+To develop and test locally:
 
 ```bash
 # Install dependencies
+cd skills/neta
 npm install
 
 # Run TypeScript type checking
-cd packages/neta-cli && npm run type-check
+npm run typecheck
+
+# Run lint
+npm run lint
 
 # Test CLI commands locally
-npm run neta -- <command> [options]
+npm start <command> [options]
 ```
 
 ## 📄 License
