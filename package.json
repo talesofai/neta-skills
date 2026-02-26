@@ -1,13 +1,34 @@
 {
   "name": "neta-skills",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "TalesofAI API CLI tools and pi coding agent skills",
   "private": true,
   "type": "module",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-    "neta": "tsx packages/neta-cli/src/index.ts"
+    "neta": "tsx packages/neta-cli/src/index.ts",
+    "type-check": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/talesofai/neta-skills.git"
+  },
+  "keywords": [
+    "talesofai",
+    "neta",
+    "cli",
+    "skills",
+    "pi-coding-agent",
+    "ai",
+    "image-generation",
+    "video-generation"
+  ],
+  "author": "TalesofAI Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
   },
   "devDependencies": {
     "tsx": "^4.19.3",
