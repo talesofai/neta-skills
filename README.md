@@ -6,6 +6,8 @@
 
 **NETA Skills** is a collection of powerful AI agent skills and accompanying CLI tools designed for interacting with the [Neta Art](https://www.neta.art/) API. Built for developers and AI agents, it seamlessly extends any agent's capabilities to generate multimedia, manage characters, and process audio/video workflows.
 
+You can get your access token from [Neta Open Portal](https://www.neta.art/open/).
+
 ---
 
 ## ✨ Features
