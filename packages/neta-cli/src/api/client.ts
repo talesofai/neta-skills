@@ -94,7 +94,6 @@ export const apiClient = {
     const res = await polling(
       () => this.task(taskUuid),
       (result) => {
-        console.log(`Task ${taskUuid} status: ${result.task_status}`);
         return result.task_status !== "PENDING" && result.task_status !== "MODERATION";
       },
       2000,
