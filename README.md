@@ -27,7 +27,7 @@ The primary way to use this project is by installing the skills into your AI age
 Install the unified [`neta`](skills/neta/SKILL.md) skill into your agent:
 
 ```bash
-npx skills add neta-skills/skills/neta
+npx skills add talesofai/neta-skills/skills/neta
 ```
 
 ### Available Commands
@@ -40,7 +40,6 @@ The skill includes 12 commands for various tasks:
 | | `make-video` | Generate videos from images and prompts |
 | | `make-song` | Compose songs with custom prompts and lyrics |
 | | `remove-background` | Remove the background from an image |
-| | `merge-video` | Merge multiple media assets into a single video |
 | **Characters**| `search-tcp` | Search for characters and style elements |
 | | `request-character` | Fetch character details by name |
 | | `request-character-or-style` | Fetch character/style details by name or UUID |
@@ -59,7 +58,7 @@ The unified skill includes a built-in CLI for testing and automation.
 
 ```bash
 # 1. Clone & Install & Build
-git clone https://github.com/neta-skills.git
+git clone https://github.com/talesofai/neta-skills.git
 corepack enabled
 pnpm i
 pnpm -r build
@@ -74,13 +73,13 @@ export NETA_TOKEN=your_token_here
 ```bash
 # Get general help or specific command help
 pnpm start:skills --help
-pnpm start:skills make-image --help
+pnpm start:skills make_image --help
 
 # Example: Generate an image
-pnpm start:skills make-image --prompt "A cyberpunk cityscape at night" --aspect "16:9"
+pnpm start:skills make_image --prompt "A cyberpunk cityscape at night" --aspect "16:9"
 
-# Example: Search for characters
-pnpm start:skills search-tcp --keywords "fantasy"
+# Example: Search for characters or elementum
+pnpm start:skills search_character_or_elementum --keywords "fantasy"
 ```
 
 ---
