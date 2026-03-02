@@ -7,7 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["skills/neta/src/**", "skills/neta/scripts/**"]
+    "includes": ["**", "!.agents", "!skills/neta/bin"]
   },
   "formatter": {
     "enabled": true,
