@@ -81,9 +81,13 @@ type CollectionDetail = CollectionBasic & {
   video_uuid?: string | null;
 
   is_interactive?: boolean | null;
+
+  extra_data?: {
+    remix_instruct?: string;
+  };
 };
 
-type CollectionPublishPayload = Partial<
+export type CollectionPublishPayload = Partial<
   Omit<CollectionDetail, "ctime" | "mtime" | "uuid" | "name" | "description">
 > & {
   /**
@@ -96,10 +100,6 @@ type CollectionPublishPayload = Partial<
   description: string;
   //
   additional_verse_artifact_uuid?: string | null;
-  //
-  extra_data?: {
-    remix_instruct?: string;
-  };
 };
 
 export const createCollectionApis = (client: AxiosInstance) => {
@@ -143,9 +143,20 @@ export const createCollectionApis = (client: AxiosInstance) => {
       .then((res) => res.data.status === "SUCCESS");
   };
 
+  const collectionDetails = async (uuids: string[]) => {
+    return client
+      .get<CollectionDetail[]>("/v3/story/story-detail", {
+        params: {
+          uuids: uuids.join(","),
+        },
+      })
+      .then((res) => res.data);
+  };
+
   return {
     createCollection,
     saveCollection,
     publishCollection,
+    collectionDetails,
   };
 };

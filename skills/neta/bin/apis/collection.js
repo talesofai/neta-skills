@@ -21,9 +21,19 @@ export const createCollectionApis = (client) => {
         })}`)
             .then((res) => res.data.status === "SUCCESS");
     };
+    const collectionDetails = async (uuids) => {
+        return client
+            .get("/v3/story/story-detail", {
+            params: {
+                uuids: uuids.join(","),
+            },
+        })
+            .then((res) => res.data);
+    };
     return {
         createCollection,
         saveCollection,
         publishCollection,
+        collectionDetails,
     };
 };
