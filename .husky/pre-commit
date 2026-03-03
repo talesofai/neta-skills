@@ -1,7 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-# pnpm turbo run type-check
 pnpm -r type-check
 pnpm -r build
 pnpm -r validate

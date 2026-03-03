@@ -9,7 +9,7 @@ program
     .name("neta")
     .description("NETA CLI - Neta API Client")
     .version(pkg.version);
-const commands = await loadCommands(["verse", "community", "collection"]);
+const commands = await loadCommands(["creative", "community"]);
 await buildCommands(program
     .option("--token", "neta token (default: from env NETA_TOKEN)")
     .option("--api_base_url", "api base url (default: from env NETA_API_BASE_URL)"), commands);
