@@ -7,6 +7,7 @@ import type {
   InheritPayloadV3Params,
   MakeImageRequest,
   MakeVideoRequest,
+  OssUploadSignedUrl,
   PostProcessPreset,
   TaskMeta,
 } from "./types.ts";
@@ -110,6 +111,18 @@ export const createArtifactApis = (client: AxiosInstance) => {
       .then((res) => res.data);
   };
 
+  const uploadSignedUrl = async (
+    payload: { suffix: string },
+    config?: AxiosRequestConfig,
+  ) => {
+    return client
+      .get<OssUploadSignedUrl>("/v1/oss/upload-signed-url", {
+        ...config,
+        params: payload,
+      })
+      .then((res) => res.data);
+  };
+
   return {
     makeImage,
     makeVideo,
@@ -119,5 +132,6 @@ export const createArtifactApis = (client: AxiosInstance) => {
     postProcess,
     task,
     artifactDetail,
+    uploadSignedUrl,
   };
 };

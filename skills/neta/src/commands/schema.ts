@@ -63,6 +63,31 @@ const meta = parseMeta(
     remove_background_parameters_schema: z.object({
       input_image: z.string(),
     }),
+    upload_image_parameters_schema: z.object({
+      image: z.string(),
+      input: z.string(),
+      image_path: z.string(),
+      image_url: z.string(),
+      image_data: z.string(),
+      filename: z.string(),
+      content_type: z.string(),
+      suffix: z.string(),
+    }),
+    upload_image_result_schema: z.object({
+      status: z.string(),
+      source_type: z.string(),
+      input_key: z.string(),
+      bucket: z.string(),
+      path: z.string(),
+      url: z.string(),
+      mime_type: z.string(),
+      suffix: z.string(),
+      byte_size: z.string(),
+      sha256: z.string(),
+      etag: z.string(),
+      upload_http_status: z.string(),
+      trace_id: z.string(),
+    }),
     hashtag_base_parameters_schema: z.object({
       hashtag: z.string(),
     }),
@@ -494,6 +519,93 @@ export const removeBackgroundV1Parameters = z.object({
 export type RemoveBackgroundV1Parameters = z.infer<
   typeof removeBackgroundV1Parameters
 >;
+
+// #endregion
+
+// #region Upload Image V1
+const uploadImageSourceKeys = [
+  "image",
+  "input",
+  "image_path",
+  "image_url",
+  "image_data",
+] as const;
+
+export const uploadImageV1Parameters = z
+  .object({
+    image: z
+      .string()
+      .optional()
+      .describe(meta.upload_image_parameters_schema.image),
+    input: z
+      .string()
+      .optional()
+      .describe(meta.upload_image_parameters_schema.input),
+    image_path: z
+      .string()
+      .optional()
+      .describe(meta.upload_image_parameters_schema.image_path),
+    image_url: z
+      .string()
+      .optional()
+      .describe(meta.upload_image_parameters_schema.image_url),
+    image_data: z
+      .string()
+      .optional()
+      .describe(meta.upload_image_parameters_schema.image_data),
+    filename: z
+      .string()
+      .optional()
+      .describe(meta.upload_image_parameters_schema.filename),
+    content_type: z
+      .string()
+      .optional()
+      .describe(meta.upload_image_parameters_schema.content_type),
+    suffix: z
+      .enum(["jpg", "jpeg", "png", "gif", "svg", "webp"])
+      .optional()
+      .describe(meta.upload_image_parameters_schema.suffix),
+  })
+  .refine(
+    (data) => uploadImageSourceKeys.some((key) => Boolean(data[key])),
+    "至少提供一个图片输入参数: image | input | image_path | image_url | image_data",
+  );
+export type UploadImageV1Parameters = z.infer<typeof uploadImageV1Parameters>;
+
+export const uploadImageV1ResultSchema = z.object({
+  status: z
+    .literal("uploaded")
+    .describe(meta.upload_image_result_schema.status),
+  source_type: z
+    .enum(["path", "url", "data_url"])
+    .describe(meta.upload_image_result_schema.source_type),
+  input_key: z
+    .enum(uploadImageSourceKeys)
+    .describe(meta.upload_image_result_schema.input_key),
+  bucket: z.string().describe(meta.upload_image_result_schema.bucket),
+  path: z.string().describe(meta.upload_image_result_schema.path),
+  url: z.string().describe(meta.upload_image_result_schema.url),
+  mime_type: z.string().describe(meta.upload_image_result_schema.mime_type),
+  suffix: z
+    .enum(["jpg", "jpeg", "png", "gif", "svg", "webp"])
+    .describe(meta.upload_image_result_schema.suffix),
+  byte_size: z
+    .number()
+    .int()
+    .nonnegative()
+    .describe(meta.upload_image_result_schema.byte_size),
+  sha256: z
+    .string()
+    .length(64)
+    .describe(meta.upload_image_result_schema.sha256),
+  etag: z.string().nullish().describe(meta.upload_image_result_schema.etag),
+  upload_http_status: z
+    .number()
+    .int()
+    .describe(meta.upload_image_result_schema.upload_http_status),
+  trace_id: z.string().describe(meta.upload_image_result_schema.trace_id),
+});
+export type UploadImageV1Result = z.infer<typeof uploadImageV1ResultSchema>;
 
 // #endregion
 

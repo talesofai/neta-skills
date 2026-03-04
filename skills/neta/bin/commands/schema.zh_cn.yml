@@ -109,6 +109,35 @@ make_song_parameters_schema:
 remove_background_parameters_schema:
   input_image: 通过{input_image_variable_name}引用一个已经存在的图片变量
 
+upload_image_parameters_schema:
+  image: |
+    通用图片输入参数（推荐）。支持三种格式：
+      - 本地路径：/tmp/a.png
+      - HTTP(S) URL：https://example.com/a.png
+      - Data URL：data:image/png;base64,xxxx
+  input: image 的别名参数，语义相同
+  image_path: 本地图片路径别名，例如 /tmp/a.png
+  image_url: 远程图片 URL 别名，必须是 http 或 https
+  image_data: Data URL 别名，格式如 data:image/png;base64,xxxx
+  filename: 可选文件名，用于后缀推断（例如 demo.png）
+  content_type: 可选 MIME 类型（如 image/png），用于覆盖自动识别结果
+  suffix: 图片后缀（jpg/jpeg/png/gif/svg/webp），用于后端签名接口
+
+upload_image_result_schema:
+  status: 上传状态，成功固定为 uploaded
+  source_type: 输入来源类型（path/url/data_url）
+  input_key: 实际使用的输入参数名
+  bucket: 上传的 OSS bucket 名称
+  path: OSS 对象路径（不含域名）
+  url: 上传后可访问的图片 URL
+  mime_type: 上传时使用的 MIME 类型
+  suffix: 实际使用的图片后缀
+  byte_size: 上传文件字节数
+  sha256: 文件内容的 sha256 摘要（证据字段）
+  etag: OSS 返回的 ETag（证据字段）
+  upload_http_status: 上传请求 HTTP 状态码（证据字段）
+  trace_id: 工具调用链路追踪 ID（审计字段）
+
 hashtag_base_parameters_schema:
   hashtag: hashtag/空间名称
 
