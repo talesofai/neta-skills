@@ -38,12 +38,15 @@ export const readCollectionCmd = createCommand({
         image_detail: image.image_detail,
         video_detail: image.video_detail,
     })));
-    const tags = await apis.feeds.tags(uuid).then(res => res.map(tag => ({
+    const tags = await apis.feeds
+        .tags(uuid)
+        .then((res) => res.map((tag) => ({
         name: tag.name,
         type: tag.type,
         participants_count: tag.participants_count,
         header_pic_url: tag.header_pic_url,
-    }))).catch(() => []);
+    })))
+        .catch(() => []);
     const remix = await (async () => {
         const cta = res.json_data.cta_info;
         const verse_uuid = isVerseCTA(cta)
