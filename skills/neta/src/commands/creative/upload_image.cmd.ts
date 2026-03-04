@@ -1,4 +1,3 @@
-import { createHash, randomUUID } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { basename, extname } from "node:path";
 import z from "zod";
@@ -18,20 +17,7 @@ const meta = parseMeta(
   import.meta,
 );
 
-const SOURCE_KEYS = [
-  "image",
-  "input",
-  "image_path",
-  "image_url",
-  "image_data",
-] as const;
-
-type SourceKey = (typeof SOURCE_KEYS)[number];
-
-type SourceType = "path" | "url" | "data_url";
-
 const ALLOWED_SUFFIXES = ["jpg", "jpeg", "png", "gif", "svg", "webp"] as const;
-
 type UploadImageSuffix = (typeof ALLOWED_SUFFIXES)[number];
 
 const ALLOWED_SUFFIX_SET = new Set<UploadImageSuffix>(ALLOWED_SUFFIXES);
@@ -56,9 +42,6 @@ const SUFFIX_TO_MIME: Record<UploadImageSuffix, string> = {
 const isUploadImageSuffix = (value: string): value is UploadImageSuffix => {
   return ALLOWED_SUFFIX_SET.has(value as UploadImageSuffix);
 };
-
-const canonicalSuffix = (suffix: string) =>
-  suffix.toLowerCase() === "jpeg" ? "jpg" : suffix.toLowerCase();
 
 const normalizeSuffix = (suffix?: string) => {
   if (!suffix) return null;
@@ -126,6 +109,7 @@ const inferMimeFromBytes = (bytes: Uint8Array): string | null => {
   ) {
     return "image/svg+xml";
   }
+
   return null;
 };
 
@@ -134,7 +118,7 @@ const parseDataUrl = (value: string) => {
     /^data:([^;,]+)?(?:;charset=[^;,]+)?(;base64)?,([\s\S]+)$/i,
   );
   if (!matched) {
-    throw new Error("E_INVALID_DATA_URL: image_data 不是合法的 data URL");
+    throw new Error("E_INVALID_DATA_URL: image 不是合法的 data URL");
   }
 
   const mime = matched[1]?.toLowerCase();
@@ -151,150 +135,58 @@ const parseDataUrl = (value: string) => {
   return {
     bytes,
     contentType: mime,
-    sourceType: "data_url" as const,
     sourceName: undefined as string | undefined,
   };
 };
 
-const resolveSource = (args: z.infer<typeof uploadImageV1Parameters>) => {
-  const picked = SOURCE_KEYS.filter((key) => {
-    const value = args[key];
-    return typeof value === "string" && value.trim().length > 0;
-  });
-
-  if (picked.length === 0) {
-    throw new Error(
-      "E_MISSING_INPUT: 至少提供一个图片输入参数(image/input/image_path/image_url/image_data)",
-    );
+const readInputBytes = async (image: string) => {
+  if (image.startsWith("data:")) {
+    return parseDataUrl(image);
   }
 
-  const key = picked[0];
-  if (!key) {
-    throw new Error("E_MISSING_INPUT: 无可用图片输入参数");
-  }
-
-  const rawValue = args[key];
-  if (typeof rawValue !== "string") {
-    throw new Error(`E_INVALID_INPUT: 输入参数 ${key} 不是字符串`);
-  }
-
-  return {
-    key,
-    value: rawValue.trim(),
-    hasAmbiguousInput: picked.length > 1,
-  };
-};
-
-const readInputBytes = async (key: SourceKey, value: string) => {
-  if (key === "image_data") {
-    return parseDataUrl(value);
-  }
-
-  if (key === "image_url" || /^https?:\/\//i.test(value)) {
-    const response = await fetch(value);
+  if (/^https?:\/\//i.test(image)) {
+    const response = await fetch(image);
     if (!response.ok) {
       throw new Error(
-        `E_DOWNLOAD_FAILED: 下载图片失败 status=${response.status} url=${value}`,
+        `E_DOWNLOAD_FAILED: 下载图片失败 status=${response.status} url=${image}`,
       );
     }
 
     const arrayBuffer = await response.arrayBuffer();
     const contentType =
       response.headers.get("content-type")?.split(";")[0]?.trim() ?? undefined;
+
     return {
       bytes: Buffer.from(arrayBuffer),
       contentType,
-      sourceType: "url" as const,
-      sourceName: basename(new URL(value).pathname) || undefined,
+      sourceName: basename(new URL(image).pathname) || undefined,
     };
   }
 
-  if (key === "image_path" || key === "image" || key === "input") {
-    const bytes = await readFile(value);
-    return {
-      bytes,
-      contentType: undefined,
-      sourceType: "path" as const,
-      sourceName: basename(value),
-    };
-  }
-
-  throw new Error(`E_UNSUPPORTED_SOURCE: 不支持的输入来源 key=${key}`);
-};
-
-const inferContentType = (args: {
-  explicitContentType?: string;
-  uploadedBytes: Uint8Array;
-  suffix?: UploadImageSuffix | null;
-  sourceContentType?: string;
-}) => {
-  const explicit = args.explicitContentType?.trim().toLowerCase();
-  if (explicit) {
-    if (!explicit.startsWith("image/")) {
-      throw new Error(
-        "E_UNSUPPORTED_CONTENT_TYPE: content_type 必须是 image/*",
-      );
-    }
-    return explicit;
-  }
-
-  const fromSource = args.sourceContentType?.toLowerCase();
-  if (fromSource?.startsWith("image/")) {
-    return fromSource;
-  }
-
-  const fromBytes = inferMimeFromBytes(args.uploadedBytes);
-  if (fromBytes) return fromBytes;
-
-  if (args.suffix) {
-    const fromSuffix = SUFFIX_TO_MIME[args.suffix];
-    if (fromSuffix) return fromSuffix;
-  }
-
-  throw new Error(
-    "E_CANNOT_INFER_CONTENT_TYPE: 无法识别图片类型，请显式传入 content_type 或 suffix",
-  );
+  const bytes = await readFile(image);
+  return {
+    bytes,
+    contentType: undefined,
+    sourceName: basename(image),
+  };
 };
 
 const inferSuffix = (args: {
   explicitSuffix?: string;
-  explicitFilename?: string;
+  image: string;
   sourceName?: string;
   sourceContentType?: string;
   bytes: Uint8Array;
 }) => {
   const byParam = normalizeSuffix(args.explicitSuffix);
-  const byFilename = inferSuffixFromFilename(args.explicitFilename);
+  const byImagePath = inferSuffixFromFilename(args.image);
   const bySourceName = inferSuffixFromFilename(args.sourceName);
   const byContentType = inferSuffixFromContentType(args.sourceContentType);
   const byBytes = inferSuffixFromContentType(
     inferMimeFromBytes(args.bytes) ?? "",
   );
 
-  const inferred =
-    byParam ?? byFilename ?? bySourceName ?? byContentType ?? byBytes;
-  if (!inferred) {
-    throw new Error(
-      "E_CANNOT_INFER_SUFFIX: 无法识别图片后缀，请显式传入 suffix 或 filename",
-    );
-  }
-
-  if (byParam && byContentType) {
-    const sameType =
-      canonicalSuffix(byParam) === canonicalSuffix(byContentType);
-    if (!sameType) {
-      throw new Error(
-        `E_SUFFIX_CONTENT_TYPE_CONFLICT: suffix=${byParam} 与 content-type=${byContentType} 冲突`,
-      );
-    }
-  }
-
-  return inferred;
-};
-
-const getPathFromUrl = (url: string) => {
-  const pathname = new URL(url).pathname;
-  return pathname.replace(/^\/+/, "");
+  return byParam ?? byImagePath ?? bySourceName ?? byContentType ?? byBytes;
 };
 
 export const uploadImage = createCommand(
@@ -305,49 +197,35 @@ export const uploadImage = createCommand(
     inputSchema: uploadImageV1Parameters,
     outputSchema: uploadImageV1ResultSchema,
   },
-  async (args, { apis, log }) => {
-    const traceId = randomUUID();
-    const source = resolveSource(args);
+  async ({ image, suffix }, { apis }) => {
+    const inputData = await readInputBytes(image);
 
-    if (source.hasAmbiguousInput) {
-      log.warn(
-        "upload_image: multiple input aliases provided, use key=%s",
-        source.key,
-      );
-    }
-
-    const inputData = await readInputBytes(source.key, source.value);
     if (inputData.bytes.length === 0) {
       throw new Error("E_EMPTY_FILE: 上传内容为空");
     }
 
-    const suffix = inferSuffix({
-      explicitSuffix: args.suffix,
-      explicitFilename: args.filename,
+    const finalSuffix = inferSuffix({
+      explicitSuffix: suffix,
+      image,
       sourceName: inputData.sourceName,
       sourceContentType: inputData.contentType,
       bytes: inputData.bytes,
     });
 
-    const contentType = inferContentType({
-      explicitContentType: args.content_type,
-      uploadedBytes: inputData.bytes,
-      suffix,
-      sourceContentType: inputData.contentType,
-    });
+    if (!finalSuffix) {
+      throw new Error(
+        "E_CANNOT_INFER_SUFFIX: 无法识别图片后缀，请显式传入 suffix",
+      );
+    }
 
-    log.info(
-      "upload_image: prepare trace=%s key=%s sourceType=%s bytes=%d suffix=%s contentType=%s",
-      traceId,
-      source.key,
-      inputData.sourceType,
-      inputData.bytes.length,
-      suffix,
-      contentType,
-    );
+    const contentType = inputData.contentType
+      ?.toLowerCase()
+      .startsWith("image/")
+      ? inputData.contentType
+      : SUFFIX_TO_MIME[finalSuffix];
 
     const { upload_url, view_url } = await apis.artifact.uploadSignedUrl({
-      suffix,
+      suffix: finalSuffix,
     });
 
     const uploadRes = await fetch(upload_url, {
@@ -365,27 +243,8 @@ export const uploadImage = createCommand(
       );
     }
 
-    const structuredContent = {
-      status: "uploaded" as const,
-      source_type: inputData.sourceType as SourceType,
-      input_key: source.key,
-      bucket: "talesofai",
-      path: getPathFromUrl(view_url),
+    return {
       url: view_url,
-      mime_type: contentType,
-      suffix,
-      byte_size: inputData.bytes.length,
-      sha256: createHash("sha256").update(inputData.bytes).digest("hex"),
-      etag: uploadRes.headers.get("etag"),
-      upload_http_status: uploadRes.status,
-      trace_id: traceId,
     };
-
-    log.info(
-      "upload_image: result trace=%s path=%s",
-      traceId,
-      structuredContent.path,
-    );
-    return structuredContent;
   },
 );
