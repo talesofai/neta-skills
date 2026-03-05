@@ -100,7 +100,7 @@ export const createPromptApis = (
           page_index: 0,
           page_size: 1,
           parent_type: p.type === "character" ? "oc" : "elementum",
-          sort_scheme: "best",
+          sort_scheme: "exact",
         });
 
         const first = (() => {

@@ -106,12 +106,9 @@ pnpm start request_character_or_elementum --uuid "角色-uuid"
 # 1. 获取角色标准信息
 pnpm start request_character_or_elementum --name "初音未来"
 
-# 2. 从返回中提取特征描述
-# age: "16", 葱绿色双马尾，等等
-
-# 3. 生成图片
+# 2. 生成图片
 pnpm start make_image \
-  --prompt "16 岁少女，葱绿色双马尾，穿着标志性服装，手持大葱，舞台背景" \
+  --prompt "@初音未来，穿着标志性服装，手持大葱，舞台背景" \
   --aspect "3:4"
 ```
 

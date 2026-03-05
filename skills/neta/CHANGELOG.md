@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.4.0
+
+### Minor Changes
+
+- appends space commands
+
 ## 0.3.0
 
 ### Minor Changes

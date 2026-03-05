@@ -25,7 +25,7 @@ export const readCollectionCmd = createCommand({
         throw new Error(`Collection "${uuid}" not found`);
     }
     const name = res.json_data.name;
-    const description = res.json_data.description;
+    const description = res.json_data.description ?? "";
     const creator = {
         uuid: res.json_data.creator.uuid,
         name: res.json_data.creator.nick_name,
@@ -75,12 +75,14 @@ export const readCollectionCmd = createCommand({
         return null;
     })();
     return {
-        uuid,
-        name,
-        description,
-        creator,
-        artifacts,
-        tags,
-        remix,
+        collection: {
+            uuid,
+            name,
+            description,
+            creator,
+            artifacts,
+            tags,
+            remix,
+        },
     };
 });

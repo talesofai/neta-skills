@@ -10,6 +10,7 @@ import { createGptApis } from "./gpt.js";
 import { createHashtagApis, } from "./hashtag.js";
 import { createPromptApis } from "./prompt.js";
 import { createRecsysApis } from "./recsys.js";
+import { createSpaceApis } from "./space.js";
 import { createTaskApis } from "./task.js";
 import { createTcpApis } from "./tcp.js";
 import { createUserApis } from "./user.js";
@@ -39,6 +40,7 @@ export const createApis = (option) => {
     const user = createUserApis(client);
     const collection = createCollectionApis(client);
     const feeds = createFeedsApis(client);
+    const space = createSpaceApis(client);
     const recsys = createRecsysApis(client);
     return {
         tcp,
@@ -54,6 +56,7 @@ export const createApis = (option) => {
         user,
         collection,
         feeds,
+        space,
         recsys,
     };
 };

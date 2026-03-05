@@ -34,7 +34,7 @@ export const readCollectionCmd = createCommand(
     }
 
     const name = res.json_data.name;
-    const description = res.json_data.description;
+    const description = res.json_data.description ?? "";
 
     const creator = {
       uuid: res.json_data.creator.uuid,
@@ -100,13 +100,15 @@ export const readCollectionCmd = createCommand(
     })();
 
     return {
-      uuid,
-      name,
-      description,
-      creator,
-      artifacts,
-      tags,
-      remix,
+      collection: {
+        uuid,
+        name,
+        description,
+        creator,
+        artifacts,
+        tags,
+        remix,
+      },
     };
   },
 );
