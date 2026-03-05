@@ -30,19 +30,19 @@ export const suggestContentCommand = new Command('suggest-content')
     // ==================
     
     // [Search 模式专用]
-    .option('-k, --keywords <string>', '🔍 [Search] 关键词列表 (逗号分隔)', '')
+    .option('-k, --keywords <string>', '🔍 [Search] 关键词列表 (用英文逗号分隔)', '')
     
     // [Exact/Search 模式专用] - 分类路径
-    .option('-t, --tax-paths <string>', '🏷️ [Exact/Search] 分类路径 (逗号分隔，支持 ">" 层级，例: "科幻>AI,生活")', '')
+    .option('-t, --tax-paths <string>', '🏷️ [Exact/Search] 分类路径 (用英文逗号分隔，支持 ">" 层级，例: "科幻>AI,生活")', '')
     
     // [Recommend 模式专用] - 分层级分类 (如果不使用 tax_paths)
-    .option('--primaries <string>', '📂 [Recommend] 一级分类列表 (逗号分隔)', '')
-    .option('--secondaries <string>', '📂 [Recommend] 二级分类列表 (逗号分隔)', '')
-    .option('--tertiaries <string>', '📂 [Recommend] 三级分类列表 (逗号分隔)', '')
+    .option('--primaries <string>', '📂 [Recommend] 一级分类列表 (用英文逗号分隔)', '')
+    .option('--secondaries <string>', '📂 [Recommend] 二级分类列表 (用英文逗号分隔)', '')
+    .option('--tertiaries <string>', '📂 [Recommend] 三级分类列表 (用英文逗号分隔)', '')
     
     // [全局排除]
-    .option('-x, --exclude-keywords <string>', '🚫 排除关键词 (逗号分隔)', '')
-    .option('-X, --exclude-paths <string>', '🚫 排除分类路径 (逗号分隔)', '')
+    .option('-x, --exclude-keywords <string>', '🚫 排除关键词 (用英文逗号分隔)', '')
+    .option('-X, --exclude-paths <string>', '🚫 排除分类路径 (用英文逗号分隔)', '')
     
     // ==================
     // 4. 高级透传模式 (绕过自动映射)

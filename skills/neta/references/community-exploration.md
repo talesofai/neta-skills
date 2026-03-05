@@ -95,7 +95,7 @@ npm start -- suggest-content -m exact -t "衍生创作类>同人二创" --limit 
 ```bash
 # 指定一级分类筛选
 npm start -- suggest-content -m recommend \
-  --primaries "衍生创作类，创意应用类" \
+  --primaries "衍生创作类,创意应用类" \
   --limit 10
 
 # 排除不想要的分类
