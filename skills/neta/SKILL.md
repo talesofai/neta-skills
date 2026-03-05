@@ -27,6 +27,11 @@ pnpm i
 pnpm start list_spaces
 ```
 
+**获取空间详情**
+```
+pnpm start get_hashtag_info --hashtag "空间标签名"
+```
+
 **获取空间的子空间**
 
 ```bash
