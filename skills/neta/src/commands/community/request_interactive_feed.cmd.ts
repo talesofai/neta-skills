@@ -12,7 +12,7 @@ const meta = parseMeta(
   import.meta,
 );
 
-export const requestHomeFeedInteractiveInputSchema = z.object({
+export const requestInteractiveFeedInputSchema = z.object({
   page_index: z.number().int().min(0).optional().default(0),
   page_size: z.number().int().min(1).max(40).optional().default(20),
   biz_trace_id: z.string().optional(),
@@ -25,7 +25,7 @@ export const requestHomeFeedInteractiveInputSchema = z.object({
 });
 
 // 复用 collection.ts 中的类型定义
-export const requestHomeFeedInteractiveOutputSchema = z.object({
+export const requestInteractiveFeedOutputSchema = z.object({
   module_list_header: z.null(),
   module_list: z.array(
     z.object({
@@ -43,20 +43,20 @@ export const requestHomeFeedInteractiveOutputSchema = z.object({
   }),
 });
 
-export type RequestHomeFeedInteractiveOutput = z.infer<
-  typeof requestHomeFeedInteractiveOutputSchema
+export type RequestInteractiveFeedOutput = z.infer<
+  typeof requestInteractiveFeedOutputSchema
 >;
 
-export const requestHomeFeedInteractive = createCommand(
+export const requestInteractiveFeed = createCommand(
   {
     name: meta.name,
     title: meta.title,
     description: meta.description,
-    inputSchema: requestHomeFeedInteractiveInputSchema,
-    outputSchema: requestHomeFeedInteractiveOutputSchema,
+    inputSchema: requestInteractiveFeedInputSchema,
+    outputSchema: requestInteractiveFeedOutputSchema,
   },
   async (params, { log, apis }) => {
-    log.debug("request_home_feed_interactive: params: %o", params);
+    log.debug("request_interactive_feed: params: %o", params);
 
     const result: FeedInteractionList = await apis.feeds.interactiveList({
       page_index: params.page_index,
@@ -73,9 +73,9 @@ export const requestHomeFeedInteractive = createCommand(
     return {
       module_list_header: result.module_list_header,
       module_list:
-        result.module_list as unknown as RequestHomeFeedInteractiveOutput["module_list"],
+        result.module_list as unknown as RequestInteractiveFeedOutput["module_list"],
       page_data:
-        result.page_data as unknown as RequestHomeFeedInteractiveOutput["page_data"],
+        result.page_data as unknown as RequestInteractiveFeedOutput["page_data"],
     };
   },
 );
