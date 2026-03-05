@@ -7,6 +7,15 @@
 - **Collection**：可供浏览、Remix、改变的内容, 也可以泛指空间内发生的事件、场景，玩法
 - **活动**：官方主导的特殊 Hashtag。
 
+# Workflow
+
+- 列出全部空间 `list_spaces`
+- 获取空间详情 `get_hashtag_info`
+- 获取子空间 `list_space_topics`
+- 获取空间或子空间内的内容 `get_hashtag_collections` `get_hashtag_characters`
+- 扮演空间中的某个角色，或者使用某个角色 `request_character_or_elementum`
+- Remix 空间的内容 📖 [Remix](./collection-remix.md)
+
 # 空间结构
 
 - 空间
@@ -30,22 +39,10 @@ pnpm start list_spaces
 - main_hashtag_name: hashtag
 - topic_count: 子空间（topic）数量
 
-# 获取子空间
-
-```bash
-pnpm start list_space_topics --space_uuid "空间 UUID"
-```
-
-**返回内容**
-
-- primary_topic 主空间
-- topics 子空间列表
-
-# 获取空间内信息
+# 获取空间详细信息
 
 参考 📖 [标签](./hashtag-research.md)
 
-## 获取空间详细信息
 
 ```bash
 pnpm start get_hashtag_info --hashtag "空间标签名"
@@ -57,13 +54,24 @@ pnpm start get_hashtag_info --hashtag "空间标签名"
 - 热度数据
 - 订阅数量
 
-## 获取空间内角色
+# 获取子空间
+
+```bash
+pnpm start list_space_topics --space_uuid "空间 UUID"
+```
+
+**返回内容**
+
+- primary_topic 主空间
+- topics 子空间列表
+
+# 获取空间内角色
 
 ```bash
 pnpm start get_hashtag_characters --hashtag "空间标签名" --sort_by "hot"
 ```
 
-## 获取空间内的场景、事件、内容（可供游玩的部分）
+# 获取空间内的场景、事件、内容（可供游玩的部分）
 
 ```bash
 pnpm start get_hashtag_collections --hashtag "标签名"
