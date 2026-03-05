@@ -3,7 +3,6 @@ import type {
   SuggestCategoriesV1Parameters,
   SuggestCategoriesV1Result,
   SuggestContentV1Parameters,
-  SuggestContentV1Result,
   SuggestKeywordsV1Parameters,
   SuggestKeywordsV1Result,
   SuggestTagsV1Parameters,
@@ -11,6 +10,7 @@ import type {
   ValidateTaxPathV1Parameters,
   ValidateTaxPathV1Result,
 } from "../commands/schema.ts";
+import type { FeedInteractionList } from "./collection.ts";
 
 export const createRecsysApis = (client: AxiosInstance) => {
   const suggestKeywords = async (
@@ -36,7 +36,7 @@ export const createRecsysApis = (client: AxiosInstance) => {
 
   const suggestContent = async (
     params: SuggestContentV1Parameters,
-  ): Promise<SuggestContentV1Result> => {
+  ): Promise<FeedInteractionList> => {
     const response = await client.post("/v1/recsys/content", params);
     return response.data;
   };

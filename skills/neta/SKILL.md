@@ -129,13 +129,16 @@ pnpm start suggest_categories --level 3 --parent_path "衍生创作类>同人二
 **智能内容流引擎（推荐/搜索/精确筛选三模式）**
 ```bash
 # 推荐模式（适合广泛探索）
-pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --business_data '{"intent":"recommend"}'
+pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent recommend
 
 # 搜索模式（需要关键词）
-pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --business_data '{"intent":"search","search_keywords":["角色","创意"]}'
+pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent search --search_keywords "角色,创意"
 
 # 精确模式（严格按分类路径筛选）
-pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --business_data '{"intent":"exact","tax_paths":["衍生创作类>同人二创"]}'
+pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent exact --tax_paths "衍生创作类>同人二创"
+
+# 组合使用（多个条件筛选）
+pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent search --search_keywords "AI,绘画" --tax_paths "数字艺术>概念设计" --exclude_keywords "测试,废弃"
 ```
 
 **验证分类路径是否有效**

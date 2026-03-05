@@ -868,27 +868,6 @@ export type SuggestContentV1Parameters = z.infer<
   typeof suggestContentV1Parameters
 >;
 
-export const contentItemSchema = z.object({
-  uuid: z.string(),
-  title: z.string(),
-  cover_url: z.string().nullish(),
-  type: z.enum(["video", "image", "article"]).optional(),
-  score: z.number().optional(),
-  reason: z.string().optional(),
-});
-export type ContentItem = z.infer<typeof contentItemSchema>;
-
-export const suggestContentV1ResultSchema = z.object({
-  total: z.number().optional(),
-  page_index: z.number().optional(),
-  page_size: z.number().optional(),
-  list: z.array(contentItemSchema).default([]),
-  has_next: z.boolean().optional(),
-});
-export type SuggestContentV1Result = z.infer<
-  typeof suggestContentV1ResultSchema
->;
-
 // 5. 路径验证 (Path Validation)
 export const validateTaxPathV1Parameters = z.object({
   tax_path: z.string().min(1),
