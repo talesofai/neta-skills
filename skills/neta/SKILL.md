@@ -119,20 +119,24 @@ pnpm start read_colleciton --uuid "玩法-uuid"
 
 ### 内容玩法探索
 
-**获取首页推荐列表**
+**获取互动推荐列表**
 ```bash
-pnpm start request_home_feed_interactive --page_index 0 --page_size 20
+pnpm start request_interactive_feed --page_index 0 --page_size 3
 ```
-支持参数：
-- `--page_index`: 页码（默认 0）
-- `--page_size`: 每页数量（1-40，默认 20）
-- `--biz_trace_id`: 会话追踪 ID，用于保持翻页连续性（可选）
-- `--is_new_user`: 是否新用户（可选）
-- `--select_themes`: 选择主题（可选）
-- `--scene`: 场景（可选）
-- `--collection_uuid`: 合集 UUID（可选）
+
+**基础参数：**
+- `--page_index`: 页码，从 0 开始（默认 0）
+- `--page_size`: 每页数量，范围 1-10（默认 3）
+- `--biz_trace_id`: 会话追踪 ID，用于保持翻页连续性。首次请求可不传，后续使用返回的 biz_trace_id（可选）
+
+**场景控制：**
+- `--is_new_user`: 是否启用青少年模式（可选，true 时启用）
+- `--scene`: 场景标识（可选），支持：`relation_feed_child`（查看原作）、`relation_feed_same`（评论区子作品）、`personal_feed`（个人主页）、`topic_picked_associated`（空间发现页）
+
+**关联目标：**
+- `--collection_uuid`: 原作 UUID（可选）。提供且 page_index=0 时获取单个作品详情，page_index>0 时获取相关作品推荐
 - `--target_collection_uuid`: 目标合集 UUID（可选）
-- `--target_user_uuid`: 目标用户 UUID（可选）
+- `--target_user_uuid`: 用户 UUID（可选）。提供时进入个人主页场景
 
 **获取搜索关键词的自动补全建议**
 ```bash
