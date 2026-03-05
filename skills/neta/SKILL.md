@@ -98,7 +98,49 @@ pnpm start get_hashtag_collections --hashtag "标签名"
 
 **获取玩法信息**
 ```bash
-pnpm start read_collection --uuid "玩法-uuid"
+pnpm start read_colleciton --uuid "玩法-uuid"
+```
+
+### 内容玩法探索
+
+**获取搜索关键词的自动补全建议**
+```bash
+pnpm start suggest_keywords --prefix "游戏" --size 20
+```
+📖 [详细指南](./references/community-exploration.md) - 渐进式探索流程
+
+**基于完整关键词获取相关标签建议**
+```bash
+pnpm start suggest_tags --keyword "角色塑造" --size 15
+```
+
+**获取玩法分类层级的导航建议**
+```bash
+# 获取一级分类
+pnpm start suggest_categories --level 1
+
+# 获取二级分类（需要父级路径）
+pnpm start suggest_categories --level 2 --parent_path "衍生创作类"
+
+# 获取三级分类
+pnpm start suggest_categories --level 3 --parent_path "衍生创作类>同人二创"
+```
+
+**智能内容流引擎（推荐/搜索/精确筛选三模式）**
+```bash
+# 推荐模式（适合广泛探索）
+pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --business_data '{"intent":"recommend"}'
+
+# 搜索模式（需要关键词）
+pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --business_data '{"intent":"search","search_keywords":["角色","创意"]}'
+
+# 精确模式（严格按分类路径筛选）
+pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --business_data '{"intent":"exact","tax_paths":["衍生创作类>同人二创"]}'
+```
+
+**验证分类路径是否有效**
+```bash
+pnpm start validate_tax_path --tax_path "衍生创作类>热门 IP>崩坏星穹铁道"
 ```
 
 ## 参考文档
@@ -112,6 +154,7 @@ pnpm start read_collection --uuid "玩法-uuid"
 | 👤 角色查询 | [character-search.md](./references/character-search.md) |
 | 🏷️ 标签调研 | [hashtag-research.md](./references/hashtag-research.md) |
 | 🌏 世界观玩法 | [collection-remix.md](./references/collection-remix.md) |
+| 🧭 社区玩法探索 | [community-exploration.md](./references/community-exploration.md) |
 
 ## 使用建议
 
@@ -119,3 +162,4 @@ pnpm start read_collection --uuid "玩法-uuid"
 2. **先调研后规划** - 使用标签调研了解热门元素和创作方向
 3. **提示词具体化** - 避免抽象描述，使用详细的要素组合
 4. **迭代测试** - 先用快速模型测试，满意后再用高质量模型
+5. **渐进式探索** - 从宽到窄逐步探索：浏览分类 → 发现标签 → 验证路径 → 获取内容
