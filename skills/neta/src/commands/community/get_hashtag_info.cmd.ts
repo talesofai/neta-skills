@@ -46,6 +46,7 @@ export const getHashtagInfo = createCommand(
           })),
         }
       : undefined;
+
     const simplifiedHashtag: HashtagInfo = {
       name: result.name,
       lore: result.lore || [],

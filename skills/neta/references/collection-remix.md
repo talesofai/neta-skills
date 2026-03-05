@@ -2,40 +2,16 @@
 
 利用已有的信息、工具集和参考素材，精确执行指令，帮助用户生成高质量的幻想内容。
 
-# Terminology (术语表)
-- **Hashtag**：标签/空间。用于构建世界观、组织社团。
-- **活动**：官方主导的特殊 Hashtag。
+# Constraints (关键执行限制)
 
-# Workflow Instruction
+- 除非任务完成或必须确认关键信息，否则**坚持连续调用指令**直到任务结束，减少对用户的打扰。
+- 指令调用不共享上下文，必须每次传入完整的参数信息。
+ - **严禁**使用未提供的指令。
+ - **失败重试**：若指令调用失败，最多重试一次，且必须使用**原参数**重试，禁止擅自修改参数逻辑。
 
-## 载入世界观设定
+# Reference Context (参考素材)
 
-📖 - [标签管理](./hashtag-research.md)
-
-
-``` bash
-pnpm start get_hashtag_info --hashtag "标签名"
-```
-
-### 看看时间观内都有哪些人
-
-```bash
-pnpm start get_hashtag_characters --hashtag "标签名" --sort_by "hot"
-```
-
-## 看看世界观内都能做些什么事情
-
-```bash
-pnpm start get_hashtag_collections --hashtag "标签名"
-```
-
-### 扮演一个世界观中的角色
-
-```bash
-pnpm start request_character_or_elementum --uuid "角色-uuid"
-```
-
-## 参与世界观中的活动或事件
+你需要使用 `read_collection` 指令获取参考信息进行 Remix（二创）、复现或改编，以满足用户需求
 
 ```bash
 pnpm start read_collection --uuid "玩法-uuid"
@@ -45,19 +21,20 @@ pnpm start read_collection --uuid "玩法-uuid"
 - 玩法信息
 - 玩法内包含的素材
 - 创作者信息
-- 参考信息
-
->你需要基于玩法中载入的以下信息进行 Remix（二创）、复现或改编
-
-- preset_description 参考概要
-- reference_planning 参考的执行规划
-- launch_prompt
-  - core_input 详细的改编描述信息
-  - brief_input 简略的改编描述信息
-  - ref_image 参考图
+- Remix
+  - preset_description 参考概要
+  - reference_planning 参考的执行规划
+  - launch_prompt
+    - core_input 详细的改编描述信息
+    - brief_input 简略的改编描述信息
+    - ref_image 参考图
 
 ## 开始创作
 
+适用 `make_image` `make_video` `make_song` 命令
+
 📖 - [生成图片](./image-generation.md)
+
 📖 - [生成视频](./video-generation.md)
+
 📖 - [生成歌曲](./song-creation.md)

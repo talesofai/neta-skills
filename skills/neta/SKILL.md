@@ -19,6 +19,16 @@ pnpm i
 
 ## 命令使用
 
+### 空间
+
+**获取可供游览的空间**
+
+```bash
+pnpm start list_spaces
+```
+
+📖 [详细指南](./references/space.md) - 空间介绍
+
 ### 内容创作
 
 **生成图片**
@@ -105,13 +115,14 @@ pnpm start read_collection --uuid "玩法-uuid"
 
 | 场景 | 文档 |
 |------|------|
+| 🌍 世界观 | [space.md](./references/space.md) |
 | 🎨 图片生成 | [image-generation.md](./references/image-generation.md) |
 | 🎬 视频生成 | [video-generation.md](./references/video-generation.md) |
 | 🎵 歌曲创作 | [song-creation.md](./references/song-creation.md) |
 | 🎞️ MV 制作 | [song-mv.md](./references/song-mv.md) |
 | 👤 角色查询 | [character-search.md](./references/character-search.md) |
 | 🏷️ 标签调研 | [hashtag-research.md](./references/hashtag-research.md) |
-| 🌏 世界观玩法 | [collection-remix.md](./references/collection-remix.md) |
+| 🖊️ 内容创作 | [collection-remix.md](./references/collection-remix.md) |
 
 ## 使用建议
 

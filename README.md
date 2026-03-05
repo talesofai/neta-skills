@@ -32,21 +32,23 @@ npx skills add talesofai/neta-skills/skills/neta
 
 ### Available Commands
 
-The skill includes 12 commands for various tasks:
+The skill includes 13 commands for various tasks:
 
 | Category | Command | Description |
 |----------|---------|-------------|
-| **Creation** | `make-image` | Generate images from text prompts |
-| | `make-video` | Generate videos from images and prompts |
-| | `make-song` | Compose songs with custom prompts and lyrics |
-| | `remove-background` | Remove the background from an image |
-| **Characters**| `search-tcp` | Search for characters and style elements |
-| | `request-character` | Fetch character details by name |
-| | `request-character-or-style` | Fetch character/style details by name or UUID |
-| | `request-bgm` | Fetch background music |
-| **Community**| `get-hashtag-info` | Get details about a specific hashtag |
-| | `get-hashtag-characters` | Get a list of characters under a hashtag |
-| | `get-hashtag-collections` | Get curated collections under a hashtag |
+| **Creation** | `make_image` | Generate images from text prompts |
+| | `make_video` | Generate videos from images and prompts |
+| | `make_song` | Compose songs with custom prompts and lyrics |
+| | `remove_background` | Remove the background from an image |
+| | `merge_video` | Merge multiple video clips into one |
+| **Characters** | `search_character_or_elementum` | Search for characters and style elements |
+| | `request_character_or_elementum` | Fetch character or elementum details by name or UUID |
+| **Community** | `get_hashtag_info` | Get details and metrics for a specific hashtag |
+| | `get_hashtag_characters` | Get a list of characters under a hashtag |
+| | `get_hashtag_collections` | Get curated collections under a hashtag |
+| | `read_collection` | Read details for a specific collection (玩法) |
+| | `list_spaces` | List spaces that can be explored |
+| | `list_space_topics` | List topics available under a specific space |
 
 ---
 

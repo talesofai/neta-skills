@@ -1,6 +1,6 @@
 {
   "name": "@neta/skills-neta",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A skill for interacting with Neta API to generate images, videos, songs, and manage characters/elements.",
   "type": "module",
   "author": "Neta Team",
@@ -26,7 +26,7 @@
     "neta-skills": "bin/cli.js"
   },
   "scripts": {
-    "dev": "node src/cli.ts",
+    "dev": "NODE_ENV=development node src/cli.ts",
     "start": "node bin/cli.js",
     "type-check": "tsc --noEmit",
     "build": "rimraf bin && tsc",
