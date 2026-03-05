@@ -1,0 +1,9 @@
+remove_background:
+  name: remove_background
+  title: 去除图片背景
+  description: 输入图片保留主体去除背景，返回透明通道图片
+
+remove_background_nocrop:
+  name: remove_background_nocrop
+  title: 去除图片背景(不裁剪透明边缘)
+  description: 去除输入图片的背景,返回透明底图片(不裁剪透明边缘).

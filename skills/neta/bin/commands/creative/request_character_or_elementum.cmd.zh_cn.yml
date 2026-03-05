@@ -1,0 +1,3 @@
+name: request_character_or_elementum
+title: 请求角色或元素
+description: 通过名称(精确匹配)或UUID获取角色或元素的详细信息

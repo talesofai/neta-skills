@@ -13,7 +13,7 @@ import {
   type LoreEntry,
 } from "./hashtag.ts";
 import { createPromptApis } from "./prompt.ts";
-// import { createRecsysApis } from "./recsys.ts";
+import { createRecsysApis } from "./recsys.ts";
 import { createTaskApis } from "./task.ts";
 import { createTcpApis } from "./tcp.ts";
 import type { PromiseResult } from "./types.ts";
@@ -53,7 +53,7 @@ export const createApis = (option: {
   const user = createUserApis(client);
   const collection = createCollectionApis(client);
   const feeds = createFeedsApis(client);
-  // const recsys = createRecsysApis(client);
+  const recsys = createRecsysApis(client);
 
   return {
     tcp,
@@ -69,7 +69,7 @@ export const createApis = (option: {
     user,
     collection,
     feeds,
-    // recsys,
+    recsys,
   };
 };
 

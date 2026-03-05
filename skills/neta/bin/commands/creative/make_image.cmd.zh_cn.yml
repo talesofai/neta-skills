@@ -1,0 +1,3 @@
+name: make_image
+title: 生成图片
+description: 基于文本提示词或图片生成图片的工具

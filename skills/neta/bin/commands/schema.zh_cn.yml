@@ -1,0 +1,162 @@
+character_assign_schema:
+  type: 角色类型
+  age: 角色的年龄
+  interests: 角色的兴趣
+  persona: 角色的性格
+  description: 角色的背景描述信息
+  occupation: 角色的职业
+  avatar_img: 角色的头像图片
+  header_img: 角色的立绘图片
+
+elementum_assign_schema:
+  type: 风格元素类型
+  name: 风格元素名称
+  description: 元素的使用说明或背景信息
+  avatar_img: 风格元素的头像图片
+
+task_artifact: 任务产物
+task_result: 任务结果
+task_status_schema:
+  status: 任务状态
+  modality: 任务类型
+  artifact_audio_detail_audio_name: 音频名称
+  artifact_audio_detail_lyric_url: 歌词地址
+  artifact: 任务产物
+  result: 任务结果
+
+make_image_parameters_schema:
+  prompt: |
+    生图提示词。
+      - 可包括:
+        - 角色:通过 @character_name 来引用角色,这个引用会包含角色的完整形象信息;
+        - 画面元素:通过 /元素名称 格式引用风格元素,如 /漫画风格;
+        - 参考图:通过 参考图-全图参考-uuid 格式引用已存在的图片作为参考图,如"参考图-全图参考-1234567890"。最多能有 14 张图片;
+        - 中文词组:描述具体画面生成要求,如果没有引用角色,则需要在自然语言词组中描述角色形象;
+      - 注意:
+        - 提示词要多提供上下文和意图。详细描述场景,而不仅仅是列出关键字。与一连串不相关的字词相比,叙述性描述段落几乎总是能生成更好、更连贯的图片；
+        - 角色引用必须以 @角色名称 形式出现,如 @奈塔#996;
+        - 元素引用必须以 /元素名称 形式出现,如 /漫画风格;
+        - 引用角色或者元素的时候,前后要添加空格或逗号分隔,如："@奈塔#996, /漫画风格, 在校园里散步"
+        - 对于修改图片等跟原图参考相关的生成,请一定引用上参考图变量
+      - 示例(引用角色和元素)：@奈塔#996, /漫画风格, 参考图-全图参考-1234567890, 参考图-全图参考-1234567891, 词组1, 词组2…
+  aspect: 图片比例
+
+make_video_parameters_schema:
+  image_source: |
+    支持图片URL作为视频的首帧。只能引用一张图,因此需要参考多角色/多分镜场景时先使用 make_image 生成一张多人/多分镜图片再作为视频参考图引用。
+    图片URL: 完整图片地址
+  prompt:  |
+    用于驱动视频生成的完整自然语言提示词。
+    单分镜场景：需要包含场景、角色、动作、风格、镜头调度、光线、氛围等信息。提醒角色动作要自然流畅。
+    多分镜场景：提示词结构 = 总体描述 + 镜头序号 + 时间戳 + 分镜内容 + 美学控制 + 风格化 + 声音描述(人声/音效/背景音乐)
+      - 总体描述：简要概述整个视频内容,说明故事主题、叙述风格、主要情感或核心事件
+      - 镜头序号：为每个镜头分配编号,用于区分视频中不同的场景或段落顺序
+      - 时间戳：标明每个镜头在视频中的具体时间范围,确保镜头内容与视频时间线对应
+      - 分镜内容：详细描述每个分镜头中主要角色或物体的具体行为,包括动作、语言、表情、姿态等
+  model: 视频生成模型。model_w 用于带声音的 10s 多分镜音画同步的视频生成,model_s 用于 5s 单分镜无声音视频生成。
+
+search_character_or_elementum_parameters_schema:
+  keywords: |
+    搜索关键词
+      - 如果要搜索特定角色或元素,请输入名称,如："奈塔#996"、"初音未来"、"五条悟"
+      - 如果要搜索特定风格元素,请输入风格名称,如："漫画屋"、"水彩风"、"赛博朋克"
+      - TCP名称带有井号标识(如"奈塔#996"),搜索时必须使用完整名称
+  parent_type: 搜索类型
+  sort_scheme: |
+    搜索匹配模式
+      - exact: 精确匹配,用于已知名称的精确查找
+      - "best": 最佳匹配,用于模糊搜索和推荐
+  page_index: 页码,从0开始
+  page_size: 每页数量,1-50
+
+request_character_or_elementum_parameters_schema:
+  name: |
+    角色或元素的名称(精确匹配)
+      - 当提供name时,工具会先搜索匹配的角色或元素(使用精确匹配),然后获取详情
+      - 示例："奈塔#996"、"初音未来"、"赛博朋克风格"
+      - 注意：使用精确匹配,确保名称完全一致
+      - 如果同时提供name和uuid,优先使用uuid
+  uuid: |
+    角色或元素的UUID
+      - 当提供uuid时,直接获取角色或元素详情
+      - 可以通过search_tcp工具获取UUID
+      - 如果同时提供name和uuid,优先使用uuid
+  parent_type: 指定搜索类型
+
+request_character_or_elementum_result_schema:
+  detail: 获取到的角色或元素详情
+
+request_bgm_parameters_schema:
+  placeholder: |
+    音乐名称,唯一值.
+      如果没有指定音乐名称,你可以选择一个预设的音乐名称填入:
+      - "窗边清晨":轻柔,抒情的环境声与旋律
+      - "沉静午后":哀伤中带有一些温柔的旋律
+      - "神秘塔罗":神秘,悬疑的氛围
+      - "故事结局":缓缓诉说的抒情风格
+      - "芳草夕阳":宁静,温暖的田园风格
+      - "低语思念":轻柔,空灵的抒情风格
+      - "片尾曲":故事结束时的回忆与感慨
+      - "人生游戏":燃情,励志的旋律
+      - "黑色森林":阴森,悬疑的氛围
+      - "滑稽剪辑":搞笑,轻松的氛围
+
+make_song_parameters_schema:
+  prompt: 音乐的描述,用于指定风格、情绪和场景。例如"流行音乐, 难过, 适合在下雨的晚上"。
+  lyrics: |
+    歌曲的歌词。使用 \n 分隔每行。你可以在歌词中加入 [Intro], [Verse], [Pre Chorus], [Chorus], [Interlude], [Bridge], [Outro], [Post Chorus], [Transition], [Break], [Hook], [Build Up], [Inst], [Solo] 等结构标签来优化生成的音乐结构。
+
+remove_background_parameters_schema:
+  input_image: 通过{input_image_variable_name}引用一个已经存在的图片变量
+
+hashtag_base_parameters_schema:
+  hashtag: hashtag/空间名称
+
+paginated_hashtag_parameters_schema:
+  page_index: 分页索引,从0开始,默认0
+  page_size: 每页数量,默认20,最大100
+
+activity_detail_schema:
+  uuid: 空间的UUID
+  title: 活动标题
+  banner_pic: 活动横幅图片
+  creator_name: 创建者名称
+  review_users: 管理员列表
+  review_users_uuid: 管理员UUID
+  review_users_name: 管理员名称
+
+hashtag_info_schema:
+  name: hashtag/空间名称
+  lore: hashtag相关的设定条目
+  activity_detail: 活动(空间)详细信息
+  hashtag_heat: 热度
+  subscribe_count: 订阅数
+
+fetch_characters_by_hashtag_parameters_schema:
+  sort_by: 排序方式, hot(热门)或newest(最新),默认hot
+  parent_type: 类型, oc(角色)或elementum(元素),可选
+
+fetch_characters_by_hashtag_result_schema:
+  total: 总数量
+  page_index: 当前页索引
+  page_size: 每页数量
+  list: 角色列表
+  has_next: 是否有下一页
+
+selected_collection_schema:
+  uuid: 作品UUID
+  name: 作品名称
+  coverUrl: 封面图片地址
+  creator_name: 创作者名称
+  likeCount: 点赞数
+  sameStyleCount: 捏同款数量
+  ctime: 创建时间
+
+fetch_selected_collections_by_hashtag_parameters_schema:
+  sort_by: 排序方式,默认按精选时间排序
+
+fetch_selected_collections_by_activity_result_schema:
+  total: 总数量
+  page_index: 当前页索引
+  page_size: 每页数量
+  list: 精选玩法列表

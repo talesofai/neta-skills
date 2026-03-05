@@ -1,0 +1,10 @@
+name: edit_collection
+title: 编辑作品
+description: 编辑一个作品
+parameters:
+  uuid: 作品 uuid
+  name: 作品标题
+  description: 作品简介
+  status: 作品发布状态 PRIVATE(私密) 或 PUBLISHED(公开)
+  artifacts: 作品素材列表, 最少1张, 最多12张, 示例, picture_uuid,picture_uuid
+  hashtags: 作品标签列表, 示例, hashtag_name,hashtag_name
