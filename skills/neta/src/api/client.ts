@@ -15,6 +15,16 @@ import type {
   SearchCharacterOrElementumV1Parameters,
   SearchCharacterOrElementumV1Result,
   TaskResult,
+  SuggestKeywordsV1Parameters,
+  SuggestKeywordsV1Result,
+  SuggestTagsV1Parameters,
+  SuggestTagsV1Result,
+  SuggestCategoriesV1Parameters,
+  SuggestCategoriesV1Result,
+  SuggestContentV1Parameters,
+  SuggestContentV1Result,
+  ValidateTaxPathV1Parameters,
+  ValidateTaxPathV1Result,
 } from '../types.ts';
 
 const BASE_URL = process.env.NETA_BASE_URL || 'https://api.talesofai.cn';
@@ -475,5 +485,66 @@ export const apiClient = {
         }),
       ),
     };
+  },
+  /**
+   * 获取搜索关键词的自动补全建议
+   * GET /suggest/keywords
+   */
+  async suggestKeywords(params: SuggestKeywordsV1Parameters): Promise<SuggestKeywordsV1Result> {
+    const res = await getClient().get('/v1/suggest/keywords', {
+      params: {
+        prefix: params.prefix,
+        size: params.size ?? 10,
+      },
+    });
+    return res.data;
+  },
+  
+  /**
+   * 基于关键词获取相关标签建议
+   * GET /suggest/tags
+   */
+  async suggestTags(params: SuggestTagsV1Parameters): Promise<SuggestTagsV1Result> {
+    const res = await getClient().get('/v1/suggest/tags', {
+      params: {
+        keyword: params.keyword,
+        size: params.size ?? 10,
+      },
+    });
+    return res.data;
+  },
+  
+  /**
+   * 获取分类层级的导航建议
+   * GET /suggest/categories
+   */
+  async suggestCategories(params: SuggestCategoriesV1Parameters): Promise<SuggestCategoriesV1Result> {
+    const res = await getClient().get('/v1/suggest/categories', {
+      params: {
+        level: params.level ?? 1,
+        parent_path: params.parent_path,
+      },
+    });
+    return res.data;
+  },
+  
+  /**
+   * 基于用户意图生成个性化内容流建议
+   * POST /suggest/content
+   */
+  async suggestContent(params: SuggestContentV1Parameters): Promise<SuggestContentV1Result> {
+    const res = await getClient().post('/v1/suggest/content', params);
+    return res.data;
+  },
+  
+  /**
+   * 验证分类路径是否有效
+   * POST /validate/tax-path
+   */
+  async validateTaxPath(body: ValidateTaxPathV1Parameters): Promise<ValidateTaxPathV1Result> {
+    const res = await getClient().post('/v1/validate/tax-path', {
+      tax_path: body.tax_path,
+    });
+    return res.data;
   },
 };

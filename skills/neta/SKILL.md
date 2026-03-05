@@ -91,6 +91,45 @@ npm start get-hashtag-characters -t "标签名" --sort-by "hot"
 npm start get-hashtag-collections -t "标签名"
 ```
 
+### 内容玩法探索
+
+**获取玩法搜索关键词的自动补全建议 (Search Keyword Autocomplete)**
+```bash
+npm start -- suggest-keywords -p "游戏"
+```
+
+**基于完整关键词获取相关标签建议 (Tag Matching Suggestions)**
+```bash
+npm start -- suggest-tags -k "游戏"
+```
+
+**获取玩法分类层级的导航建议 (Category Navigation Suggestions)**
+```bash
+# 获取一级玩法分类
+npm start -- suggest-categories -l 1
+# 获取多级玩法分类 情景剧情类>Q 版小剧场
+npm start -- suggest-categories -l 2 -P "情景剧情类"
+npm start -- suggest-categories -l 3 -P "像素游戏世界"
+```
+
+**探索各种社区玩法 (智能内容流引擎)**
+```bash
+# 推荐模式
+npm start -- suggest-content -m recommend --secondaries "热门 IP" -l 10
+npm start -- suggest-content -m recommend -l 10
+npm start -- suggest-content -m recommend --primaries "情景剧情类" -l 10
+
+# 搜索模式
+npm start -- suggest-content -m search -k "主题换装" -l 10
+# 筛选模式
+npm start -- suggest-content -m exact -t "衍生创作类>热门 IP>初音未来" -l 10
+npm start -- suggest-content -m exact -t "衍生创作类>原创 IP>伪人大本营" -l 10
+
+
+```
+
+
+
 ## 参考文档
 
 | 场景 | 文档 |

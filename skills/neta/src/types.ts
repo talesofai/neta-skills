@@ -296,3 +296,146 @@ export const fetchSelectedCollectionsByActivityV1ResultSchema = z.object({
 export type FetchSelectedCollectionsByActivityV1Result = z.infer<
   typeof fetchSelectedCollectionsByActivityV1ResultSchema
 >;
+
+
+// ==============================================================================
+// RecSys Types (推荐系统相关类型)
+// ==============================================================================
+
+// 1. 搜索关键词建议 (Search Keywords Suggestion)
+export const suggestKeywordsV1Parameters = z.object({
+  prefix: z.string().min(1),
+  size: z.number().int().min(1).max(50).optional().default(10),
+});
+export type SuggestKeywordsV1Parameters = z.infer<typeof suggestKeywordsV1Parameters>;
+
+export const keywordSuggestionItemSchema = z.object({
+  text: z.string(),
+  score: z.number().optional(),
+  highlight: z.string().optional(), // 高亮部分
+});
+export type KeywordSuggestionItem = z.infer<typeof keywordSuggestionItemSchema>;
+
+export const suggestKeywordsV1ResultSchema = z.object({
+  suggestions: z.array(keywordSuggestionItemSchema),
+});
+export type SuggestKeywordsV1Result = z.infer<typeof suggestKeywordsV1ResultSchema>;
+
+// 2. 标签建议 (Tag Suggestion)
+export const suggestTagsV1Parameters = z.object({
+  keyword: z.string().min(1),
+  size: z.number().int().min(1).max(50).optional().default(10),
+});
+export type SuggestTagsV1Parameters = z.infer<typeof suggestTagsV1Parameters>;
+
+export const tagSuggestionItemSchema = z.object({
+  name: z.string(),
+  id: z.string().optional(),
+  score: z.number().optional(),
+  highlight: z.string().optional(),
+});
+export type TagSuggestionItem = z.infer<typeof tagSuggestionItemSchema>;
+
+export const suggestTagsV1ResultSchema = z.object({
+  suggestions: z.array(tagSuggestionItemSchema),
+});
+export type SuggestTagsV1Result = z.infer<typeof suggestTagsV1ResultSchema>;
+
+// 3. 分类导航建议 (Category Suggestion)
+export const suggestCategoriesV1Parameters = z.object({
+  level: z.number().int().min(1).max(5).optional().default(1),
+  parent_path: z.string().optional(), // 二级及以上分类需要父路径
+});
+export type SuggestCategoriesV1Parameters = z.infer<typeof suggestCategoriesV1Parameters>;
+
+export const categoryItemSchema = z.object({
+  path: z.string(),
+  name: z.string(),
+  level: z.number(),
+  count: z.number().optional(), // 该分类下的内容数量
+});
+export type CategoryItem = z.infer<typeof categoryItemSchema>;
+
+export const suggestCategoriesV1ResultSchema = z.object({
+  suggestions: z.array(categoryItemSchema),
+});
+export type SuggestCategoriesV1Result = z.infer<typeof suggestCategoriesV1ResultSchema>;
+
+// 4. 个性化内容流建议 (Content Feed Suggestion)
+const IntentEnum = z.enum(['recommend', 'search', 'exact']);
+
+// 2. 定义业务参数模型 (对应后端的 AgentRecallBusinessParam)
+const SuggestBusinessParamSchema = z.object({
+  // 核心意图
+  intent: IntentEnum.default('recommend'),
+  
+  // 搜索模式参数
+  search_keywords: z.array(z.string()).optional().default([]),
+  
+  // 分类筛选参数 (支持路径和分层级)
+  tax_paths: z.array(z.string()).optional().default([]), // 例: ["科幻>AI"]
+  tax_primaries: z.array(z.string()).optional().default([]),
+  tax_secondaries: z.array(z.string()).optional().default([]),
+  tax_tertiaries: z.array(z.string()).optional().default([]),
+  
+  // 排除关键字参数
+  exclude_keywords: z.array(z.string()).optional().default([]),
+  exclude_tax_paths: z.array(z.string()).optional().default([]),
+});
+
+// 3. 定义主请求体 (对应后端的 AgentIntentRecRequest)
+export const suggestContentV1Parameters = z.object({
+  // 分页参数 (后端使用 page_index 从 0 开始)
+  page_index: z.number().int().min(0).optional().default(0),
+  page_size: z.number().int().min(1).max(40).optional().default(20),
+  
+  // 场景标识 (后端默认为 'agent_intent')
+  scene: z.string().optional().default('agent_intent'),
+  
+  // 业务追踪 ID (可选)
+  biz_trace_id: z.string().optional(),
+  
+  // 核心业务数据 (嵌套结构)
+  business_data: SuggestBusinessParamSchema.optional().default({
+    intent: 'recommend',
+    search_keywords: [],
+    tax_paths: [],
+    tax_primaries: [],
+    tax_secondaries: [],
+    tax_tertiaries: [],
+    exclude_keywords: [],
+    exclude_tax_paths: [],
+  }),
+});
+export type SuggestContentV1Parameters = z.infer<typeof suggestContentV1Parameters>;
+
+// 假设内容项的基本结构 (可根据实际 API 返回调整)
+export const contentItemSchema = z.object({
+  uuid: z.string(),
+  title: z.string(),
+  cover_url: z.string().nullish(),
+  type: z.enum(['video', 'image', 'article']).optional(),
+  score: z.number().optional(),
+  reason: z.string().optional(), // 推荐理由
+});
+export type ContentItem = z.infer<typeof contentItemSchema>;
+
+export const suggestContentV1ResultSchema = z.object({
+  items: z.array(contentItemSchema),
+  has_next: z.boolean().optional(),
+  next_cursor: z.string().optional(),
+});
+export type SuggestContentV1Result = z.infer<typeof suggestContentV1ResultSchema>;
+
+// 5. 路径验证 (Path Validation)
+export const validateTaxPathV1Parameters = z.object({
+  tax_path: z.string().min(1),
+});
+export type ValidateTaxPathV1Parameters = z.infer<typeof validateTaxPathV1Parameters>;
+
+export const validateTaxPathV1ResultSchema = z.object({
+  valid: z.boolean(),
+  message: z.string().optional(),
+  normalized_path: z.string().optional(),
+});
+export type ValidateTaxPathV1Result = z.infer<typeof validateTaxPathV1ResultSchema>;

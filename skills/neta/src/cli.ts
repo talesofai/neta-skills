@@ -13,6 +13,11 @@ import { requestBgmCommand } from './commands/request-bgm.ts';
 import { requestCharacterCommand } from './commands/request-character.ts';
 import { requestCharacterOrStyleCommand } from './commands/request-character-or-style.ts';
 import { searchTcpCommand } from './commands/search-tcp.ts';
+import {validateTaxPathCommand} from "./commands/suggest/validate-tax-path.ts";
+import {suggestKeywordsCommand} from "./commands/suggest/suggest-keywords.ts";
+import {suggestTagsCommand} from "./commands/suggest/suggest-tags.ts";
+import {suggestCategoriesCommand} from "./commands/suggest/suggest-categories.ts";
+import {suggestContentCommand} from "./commands/suggest/suggest-content.ts";
 
 // Load environment variables
 dotenv.config();
@@ -34,5 +39,10 @@ program.addCommand(requestBgmCommand);
 program.addCommand(getHashtagInfoCommand);
 program.addCommand(getHashtagCharactersCommand);
 program.addCommand(getHashtagCollectionsCommand);
+program.addCommand(suggestKeywordsCommand);
+program.addCommand(suggestTagsCommand)
+program.addCommand(suggestCategoriesCommand)
+program.addCommand(suggestContentCommand)
+program.addCommand(validateTaxPathCommand);
 
 program.parse();
