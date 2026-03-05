@@ -119,6 +119,21 @@ pnpm start read_colleciton --uuid "玩法-uuid"
 
 ### 内容玩法探索
 
+**获取首页推荐列表**
+```bash
+pnpm start request_home_feed_interactive --page_index 0 --page_size 20
+```
+支持参数：
+- `--page_index`: 页码（默认 0）
+- `--page_size`: 每页数量（1-40，默认 20）
+- `--biz_trace_id`: 会话追踪 ID，用于保持翻页连续性（可选）
+- `--is_new_user`: 是否新用户（可选）
+- `--select_themes`: 选择主题（可选）
+- `--scene`: 场景（可选）
+- `--collection_uuid`: 合集 UUID（可选）
+- `--target_collection_uuid`: 目标合集 UUID（可选）
+- `--target_user_uuid`: 目标用户 UUID（可选）
+
 **获取搜索关键词的自动补全建议**
 ```bash
 pnpm start suggest_keywords --prefix "游戏" --size 20
@@ -140,6 +155,9 @@ pnpm start suggest_categories --level 2 --parent_path "衍生创作类"
 
 # 获取三级分类
 pnpm start suggest_categories --level 3 --parent_path "衍生创作类>同人二创"
+
+# 验证分类路径是否有效
+pnpm start validate_tax_path --tax_path "衍生创作类>热门 IP>崩坏星穹铁道"
 ```
 
 **智能内容流引擎（推荐/搜索/精确筛选三模式）**
@@ -157,10 +175,7 @@ pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --
 pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent search --search_keywords "AI,绘画" --tax_paths "数字艺术>概念设计" --exclude_keywords "测试,废弃"
 ```
 
-**验证分类路径是否有效**
-```bash
-pnpm start validate_tax_path --tax_path "衍生创作类>热门 IP>崩坏星穹铁道"
-```
+
 
 ## 参考文档
 

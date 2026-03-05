@@ -51,7 +51,7 @@ const collectionUnitJsonDataSchema = z.object({
     all_tax_nodes: z.array(z.string()),
     tax_primary: z.array(z.string()),
     tax_secondary: z.array(z.string()),
-    tax_tertiary: z.array(z.string())
+    tax_tertiary: z.array(z.string()),
 });
 // 定义 travel_unit 的 json_data 结构
 const travelUnitJsonDataSchema = z.object({
