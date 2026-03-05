@@ -21,11 +21,11 @@
 - 空间
   - 世界观、设定（lore）
   - 角色
-  - Collection
+  - collections
 
   - 子空间
-    - curated_works 核心玩法
-    - Collection
+    - offical_collections
+    - collections
 
 # 获取可供游览的空间
 
@@ -65,7 +65,7 @@ pnpm start list_space_topics --space_uuid "空间 UUID"
 
 - primary_topic 主空间
 - topics 子空间列表
-  - curated_works 核心玩法
+  - offical_collections
 
 # 获取空间内角色
 
@@ -82,7 +82,7 @@ pnpm start get_hashtag_collections --hashtag "标签名"
 # 获取空间中的某个玩法信息
 
 ```bash
-pnpm start read_collection --uuid "curated_works in topic | collection"
+pnpm start read_collection --uuid "official_collections in topic | collections in hashtag"
 ```
 
 ## 在空间内游玩

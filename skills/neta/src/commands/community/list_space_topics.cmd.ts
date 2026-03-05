@@ -30,10 +30,15 @@ export const listSpaceTopics = createCommand(
       .then(({ primary_topic, topics }) => {
         return {
           primary_topic,
-          topics: topics.map((topic) => ({
-            ...topic,
-            ...spaceConfigs[topic.hashtag_name],
-          })),
+          topics: topics.map((topic) => {
+            const { curated_works, ...config } =
+              spaceConfigs[topic.hashtag_name] ?? {};
+            return {
+              ...topic,
+              ...config,
+              official_collections: curated_works,
+            };
+          }),
         };
       });
     return {
