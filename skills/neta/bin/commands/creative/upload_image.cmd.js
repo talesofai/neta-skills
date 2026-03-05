@@ -18,14 +18,6 @@ const MIME_TO_SUFFIX = {
     "image/svg+xml": "svg",
     "image/webp": "webp",
 };
-const SUFFIX_TO_MIME = {
-    jpg: "image/jpeg",
-    jpeg: "image/jpeg",
-    png: "image/png",
-    gif: "image/gif",
-    svg: "image/svg+xml",
-    webp: "image/webp",
-};
 const isUploadImageSuffix = (value) => {
     return ALLOWED_SUFFIX_SET.has(value);
 };
@@ -163,17 +155,11 @@ export const uploadImage = createCommand({
     if (!finalSuffix) {
         throw new Error("E_CANNOT_INFER_SUFFIX: 无法识别图片后缀，请显式传入 suffix");
     }
-    const contentType = inputData.contentType?.toLowerCase().startsWith("image/")
-        ? inputData.contentType
-        : SUFFIX_TO_MIME[finalSuffix];
     const { upload_url, view_url } = await apis.artifact.uploadSignedUrl({
         suffix: finalSuffix,
     });
     const uploadRes = await fetch(upload_url, {
         method: "PUT",
-        headers: {
-            "content-type": contentType,
-        },
         body: inputData.bytes,
     });
     if (!uploadRes.ok) {

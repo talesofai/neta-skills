@@ -30,15 +30,6 @@ const MIME_TO_SUFFIX: Record<string, UploadImageSuffix> = {
   "image/webp": "webp",
 };
 
-const SUFFIX_TO_MIME: Record<UploadImageSuffix, string> = {
-  jpg: "image/jpeg",
-  jpeg: "image/jpeg",
-  png: "image/png",
-  gif: "image/gif",
-  svg: "image/svg+xml",
-  webp: "image/webp",
-};
-
 const isUploadImageSuffix = (value: string): value is UploadImageSuffix => {
   return ALLOWED_SUFFIX_SET.has(value as UploadImageSuffix);
 };
@@ -218,21 +209,12 @@ export const uploadImage = createCommand(
       );
     }
 
-    const contentType = inputData.contentType
-      ?.toLowerCase()
-      .startsWith("image/")
-      ? inputData.contentType
-      : SUFFIX_TO_MIME[finalSuffix];
-
     const { upload_url, view_url } = await apis.artifact.uploadSignedUrl({
       suffix: finalSuffix,
     });
 
     const uploadRes = await fetch(upload_url, {
       method: "PUT",
-      headers: {
-        "content-type": contentType,
-      },
       body: inputData.bytes,
     });
 
