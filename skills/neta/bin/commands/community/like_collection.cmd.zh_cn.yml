@@ -1,0 +1,12 @@
+name: like_collection
+title: 点赞作品
+description: |
+  对作品进行点赞或取消点赞操作
+  - 支持点赞和取消点赞两种操作
+  - 需要提供作品 UUID
+parameters:
+  uuid: 作品 UUID
+  is_cancel: 是否取消点赞，true 为取消点赞，false 为点赞（可选，默认为 false）
+output:
+  success: 操作是否成功
+  message: 操作结果信息

@@ -488,10 +488,24 @@ export const createCollectionApis = (client: AxiosInstance) => {
       .then((res) => res.data);
   };
 
+  const likeCollection = async (
+    storyId: string,
+    options?: { is_cancel?: boolean },
+  ) => {
+    const { is_cancel } = options ?? {};
+    return client
+      .put<{ status: string }>("/v1/story/story-like", {
+        storyId,
+        is_cancel: is_cancel ?? false,
+      })
+      .then((res) => res.data.status === "SUCCESS");
+  };
+
   return {
     createCollection,
     saveCollection,
     publishCollection,
     collectionDetails,
+    likeCollection,
   };
 };

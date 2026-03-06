@@ -33,10 +33,20 @@ export const createCollectionApis = (client) => {
         })
             .then((res) => res.data);
     };
+    const likeCollection = async (storyId, options) => {
+        const { is_cancel } = options ?? {};
+        return client
+            .put("/v1/story/story-like", {
+            storyId,
+            is_cancel: is_cancel ?? false,
+        })
+            .then((res) => res.data.status === "SUCCESS");
+    };
     return {
         createCollection,
         saveCollection,
         publishCollection,
         collectionDetails,
+        likeCollection,
     };
 };
