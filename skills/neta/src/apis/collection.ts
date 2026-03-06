@@ -548,6 +548,25 @@ export const createCollectionApis = (client: AxiosInstance) => {
     };
   };
 
+  const favorCollection = async (
+    storyId: string,
+    options?: { is_cancel?: boolean },
+  ): Promise<{ success: boolean }> => {
+    const { is_cancel } = options ?? {};
+    const response = await client.request({
+      method: "PUT",
+      url: "/v1/story/story-favor",
+      data: {
+        storyId,
+        is_cancel: is_cancel ?? false,
+      },
+    });
+
+    return {
+      success: response.status === 200 || response.status === 204,
+    };
+  };
+
   return {
     createCollection,
     saveCollection,
@@ -555,5 +574,6 @@ export const createCollectionApis = (client: AxiosInstance) => {
     collectionDetails,
     likeCollection,
     createComment,
+    favorCollection,
   };
 };

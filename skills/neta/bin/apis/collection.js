@@ -62,6 +62,20 @@ export const createCollectionApis = (client) => {
             comment: response.data,
         };
     };
+    const favorCollection = async (storyId, options) => {
+        const { is_cancel } = options ?? {};
+        const response = await client.request({
+            method: "PUT",
+            url: "/v1/story/story-favor",
+            data: {
+                storyId,
+                is_cancel: is_cancel ?? false,
+            },
+        });
+        return {
+            success: response.status === 200 || response.status === 204,
+        };
+    };
     return {
         createCollection,
         saveCollection,
@@ -69,5 +83,6 @@ export const createCollectionApis = (client) => {
         collectionDetails,
         likeCollection,
         createComment,
+        favorCollection,
     };
 };
