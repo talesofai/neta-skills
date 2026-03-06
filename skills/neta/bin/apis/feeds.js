@@ -6,7 +6,7 @@ export const createFeedsApis = (client) => {
     };
     const interactiveList = async (params) => {
         return client
-            .get("/v1/home/feed/interactive", {
+            .get("/v1/recsys/feed/interactive", {
             params,
         })
             .then((res) => res.data);

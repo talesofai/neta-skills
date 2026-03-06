@@ -62,8 +62,6 @@ export const requestInteractiveFeed = createCommand(
       page_index: params.page_index,
       page_size: params.page_size,
       biz_trace_id: params.biz_trace_id,
-      is_new_user: params.is_new_user,
-      select_themes: params.select_themes,
       scene: params.scene,
       collection_uuid: params.collection_uuid,
       target_collection_uuid: params.target_collection_uuid,

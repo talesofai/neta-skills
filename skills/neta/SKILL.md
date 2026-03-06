@@ -126,12 +126,11 @@ pnpm start request_interactive_feed --page_index 0 --page_size 3
 
 **基础参数：**
 - `--page_index`: 页码，从 0 开始（默认 0）
-- `--page_size`: 每页数量，范围 1-10（默认 3）
+- `--page_size`: 每页数量，范围 1-20（默认 10）
 - `--biz_trace_id`: 会话追踪 ID，用于保持翻页连续性。首次请求可不传，后续使用返回的 biz_trace_id（可选）
 
 **场景控制：**
-- `--is_new_user`: 是否启用青少年模式（可选，true 时启用）
-- `--scene`: 场景标识（可选），支持：`relation_feed_child`（查看原作）、`relation_feed_same`（评论区子作品）、`personal_feed`（个人主页）、`topic_picked_associated`（空间发现页）
+- `--scene`: 场景标识（可选），支持：`relation_feed_child`（查看原作）、`relation_feed_same`（评论区子作品）、`personal_feed`（个人主页）
 
 **关联目标：**
 - `--collection_uuid`: 原作 UUID（可选）。提供且 page_index=0 时获取单个作品详情，page_index>0 时获取相关作品推荐
