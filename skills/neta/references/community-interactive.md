@@ -36,4 +36,27 @@ pnpm start create_comment \
     --content "老师，这个作品真的好棒啊！"
 ```
 
+## 收藏作品
+## 收藏
+
+## 取消收藏
+
+
+## 关注用户
+### 关注
+```bash
+pnpm start subscribe_user \
+    --user_uuid "c492883d5dd846adaf715a75ad344350" \
+    --is_cancel false
+```
+### 取消关注
+```bash
+pnpm start subscribe_user \
+    --user_uuid "c492883d5dd846adaf715a75ad344350" \
+    --is_cancel true
+```
+
+
+
+
 

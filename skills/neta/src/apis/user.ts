@@ -187,11 +187,35 @@ export interface UserInfo {
   privileges: UserPrivilege[];
 }
 
+export interface SubscribeUserResponse {
+  success: boolean;
+  subscribe_status?: UserSubscribeStatus | null;
+}
+
 export const createUserApis = (client: AxiosInstance) => {
   return {
     me: async () => {
       const res = await client.get<UserInfo>("/v1/user/");
       return res.data ?? null;
+    },
+    subscribeUser: async (params: {
+      user_uuid: string;
+      is_cancel?: boolean;
+    }): Promise<SubscribeUserResponse> => {
+      const response = await client.request({
+        method: "PUT",
+        url: "/v1/user/user-subscribe",
+        data: {
+          user_uuid: params.user_uuid,
+          is_cancel: params.is_cancel ?? false,
+        },
+      });
+
+      return {
+        success: response.status === 200 || response.status === 204,
+        subscribe_status: (response.data as Partial<UserInfo>)
+          ?.subscribe_status,
+      };
     },
   };
 };
