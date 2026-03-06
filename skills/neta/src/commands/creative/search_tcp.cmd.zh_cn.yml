@@ -12,4 +12,4 @@ description: |
     - 风格元素(elementum)：也称为"元素",包括绘画风格、世界观设定、梗图、故事片段等概念,如"漫画风格"、"赛博朋克风格"、"校园恋爱世界观"
 
   搜索建议：
-    - 可以通过search_tcp搜索获取准确名称,然后使用request_character_or_elementum获取详情
+    - 可以通过search_character_or_elementum搜索获取准确名称,然后使用request_character_or_elementum获取详情
