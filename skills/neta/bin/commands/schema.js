@@ -603,3 +603,84 @@ export const wrapAction = (action) => {
         return wrapOutput(result);
     };
 };
+// ==============================================================================
+// RecSys Types (推荐系统相关类型)
+// ==============================================================================
+// 1. 搜索关键词建议 (Search Keywords Suggestion)
+export const suggestKeywordsV1Parameters = z.object({
+    prefix: z.string().min(1),
+    size: z.number().int().min(1).max(50).optional().default(10),
+});
+export const keywordSuggestionItemSchema = z.object({
+    text: z.string(),
+    score: z.number().optional(),
+    highlight: z.string().optional(),
+});
+export const suggestKeywordsV1ResultSchema = z.object({
+    suggestions: z.array(keywordSuggestionItemSchema),
+});
+// 2. 标签建议 (Tag Suggestion)
+export const suggestTagsV1Parameters = z.object({
+    keyword: z.string().min(1),
+    size: z.number().int().min(1).max(50).optional().default(10),
+});
+export const tagSuggestionItemSchema = z.object({
+    name: z.string(),
+    id: z.string().optional(),
+    score: z.number().optional(),
+    highlight: z.string().optional(),
+});
+export const suggestTagsV1ResultSchema = z.object({
+    suggestions: z.array(tagSuggestionItemSchema),
+});
+// 3. 分类导航建议 (Category Suggestion)
+export const suggestCategoriesV1Parameters = z.object({
+    level: z.number().int().min(1).max(5).optional().default(1),
+    parent_path: z.string().optional(),
+});
+export const categoryItemSchema = z.object({
+    path: z.string(),
+    name: z.string(),
+    level: z.number(),
+    count: z.number().optional(),
+});
+export const suggestCategoriesV1ResultSchema = z.object({
+    suggestions: z.array(categoryItemSchema),
+});
+// 4. 个性化内容流建议 (Content Feed Suggestion)
+const IntentEnum = z.enum(["recommend", "search", "exact"]);
+const SuggestBusinessParamSchema = z.object({
+    intent: IntentEnum.default("recommend"),
+    search_keywords: z.array(z.string()).optional().default([]),
+    tax_paths: z.array(z.string()).optional().default([]),
+    tax_primaries: z.array(z.string()).optional().default([]),
+    tax_secondaries: z.array(z.string()).optional().default([]),
+    tax_tertiaries: z.array(z.string()).optional().default([]),
+    exclude_keywords: z.array(z.string()).optional().default([]),
+    exclude_tax_paths: z.array(z.string()).optional().default([]),
+});
+export const suggestContentV1Parameters = z.object({
+    page_index: z.number().int().min(0).optional().default(0),
+    page_size: z.number().int().min(1).max(40).optional().default(20),
+    scene: z.string().optional().default("agent_intent"),
+    biz_trace_id: z.string().optional(),
+    business_data: SuggestBusinessParamSchema.optional().default({
+        intent: "recommend",
+        search_keywords: [],
+        tax_paths: [],
+        tax_primaries: [],
+        tax_secondaries: [],
+        tax_tertiaries: [],
+        exclude_keywords: [],
+        exclude_tax_paths: [],
+    }),
+});
+// 5. 路径验证 (Path Validation)
+export const validateTaxPathV1Parameters = z.object({
+    tax_path: z.string().min(1),
+});
+export const validateTaxPathV1ResultSchema = z.object({
+    valid: z.boolean(),
+    message: z.string().optional(),
+    normalized_path: z.string().optional(),
+});

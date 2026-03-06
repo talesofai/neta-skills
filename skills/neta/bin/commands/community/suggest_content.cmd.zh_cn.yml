@@ -1,0 +1,4 @@
+name: suggest_content
+title: 🧠 智能内容流引擎（支持推荐/搜索/精确筛选三模式）
+description: |
+  根据指定模式返回个性化的内容流（Content Feed Suggestion）

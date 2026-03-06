@@ -1,0 +1,3 @@
+name: validate_tax_path
+title: ✅ 验证玩法标签路径是否有效
+description: 验证指定的分类路径字符串是否有效（Validate Taxonomy Path）

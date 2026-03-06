@@ -114,8 +114,92 @@ pnpm start get_hashtag_collections --hashtag "标签名"
 
 **获取玩法信息**
 ```bash
-pnpm start read_collection --uuid "玩法-uuid"
+pnpm start read_colleciton --uuid "玩法-uuid"
 ```
+
+### 内容玩法探索
+
+**获取互动推荐列表**
+```bash
+pnpm start request_interactive_feed --page_index 0 --page_size 3
+
+
+# 获取相似 feed
+pnpm start request_interactive_feed --page_index 1 --page_size 3 \
+  --collection_uuid "目标合集 UUID"
+  
+# 获取原作及全部同款子作品 feed
+pnpm start request_interactive_feed --page_index 0 --page_size 3 \
+  --scene 'relation_feed_child' \
+  --target_collection_uuid "目标合集 UUID" \
+  --collection_uuid "目标合集 UUID"
+
+pnpm start request_interactive_feed --page_index 0 --page_size 3 \
+  --scene 'relation_feed_same' \
+  --target_collection_uuid "目标合集 UUID" \
+  --collection_uuid "目标合集 UUID"
+
+# 获取用户主页互动作品
+pnpm start request_interactive_feed --page_index 0 --page_size 3  \
+  --scene 'personal_feed' \
+  --target_user_uuid "目标用户 UUID" 
+```
+
+**基础参数：**
+- `--page_index`: 页码，从 0 开始（默认 0）
+- `--page_size`: 每页数量，范围 1-20（默认 10）
+- `--biz_trace_id`: 会话追踪 ID，用于保持翻页连续性。首次请求可不传，后续使用返回的 biz_trace_id（可选）
+
+**场景控制：**
+- `--scene`: 场景标识（可选），支持：`relation_feed_child`（查看原作）、`relation_feed_same`（评论区子作品）、`personal_feed`（个人主页）
+
+**关联目标：**
+- `--collection_uuid`: 原作 UUID（可选）。提供且 page_index=0 时获取单个作品详情，page_index>0 时获取相关作品推荐
+- `--target_collection_uuid`: 目标合集 UUID（可选）
+- `--target_user_uuid`: 用户 UUID（可选）。提供时进入个人主页场景
+
+**获取搜索关键词的自动补全建议**
+```bash
+pnpm start suggest_keywords --prefix "游戏" --size 20
+```
+📖 [详细指南](./references/community-exploration.md) - 渐进式探索流程
+
+**基于完整关键词获取相关标签建议**
+```bash
+pnpm start suggest_tags --keyword "角色塑造" --size 15
+```
+
+**获取玩法分类层级的导航建议**
+```bash
+# 获取一级分类
+pnpm start suggest_categories --level 1
+
+# 获取二级分类（需要父级路径）
+pnpm start suggest_categories --level 2 --parent_path "衍生创作类"
+
+# 获取三级分类
+pnpm start suggest_categories --level 3 --parent_path "衍生创作类>同人二创"
+
+# 验证分类路径是否有效
+pnpm start validate_tax_path --tax_path "衍生创作类>热门 IP>崩坏星穹铁道"
+```
+
+**智能内容流引擎（推荐/搜索/精确筛选三模式）**
+```bash
+# 推荐模式（适合广泛探索）
+pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent recommend
+
+# 搜索模式（需要关键词）
+pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent search --search_keywords "角色,创意"
+
+# 精确模式（严格按分类路径筛选）
+pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent exact --tax_paths "衍生创作类>同人二创"
+
+# 组合使用（多个条件筛选）
+pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent search --search_keywords "AI,绘画" --tax_paths "数字艺术>概念设计" --exclude_keywords "测试,废弃"
+```
+
+
 
 ## 参考文档
 
@@ -129,6 +213,8 @@ pnpm start read_collection --uuid "玩法-uuid"
 | 👤 角色查询 | [character-search.md](./references/character-search.md) |
 | 🏷️ 标签调研 | [hashtag-research.md](./references/hashtag-research.md) |
 | 🖊️ 内容创作 | [collection-remix.md](./references/collection-remix.md) |
+| 🌏 世界观玩法 | [collection-remix.md](./references/collection-remix.md) |
+| 🧭 社区玩法探索 | [community-exploration.md](./references/community-exploration.md) |
 
 ## 使用建议
 
@@ -136,3 +222,4 @@ pnpm start read_collection --uuid "玩法-uuid"
 2. **先调研后规划** - 使用标签调研了解热门元素和创作方向
 3. **提示词具体化** - 避免抽象描述，使用详细的要素组合
 4. **迭代测试** - 先用快速模型测试，满意后再用高质量模型
+5. **渐进式探索** - 从宽到窄逐步探索：浏览分类 → 发现标签 → 验证路径 → 获取内容

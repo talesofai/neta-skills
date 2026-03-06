@@ -33,7 +33,7 @@ export const createFeedsApis = (client: AxiosInstance) => {
     target_user_uuid?: string;
   }) => {
     return client
-      .get<FeedInteractionList>("/v1/home/feed/interactive", {
+      .get<FeedInteractionList>("/v1/recsys/feed/interactive", {
         params,
       })
       .then((res) => res.data);
