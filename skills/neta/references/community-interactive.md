@@ -2,14 +2,30 @@
 
 ## 点赞玩法作品 (collection)
 
-### 点赞
+### 点赞作品
 ```bash
-pnpm start like_collection --uuid "b7a64aa7-3e72-40ea-9f54-9b5bdc1863f1"
+# 点赞
+pnpm start like_collection \
+    --uuid "b7a64aa7-3e72-40ea-9f54-9b5bdc1863f1"
 ```
-
 ### 取消点赞
 ```bash
-pnpm start like_collection --is_cancel true --uuid "b7a64aa7-3e72-40ea-9f54-9b5bdc1863f1"
+pnpm start like_collection \
+    --uuid "b7a64aa7-3e72-40ea-9f54-9b5bdc1863f1" \
+    --is_cancel true
+```
+
+## 收藏玩法作品 (collection)
+### 收藏作品
+```bash
+pnpm start favor_collection \
+    --uuid "b7a64aa7-3e72-40ea-9f54-9b5bdc1863f1"
+```
+### 取消收藏
+```bash
+pnpm start favor_collection \
+    --uuid "b7a64aa7-3e72-40ea-9f54-9b5bdc1863f1" \
+    --is_cancel true
 ```
 
 ## 评论玩法作品 (collection)
@@ -36,12 +52,6 @@ pnpm start create_comment \
     --content "老师，这个作品真的好棒啊！"
 ```
 
-## 收藏作品
-## 收藏
-
-## 取消收藏
-
-
 ## 关注用户
 ### 关注
 ```bash
@@ -49,12 +59,14 @@ pnpm start subscribe_user \
     --user_uuid "c492883d5dd846adaf715a75ad344350" \
     --is_cancel false
 ```
-### 取消关注
+
+### 取关
 ```bash
 pnpm start subscribe_user \
     --user_uuid "c492883d5dd846adaf715a75ad344350" \
     --is_cancel true
 ```
+
 
 
 
