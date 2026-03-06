@@ -41,7 +41,7 @@ export const readCollectionCmd = createCommand(
       name: res.json_data.creator.nick_name,
     };
 
-    const artifacts = res.json_data.displayData.pages.flatMap((page) =>
+    const artifacts = res.json_data.displayData?.pages.flatMap((page) =>
       page.images.map((image) => ({
         uuid: image.uuid,
         url: image.url,

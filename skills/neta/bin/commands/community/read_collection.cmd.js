@@ -30,7 +30,7 @@ export const readCollectionCmd = createCommand({
         uuid: res.json_data.creator.uuid,
         name: res.json_data.creator.nick_name,
     };
-    const artifacts = res.json_data.displayData.pages.flatMap((page) => page.images.map((image) => ({
+    const artifacts = res.json_data.displayData?.pages.flatMap((page) => page.images.map((image) => ({
         uuid: image.uuid,
         url: image.url,
         modality: image.modality,

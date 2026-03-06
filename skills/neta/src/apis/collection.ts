@@ -339,61 +339,22 @@ export interface NormalInteractionData {
   uuid: string;
   name: string;
   description: string | null;
-  version: string | null;
   status: CollectionStatus;
   aspect?: string;
-  activity?: string | null;
-  activityData: { uuid: string } | null;
   commentCount: number;
-  hashtags: string[];
   coverUrl: string;
-  shareUrl: string;
   picCount: number;
   sharedCount: number;
   likeCount: number;
   likeStatus: CollectionLikeStatus;
   favorStatus: CollectionFavorStatus;
-  is_pinned: null;
-  video_uuid: string | null;
   has_video: boolean;
-  bgm_uuid: string | null;
   is_interactive: true;
   mtime: string | null;
   ctime: string;
   creator: CreatorForStoryShowcase;
   cta_info: CTAInfo;
-  event_tracking: unknown;
-  need_create: boolean;
   displayData: DisplayData;
-  view_scheme?: string;
-  extra_datas?: unknown;
-
-  /**
-   * 原作信息
-   */
-  parent_collection_scheme?: string;
-  parent_collection_uuid?: string;
-  parent_collection_title?: string;
-  parent_collection_cover_url?: string;
-
-  /**
-   * 推荐理由
-   */
-
-  reason?: {
-    background_color?: string;
-    icon: string;
-    scheme?: string;
-    text: string;
-    text_color?: string;
-    type: string;
-  }[];
-
-  /**
-   * 内部召回属性
-   */
-  rank_score?: number;
-  recall_type?: string;
 }
 
 export interface NormalInteractionModule extends BaseModule {
