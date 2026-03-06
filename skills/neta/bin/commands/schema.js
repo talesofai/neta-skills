@@ -61,6 +61,13 @@ const meta = parseMeta(z.object({
     remove_background_parameters_schema: z.object({
         input_image: z.string(),
     }),
+    upload_image_parameters_schema: z.object({
+        image: z.string(),
+        suffix: z.string(),
+    }),
+    upload_image_result_schema: z.object({
+        url: z.string(),
+    }),
     hashtag_base_parameters_schema: z.object({
         hashtag: z.string(),
     }),
@@ -395,6 +402,18 @@ export const removeBackgroundV1Parameters = z.object({
     input_image: z
         .string()
         .describe(meta.remove_background_parameters_schema.input_image),
+});
+// #endregion
+// #region Upload Image V1
+export const uploadImageV1Parameters = z.object({
+    image: z.string().describe(meta.upload_image_parameters_schema.image),
+    suffix: z
+        .enum(["jpg", "jpeg", "png", "gif", "svg", "webp"])
+        .optional()
+        .describe(meta.upload_image_parameters_schema.suffix),
+});
+export const uploadImageV1ResultSchema = z.object({
+    url: z.string().describe(meta.upload_image_result_schema.url),
 });
 // #endregion
 // #region Hashtag Common Schemas

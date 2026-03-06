@@ -10,6 +10,11 @@ export interface GenericPagination<T> {
 
 export type PromiseResult<T> = T extends Promise<infer U> ? U : T;
 
+export interface OssUploadSignedUrl {
+  upload_url: string;
+  view_url: string;
+}
+
 export type MakeImageEntrance =
   | "PICTURE,PURE"
   | "PICTURE,CP"

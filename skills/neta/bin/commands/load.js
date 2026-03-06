@@ -36,6 +36,9 @@ export const loadCommands = async (domains) => {
 const IS_DEV = process.env["NODE_ENV"] === "development";
 const logger = console;
 export const buildCommands = async (cli, commands) => {
+    // Parse global options early so --token/--api_base_url can be used
+    // before subcommands are registered.
+    cli.parseOptions(process.argv);
     const { api_base_url, token } = cli.opts();
     const apis = createApis({
         baseUrl: typeof api_base_url === "string"

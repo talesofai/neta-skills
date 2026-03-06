@@ -62,6 +62,9 @@ export const buildCommands = async (
   >,
   commands: Command<ZodObject | undefined, ZodObject | undefined>[],
 ) => {
+  // Parse global options early so --token/--api_base_url can be used
+  // before subcommands are registered.
+  cli.parseOptions(process.argv);
   const { api_base_url, token } = cli.opts();
 
   const apis = createApis({

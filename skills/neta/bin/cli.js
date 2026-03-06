@@ -11,6 +11,6 @@ program
     .version(pkg.version);
 const commands = await loadCommands(["creative", "community"]);
 await buildCommands(program
-    .option("--token", "neta token (default: from env NETA_TOKEN)")
-    .option("--api_base_url", "api base url (default: from env NETA_API_BASE_URL)"), commands);
+    .option("--token <token>", "neta token (default: from env NETA_TOKEN)")
+    .option("--api_base_url <api_base_url>", "api base url (default: from env NETA_API_BASE_URL)"), commands);
 program.parse(process.argv);

@@ -51,6 +51,14 @@ export const createArtifactApis = (client) => {
         })
             .then((res) => res.data);
     };
+    const uploadSignedUrl = async (payload, config) => {
+        return client
+            .get("/v1/oss/upload-signed-url", {
+            ...config,
+            params: payload,
+        })
+            .then((res) => res.data);
+    };
     return {
         makeImage,
         makeVideo,
@@ -60,5 +68,6 @@ export const createArtifactApis = (client) => {
         postProcess,
         task,
         artifactDetail,
+        uploadSignedUrl,
     };
 };

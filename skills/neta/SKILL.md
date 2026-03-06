@@ -71,6 +71,11 @@ pnpm start make_song --prompt "风格描述" --lyrics "歌词内容"
 pnpm start remove_background --input_image "image_url"
 ```
 
+**上传图片**
+```bash
+pnpm start upload_image --image "/tmp/demo.png"
+```
+
 **合并视频**
 ```bash
 pnpm start merge_video --input "合并指令"

@@ -109,6 +109,17 @@ make_song_parameters_schema:
 remove_background_parameters_schema:
   input_image: 通过{input_image_variable_name}引用一个已经存在的图片变量
 
+upload_image_parameters_schema:
+  image: |
+    图片输入。支持：
+      - 本地路径：/tmp/a.png
+      - HTTP(S) URL：https://example.com/a.png
+      - Data URL：data:image/png;base64,xxxx
+  suffix: 可选图片后缀（jpg/jpeg/png/gif/svg/webp），用于后端签名接口
+
+upload_image_result_schema:
+  url: 上传后可访问的图片 URL
+
 hashtag_base_parameters_schema:
   hashtag: hashtag/空间名称
 
