@@ -11,9 +11,6 @@
 接口根据传入参数自动判断场景，无需手动指定 Scene 枚举：
 
 - **提供 `collection_uuid`**：进入相关性场景
-  - `page_index=0`：获取单个作品详情（单体接口）
-  - `page_index>0`：获取相关作品推荐
-
 - **提供 `target_user_uuid`**：进入个人主页场景
 
 
@@ -55,16 +52,8 @@ pnpm start request_interactive_feed --page_index 0 --page_size 10
 
 ```bash
 # 获取单个作品详情
-pnpm start request_interactive_feed \
-  --page_index 0 \
-  --page_size 1 \
-  --collection_uuid "目标作品 UUID"
+pnpm start read_collection --uuid "目标作品 UUID"
 ```
-
-**特点：**
-- `page_index` 必须为 0
-- `page_size` 通常为 1
-- 返回包含详细的交互配置（CTA 信息）
 
 ### 3. 获取相似作品推荐
 
@@ -79,7 +68,6 @@ pnpm start request_interactive_feed \
 ```
 
 **特点：**
-- `page_index` 从 1 开始（0 是详情）
 - 基于内容相似度推荐
 - 适合"看了又看"场景
 
