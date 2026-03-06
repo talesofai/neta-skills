@@ -19,5 +19,27 @@ export const createUserApis = (client) => {
                     ?.subscribe_status,
             };
         },
+        getSubscribeList: async (params) => {
+            const response = await client.request({
+                method: "GET",
+                url: "/v1/user/subscribe-list",
+                params: {
+                    page_index: params?.page_index ?? 0,
+                    page_size: params?.page_size ?? 20,
+                },
+            });
+            return response.data;
+        },
+        getFanList: async (params) => {
+            const response = await client.request({
+                method: "GET",
+                url: "/v1/user/fan-list",
+                params: {
+                    page_index: params?.page_index ?? 0,
+                    page_size: params?.page_size ?? 20,
+                },
+            });
+            return response.data;
+        },
     };
 };

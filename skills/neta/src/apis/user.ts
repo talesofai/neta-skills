@@ -192,6 +192,24 @@ export interface SubscribeUserResponse {
   subscribe_status?: UserSubscribeStatus | null;
 }
 
+export interface UserListItem {
+  uuid: string;
+  name: string;
+  avatar_url: string;
+  total_fans: number | null;
+  total_collections: number | null;
+  subscribe_status: UserSubscribeStatus | null;
+}
+
+export interface UserListResponse {
+  total: number;
+  page_index: number;
+  page_size: number;
+  list: UserListItem[];
+  has_next: boolean | null;
+  has_review_permission: boolean | null;
+}
+
 export const createUserApis = (client: AxiosInstance) => {
   return {
     me: async () => {
@@ -216,6 +234,34 @@ export const createUserApis = (client: AxiosInstance) => {
         subscribe_status: (response.data as Partial<UserInfo>)
           ?.subscribe_status,
       };
+    },
+    getSubscribeList: async (params?: {
+      page_index?: number;
+      page_size?: number;
+    }): Promise<UserListResponse> => {
+      const response = await client.request({
+        method: "GET",
+        url: "/v1/user/subscribe-list",
+        params: {
+          page_index: params?.page_index ?? 0,
+          page_size: params?.page_size ?? 20,
+        },
+      });
+      return response.data as UserListResponse;
+    },
+    getFanList: async (params?: {
+      page_index?: number;
+      page_size?: number;
+    }): Promise<UserListResponse> => {
+      const response = await client.request({
+        method: "GET",
+        url: "/v1/user/fan-list",
+        params: {
+          page_index: params?.page_index ?? 0,
+          page_size: params?.page_size ?? 20,
+        },
+      });
+      return response.data as UserListResponse;
     },
   };
 };

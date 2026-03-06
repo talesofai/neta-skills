@@ -67,7 +67,12 @@ pnpm start subscribe_user \
     --is_cancel true
 ```
 
+### 获取关注作者列表
+```json
 
+```
+
+### 获取粉丝列表
 
 
 
