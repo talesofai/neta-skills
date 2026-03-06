@@ -122,6 +122,27 @@ pnpm start read_colleciton --uuid "玩法-uuid"
 **获取互动推荐列表**
 ```bash
 pnpm start request_interactive_feed --page_index 0 --page_size 3
+
+
+# 获取相似 feed
+pnpm start request_interactive_feed --page_index 1 --page_size 3 \
+  --collection_uuid "目标合集 UUID"
+  
+# 获取原作及全部同款子作品 feed
+pnpm start request_interactive_feed --page_index 0 --page_size 3 \
+  --scene 'relation_feed_child' \
+  --target_collection_uuid "目标合集 UUID" \
+  --collection_uuid "目标合集 UUID"
+
+pnpm start request_interactive_feed --page_index 0 --page_size 3 \
+  --scene 'relation_feed_same' \
+  --target_collection_uuid "目标合集 UUID" \
+  --collection_uuid "目标合集 UUID"
+
+# 获取用户主页互动作品
+pnpm start request_interactive_feed --page_index 0 --page_size 3  \
+  --scene 'personal_feed' \
+  --target_user_uuid "目标用户 UUID" 
 ```
 
 **基础参数：**

@@ -1,26 +1,5 @@
 name: request_interactive_feed
 title: 获取互动推荐列表
-description: |
-  获取互动内容推荐列表，支持分页和多种筛选参数。根据传入参数自动判断场景（首页/个人主页/相关性 Feed 等）。
+description: 获取互动内容推荐列表，支持分页和多种筛选参数。根据传入参数自动判断场景（首页/个人主页/相关性 Feed 等）。
 
-  ## 使用场景（自动判断）
-  - **默认场景**: HOME_PAGE_INTERACTIVE_FEED + HOME_PAGE_MAJOR（首页互动流主模式）
-  - **个人主页**: PERSONAL_PAGE_INTERACTIVE_FEED + PERSONAL_PAGE（提供 target_user_uuid）
-  - **相关性 Feed**:
-    - INTERACTIVE_RELATION_FEED + RELATION_FEED_CHILD（查看原作）
-    - INTERACTIVE_RELATION_FEED + RELATION_FEED_SAME（评论区查看子作品）
-  - **单个作品详情**: INTERACTIVE_COLLECTION + RELATION_COLLECTION（提供 collection_uuid 且 page_index=0，用于获取单个作品的详细信息）
 
-  ## 输入参数
-  - page_index: 页码，从 0 开始（默认 0）
-  - page_size: 每页数量，范围 1-20（默认 10）
-  - biz_trace_id: 会话追踪 ID，用于保持翻页连续性。首次请求可不传，后续请求使用返回的 biz_trace_id 保持一致性
-  - scene: 场景标识（可选），支持 relation_feed_child/relation_feed_same/personal_feed
-  - collection_uuid: 原作 UUID（可选，**提供此参数且 page_index=0 时获取单个作品详情**，page_index>0 时获取相关作品推荐）
-  - target_collection_uuid: 目标合集 UUID（可选）
-  - target_user_uuid: 用户 UUID（可选，提供时进入个人主页场景）
-
-  ## 输出字段
-  - module_list_header: 模块列表头信息
-  - module_list: 推荐内容模块列表（包含 NORMAL/DRAFT/SPACE 等类型）
-  - page_data: 分页数据（page_index, page_size, has_next_page, biz_trace_id）
