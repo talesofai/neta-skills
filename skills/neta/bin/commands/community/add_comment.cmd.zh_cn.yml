@@ -1,0 +1,7 @@
+name: add_comment
+title: 添加评论
+description: 在合集/帖子下添加评论
+parameters:
+  collection_uuid: 合集/帖子的 UUID
+  content: 评论内容
+  parent_comment_uuid: 父评论 UUID（回复评论时可选）

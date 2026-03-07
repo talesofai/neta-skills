@@ -4,6 +4,7 @@ import { createActivityApis, type SelectedCollection } from "./activity.ts";
 import { createArtifactApis } from "./artifact.ts";
 import { createAudioApis } from "./audio.ts";
 import { createCollectionApis } from "./collection.ts";
+import { createCommentApis } from "./comment.ts";
 import { createConfigApis } from "./config.ts";
 import { createFeedsApis } from "./feeds.ts";
 import { createGptApis } from "./gpt.ts";
@@ -52,6 +53,7 @@ export const createApis = (option: {
   const config = createConfigApis(client);
   const user = createUserApis(client);
   const collection = createCollectionApis(client);
+  const comment = createCommentApis(client);
   const feeds = createFeedsApis(client);
   const space = createSpaceApis(client);
 
@@ -68,6 +70,7 @@ export const createApis = (option: {
     config,
     user,
     collection,
+    comment,
     feeds,
     space,
   };

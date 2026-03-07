@@ -44,7 +44,7 @@ pnpm list_space_topics --space_uuid "空间 uuid"
 
 **生成图片**
 ```bash
-pnpm start make_image --prompt "@角色名，/风格元素，参考图-全图参考-图片uuid，描述词，描述词" --aspect "3:4"
+pnpm start make_image --prompt "@角色名，/风格元素，参考图 - 全图参考 - 图片 uuid，描述词，描述词" --aspect "3:4"
 ```
 📖 [详细指南](./references/image-generation.md) - 提示词结构、宽高比选择、用例
 
@@ -114,7 +114,24 @@ pnpm start get_hashtag_collections --hashtag "标签名"
 
 **获取玩法信息**
 ```bash
-pnpm start read_collection --uuid "玩法-uuid"
+pnpm start read_collection --uuid "玩法 -uuid"
+```
+
+### 评论互动
+
+**获取评论列表**
+```bash
+pnpm start get_comments --collection_uuid "合集 uuid" --page_size 20
+```
+
+**发表评论**
+```bash
+pnpm start add_comment --collection_uuid "合集 uuid" --content "评论内容"
+```
+
+**回复评论**
+```bash
+pnpm start add_comment --collection_uuid "合集 uuid" --content "回复内容" --parent_comment_uuid "父评论 uuid"
 ```
 
 ## 参考文档

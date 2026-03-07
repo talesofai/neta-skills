@@ -4,6 +4,7 @@ import { createActivityApis } from "./activity.js";
 import { createArtifactApis } from "./artifact.js";
 import { createAudioApis } from "./audio.js";
 import { createCollectionApis } from "./collection.js";
+import { createCommentApis } from "./comment.js";
 import { createConfigApis } from "./config.js";
 import { createFeedsApis } from "./feeds.js";
 import { createGptApis } from "./gpt.js";
@@ -38,6 +39,7 @@ export const createApis = (option) => {
     const config = createConfigApis(client);
     const user = createUserApis(client);
     const collection = createCollectionApis(client);
+    const comment = createCommentApis(client);
     const feeds = createFeedsApis(client);
     const space = createSpaceApis(client);
     return {
@@ -53,6 +55,7 @@ export const createApis = (option) => {
         config,
         user,
         collection,
+        comment,
         feeds,
         space,
     };
