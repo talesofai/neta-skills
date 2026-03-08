@@ -20,6 +20,7 @@
 - 通过推荐引擎和互动 Feed 进行玩法内容发现
 
 你可以在 [Neta 开放平台](https://www.neta.art/open/) 获取访问令牌 `NETA_TOKEN`。
+也可以在[国内登陆账号后台](https://app.nieta.art/security) 获取访问令牌 `NETA_TOKEN`。
 
 ---
 
