@@ -252,16 +252,35 @@ get_tcp_detail_parameters_schema:
       - both: 同时搜索角色和元素（默认）
 
 get_tcp_detail_result_schema:
-  uuid: 角色/元素 UUID
-  type: 类型（character=角色，elementum=元素）
-  name: 名称
-  short_name: 简称
-  avatar_img: 头像图片地址
-  header_img: 立绘图片地址
-  description: 角色简介/描述词
-  persona: 角色性格
-  interests: 角色兴趣
-  age: 角色年龄
-  occupation: 角色职业
-  travel_preview: 元素提示词/预览描述
-  traits: 元素特征标签列表
+  # 角色开盒字段
+  character_unbox:
+    uuid: 角色 UUID
+    type: "character（角色）"
+    name: 角色名称
+    short_name: 角色简称
+    description: 角色描述
+    appearance_vtokens: 外貌描述词
+    prompt: 带权重的 prompt
+    tachie_url: 角色封面/立绘
+    creator_avatar_url: 用户头像
+    original_image_url: 垫图
+    trigger_id: 触发器 ID
+    style_key: 风格键
+    creator_name: 创作者名称
+    ctime: 创建时间
+    raw_response: 完整响应 JSON
+  # 元素开盒字段
+  elementum_unbox:
+    uuid: 元素 UUID
+    type: "elementum（元素）"
+    name: 元素名称
+    short_name: 元素简称
+    description: 元素描述
+    appearance_vtokens: 提示词
+    tachie_url: 元素封面
+    creator_avatar_url: 用户头像
+    controlnetunit_tile_image_ref: 垫图
+    preset_key: 预设键
+    creator_name: 创作者名称
+    ctime: 创建时间
+    raw_response: 完整响应 JSON

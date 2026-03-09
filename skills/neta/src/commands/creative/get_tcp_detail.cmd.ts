@@ -15,6 +15,54 @@ const meta = parseMeta(
   import.meta,
 );
 
+/**
+ * 角色开盒输出格式
+ */
+const characterUnboxResultSchema = z.object({
+  // 基础信息
+  uuid: z.string(),
+  type: z.literal("character"),
+  name: z.string(),
+  short_name: z.string().nullable(),
+  // 开盒核心字段
+  description: z.string().nullable().describe("角色描述"),
+  appearance_vtokens: z.string().nullable().describe("外貌描述词"),
+  prompt: z.string().nullable().describe("带权重的 prompt"),
+  tachie_url: z.string().nullable().describe("角色封面/立绘"),
+  creator_avatar_url: z.string().nullable().describe("用户头像"),
+  original_image_url: z.string().nullable().describe("垫图"),
+  trigger_id: z.string().nullable().describe("触发器 ID"),
+  style_key: z.string().nullable().describe("风格键"),
+  // 额外信息
+  creator_name: z.string().nullable(),
+  ctime: z.string().nullable(),
+  // 原始响应
+  raw_response: z.unknown().describe("完整响应 JSON"),
+});
+
+/**
+ * 元素开盒输出格式
+ */
+const elementumUnboxResultSchema = z.object({
+  // 基础信息
+  uuid: z.string(),
+  type: z.literal("elementum"),
+  name: z.string(),
+  short_name: z.string().nullable(),
+  // 开盒核心字段
+  description: z.string().nullable().describe("元素描述"),
+  appearance_vtokens: z.string().nullable().describe("提示词"),
+  tachie_url: z.string().nullable().describe("角色封面"),
+  creator_avatar_url: z.string().nullable().describe("用户头像"),
+  controlnetunit_tile_image_ref: z.string().nullable().describe("垫图"),
+  preset_key: z.string().nullable().describe("预设键"),
+  // 额外信息
+  creator_name: z.string().nullable(),
+  ctime: z.string().nullable(),
+  // 原始响应
+  raw_response: z.unknown().describe("完整响应 JSON"),
+});
+
 const getTcpDetailV1Parameters = z.object({
   /** 角色或元素的名称 */
   name: z.string().describe(meta.parameters.name),
@@ -22,28 +70,10 @@ const getTcpDetailV1Parameters = z.object({
   parent_type: z.enum(["character", "elementum", "both"]).optional().default("both").describe(meta.parameters.parent_type),
 });
 
-const getTcpDetailV1ResultSchema = z.object({
-  uuid: z.string(),
-  type: z.enum(["character", "elementum"]),
-  name: z.string(),
-  short_name: z.string().nullable(),
-  avatar_img: z.string().nullable(),
-  header_img: z.string().nullable(),
-  /** 角色的详细描述词（仅角色类型） */
-  description: z.string().nullable(),
-  /** 角色的性格（仅角色类型） */
-  persona: z.string().nullable(),
-  /** 角色的兴趣（仅角色类型） */
-  interests: z.string().nullable(),
-  /** 角色的年龄（仅角色类型） */
-  age: z.string().nullable(),
-  /** 角色的职业（仅角色类型） */
-  occupation: z.string().nullable(),
-  /** 元素的提示词（仅元素类型） */
-  travel_preview: z.string().nullable(),
-  /** 元素的特征标签（仅元素类型） */
-  traits: z.array(z.string()).nullable(),
-});
+const getTcpDetailV1ResultSchema = z.union([
+  characterUnboxResultSchema,
+  elementumUnboxResultSchema,
+]);
 
 export const getTcpDetail = createCommand(
   {
@@ -75,36 +105,72 @@ export const getTcpDetail = createCommand(
 
     const item = searchResult.list[0];
     const uuid = item.uuid;
-
-    // 2. 获取详细资料
-    const profile = await apis.tcp.tcpProfile(uuid);
-
-    if (!profile) {
-      throw new Error(`无法获取 "${name}" 的详细资料`);
-    }
-
     const itemType: "character" | "elementum" = (item.type === "oc" || item.type === "official") ? "character" : "elementum";
 
-    // 3. 提取描述词/提示词
-    const isCharacter = itemType === "character";
-    const ocBio = isCharacter && "oc_bio" in profile ? profile.oc_bio : null;
+    // 2. 获取详细资料（tcpProfile 需要 APP token）
+    let profile: any = null;
+    let profileError: string | null = null;
+    
+    try {
+      profile = await apis.tcp.tcpProfile(uuid);
+    } catch (e: any) {
+      profileError = e.message || "无法获取详细资料";
+    }
 
-    return {
-      uuid: item.uuid,
-      type: itemType,
-      name: item.name,
-      short_name: item.short_name ?? null,
-      avatar_img: item.config?.avatar_img ?? null,
-      header_img: item.config?.header_img ?? null,
-      // 角色字段
-      description: ocBio?.description ?? null,
-      persona: ocBio?.persona ?? null,
-      interests: ocBio?.interests ?? null,
-      age: ocBio?.age ?? null,
-      occupation: ocBio?.occupation ?? null,
-      // 元素字段
-      travel_preview: !isCharacter ? item.config?.travel_preview ?? null : null,
-      traits: !isCharacter ? (item.config?.traits ?? null) : null,
-    };
+    const isCharacter = itemType === "character";
+    const ocBio = isCharacter && profile?.oc_bio ? profile.oc_bio : null;
+
+    // 3. 构建开盒输出
+    if (isCharacter) {
+      // 角色开盒格式
+      return {
+        uuid: item.uuid,
+        type: "character" as const,
+        name: item.name,
+        short_name: item.short_name ?? null,
+        // 开盒核心字段
+        description: ocBio?.description ?? null,
+        appearance_vtokens: ocBio?.appearance_vtokens ?? null,
+        prompt: ocBio?.prompt ?? null,
+        tachie_url: profile?.tachie_url ?? null,
+        creator_avatar_url: item.creator?.avatar_url ?? null,
+        original_image_url: profile?.original_image_url ?? null,
+        trigger_id: profile?.trigger_id ?? null,
+        style_key: profile?.style_key ?? null,
+        // 额外信息
+        creator_name: item.creator?.nick_name ?? null,
+        ctime: item.ctime ?? null,
+        // 原始响应
+        raw_response: {
+          search_result: item,
+          profile: profile,
+          profile_error: profileError,
+        },
+      };
+    } else {
+      // 元素开盒格式
+      return {
+        uuid: item.uuid,
+        type: "elementum" as const,
+        name: item.name,
+        short_name: item.short_name ?? null,
+        // 开盒核心字段
+        description: profile?.description ?? null,
+        appearance_vtokens: profile?.appearance_vtokens ?? null,
+        tachie_url: profile?.tachie_url ?? null,
+        creator_avatar_url: item.creator?.avatar_url ?? null,
+        controlnetunit_tile_image_ref: profile?.controlnetunit_tile_image_ref ?? null,
+        preset_key: profile?.preset_key ?? null,
+        // 额外信息
+        creator_name: item.creator?.nick_name ?? null,
+        ctime: item.ctime ?? null,
+        // 原始响应
+        raw_response: {
+          search_result: item,
+          profile: profile,
+          profile_error: profileError,
+        },
+      };
+    }
   },
 );
