@@ -51,22 +51,6 @@ export const createArtifactApis = (client) => {
         })
             .then((res) => res.data);
     };
-    /**
-     * 获取作品列表（图片/视频/音频/星标）
-     */
-    const getArtifactList = async (params) => {
-        const { page_index = 0, page_size = 20, modality, is_starred } = params;
-        return client
-            .get("/v1/artifact/list", {
-            params: {
-                page_index,
-                page_size,
-                ...(modality ? { modality } : {}),
-                ...(is_starred !== undefined ? { is_starred } : {}),
-            },
-        })
-            .then((res) => res.data);
-    };
     return {
         makeImage,
         makeVideo,
@@ -76,6 +60,5 @@ export const createArtifactApis = (client) => {
         postProcess,
         task,
         artifactDetail,
-        getArtifactList,
     };
 };

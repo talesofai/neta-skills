@@ -11,6 +11,26 @@ import type {
   TaskMeta,
 } from "./types.ts";
 
+export interface ArtifactItem {
+  uuid: string;
+  status: string;
+  url: string;
+  is_starred: boolean;
+  user_uuid: string;
+  ctime: string;
+  mtime: string;
+  platform: string;
+  modality: "PICTURE" | "VIDEO" | "AUDIO";
+  audio_name: string | null;
+}
+
+export interface ArtifactListResponse {
+  msg: string;
+  err_msg: string | null;
+  total: number;
+  list: ArtifactItem[];
+}
+
 export const createArtifactApis = (client: AxiosInstance) => {
   const makeImage = async (
     payload: MakeImageRequest,
@@ -110,6 +130,28 @@ export const createArtifactApis = (client: AxiosInstance) => {
       .then((res) => res.data);
   };
 
+  /**
+   * 获取作品列表（图片/视频/音频/星标）
+   */
+  const getArtifactList = async (params: {
+    page_index?: number;
+    page_size?: number;
+    modality?: "PICTURE" | "VIDEO" | "AUDIO";
+    is_starred?: boolean;
+  }): Promise<ArtifactListResponse> => {
+    const { page_index = 0, page_size = 20, modality, is_starred } = params;
+    return client
+      .get<ArtifactListResponse>("/v1/artifact/list", {
+        params: {
+          page_index,
+          page_size,
+          ...(modality ? { modality } : {}),
+          ...(is_starred !== undefined ? { is_starred } : {}),
+        },
+      })
+      .then((res) => res.data);
+  };
+
   return {
     makeImage,
     makeVideo,
@@ -119,5 +161,6 @@ export const createArtifactApis = (client: AxiosInstance) => {
     postProcess,
     task,
     artifactDetail,
+    getArtifactList,
   };
 };

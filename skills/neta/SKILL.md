@@ -134,6 +134,47 @@ pnpm start add_comment --collection_uuid "合集 uuid" --content "评论内容"
 pnpm start add_comment --collection_uuid "合集 uuid" --content "回复内容" --parent_comment_uuid "父评论 uuid"
 ```
 
+**删除评论**
+```bash
+pnpm start delete_comment --comment_uuid "评论 uuid"
+```
+
+**点赞/取消点赞评论**
+```bash
+pnpm start like_comment --comment_uuid "评论 uuid" --like true
+```
+
+### 素材管理
+
+**获取作品列表（图片/视频/音频/星标）**
+```bash
+# 获取图片列表
+pnpm start get_artifact_list --modality "PICTURE" --page_size 20
+
+# 获取视频列表
+pnpm start get_artifact_list --modality "VIDEO" --page_size 20
+
+# 获取音频列表
+pnpm start get_artifact_list --modality "AUDIO" --page_size 20
+
+# 获取星标作品
+pnpm start get_artifact_list --is_starred true --page_size 20
+```
+
+**获取用户角色/元素列表**
+```bash
+# 获取用户的角色列表（OC）
+pnpm start get_travel_parent --user_uuid "用户 uuid" --parent_type "oc" --page_size 20
+
+# 获取用户的元素列表（Elementum）
+pnpm start get_travel_parent --user_uuid "用户 uuid" --parent_type "elementum" --page_size 20
+```
+
+**获取提示词标签（图生图模式）**
+```bash
+pnpm start get_full_prompt_tags --domain_name "APP/单图/图生图"
+```
+
 ## 参考文档
 
 | 场景 | 文档 |

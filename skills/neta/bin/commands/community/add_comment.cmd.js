@@ -18,7 +18,10 @@ export const addComment = createCommand({
     inputSchema: z.object({
         collection_uuid: z.string().describe(meta.parameters.collection_uuid),
         content: z.string().describe(meta.parameters.content),
-        parent_comment_uuid: z.string().optional().describe(meta.parameters.parent_comment_uuid ?? ""),
+        parent_comment_uuid: z
+            .string()
+            .optional()
+            .describe(meta.parameters.parent_comment_uuid ?? ""),
     }),
 }, async ({ collection_uuid, content, parent_comment_uuid }, { log, apis }) => {
     const parentUuid = parent_comment_uuid ?? "none";

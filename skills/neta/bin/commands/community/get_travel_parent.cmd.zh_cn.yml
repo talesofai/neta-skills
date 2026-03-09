@@ -1,0 +1,8 @@
+name: get_travel_parent
+title: 获取用户角色/元素列表
+description: 获取指定用户的角色（OC）或元素（Elementum）列表
+parameters:
+  user_uuid: 用户 UUID
+  parent_type: oc=角色，elementum=元素
+  page_index: 页码，从 0 开始
+  page_size: 每页数量，最大 100

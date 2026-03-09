@@ -1,73 +1,56 @@
 import z from "zod";
 import { parseMeta } from "../../utils/parse_meta.js";
 import { createCommand } from "../factory.js";
-
 const meta = parseMeta(z.object({
     name: z.string(),
     title: z.string(),
     description: z.string(),
+    parameters: z.object({
+        collection_uuid: z.string(),
+        page_size: z.string().optional(),
+        cursor: z.string().optional(),
+    }),
 }), import.meta);
-
 export const getComments = createCommand({
     name: meta.name,
     title: meta.title,
     description: meta.description,
     inputSchema: z.object({
-        collection_uuid: z.string().describe("合集 UUID"),
-        cursor: z.string().optional().describe("分页游标（可选）"),
-        page_size: z.number().default(20).describe("每页数量，默认 20"),
+        collection_uuid: z.string().describe(meta.parameters.collection_uuid),
+        page_size: z
+            .number()
+            .optional()
+            .default(20)
+            .describe(String(meta.parameters.page_size ?? "20")),
+        cursor: z
+            .string()
+            .optional()
+            .describe(meta.parameters.cursor ?? ""),
     }),
-    outputSchema: z.object({
-        total: z.number().optional(),
-        cursor: z.string().optional(),
-        has_more: z.boolean(),
-        list: z.array(z.object({
-            comment_uuid: z.string(),
-            content: z.string(),
-            user_nick_name: z.string(),
-            user_avatar: z.string().optional(),
-            like_count: z.number(),
-            reply_count: z.number(),
-            ctime: z.string(),
-            is_liked: z.boolean(),
-        })),
-    }),
-}, async ({ collection_uuid, cursor, page_size = 20 }, { log, apis }) => {
-    log.debug("get_comments: collection_uuid: %s, cursor: %s, page_size: %d", 
-        collection_uuid, cursor || "none", page_size);
-
-    try {
-        const result = await apis.comment.getComments(collection_uuid, {
-            cursor,
-            page_size,
-        });
-        
-        log.debug("get_comments: success, got %d comments", result?.comments?.length || 0);
-
-        const simplifiedList = (result?.comments || []).map((comment) => ({
-            comment_uuid: comment.comment_uuid,
+}, async ({ collection_uuid, page_size = 20, cursor }, { log, apis }) => {
+    const actualPageSize = page_size ?? 20;
+    log.debug("get_comments: collection_uuid: %s, page_size: %d", String(collection_uuid), actualPageSize);
+    const result = await apis.comment.getComments(collection_uuid, {
+        page_size: actualPageSize,
+        ...(cursor ? { cursor } : {}),
+    });
+    return {
+        comments: result.comments.map((comment) => ({
+            uuid: comment.uuid,
             content: comment.content,
-            user_nick_name: comment.user_nick_name,
-            user_avatar: comment.user_avatar,
+            ctime: comment.ctime,
             like_count: comment.like_count,
             reply_count: comment.reply_count,
-            ctime: comment.ctime,
+            user: {
+                uuid: comment.user.uuid,
+                nick_name: comment.user.nick_name,
+                avatar_url: comment.user.avatar_url,
+            },
+            parent_comment_uuid: comment.parent_comment_uuid,
             is_liked: comment.is_liked,
-        }));
-
-        return {
-            total: result?.total,
-            cursor: result?.cursor,
-            has_more: result?.has_more || false,
-            list: simplifiedList,
-        };
-    } catch (error) {
-        log.error("get_comments failed:", error);
-        return {
-            total: 0,
-            cursor: null,
-            has_more: false,
-            list: [],
-        };
-    }
+        })),
+        total: result.total,
+        has_more: result.has_more,
+        next_cursor: result.next_cursor,
+    };
 });

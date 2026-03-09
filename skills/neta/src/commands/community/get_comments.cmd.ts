@@ -9,7 +9,7 @@ const meta = parseMeta(
     description: z.string(),
     parameters: z.object({
       collection_uuid: z.string(),
-      page_size: z.number().optional(),
+      page_size: z.string().optional(),
       cursor: z.string().optional(),
     }),
   }),

@@ -13,7 +13,7 @@ export const getHashtagCollections = createCommand({
     description: meta.description,
     inputSchema: fetchSelectedCollectionsByHashtagV1Parameters,
     outputSchema: fetchSelectedCollectionsByActivityV1ResultSchema,
-}, async ({ hashtag, page_index = 0, page_size = 20, sort_by = "highlight_mark_time", }, { log, apis }) => {
+}, async ({ hashtag, page_index = 0, page_size = 20, sort_by = "ctime", }, { log, apis }) => {
     log.debug("get_hashtag_collections: hashtag: %s, page_index: %d, page_size: %d, sort_by: %s", hashtag, page_index, page_size, sort_by);
     // 通过hashtag获取对应的activity_uuid
     const hashtagResult = await apis.hashtag.fetchHashtag(hashtag);

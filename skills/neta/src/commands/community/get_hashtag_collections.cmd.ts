@@ -28,7 +28,7 @@ export const getHashtagCollections = createCommand(
       hashtag,
       page_index = 0,
       page_size = 20,
-      sort_by = "highlight_mark_time",
+      sort_by = "ctime",
     },
     { log, apis },
   ) => {

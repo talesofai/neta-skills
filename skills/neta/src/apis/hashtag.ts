@@ -117,9 +117,69 @@ export const createHashtagApis = (client: AxiosInstance) => {
       .then((res) => res.data);
   };
 
+  /**
+   * 标记帖子为过审（审核通过）
+   * API: POST /v1/hashtag/{hashtag_name}/stories/review/{story_uuid}
+   * Body: {"action": "select"}
+   */
+  const markStoryAsReviewed = async (
+    hashtag: string,
+    story_uuid: string,
+  ): Promise<{ message: string }> => {
+    const url = `/v1/hashtag/${encodeURIComponent(hashtag)}/stories/review/${story_uuid}`;
+    const response = await client.post<{ message: string }>(url, {
+      action: "select",
+    });
+    return response.data;
+  };
+
+  /**
+   * 标记帖子为精选
+   * API: POST /v1/hashtag/{hashtag_name}/stories/review/{story_uuid}
+   * Body: {"result":"HIGHLIGHT","item_type":"collection"}
+   * Response: {"message":"success"}
+   */
+  const markStoryAsFeatured = async (
+    hashtag: string,
+    story_uuid: string,
+  ): Promise<{ message: string }> => {
+    const url = `/v1/hashtag/${encodeURIComponent(hashtag)}/stories/review/${story_uuid}`;
+    const response = await client.post<{ message: string }>(url, {
+      result: "HIGHLIGHT",
+      item_type: "collection",
+    });
+    return response.data;
+  };
+
+  /**
+   * 获取标签下的所有帖子（已过审的）
+   * API: GET /v1/hashtag/{hashtag_name}/stories
+   * 参数：page_index, page_size, sort_by (hot/newest)
+   */
+  const fetchStoriesByHashtag = async (
+    hashtag: string,
+    params: {
+      page_index: number;
+      page_size: number;
+      sort_by?: string;
+    },
+    config?: InternalAxiosRequestConfig,
+  ) => {
+    const url = `/v1/hashtag/${encodeURIComponent(hashtag)}/stories`;
+    return client
+      .get(url, {
+        ...config,
+        params,
+      })
+      .then((res) => res.data);
+  };
+
   return {
     createHashtag,
     fetchHashtag,
     fetchCharactersByHashtag,
+    markStoryAsReviewed,
+    markStoryAsFeatured,
+    fetchStoriesByHashtag,
   };
 };

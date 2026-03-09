@@ -1,0 +1,5 @@
+name: get_full_prompt_tags
+title: 获取提示词标签
+description: 获取指定域的完整提示词标签（图生图模式）
+parameters:
+  domain_name: 提示词域，例如：APP/单图/图生图

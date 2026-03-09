@@ -1,6 +1,53 @@
 import type { AxiosInstance } from "axios";
 import type { GenericPagination, OriginalCharacterProfile } from "./types.ts";
 
+export interface TravelParentItem {
+  uuid: string;
+  type: "oc" | "elementum" | "official";
+  ref_uuid: string;
+  name: string;
+  short_name: string;
+  status: string;
+  accessibility: "PUBLIC" | "PRIVATE";
+  platform: string;
+  config: {
+    traits?: string[] | null;
+    avatar_img?: string;
+    header_img?: string;
+    latin_name?: string;
+    travel_preview?: string | null;
+    char_info?: {
+      tone: string;
+      toneeg: string;
+      background: string;
+    };
+    is_cheerupable: boolean;
+  };
+  ctime: string;
+  mtime: string;
+  ptime: string | null;
+  review_status: "PASS" | "REVIEW" | "REJECTED";
+  creator: {
+    uuid: string;
+    avatar_url: string;
+    nick_name: string;
+  } | null;
+  sub_type: string | null;
+  is_favored: boolean | null;
+  is_used: boolean | null;
+  heat_score: number | null;
+  in_catalog_ctime: string | null;
+}
+
+export interface TravelParentListResponse {
+  total: number;
+  page_index: number;
+  page_size: number;
+  list: TravelParentItem[];
+  has_next: boolean | null;
+  has_review_permission: boolean | null;
+}
+
 export const createTcpApis = (client: AxiosInstance) => {
   const searchTCPs = async (query: {
     keywords: string;
@@ -40,8 +87,31 @@ export const createTcpApis = (client: AxiosInstance) => {
       .then((res) => res.data);
   };
 
+  /**
+   * 获取用户的角色/元素列表
+   */
+  const getTravelParent = async (params: {
+    user_uuid: string;
+    parent_type: "oc" | "elementum";
+    page_index?: number;
+    page_size?: number;
+  }): Promise<TravelParentListResponse> => {
+    const { user_uuid, parent_type, page_index = 0, page_size = 20 } = params;
+    return client
+      .get<TravelParentListResponse>("/v2/travel/parent", {
+        params: {
+          user_uuid,
+          parent_type,
+          page_index,
+          page_size,
+        },
+      })
+      .then((res) => res.data);
+  };
+
   return {
     searchTCPs,
     tcpProfile,
+    getTravelParent,
   };
 };

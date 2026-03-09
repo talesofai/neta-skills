@@ -1,0 +1,6 @@
+name: mark_selected
+title: 标记精选
+description: 标记标签下的帖子为精选作品
+parameters:
+  hashtag: 标签名称
+  story_uuid: 帖子/故事 UUID

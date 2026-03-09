@@ -1,0 +1,3 @@
+name: get_hashtag_stories
+title: 获取标签帖子列表
+description: 获取指定标签下的所有帖子（已过审的），支持按热度或最新排序

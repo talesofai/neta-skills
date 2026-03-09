@@ -1,0 +1,8 @@
+name: get_artifact_list
+title: 获取作品列表
+description: 获取用户的作品列表（图片/视频/音频/星标作品）
+parameters:
+  page_index: 页码，从 0 开始
+  page_size: 每页数量，最大 100
+  modality: 作品类型：PICTURE=图片，VIDEO=视频，AUDIO=音频
+  is_starred: 是否只获取星标作品
