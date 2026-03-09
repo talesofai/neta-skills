@@ -1,0 +1,14 @@
+name: get_tcp_detail
+title: 获取角色/元素详情
+description: 根据名称获取角色或元素的详细描述词/提示词
+parameters:
+  name: |
+    角色或元素的名称
+      - 角色示例："奈塔#996"、"初音未来"、"五条悟"
+      - 元素示例："漫画风格"、"赛博朋克"、"水彩风"
+      - TCP 名称带有井号标识时必须使用完整名称
+  parent_type: |
+    搜索类型
+      - character: 只搜索角色
+      - elementum: 只搜索元素
+      - both: 同时搜索角色和元素（默认）
