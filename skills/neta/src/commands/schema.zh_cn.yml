@@ -210,6 +210,9 @@ get_checkin_status_result_schema:
   cycle_signed_history: 周期签到历史记录
   reward_list: 奖励列表
 
+do_checkin_result_schema:
+  message: 签到结果消息
+
 get_message_count_result_schema:
   like: 点赞消息数量
   interacts: 互动消息数量
@@ -231,3 +234,7 @@ get_oc_worlds_result_schema:
     - cover_url: 封面图片地址
     - character_count: 角色数量
     - ctime: 创建时间
+
+like_comment_parameters_schema:
+  comment_uuid: 评论 UUID
+  like: "true=点赞，false=取消点赞"
