@@ -134,17 +134,17 @@ pnpm start like_collection --uuid "目标作品 UUID"
 
 ## 参考文档
 
-| 场景         | 文档 |
-|------------|------|
-| 🌍 世界观     | [space.md](./references/space.md) |
-| 🎨 图片生成    | [image-generation.md](./references/image-generation.md) |
-| 🎬 视频生成    | [video-generation.md](./references/video-generation.md) |
-| 🎵 歌曲创作    | [song-creation.md](./references/song-creation.md) |
-| 🎞️ MV 制作  | [song-mv.md](./references/song-mv.md) |
-| 👤 角色查询    | [character-search.md](./references/character-search.md) |
-| 🏷️ 标签调研   | [hashtag-research.md](./references/hashtag-research.md) |
-| 🖊️ 内容创作   | [collection-remix.md](./references/collection-remix.md) |
-| 🌏 世界观玩法   | [space.md](./references/space.md) |
+| 场景 | 文档 |
+|------|------|
+| 🌍 世界观 | [space.md](./references/space.md) |
+| 🎨 图片生成 | [image-generation.md](./references/image-generation.md) |
+| 🎬 视频生成 | [video-generation.md](./references/video-generation.md) |
+| 🎵 歌曲创作 | [song-creation.md](./references/song-creation.md) |
+| 🎞️ MV 制作 | [song-mv.md](./references/song-mv.md) |
+| 👤 角色查询 | [character-search.md](./references/character-search.md) |
+| 🏷️ 标签调研 | [hashtag-research.md](./references/hashtag-research.md) |
+| 🖊️ 内容创作 | [collection-remix.md](./references/collection-remix.md) |
+| 🌏 世界观玩法 | [space.md](./references/space.md) |
 | 🗺️ 玩法内容探索 | [community-exploration.md](./references/community-exploration.md) |
 | 🎮 互动玩法推荐  | [interactive-feed.md](./references/interactive-feed.md) |
 | 💬 社区互动    | [social-interactive.md](./references/social-interactive.md) |
