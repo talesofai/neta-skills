@@ -177,6 +177,8 @@ pnpm start get_full_prompt_tags --domain_name "APP/单图/图生图"
 
 ## 参考文档
 
+### 基础指南
+
 | 场景 | 文档 |
 |------|------|
 | 🌍 世界观 | [space.md](./references/space.md) |
@@ -187,6 +189,20 @@ pnpm start get_full_prompt_tags --domain_name "APP/单图/图生图"
 | 👤 角色查询 | [character-search.md](./references/character-search.md) |
 | 🏷️ 标签调研 | [hashtag-research.md](./references/hashtag-research.md) |
 | 🖊️ 内容创作 | [collection-remix.md](./references/collection-remix.md) |
+
+### 执行技能（高级用法）
+
+| 技能 | 文档 | 说明 |
+|------|------|------|
+| 💬 评论区互动 | [comment-interaction-skill.md](./references/comment-interaction-skill.md) | 按规则执行点赞/评论任务 |
+| 📝 批量精选 | [batch-feature-skill.md](./references/batch-feature-skill.md) | 批量标记帖子为精选 |
+| 📖 标签故事 | [hashtag-stories-skill.md](./references/hashtag-stories-skill.md) | 获取标签下的故事列表 |
+
+### API 参考
+
+| 类型 | 文档 |
+|------|------|
+| 评论 API | [comment-interaction.md](./references/comment-interaction.md) |
 
 ## 使用建议
 
