@@ -175,6 +175,43 @@ pnpm start get_travel_parent --user_uuid "用户 uuid" --parent_type "elementum"
 pnpm start get_full_prompt_tags --domain_name "APP/单图/图生图"
 ```
 
+### 用户信息
+
+**获取当前用户信息**
+```bash
+pnpm start get_user_info
+```
+
+**获取用户 AP 电量信息**
+```bash
+pnpm start get_ap_info
+```
+
+**获取用户发布的帖子列表**
+```bash
+pnpm start get_user_stories --uuid "用户 uuid" --page_index 0 --page_size 20
+```
+
+**获取用户草稿/稿件列表**
+```bash
+pnpm start get_manuscript_list --page_index 0 --page_size 24
+```
+
+**获取签到状态**
+```bash
+pnpm start get_checkin_status
+```
+
+**获取消息数量**
+```bash
+pnpm start get_message_count
+```
+
+**获取用户 OC 世界列表**
+```bash
+pnpm start get_oc_worlds
+```
+
 ## 参考文档
 
 ### 基础指南

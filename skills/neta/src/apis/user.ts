@@ -187,11 +187,157 @@ export interface UserInfo {
   privileges: UserPrivilege[];
 }
 
+export interface UserStory {
+  id: number;
+  storyId: string;
+  name: string;
+  coverUrl: string;
+  shareUrl: string;
+  pageLength: number;
+  version: string;
+  aspect: string;
+  status: "PUBLISHED" | "PRIVATE" | "DRAFT";
+  user_uuid: string;
+  user_nick_name: string;
+  user_avatar_url: string;
+  likeCount: number;
+  likeStatus: "unliked" | "liked";
+  favorStatus: "not_favorited" | "favorited";
+  commentCount: number | null;
+  sharedCount: number | null;
+  sameStyleCount: number;
+  picCount: number;
+  ctime: string;
+  mtime: string;
+  is_pinned: boolean;
+  hashtag_names: string[];
+  is_interactive: boolean;
+}
+
+export interface UserStoriesResponse {
+  theme: string;
+  total: number;
+  page_index: number;
+  page_size: number;
+  list: UserStory[];
+  biz_trace_id: string;
+}
+
+export interface Manuscript {
+  uuid: string;
+  name: string;
+  cover_url: string;
+  status: string;
+  ctime: string;
+  mtime: string;
+}
+
+export interface ManuscriptListResponse {
+  total: number;
+  page_index: number;
+  page_size: number;
+  list: Manuscript[];
+  has_next: boolean;
+}
+
+export interface CheckinStatus {
+  today_signed: boolean;
+  streak_count: number;
+  cycle_day: number;
+  cycle_signed_history: boolean[];
+  reward_list: any[];
+}
+
+export interface MessageCount {
+  data: {
+    like?: number;
+    interacts?: number;
+    subscribe?: number;
+    [key: string]: number | undefined;
+  };
+}
+
+export interface OCWorld {
+  uuid: string;
+  name: string;
+  description: string;
+  cover_url: string;
+  character_count: number;
+  ctime: string;
+}
+
 export const createUserApis = (client: AxiosInstance) => {
   return {
     me: async () => {
       const res = await client.get<UserInfo>("/v1/user/");
       return res.data ?? null;
+    },
+
+    /**
+     * 获取用户 AP 电量信息
+     */
+    getApInfo: async () => {
+      const res = await client.get<UserApInfo>("/v2/user/ap_info");
+      return res.data ?? null;
+    },
+
+    /**
+     * 获取用户发布的帖子/故事列表
+     * @param uuid 用户 UUID
+     * @param page_index 页码（从 0 开始）
+     * @param page_size 每页数量（默认 20）
+     */
+    getUserStories: async (
+      uuid: string,
+      page_index = 0,
+      page_size = 20,
+    ) => {
+      const res = await client.get<UserStoriesResponse>(
+        "/v2/story/user-stories",
+        {
+          params: { uuid, page_index, page_size },
+        },
+      );
+      return res.data;
+    },
+
+    /**
+     * 获取用户草稿/稿件列表
+     * @param page_index 页码（从 0 开始）
+     * @param page_size 每页数量（默认 24）
+     */
+    getManuscriptList: async (page_index = 0, page_size = 24) => {
+      const res = await client.get<ManuscriptListResponse>(
+        "/v1/manuscript/list",
+        {
+          params: { page_index, page_size },
+        },
+      );
+      return res.data;
+    },
+
+    /**
+     * 获取签到状态
+     */
+    getCheckinStatus: async () => {
+      const res = await client.get<CheckinStatus>("/v1/checkin/status");
+      return res.data;
+    },
+
+    /**
+     * 获取消息数量
+     */
+    getMessageCount: async () => {
+      const res = await client.get<MessageCount>("/v1/message/message-count");
+      return res.data;
+    },
+
+    /**
+     * 获取 OC 世界列表
+     */
+    getOCWorlds: async () => {
+      const res = await client.get<OCWorld[]>("/v2/oc/list-worlds");
+      return res.data ?? [];
     },
   };
 };

@@ -762,3 +762,182 @@ export const wrapAction = <
     return wrapOutput(result);
   };
 };
+
+// #region User Stories
+
+export const getUserStoriesParametersSchema = z.object({
+  uuid: z.string().describe(meta.get_user_stories_parameters_schema.uuid),
+  page_index: z
+    .number()
+    .optional()
+    .default(0)
+    .describe(meta.get_user_stories_parameters_schema.page_index),
+  page_size: z
+    .number()
+    .optional()
+    .default(20)
+    .describe(meta.get_user_stories_parameters_schema.page_size),
+});
+export type GetUserStoriesParameters = z.infer<
+  typeof getUserStoriesParametersSchema
+>;
+
+export const userStorySchema = z.object({
+  id: z.number(),
+  storyId: z.string(),
+  name: z.string(),
+  coverUrl: z.string(),
+  status: z.enum(["PUBLISHED", "PRIVATE", "DRAFT"]),
+  likeCount: z.number(),
+  commentCount: z.number().nullable(),
+  sharedCount: z.number().nullable(),
+  sameStyleCount: z.number(),
+  ctime: z.string(),
+  is_pinned: z.boolean(),
+  hashtag_names: z.array(z.string()),
+});
+export type UserStory = z.infer<typeof userStorySchema>;
+
+export const getUserStoriesResultSchema = z.object({
+  total: z.number().describe(meta.get_user_stories_result_schema.total),
+  page_index: z
+    .number()
+    .describe(meta.get_user_stories_result_schema.page_index),
+  page_size: z
+    .number()
+    .describe(meta.get_user_stories_result_schema.page_size),
+  stories: z.array(userStorySchema).describe(
+    meta.get_user_stories_result_schema.stories,
+  ),
+});
+export type GetUserStoriesResult = z.infer<typeof getUserStoriesResultSchema>;
+
+// #endregion
+
+// #region Manuscript List
+
+export const getManuscriptListParametersSchema = z.object({
+  page_index: z
+    .number()
+    .optional()
+    .default(0)
+    .describe(meta.get_manuscript_list_parameters_schema.page_index),
+  page_size: z
+    .number()
+    .optional()
+    .default(24)
+    .describe(meta.get_manuscript_list_parameters_schema.page_size),
+});
+export type GetManuscriptListParameters = z.infer<
+  typeof getManuscriptListParametersSchema
+>;
+
+export const manuscriptSchema = z.object({
+  uuid: z.string(),
+  name: z.string(),
+  cover_url: z.string(),
+  status: z.string(),
+  ctime: z.string(),
+  mtime: z.string(),
+});
+export type Manuscript = z.infer<typeof manuscriptSchema>;
+
+export const getManuscriptListResultSchema = z.object({
+  total: z.number().describe(meta.get_manuscript_list_result_schema.total),
+  page_index: z
+    .number()
+    .describe(meta.get_manuscript_list_result_schema.page_index),
+  page_size: z
+    .number()
+    .describe(meta.get_manuscript_list_result_schema.page_size),
+  has_next: z.boolean().describe(meta.get_manuscript_list_result_schema.has_next),
+  manuscripts: z.array(manuscriptSchema).describe(
+    meta.get_manuscript_list_result_schema.manuscripts,
+  ),
+});
+export type GetManuscriptListResult = z.infer<
+  typeof getManuscriptListResultSchema
+>;
+
+// #endregion
+
+// #region Checkin Status
+
+export const getCheckinStatusResultSchema = z.object({
+  today_signed: z.boolean().describe(
+    meta.get_checkin_status_result_schema.today_signed,
+  ),
+  streak_count: z.number().describe(
+    meta.get_checkin_status_result_schema.streak_count,
+  ),
+  cycle_day: z.number().describe(meta.get_checkin_status_result_schema.cycle_day),
+  cycle_signed_history: z.array(z.boolean()).describe(
+    meta.get_checkin_status_result_schema.cycle_signed_history,
+  ),
+  reward_list: z.array(z.looseObject()).describe(
+    meta.get_checkin_status_result_schema.reward_list,
+  ),
+});
+export type GetCheckinStatusResult = z.infer<
+  typeof getCheckinStatusResultSchema
+>;
+
+// #endregion
+
+// #region Message Count
+
+export const getMessageCountResultSchema = z.looseObject({
+  like: z.number().optional().describe(meta.get_message_count_result_schema.like),
+  interacts: z.number().optional().describe(
+    meta.get_message_count_result_schema.interacts,
+  ),
+  subscribe: z.number().optional().describe(
+    meta.get_message_count_result_schema.subscribe,
+  ),
+});
+export type GetMessageCountResult = z.infer<
+  typeof getMessageCountResultSchema
+>;
+
+// #endregion
+
+// #region AP Info
+
+export const getApInfoResultSchema = z.object({
+  ap: z.number().nullable().describe(meta.get_ap_info_result_schema.ap),
+  temp_ap: z.number().nullable().describe(
+    meta.get_ap_info_result_schema.temp_ap,
+  ),
+  ap_limit: z.number().nullable().describe(
+    meta.get_ap_info_result_schema.ap_limit,
+  ),
+  unlimited_until: z.number().nullable().describe(
+    meta.get_ap_info_result_schema.unlimited_until,
+  ),
+  true_unlimited_until: z.number().nullable().describe(
+    meta.get_ap_info_result_schema.true_unlimited_until,
+  ),
+});
+export type GetApInfoResult = z.infer<typeof getApInfoResultSchema>;
+
+// #endregion
+
+// #region OC Worlds
+
+export const ocWorldSchema = z.object({
+  uuid: z.string(),
+  name: z.string(),
+  description: z.string(),
+  cover_url: z.string(),
+  character_count: z.number(),
+  ctime: z.string(),
+});
+export type OCWorld = z.infer<typeof ocWorldSchema>;
+
+export const getOCWorldsResultSchema = z.object({
+  count: z.number().describe(meta.get_oc_worlds_result_schema.count),
+  worlds: z.array(ocWorldSchema).describe(meta.get_oc_worlds_result_schema.worlds),
+});
+export type GetOCWorldsResult = z.infer<typeof getOCWorldsResultSchema>;
+
+// #endregion
