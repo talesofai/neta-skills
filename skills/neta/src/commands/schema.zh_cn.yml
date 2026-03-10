@@ -284,3 +284,42 @@ get_tcp_detail_result_schema:
     creator_name: 创作者名称
     ctime: 创建时间
     raw_response: 完整响应 JSON
+
+get_subscribe_list_parameters_schema:
+  page_index: 页码（从 0 开始）
+  page_size: 每页数量（默认 20）
+
+get_subscribe_list_result_schema:
+  total: 关注总数
+  page_index: 当前页码
+  page_size: 每页数量
+  has_next: 是否有下一页
+  list: 关注列表
+    - uuid: 用户 UUID
+    - nick_name: 昵称
+    - avatar_url: 头像 URL
+    - subscribe_status: 关注状态
+    - total_subscribes: 关注数
+    - total_fans: 粉丝数
+    - total_likes: 获赞数
+    - total_collections: 作品数
+
+get_fan_list_parameters_schema:
+  visit_user_uuid: 要查询粉丝的用户 UUID
+  page_index: 页码（从 0 开始，默认 0）
+  page_size: 每页数量（默认 20，最大 20）
+
+get_fan_list_result_schema:
+  total: 粉丝总数
+  page_index: 当前页码
+  page_size: 每页数量
+  has_next: 是否有下一页
+  list: 粉丝列表
+    - uuid: 用户 UUID
+    - nick_name: 昵称
+    - avatar_url: 头像 URL
+    - subscribe_status: 关注状态
+    - total_subscribes: 关注数
+    - total_fans: 粉丝数
+    - total_likes: 获赞数
+    - total_collections: 作品数

@@ -1,0 +1,6 @@
+name: get_subscribe_list
+title: 获取关注列表
+description: 获取当前用户的关注列表，支持分页查询
+parameters:
+  page_index: 页码（从 0 开始，默认 0）
+  page_size: 每页数量（默认 20）

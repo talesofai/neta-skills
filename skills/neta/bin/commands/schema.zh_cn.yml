@@ -160,3 +160,144 @@ fetch_selected_collections_by_activity_result_schema:
   page_index: 当前页索引
   page_size: 每页数量
   list: 精选玩法列表
+
+# ===== 用户相关命令 =====
+
+get_user_stories_parameters_schema:
+  uuid: 用户 UUID，可以通过 get_user_info 获取
+  page_index: 分页索引，从 0 开始，默认 0
+  page_size: 每页数量，默认 20，最大 100
+
+get_user_stories_result_schema:
+  total: 用户发布的帖子总数
+  page_index: 当前页索引
+  page_size: 每页数量
+  stories: 故事列表数组
+
+get_manuscript_list_parameters_schema:
+  page_index: 分页索引，从 0 开始，默认 0
+  page_size: 每页数量，默认 24，最大 100
+
+get_manuscript_list_result_schema:
+  total: 草稿总数
+  page_index: 当前页索引
+  page_size: 每页数量
+  has_next: 是否有下一页
+  manuscripts: 草稿列表数组
+
+get_checkin_status_result_schema:
+  today_signed: 今日是否已签到
+  streak_count: 连续签到天数
+  cycle_day: 当前周期天数
+  cycle_signed_history: 周期签到历史记录
+  reward_list: 奖励列表
+
+do_checkin_result_schema:
+  message: 签到结果消息
+
+get_message_count_result_schema:
+  like: 点赞消息数量
+  interacts: 互动消息数量
+  subscribe: 关注消息数量
+
+get_ap_info_result_schema:
+  ap: 当前可用电量
+  temp_ap: 临时电量 (每日免费)
+  ap_limit: 电量上限
+  unlimited_until: 无限电量到期时间戳
+  true_unlimited_until: 真无限电量到期时间戳
+
+get_oc_worlds_result_schema:
+  count: OC 世界数量
+  worlds: OC 世界列表数组
+
+like_comment_parameters_schema:
+  comment_uuid: 评论 UUID
+  like: "true=点赞，false=取消点赞"
+
+get_tcp_detail_parameters_schema:
+  name: |
+    角色或元素的名称
+      - 角色示例："奈塔#996"、"初音未来"、"五条悟"
+      - 元素示例："漫画风格"、"赛博朋克"、"水彩风"
+      - TCP 名称带有井号标识时必须使用完整名称
+  parent_type: |
+    搜索类型
+      - character: 只搜索角色
+      - elementum: 只搜索元素
+      - both: 同时搜索角色和元素（默认）
+
+get_tcp_detail_result_schema:
+  # 角色开盒字段
+  character_unbox:
+    uuid: 角色 UUID
+    type: "character（角色）"
+    name: 角色名称
+    short_name: 角色简称
+    description: 角色描述
+    appearance_vtokens: 外貌描述词
+    prompt: 带权重的 prompt
+    tachie_url: 角色封面/立绘
+    creator_avatar_url: 用户头像
+    original_image_url: 垫图
+    trigger_id: 触发器 ID
+    style_key: 风格键
+    creator_name: 创作者名称
+    ctime: 创建时间
+    raw_response: 完整响应 JSON
+  # 元素开盒字段
+  elementum_unbox:
+    uuid: 元素 UUID
+    type: "elementum（元素）"
+    name: 元素名称
+    short_name: 元素简称
+    description: 元素描述
+    appearance_vtokens: 提示词
+    tachie_url: 元素封面
+    creator_avatar_url: 用户头像
+    controlnetunit_tile_image_ref: 垫图
+    preset_key: 预设键
+    creator_name: 创作者名称
+    ctime: 创建时间
+    raw_response: 完整响应 JSON
+
+get_subscribe_list_parameters_schema:
+  page_index: 页码（从 0 开始）
+  page_size: 每页数量（默认 20）
+
+get_subscribe_list_result_schema:
+  total: 关注总数
+  page_index: 当前页码
+  page_size: 每页数量
+  has_next: 是否有下一页
+  list: 关注列表数组
+
+get_fan_list_parameters_schema:
+  visit_user_uuid: 要查询粉丝的用户 UUID
+  page_index: 页码（从 0 开始，默认 0）
+  page_size: 每页数量（默认 20，最大 20）
+
+get_fan_list_result_schema:
+  total: 粉丝总数
+  page_index: 当前页码
+  page_size: 每页数量
+  has_next: 是否有下一页
+  list: 粉丝列表数组
+
+get_user_info_parameters_schema:
+  uuid: 用户 UUID（必填）
+
+get_user_info_result_schema:
+  id: 用户 ID
+  uuid: 用户 UUID
+  nick_name: 昵称
+  phone_num: 手机号（脱敏显示）
+  total_subscribes: 关注数
+  total_fans: 粉丝数
+  total_collections: 作品数
+  total_likes: 获赞数（字符串格式）
+  total_same_style: 被捏同款数（字符串格式）
+  is_internal: 是否内部账号（布尔值）
+  vip_level: VIP 等级（可能为 null）
+  vip_until: VIP 过期时间
+  badges: 勋章列表数组

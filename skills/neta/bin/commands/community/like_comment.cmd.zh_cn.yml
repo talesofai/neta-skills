@@ -3,4 +3,4 @@ title: 点赞评论
 description: 点赞或取消点赞评论
 parameters:
   comment_uuid: 评论 UUID
-  like: "true=点赞，false=取消点赞"
+  like: true

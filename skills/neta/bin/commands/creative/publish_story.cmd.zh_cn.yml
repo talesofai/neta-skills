@@ -1,0 +1,3 @@
+name: publish_story
+title: 发布故事
+description: 发布/更新故事状态，支持触发 TCP 评论和同款回复

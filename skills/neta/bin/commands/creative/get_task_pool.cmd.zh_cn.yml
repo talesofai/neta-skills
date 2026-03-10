@@ -1,0 +1,3 @@
+name: get_task_pool
+title: 获取任务池
+description: 获取可用任务池（v3 版本）

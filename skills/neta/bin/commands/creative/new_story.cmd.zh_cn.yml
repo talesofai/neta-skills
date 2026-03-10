@@ -1,0 +1,3 @@
+name: new_story
+title: 创建新故事
+description: 初始化一个新故事对象（空白草稿），返回故事 UUID

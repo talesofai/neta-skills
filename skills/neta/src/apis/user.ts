@@ -293,6 +293,16 @@ export interface SubscribeListResponse {
   has_next: boolean;
 }
 
+/** 粉丝列表响应 */
+export interface FanListResponse {
+  total: number;
+  page_index: number;
+  page_size: number;
+  list: SubscribeItem[];
+  has_next: boolean | null;
+  has_review_permission: boolean | null;
+}
+
 export const createUserApis = (client: AxiosInstance) => {
   return {
     me: async () => {
@@ -373,6 +383,41 @@ export const createUserApis = (client: AxiosInstance) => {
     getOCWorlds: async () => {
       const res = await client.get<OCWorld[]>("/v2/oc/list-worlds");
       return res.data ?? [];
+    },
+
+    /**
+     * 获取用户关注列表
+     * @param page_index 页码（从 0 开始）
+     * @param page_size 每页数量（默认 20）
+     */
+    getSubscribeList: async (page_index = 0, page_size = 20) => {
+      const res = await client.get<SubscribeListResponse>(
+        "/v1/user/subscribe-list",
+        {
+          params: { page_index, page_size },
+        },
+      );
+      return res.data;
+    },
+
+    /**
+     * 获取用户粉丝列表
+     * @param visit_user_uuid 要查询粉丝的用户 UUID
+     * @param page_index 页码（从 0 开始）
+     * @param page_size 每页数量（默认 20）
+     */
+    getFanList: async (
+      visit_user_uuid: string,
+      page_index = 0,
+      page_size = 20,
+    ) => {
+      const res = await client.get<FanListResponse>(
+        "/v1/user/visitor-fan-list",
+        {
+          params: { visit_user_uuid, page_index, page_size },
+        },
+      );
+      return res.data;
     },
   };
 };

@@ -116,6 +116,92 @@ const meta = parseMeta(z.object({
     do_checkin_result_schema: z.object({
         message: z.string(),
     }),
+    get_subscribe_list_parameters_schema: z.object({
+        page_index: z.string(),
+        page_size: z.string(),
+    }),
+    get_subscribe_list_result_schema: z.object({
+        total: z.string(),
+        page_index: z.string(),
+        page_size: z.string(),
+        has_next: z.string(),
+        list: z.string(),
+    }),
+    get_fan_list_parameters_schema: z.object({
+        visit_user_uuid: z.string(),
+        page_index: z.string(),
+        page_size: z.string(),
+    }),
+    get_fan_list_result_schema: z.object({
+        total: z.string(),
+        page_index: z.string(),
+        page_size: z.string(),
+        has_next: z.string(),
+        list: z.string(),
+    }),
+    get_message_count_result_schema: z.object({
+        like: z.string(),
+        interacts: z.string(),
+        subscribe: z.string(),
+    }),
+    get_ap_info_result_schema: z.object({
+        ap: z.string(),
+        temp_ap: z.string(),
+        ap_limit: z.string(),
+        unlimited_until: z.string(),
+        true_unlimited_until: z.string(),
+    }),
+    get_oc_worlds_result_schema: z.object({
+        count: z.string(),
+        worlds: z.string(),
+    }),
+    get_checkin_status_result_schema: z.object({
+        today_signed: z.string(),
+        streak_count: z.string(),
+        cycle_day: z.string(),
+        cycle_signed_history: z.string(),
+        reward_list: z.string(),
+    }),
+    get_manuscript_list_parameters_schema: z.object({
+        page_index: z.string(),
+        page_size: z.string(),
+    }),
+    get_manuscript_list_result_schema: z.object({
+        total: z.string(),
+        page_index: z.string(),
+        page_size: z.string(),
+        manuscripts: z.string(),
+        has_next: z.string(),
+    }),
+    get_user_stories_parameters_schema: z.object({
+        uuid: z.string(),
+        page_index: z.string(),
+        page_size: z.string(),
+    }),
+    get_user_stories_result_schema: z.object({
+        total: z.string(),
+        page_index: z.string(),
+        page_size: z.string(),
+        stories: z.string(),
+    }),
+    get_user_info_parameters_schema: z.object({
+        uuid: z.string(),
+    }),
+    get_user_info_result_schema: z.object({
+        id: z.string(),
+        uuid: z.string(),
+        nick_name: z.string(),
+        phone_num: z.string(),
+        total_subscribes: z.string(),
+        total_fans: z.string(),
+        total_collections: z.string(),
+        total_likes: z.string(),
+        total_same_style: z.string(),
+        is_internal: z.string(),
+        vip_level: z.string(),
+        vip_until: z.string(),
+        badges: z.string(),
+    }).passthrough(),
 }), import.meta);
 /**
  * 这是一个包含所有 schema 的文件,用于生成类型声明文件.
@@ -720,5 +806,70 @@ export const ocWorldSchema = z.object({
 export const getOCWorldsResultSchema = z.object({
     count: z.number().describe(meta.get_oc_worlds_result_schema.count),
     worlds: z.array(ocWorldSchema).describe(meta.get_oc_worlds_result_schema.worlds),
+});
+// #endregion
+// #region Subscribe List
+export const subscribeItemSchema = z.object({
+    uuid: z.string(),
+    nick_name: z.string(),
+    avatar_url: z.string(),
+    subscribe_status: z.string(),
+    total_subscribes: z.number(),
+    total_fans: z.number(),
+    total_likes: z.number(),
+    total_collections: z.number(),
+});
+export const getSubscribeListParametersSchema = z.object({
+    page_index: z.number().describe(meta.get_subscribe_list_parameters_schema.page_index),
+    page_size: z.number().describe(meta.get_subscribe_list_parameters_schema.page_size),
+});
+export const getSubscribeListResultSchema = z.object({
+    total: z.number().describe(meta.get_subscribe_list_result_schema.total),
+    page_index: z.number().describe(meta.get_subscribe_list_result_schema.page_index),
+    page_size: z.number().describe(meta.get_subscribe_list_result_schema.page_size),
+    has_next: z.boolean().describe(meta.get_subscribe_list_result_schema.has_next),
+    list: z.array(subscribeItemSchema).describe(meta.get_subscribe_list_result_schema.list),
+});
+// #endregion
+// #region get_fan_list
+export const getFanListParametersSchema = z.object({
+    visit_user_uuid: z.string().describe(meta.get_fan_list_parameters_schema.visit_user_uuid),
+    page_index: z.number().optional().default(0).describe(meta.get_fan_list_parameters_schema.page_index),
+    page_size: z.number().optional().default(20).describe(meta.get_fan_list_parameters_schema.page_size),
+});
+export const getFanListResultSchema = z.object({
+    total: z.number().describe(meta.get_fan_list_result_schema.total),
+    page_index: z.number().describe(meta.get_fan_list_result_schema.page_index),
+    page_size: z.number().describe(meta.get_fan_list_result_schema.page_size),
+    has_next: z.boolean().nullable().describe(meta.get_fan_list_result_schema.has_next),
+    list: z.array(subscribeItemSchema).describe(meta.get_fan_list_result_schema.list),
+});
+// #endregion
+
+// #region get_user_info
+export const badgeSchema = z.object({
+    name: z.string(),
+    type: z.string(),
+    icon_url: z.string(),
+    avatar_frame_url: z.string().optional(),
+    description: z.string().optional(),
+});
+export const getUserInfoParametersSchema = z.object({
+    uuid: z.string().describe(meta.get_user_info_parameters_schema.uuid),
+});
+export const getUserInfoResultSchema = z.object({
+    id: z.number().describe(meta.get_user_info_result_schema.id),
+    uuid: z.string().describe(meta.get_user_info_result_schema.uuid),
+    nick_name: z.string().describe(meta.get_user_info_result_schema.nick_name),
+    phone_num: z.string().describe(meta.get_user_info_result_schema.phone_num),
+    total_subscribes: z.number().describe(meta.get_user_info_result_schema.total_subscribes),
+    total_fans: z.number().describe(meta.get_user_info_result_schema.total_fans),
+    total_collections: z.number().describe(meta.get_user_info_result_schema.total_collections),
+    total_likes: z.string().describe(meta.get_user_info_result_schema.total_likes),
+    total_same_style: z.string().describe(meta.get_user_info_result_schema.total_same_style),
+    is_internal: z.boolean().describe(meta.get_user_info_result_schema.is_internal),
+    vip_level: z.number().nullable().describe(meta.get_user_info_result_schema.vip_level),
+    vip_until: z.string().nullable().describe(meta.get_user_info_result_schema.vip_until),
+    badges: z.array(badgeSchema).describe(meta.get_user_info_result_schema.badges),
 });
 // #endregion

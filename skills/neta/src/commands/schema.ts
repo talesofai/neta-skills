@@ -118,6 +118,74 @@ const meta = parseMeta(
     do_checkin_result_schema: z.object({
       message: z.string(),
     }),
+    get_subscribe_list_parameters_schema: z.object({
+      page_index: z.string(),
+      page_size: z.string(),
+    }),
+    get_subscribe_list_result_schema: z.object({
+      total: z.string(),
+      page_index: z.string(),
+      page_size: z.string(),
+      has_next: z.string(),
+      list: z.string(),
+    }),
+    get_fan_list_parameters_schema: z.object({
+      visit_user_uuid: z.string(),
+      page_index: z.string(),
+      page_size: z.string(),
+    }),
+    get_fan_list_result_schema: z.object({
+      total: z.string(),
+      page_index: z.string(),
+      page_size: z.string(),
+      has_next: z.string(),
+      list: z.string(),
+    }),
+    get_message_count_result_schema: z.object({
+      like: z.string(),
+      interacts: z.string(),
+      subscribe: z.string(),
+    }),
+    get_ap_info_result_schema: z.object({
+      ap: z.string(),
+      temp_ap: z.string(),
+      ap_limit: z.string(),
+      unlimited_until: z.string(),
+      true_unlimited_until: z.string(),
+    }),
+    get_oc_worlds_result_schema: z.object({
+      count: z.string(),
+      worlds: z.string(),
+    }),
+    get_checkin_status_result_schema: z.object({
+      today_signed: z.string(),
+      streak_count: z.string(),
+      cycle_day: z.string(),
+      cycle_signed_history: z.string(),
+      reward_list: z.string(),
+    }),
+    get_manuscript_list_parameters_schema: z.object({
+      page_index: z.string(),
+      page_size: z.string(),
+    }),
+    get_manuscript_list_result_schema: z.object({
+      total: z.string(),
+      page_index: z.string(),
+      page_size: z.string(),
+      list: z.string(),
+      has_next: z.string(),
+    }),
+    get_user_stories_parameters_schema: z.object({
+      uuid: z.string(),
+      page_index: z.string(),
+      page_size: z.string(),
+    }),
+    get_user_stories_result_schema: z.object({
+      total: z.string(),
+      page_index: z.string(),
+      page_size: z.string(),
+      stories: z.string(),
+    }),
   }),
   import.meta,
 );
@@ -951,5 +1019,72 @@ export const getOCWorldsResultSchema = z.object({
   worlds: z.array(ocWorldSchema).describe(meta.get_oc_worlds_result_schema.worlds),
 });
 export type GetOCWorldsResult = z.infer<typeof getOCWorldsResultSchema>;
+
+// #endregion
+
+// #region Subscribe List
+
+export const subscribeItemSchema = z.object({
+  uuid: z.string(),
+  nick_name: z.string(),
+  avatar_url: z.string(),
+  subscribe_status: z.string(),
+  total_subscribes: z.number(),
+  total_fans: z.number(),
+  total_likes: z.number(),
+  total_collections: z.number(),
+});
+export type SubscribeItem = z.infer<typeof subscribeItemSchema>;
+
+export const getSubscribeListParametersSchema = z.object({
+  page_index: z.number().describe(
+    meta.get_subscribe_list_parameters_schema.page_index,
+  ),
+  page_size: z.number().describe(
+    meta.get_subscribe_list_parameters_schema.page_size,
+  ),
+});
+export type GetSubscribeListParameters = z.infer<
+  typeof getSubscribeListParametersSchema
+>;
+
+export const getSubscribeListResultSchema = z.object({
+  total: z.number().describe(meta.get_subscribe_list_result_schema.total),
+  page_index: z.number().describe(
+    meta.get_subscribe_list_result_schema.page_index,
+  ),
+  page_size: z.number().describe(
+    meta.get_subscribe_list_result_schema.page_size,
+  ),
+  has_next: z.boolean().describe(meta.get_subscribe_list_result_schema.has_next),
+  list: z.array(subscribeItemSchema).describe(
+    meta.get_subscribe_list_result_schema.list,
+  ),
+});
+export type GetSubscribeListResult = z.infer<
+  typeof getSubscribeListResultSchema
+>;
+
+// #endregion
+
+// #region get_fan_list
+
+export const getFanListParametersSchema = z.object({
+  visit_user_uuid: z.string().describe(meta.get_fan_list_parameters_schema.visit_user_uuid),
+  page_index: z.number().optional().default(0).describe(meta.get_fan_list_parameters_schema.page_index),
+  page_size: z.number().optional().default(20).describe(meta.get_fan_list_parameters_schema.page_size),
+});
+export type GetFanListParameters = z.infer<typeof getFanListParametersSchema>;
+
+export const getFanListResultSchema = z.object({
+  total: z.number().describe(meta.get_fan_list_result_schema.total),
+  page_index: z.number().describe(meta.get_fan_list_result_schema.page_index),
+  page_size: z.number().describe(meta.get_fan_list_result_schema.page_size),
+  has_next: z.boolean().nullable().describe(meta.get_fan_list_result_schema.has_next),
+  list: z.array(subscribeItemSchema).describe(
+    meta.get_fan_list_result_schema.list,
+  ),
+});
+export type GetFanListResult = z.infer<typeof getFanListResultSchema>;
 
 // #endregion

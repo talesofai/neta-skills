@@ -1,0 +1,3 @@
+name: delete_story
+title: 删除故事
+description: 删除指定的故事/合集（不可恢复，删除前请确认）

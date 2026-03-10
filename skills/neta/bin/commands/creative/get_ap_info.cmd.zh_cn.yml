@@ -1,5 +1,3 @@
-{
-  "name": "get_ap_info",
-  "title": "获取 AP 电量信息",
-  "description": "获取用户 AP 电量信息，包括可用电量、临时电量、无限时长等"
-}
+name: get_ap_info
+title: 获取 AP 电量
+description: 获取当前用户的 AP 电量信息，包括当前电量、临时电量、电量上限等

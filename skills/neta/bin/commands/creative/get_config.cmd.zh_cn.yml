@@ -1,0 +1,3 @@
+name: get_config
+title: 获取配置
+description: 获取指定命名空间和键的配置信息

@@ -5,6 +5,16 @@ export const createUserApis = (client) => {
             return res.data ?? null;
         },
         /**
+         * 获取指定用户的详细信息
+         * @param uuid 用户 UUID
+         */
+        getUserInfo: async (uuid) => {
+            const res = await client.get("/v1/user/", {
+                params: { uuid },
+            });
+            return res.data ?? null;
+        },
+        /**
          * 获取用户 AP 电量信息
          */
         getApInfo: async () => {
@@ -61,6 +71,29 @@ export const createUserApis = (client) => {
         getOCWorlds: async () => {
             const res = await client.get("/v2/oc/list-worlds");
             return res.data ?? [];
+        },
+        /**
+         * 获取用户关注列表
+         * @param page_index 页码（从 0 开始）
+         * @param page_size 每页数量（默认 20）
+         */
+        getSubscribeList: async (page_index = 0, page_size = 20) => {
+            const res = await client.get("/v1/user/subscribe-list", {
+                params: { page_index, page_size },
+            });
+            return res.data;
+        },
+        /**
+         * 获取用户粉丝列表
+         * @param visit_user_uuid 要查询粉丝的用户 UUID
+         * @param page_index 页码（从 0 开始）
+         * @param page_size 每页数量（默认 20）
+         */
+        getFanList: async (visit_user_uuid, page_index = 0, page_size = 20) => {
+            const res = await client.get("/v1/user/visitor-fan-list", {
+                params: { visit_user_uuid, page_index, page_size },
+            });
+            return res.data;
         },
     };
 };

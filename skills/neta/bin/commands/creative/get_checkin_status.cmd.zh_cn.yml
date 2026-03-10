@@ -1,5 +1,3 @@
-{
-  "name": "get_checkin_status",
-  "title": "获取签到状态",
-  "description": "获取用户签到状态，包括今日是否签到、连续签到天数等"
-}
+name: get_checkin_status
+title: 获取签到状态
+description: 获取用户的签到状态，包括今日是否签到、连续签到天数、周期签到历史等
