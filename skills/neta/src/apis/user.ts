@@ -270,6 +270,29 @@ export interface OCWorld {
   ctime: string;
 }
 
+/** 关注列表项 */
+export interface SubscribeItem {
+  id: number;
+  uuid: string;
+  nick_name: string;
+  avatar_url: string;
+  subscribe_status: UserSubscribeStatus;
+  total_subscribes: number;
+  total_fans: number;
+  total_likes: number;
+  total_collections: number;
+  badges?: Badge[];
+}
+
+/** 关注列表响应 */
+export interface SubscribeListResponse {
+  total: number;
+  page_index: number;
+  page_size: number;
+  list: SubscribeItem[];
+  has_next: boolean;
+}
+
 export const createUserApis = (client: AxiosInstance) => {
   return {
     me: async () => {
