@@ -42,6 +42,7 @@
 | `/v1/story/new-story` | GET | v1 | 创建新故事（初始化空白草稿） | `new_story` |
 | `/v3/story/story` | PUT | v3 | 更新故事完整数据（编辑保存） | `update_story` |
 | `/v1/story/story-publish` | PUT | v1 | 发布故事（设置发布状态） | `publish_story` |
+| `/v3/story/collection` | DELETE | v3 | 删除故事/合集 ⭐ | `delete_story` |
 | `/v2/story/user-stories` | GET | v2 | 获取用户故事列表 | `get_user_stories` |
 
 ### 故事工作流

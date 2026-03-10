@@ -130,6 +130,27 @@ pnpm start publish_story \
 
 ---
 
+## 🗑️ 删除故事
+
+**接口:** `DELETE /v3/story/collection`
+
+**命令:**
+```bash
+pnpm start delete_story --uuid "533e5373-bd5f-4bc9-80d9-b59591c99075"
+```
+
+**参数:**
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `uuid` | string | ✅ | 故事/合集 UUID |
+
+**⚠️ 警告:** 删除后**不可恢复**，删除前请确认！
+
+**响应:** 成功返回 `null`（无错误即表示成功）
+
+---
+
 ## 🔍 查询故事列表
 
 **接口:** `GET /v2/story/user-stories`

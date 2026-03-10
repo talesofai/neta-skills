@@ -275,6 +275,12 @@ pnpm start publish_story \
 ```
 设置故事发布状态，可选触发 TCP 评论和同款回复。
 
+**删除故事**
+```bash
+pnpm start delete_story --uuid "故事 uuid"
+```
+⚠️ **删除后不可恢复**，删除前请确认！
+
 📖 [故事工作流](./references/story-workflow.md) - 完整发帖流程
 
 ### 任务系统
