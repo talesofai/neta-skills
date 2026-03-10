@@ -113,6 +113,9 @@ const meta = parseMeta(z.object({
         page_size: z.string(),
         list: z.string(),
     }),
+    do_checkin_result_schema: z.object({
+        message: z.string(),
+    }),
 }), import.meta);
 /**
  * 这是一个包含所有 schema 的文件,用于生成类型声明文件.
@@ -603,3 +606,119 @@ export const wrapAction = (action) => {
         return wrapOutput(result);
     };
 };
+// #region User Stories
+export const getUserStoriesParametersSchema = z.object({
+    uuid: z.string().describe(meta.get_user_stories_parameters_schema.uuid),
+    page_index: z
+        .number()
+        .optional()
+        .default(0)
+        .describe(meta.get_user_stories_parameters_schema.page_index),
+    page_size: z
+        .number()
+        .optional()
+        .default(20)
+        .describe(meta.get_user_stories_parameters_schema.page_size),
+});
+export const userStorySchema = z.object({
+    id: z.number(),
+    storyId: z.string(),
+    name: z.string(),
+    coverUrl: z.string(),
+    status: z.enum(["PUBLISHED", "PRIVATE", "DRAFT"]),
+    likeCount: z.number(),
+    commentCount: z.number().nullable(),
+    sharedCount: z.number().nullable(),
+    sameStyleCount: z.number(),
+    ctime: z.string(),
+    is_pinned: z.boolean(),
+    hashtag_names: z.array(z.string()),
+});
+export const getUserStoriesResultSchema = z.object({
+    total: z.number().describe(meta.get_user_stories_result_schema.total),
+    page_index: z
+        .number()
+        .describe(meta.get_user_stories_result_schema.page_index),
+    page_size: z
+        .number()
+        .describe(meta.get_user_stories_result_schema.page_size),
+    stories: z.array(userStorySchema).describe(meta.get_user_stories_result_schema.stories),
+});
+// #endregion
+// #region Manuscript List
+export const getManuscriptListParametersSchema = z.object({
+    page_index: z
+        .number()
+        .optional()
+        .default(0)
+        .describe(meta.get_manuscript_list_parameters_schema.page_index),
+    page_size: z
+        .number()
+        .optional()
+        .default(24)
+        .describe(meta.get_manuscript_list_parameters_schema.page_size),
+});
+export const manuscriptSchema = z.object({
+    uuid: z.string(),
+    name: z.string(),
+    cover_url: z.string(),
+    status: z.string(),
+    ctime: z.string(),
+    mtime: z.string(),
+});
+export const getManuscriptListResultSchema = z.object({
+    total: z.number().describe(meta.get_manuscript_list_result_schema.total),
+    page_index: z
+        .number()
+        .describe(meta.get_manuscript_list_result_schema.page_index),
+    page_size: z
+        .number()
+        .describe(meta.get_manuscript_list_result_schema.page_size),
+    has_next: z.boolean().describe(meta.get_manuscript_list_result_schema.has_next),
+    manuscripts: z.array(manuscriptSchema).describe(meta.get_manuscript_list_result_schema.manuscripts),
+});
+// #endregion
+// #region Checkin Status
+export const getCheckinStatusResultSchema = z.object({
+    today_signed: z.boolean().describe(meta.get_checkin_status_result_schema.today_signed),
+    streak_count: z.number().describe(meta.get_checkin_status_result_schema.streak_count),
+    cycle_day: z.number().describe(meta.get_checkin_status_result_schema.cycle_day),
+    cycle_signed_history: z.array(z.boolean()).describe(meta.get_checkin_status_result_schema.cycle_signed_history),
+    reward_list: z.array(z.looseObject()).describe(meta.get_checkin_status_result_schema.reward_list),
+});
+// #endregion
+// #region Do Checkin
+export const doCheckinResultSchema = z.object({
+    message: z.string().describe(meta.do_checkin_result_schema.message),
+});
+// #endregion
+// #region Message Count
+export const getMessageCountResultSchema = z.looseObject({
+    like: z.number().optional().describe(meta.get_message_count_result_schema.like),
+    interacts: z.number().optional().describe(meta.get_message_count_result_schema.interacts),
+    subscribe: z.number().optional().describe(meta.get_message_count_result_schema.subscribe),
+});
+// #endregion
+// #region AP Info
+export const getApInfoResultSchema = z.object({
+    ap: z.number().nullable().describe(meta.get_ap_info_result_schema.ap),
+    temp_ap: z.number().nullable().describe(meta.get_ap_info_result_schema.temp_ap),
+    ap_limit: z.number().nullable().describe(meta.get_ap_info_result_schema.ap_limit),
+    unlimited_until: z.number().nullable().describe(meta.get_ap_info_result_schema.unlimited_until),
+    true_unlimited_until: z.number().nullable().describe(meta.get_ap_info_result_schema.true_unlimited_until),
+});
+// #endregion
+// #region OC Worlds
+export const ocWorldSchema = z.object({
+    uuid: z.string(),
+    name: z.string(),
+    description: z.string(),
+    cover_url: z.string(),
+    character_count: z.number(),
+    ctime: z.string(),
+});
+export const getOCWorldsResultSchema = z.object({
+    count: z.number().describe(meta.get_oc_worlds_result_schema.count),
+    worlds: z.array(ocWorldSchema).describe(meta.get_oc_worlds_result_schema.worlds),
+});
+// #endregion

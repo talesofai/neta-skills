@@ -1,0 +1,10 @@
+{
+  "name": "get_user_stories",
+  "title": "获取用户发布的帖子列表",
+  "description": "获取用户发布的帖子/故事列表",
+  "parameters": {
+    "uuid": "用户 UUID",
+    "page_index": "页码（从 0 开始）",
+    "page_size": "每页数量（默认 20）"
+  }
+}

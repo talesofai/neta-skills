@@ -1,0 +1,5 @@
+{
+  "name": "get_message_count",
+  "title": "获取消息数量",
+  "description": "获取用户的消息数量，包括点赞、互动、订阅等"
+}

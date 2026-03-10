@@ -248,6 +248,10 @@ export interface CheckinStatus {
   reward_list: any[];
 }
 
+export interface DoCheckinResponse {
+  message: string;
+}
+
 export interface MessageCount {
   data: {
     like?: number;
@@ -321,6 +325,14 @@ export const createUserApis = (client: AxiosInstance) => {
      */
     getCheckinStatus: async () => {
       const res = await client.get<CheckinStatus>("/v1/checkin/status");
+      return res.data;
+    },
+
+    /**
+     * 执行签到
+     */
+    doCheckin: async () => {
+      const res = await client.post<DoCheckinResponse>("/v1/checkin/manual", null);
       return res.data;
     },
 

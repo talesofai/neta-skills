@@ -1,0 +1,9 @@
+{
+  "name": "get_manuscript_list",
+  "title": "获取草稿/稿件列表",
+  "description": "获取用户的草稿和稿件列表",
+  "parameters": {
+    "page_index": "页码（从 0 开始）",
+    "page_size": "每页数量（默认 24）"
+  }
+}

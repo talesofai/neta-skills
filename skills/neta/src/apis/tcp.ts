@@ -48,6 +48,27 @@ export interface TravelParentListResponse {
   has_review_permission: boolean | null;
 }
 
+/**
+ * 收藏夹中的角色/元素项
+ */
+export interface FavoritedParentItem extends TravelParentItem {
+  /** 收藏时间 */
+  favor_ctime: string;
+  /** 文件夹 ID */
+  folder_id: number | null;
+}
+
+/**
+ * 收藏夹列表响应
+ */
+export interface TravelParentFavorListResponse {
+  total: number;
+  page_index: number;
+  page_size: number;
+  list: FavoritedParentItem[];
+  has_next: boolean | null;
+}
+
 export const createTcpApis = (client: AxiosInstance) => {
   const searchTCPs = async (query: {
     keywords: string;
@@ -109,9 +130,31 @@ export const createTcpApis = (client: AxiosInstance) => {
       .then((res) => res.data);
   };
 
+  /**
+   * 获取用户收藏夹中的角色/元素列表
+   * 注意：此接口仅接受 APP 请求，需要正确的 token 类型
+   */
+  const getTravelParentFavorList = async (params: {
+    parent_type?: "oc" | "elementum";
+    page_index?: number;
+    page_size?: number;
+  }): Promise<TravelParentFavorListResponse> => {
+    const { parent_type, page_index = 0, page_size = 20 } = params;
+    return client
+      .get<TravelParentFavorListResponse>("/v2/travel/parent/parent-favor/list", {
+        params: {
+          ...(parent_type ? { parent_type } : {}),
+          page_index,
+          page_size,
+        },
+      })
+      .then((res) => res.data);
+  };
+
   return {
     searchTCPs,
     tcpProfile,
     getTravelParent,
+    getTravelParentFavorList,
   };
 };

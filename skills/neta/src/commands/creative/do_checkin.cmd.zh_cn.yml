@@ -1,0 +1,4 @@
+do_checkin:
+  name: do_checkin
+  title: 执行签到
+  description: 执行每日签到，获取 AP 电量奖励

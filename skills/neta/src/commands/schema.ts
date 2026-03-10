@@ -115,6 +115,9 @@ const meta = parseMeta(
       page_size: z.string(),
       list: z.string(),
     }),
+    do_checkin_result_schema: z.object({
+      message: z.string(),
+    }),
   }),
   import.meta,
 );
@@ -881,6 +884,15 @@ export const getCheckinStatusResultSchema = z.object({
 export type GetCheckinStatusResult = z.infer<
   typeof getCheckinStatusResultSchema
 >;
+
+// #endregion
+
+// #region Do Checkin
+
+export const doCheckinResultSchema = z.object({
+  message: z.string().describe(meta.do_checkin_result_schema.message),
+});
+export type DoCheckinResult = z.infer<typeof doCheckinResultSchema>;
 
 // #endregion
 

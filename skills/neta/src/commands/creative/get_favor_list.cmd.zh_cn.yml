@@ -1,0 +1,3 @@
+name: get_favor_list
+title: 获取收藏夹列表
+description: 获取用户收藏夹中的角色/元素列表。注意：此接口需要 APP 类型的 token 才能访问。

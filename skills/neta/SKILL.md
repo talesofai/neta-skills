@@ -42,11 +42,28 @@ pnpm list_space_topics --space_uuid "空间 uuid"
 
 ### 内容创作
 
-**生成图片**
+**生成图片（捏图模型 - 快速）**
 ```bash
-pnpm start make_image --prompt "@角色名，/风格元素，参考图 - 全图参考 - 图片 uuid，描述词，描述词" --aspect "3:4"
+pnpm start make_image_nietu --prompt "@角色名，/风格元素，描述词" --aspect "3:4"
 ```
+
+**生成图片（捏捏模型 - 高质量）**
+```bash
+pnpm start make_image_nienie --prompt "@角色名，/风格元素，描述词" --aspect "3:4"
+```
+
 📖 [详细指南](./references/image-generation.md) - 提示词结构、宽高比选择、用例
+
+#### 生图模型对比
+
+| 模型 | 命令 | entrance | context_model_series | 生成时间 | 适用场景 |
+|------|------|----------|---------------------|----------|----------|
+| **捏图** | `make_image_nietu` | `PICTURE,PURE` | `null` | ~8 秒 | 快速测试、单图生成 |
+| **捏捏** | `make_image_nienie` | `PICTURE,VERSE` | `8_image_edit` | ~50 秒 | 复杂场景、高质量输出 |
+
+**选择建议：**
+- 需要快速预览 → 用**捏图**
+- 正式发帖、复杂场景 → 用**捏捏**
 
 **生成视频**
 ```bash
@@ -170,6 +187,19 @@ pnpm start get_travel_parent --user_uuid "用户 uuid" --parent_type "oc" --page
 pnpm start get_travel_parent --user_uuid "用户 uuid" --parent_type "elementum" --page_size 20
 ```
 
+**获取收藏夹列表**
+```bash
+# 获取所有收藏
+pnpm start get_favor_list --parent_type "both" --page_index 0 --page_size 20
+
+# 只获取角色收藏
+pnpm start get_favor_list --parent_type "character" --page_index 0 --page_size 20
+
+# 只获取元素收藏
+pnpm start get_favor_list --parent_type "elementum" --page_index 0 --page_size 20
+```
+⚠️ 注意：此接口需要 APP 类型的 token 才能访问
+
 **获取提示词标签（图生图模式）**
 ```bash
 pnpm start get_full_prompt_tags --domain_name "APP/单图/图生图"
@@ -202,6 +232,11 @@ pnpm start get_manuscript_list --page_index 0 --page_size 24
 pnpm start get_checkin_status
 ```
 
+**执行签到**
+```bash
+pnpm start do_checkin
+```
+
 **获取消息数量**
 ```bash
 pnpm start get_message_count
@@ -211,6 +246,85 @@ pnpm start get_message_count
 ```bash
 pnpm start get_oc_worlds
 ```
+
+### 故事管理
+
+**创建新故事**
+```bash
+pnpm start new_story
+```
+返回初始故事 UUID，用于后续编辑和发布。
+
+**更新故事内容**
+```bash
+pnpm start update_story \
+  --uuid "故事 uuid" \
+  --name "故事标题" \
+  --description "故事描述" \
+  --coverUrl "封面图片 URL" \
+  --status "PUBLISHED"
+```
+更新故事的完整数据，包括标题、描述、封面、状态、displayData、editorData 等。
+
+**发布故事**
+```bash
+pnpm start publish_story \
+  --storyId "故事 uuid" \
+  --triggerTCPCommentNow false \
+  --triggerSameStyleReply false
+```
+设置故事发布状态，可选触发 TCP 评论和同款回复。
+
+📖 [故事工作流](./references/story-workflow.md) - 完整发帖流程
+
+### 任务系统
+
+**获取任务列表**
+```bash
+pnpm start get_assignment_list
+```
+获取用户已接取的任务列表。
+
+**获取任务池**
+```bash
+pnpm start get_task_pool
+```
+获取可用任务池（v3 版本）。
+
+**完成任务**
+```bash
+pnpm start complete_assignment --uuid "任务 uuid"
+```
+标记任务为已完成，触发奖励发放。
+
+### 配置与浏览
+
+**获取配置信息**
+```bash
+# 获取诗词生成配置
+pnpm start get_config --namespace "verse" --key "generate_verse"
+
+# 获取 AI 聊天预设
+pnpm start get_config --namespace "litellm" --key "chat_presets"
+
+# 获取生成次数限制
+pnpm start get_config --namespace "frontend/generate" --key "MAKE_COUNT"
+
+# 获取每日闪电次数
+pnpm start get_config --namespace "frontend/generate" --key "lightning_per_day"
+```
+
+**获取首页 Feed**
+```bash
+pnpm start get_feed --page_index 0 --page_size 3
+```
+获取首页推荐内容流。
+
+**角色抽奖**
+```bash
+pnpm start char_roll --num 1
+```
+执行角色抽取（Gacha 机制）。
 
 ## 参考文档
 
