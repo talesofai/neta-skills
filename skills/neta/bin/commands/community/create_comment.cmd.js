@@ -23,7 +23,6 @@ export const createCommentCmd = createCommand({
     }),
 }, async ({ content, parent_uuid, parent_type, at_users }, { apis, log }) => {
     log.debug("create_comment: content: %s, parent_uuid: %s, parent_type: %s, at_users: %s", content, parent_uuid, parent_type, at_users);
-    // 将逗号分隔的字符串转换为数组
     const atUsersArray = at_users
         ? at_users
             .split(",")

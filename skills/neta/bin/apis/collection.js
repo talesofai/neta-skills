@@ -43,7 +43,6 @@ export const createCollectionApis = (client) => {
                 is_cancel: is_cancel ?? false,
             },
         });
-        // API 可能返回 null 或者空对象，只要没有抛出错误就认为成功
         return response.status === 200 || response.status === 204;
     };
     const createComment = async (params) => {

@@ -37,7 +37,6 @@ export const createCommentCmd = createCommand(
       at_users,
     );
 
-    // 将逗号分隔的字符串转换为数组
     const atUsersArray = at_users
       ? at_users
           .split(",")
