@@ -1088,3 +1088,48 @@ export const getFanListResultSchema = z.object({
 export type GetFanListResult = z.infer<typeof getFanListResultSchema>;
 
 // #endregion
+
+// #region get_user_info
+
+export const badgeSchema = z.object({
+  uuid: z.string(),
+  name: z.string(),
+  description: z.string(),
+  type: z.string(),
+  icon_url: z.string().nullable(),
+  small_icon_url: z.string().nullable(),
+  sort_index: z.number(),
+  status: z.string(),
+  ctime: z.string(),
+  mtime: z.string(),
+  avatar_frame_url: z.string().nullable(),
+  avatar_frame_gif_url: z.string().nullable(),
+  verification_icon_url: z.string().nullable(),
+  verification_small_icon_url: z.string().nullable(),
+  verification_decor_icon_url: z.string().nullable(),
+  badge_no: z.number().optional(),
+});
+
+export const getUserInfoParametersSchema = z.object({
+  uuid: z.string().describe(meta.get_user_info_parameters_schema.uuid),
+});
+export type GetUserInfoParameters = z.infer<typeof getUserInfoParametersSchema>;
+
+export const getUserInfoResultSchema = z.object({
+  id: z.number().describe(meta.get_user_info_result_schema.id),
+  uuid: z.string().describe(meta.get_user_info_result_schema.uuid),
+  nick_name: z.string().describe(meta.get_user_info_result_schema.nick_name),
+  phone_num: z.string().describe(meta.get_user_info_result_schema.phone_num),
+  total_subscribes: z.number().describe(meta.get_user_info_result_schema.total_subscribes),
+  total_fans: z.number().describe(meta.get_user_info_result_schema.total_fans),
+  total_collections: z.number().describe(meta.get_user_info_result_schema.total_collections),
+  total_likes: z.string().describe(meta.get_user_info_result_schema.total_likes),
+  total_same_style: z.string().describe(meta.get_user_info_result_schema.total_same_style),
+  is_internal: z.boolean().nullable().describe(meta.get_user_info_result_schema.is_internal),
+  vip_level: z.number().nullable().describe(meta.get_user_info_result_schema.vip_level),
+  vip_until: z.string().nullable().describe(meta.get_user_info_result_schema.vip_until),
+  badges: z.array(badgeSchema).describe(meta.get_user_info_result_schema.badges),
+});
+export type GetUserInfoResult = z.infer<typeof getUserInfoResultSchema>;
+
+// #endregion

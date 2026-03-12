@@ -311,6 +311,17 @@ export const createUserApis = (client: AxiosInstance) => {
     },
 
     /**
+     * 获取指定用户的详细信息
+     * @param uuid 用户 UUID
+     */
+    getUserInfo: async (uuid: string) => {
+      const res = await client.get<UserInfo>("/v1/user/", {
+        params: { uuid },
+      });
+      return res.data ?? null;
+    },
+
+    /**
      * 获取用户 AP 电量信息
      */
     getApInfo: async () => {

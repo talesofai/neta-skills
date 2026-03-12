@@ -1,0 +1,6 @@
+get_user_info:
+  name: get_user_info
+  title: 获取用户详情
+  description: 通过用户 UUID 获取详细的用户信息，包括昵称、手机号、关注数、粉丝数、作品数、获赞数、被捏同款数、是否内部账号、VIP 等级和勋章列表
+  parameters:
+    uuid: 用户 UUID（必填）

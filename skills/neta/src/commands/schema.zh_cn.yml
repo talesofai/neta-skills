@@ -323,3 +323,28 @@ get_fan_list_result_schema:
     - total_fans: 粉丝数
     - total_likes: 获赞数
     - total_collections: 作品数
+
+get_user_info_parameters_schema:
+  uuid: 用户 UUID（必填）
+
+get_user_info_result_schema:
+  id: 用户 ID
+  uuid: 用户 UUID
+  nick_name: 昵称
+  phone_num: 手机号（脱敏显示）
+  total_subscribes: 关注数
+  total_fans: 粉丝数
+  total_collections: 作品数
+  total_likes: 获赞数（字符串格式）
+  total_same_style: 被捏同款数（字符串格式）
+  is_internal: 是否内部账号（可能为 null）
+  vip_level: VIP 等级（可能为 null）
+  vip_until: VIP 过期时间
+  badges: 勋章列表
+    - uuid: 勋章 UUID
+    - name: 勋章名称
+    - description: 勋章描述
+    - type: 勋章类型（BADGE/AVATAR_FRAME/VERIFICATION_BADGE/THOUMASK_BADGE）
+    - icon_url: 勋章图标 URL
+    - avatar_frame_url: 头像框 URL
+    - avatar_frame_gif_url: 动态头像框 URL
