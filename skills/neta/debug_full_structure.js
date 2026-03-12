@@ -13,23 +13,22 @@ const client = axios.create({
 });
 
 async function main() {
-  const collectionUuid = '587bb66a-f1b9-4c4a-abb4-74613fd4d8c4';
+  const hashtagName = '捏捏开荒团';
   
-  console.log('测试 /v1/home/feed/interactive API...\n');
+  const feedRes = await client.get('/v1/home/feed/mainlist', {
+    params: {
+      theme: hashtagName,
+      page_index: 0,
+      page_size: 5
+    }
+  });
   
-  try {
-    const res = await client.get('/v1/home/feed/interactive', {
-      params: {
-        collection_uuid: collectionUuid,
-        page_index: 0,
-        page_size: 1
-      }
-    });
-    
-    console.log('✅ Success!\n');
-    console.log(JSON.stringify(res.data, null, 2));
-  } catch (error) {
-    console.log('❌ Error:', error.response?.data || error.message);
+  const modules = feedRes.data.module_list || [];
+  
+  console.log('=== 第一条 module 的完整 json_data ===\n');
+  const firstModule = modules.find(m => m.template_id === 'NORMAL');
+  if (firstModule) {
+    console.log(JSON.stringify(firstModule.json_data, null, 2));
   }
 }
 

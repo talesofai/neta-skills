@@ -24,17 +24,14 @@ async function testEndpoint(method, endpoint, params = {}) {
 async function main() {
   const hashtagName = '捏捏开荒团';
   
-  console.log('=== 测试各种 hashtag API 端点 ===\n');
+  console.log('=== 测试 Story 相关 API ===\n');
   
   const endpoints = [
-    ['GET', '/v1/hashtag/info', { hashtag_name: hashtagName }],
-    ['GET', '/v1/hashtag/characters', { hashtag_name: hashtagName }],
-    ['GET', '/v1/hashtag/collections', { hashtag_name: hashtagName }],
-    ['GET', '/v1/hashtag/stories', { hashtag_name: hashtagName }],
-    ['GET', '/v1/hashtag/selected-stories', { hashtag_name: hashtagName }],
-    ['GET', '/v1/hashtag/selected-collections', { hashtag_name: hashtagName }],
-    ['GET', '/v2/hashtag/info', { hashtag_name: hashtagName }],
-    ['GET', '/v2/hashtag/collections', { hashtag_name: hashtagName }],
+    ['GET', '/v1/hashtag/stories', { hashtag_name: hashtagName, page_index: 0, page_size: 20 }],
+    ['GET', '/v1/hashtag/selected-stories', { hashtag_name: hashtagName, page_index: 0, page_size: 20 }],
+    ['GET', '/v2/hashtag/stories', { hashtag_name: hashtagName, page_index: 0, page_size: 20 }],
+    ['GET', '/v1/space/story/feed', { hashtag_name: hashtagName, page_index: 0, page_size: 20 }],
+    ['GET', '/v1/home/feed/mainlist', { theme: hashtagName, page_index: 0, page_size: 20 }],
   ];
   
   for (const [method, endpoint, params] of endpoints) {
@@ -42,11 +39,14 @@ async function main() {
     const result = await testEndpoint(method, endpoint, params);
     if (result.success) {
       console.log(`  ✅ Success`);
-      if (result.data.total !== undefined) console.log(`     total: ${result.data.total}`);
-      if (result.data.hashtag?.name) console.log(`     name: ${result.data.hashtag.name}`);
-      if (Array.isArray(result.data.list)) console.log(`     list length: ${result.data.list.length}`);
+      const dataStr = JSON.stringify(result.data);
+      if (dataStr.length < 800) {
+        console.log(`     ${dataStr}`);
+      } else {
+        console.log(`     ${dataStr.slice(0, 800)}...`);
+      }
     } else {
-      console.log(`  ❌ ${result.error?.detail || result.error}`);
+      console.log(`  ❌ ${result.error?.detail || JSON.stringify(result.error).slice(0, 200)}`);
     }
     console.log('');
   }

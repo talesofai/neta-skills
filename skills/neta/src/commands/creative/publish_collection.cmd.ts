@@ -37,8 +37,12 @@ export const publishCollection = createCommand(
     { name, description, status, hashtags, artifacts, remix_instruct },
     { apis },
   ) => {
+    // 清理 hashtag 格式：移除 # 前缀和首尾空格
+    // API 期望纯文本标签（如 "西西の🦞"），不需要 # 符号
+    const cleanTag = (tag: string) => tag.trim().replace(/^#+/, "");
+    
     const tags = await Promise.all(
-      hashtags?.split(",")?.map((tag) => apis.hashtag.createHashtag(tag)) ?? [],
+      hashtags?.split(",")?.map((tag) => apis.hashtag.createHashtag(cleanTag(tag))) ?? [],
     );
 
     const tagDetails = await Promise.all(
