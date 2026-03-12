@@ -33,10 +33,55 @@ export const createCollectionApis = (client) => {
         })
             .then((res) => res.data);
     };
+    const likeCollection = async (storyId, options) => {
+        const { is_cancel } = options ?? {};
+        const response = await client.request({
+            method: "PUT",
+            url: "/v1/story/story-like",
+            data: {
+                storyId,
+                is_cancel: is_cancel ?? false,
+            },
+        });
+        return response.status === 200 || response.status === 204;
+    };
+    const createComment = async (params) => {
+        const response = await client.request({
+            method: "POST",
+            url: "/v1/comment/comment",
+            data: {
+                content: params.content,
+                parent_uuid: params.parent_uuid,
+                parent_type: params.parent_type,
+                at_users: params.at_users ?? [],
+            },
+        });
+        return {
+            success: response.status === 200 || response.status === 201,
+            comment: response.data,
+        };
+    };
+    const favorCollection = async (storyId, options) => {
+        const { is_cancel } = options ?? {};
+        const response = await client.request({
+            method: "PUT",
+            url: "/v1/story/story-favor",
+            data: {
+                storyId,
+                is_cancel: is_cancel ?? false,
+            },
+        });
+        return {
+            success: response.status === 200 || response.status === 204,
+        };
+    };
     return {
         createCollection,
         saveCollection,
         publishCollection,
         collectionDetails,
+        likeCollection,
+        createComment,
+        favorCollection,
     };
 };

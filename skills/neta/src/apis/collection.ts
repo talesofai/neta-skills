@@ -11,6 +11,25 @@ export type CollectionStatus =
   | "DELETED"
   | "PRIVATE";
 
+export interface CommentDetail {
+  uuid: string;
+  content: string;
+  at_users: string[];
+  img_url: string | null;
+  artifact_uuid: string | null;
+  parent_type: string;
+  level: number;
+  status: string;
+  user_uuid: string;
+  user_nick_name: string;
+  user_avatar_url: string;
+}
+
+export interface CreateCommentResponse {
+  success: boolean;
+  comment?: CommentDetail;
+}
+
 type CollectionBasic = {
   /** 作品 uuid */
   uuid: string;
@@ -488,10 +507,72 @@ export const createCollectionApis = (client: AxiosInstance) => {
       .then((res) => res.data);
   };
 
+  const likeCollection = async (
+    storyId: string,
+    options?: { is_cancel?: boolean },
+  ) => {
+    const { is_cancel } = options ?? {};
+    const response = await client.request({
+      method: "PUT",
+      url: "/v1/story/story-like",
+      data: {
+        storyId,
+        is_cancel: is_cancel ?? false,
+      },
+    });
+
+    return response.status === 200 || response.status === 204;
+  };
+
+  const createComment = async (params: {
+    content: string;
+    parent_uuid: string;
+    parent_type: "collection" | "character" | "elementum";
+    at_users?: string[];
+  }): Promise<CreateCommentResponse> => {
+    const response = await client.request({
+      method: "POST",
+      url: "/v1/comment/comment",
+      data: {
+        content: params.content,
+        parent_uuid: params.parent_uuid,
+        parent_type: params.parent_type,
+        at_users: params.at_users ?? [],
+      },
+    });
+
+    return {
+      success: response.status === 200 || response.status === 201,
+      comment: response.data as CommentDetail | undefined,
+    };
+  };
+
+  const favorCollection = async (
+    storyId: string,
+    options?: { is_cancel?: boolean },
+  ): Promise<{ success: boolean }> => {
+    const { is_cancel } = options ?? {};
+    const response = await client.request({
+      method: "PUT",
+      url: "/v1/story/story-favor",
+      data: {
+        storyId,
+        is_cancel: is_cancel ?? false,
+      },
+    });
+
+    return {
+      success: response.status === 200 || response.status === 204,
+    };
+  };
+
   return {
     createCollection,
     saveCollection,
     publishCollection,
     collectionDetails,
+    likeCollection,
+    createComment,
+    favorCollection,
   };
 };

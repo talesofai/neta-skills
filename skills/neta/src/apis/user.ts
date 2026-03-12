@@ -187,11 +187,81 @@ export interface UserInfo {
   privileges: UserPrivilege[];
 }
 
+export interface SubscribeUserResponse {
+  success: boolean;
+  subscribe_status?: UserSubscribeStatus | null;
+}
+
+export interface UserListItem {
+  uuid: string;
+  name: string;
+  avatar_url: string;
+  total_fans: number | null;
+  total_collections: number | null;
+  subscribe_status: UserSubscribeStatus | null;
+}
+
+export interface UserListResponse {
+  total: number;
+  page_index: number;
+  page_size: number;
+  list: UserListItem[];
+  has_next: boolean | null;
+  has_review_permission: boolean | null;
+}
+
 export const createUserApis = (client: AxiosInstance) => {
   return {
     me: async () => {
       const res = await client.get<UserInfo>("/v1/user/");
       return res.data ?? null;
+    },
+    subscribeUser: async (params: {
+      user_uuid: string;
+      is_cancel?: boolean;
+    }): Promise<SubscribeUserResponse> => {
+      const response = await client.request({
+        method: "PUT",
+        url: "/v1/user/user-subscribe",
+        data: {
+          user_uuid: params.user_uuid,
+          is_cancel: params.is_cancel ?? false,
+        },
+      });
+
+      return {
+        success: response.status === 200 || response.status === 204,
+        subscribe_status: (response.data as Partial<UserInfo>)
+          ?.subscribe_status,
+      };
+    },
+    getSubscribeList: async (params?: {
+      page_index?: number;
+      page_size?: number;
+    }): Promise<UserListResponse> => {
+      const response = await client.request({
+        method: "GET",
+        url: "/v1/user/subscribe-list",
+        params: {
+          page_index: params?.page_index ?? 0,
+          page_size: params?.page_size ?? 20,
+        },
+      });
+      return response.data as UserListResponse;
+    },
+    getFanList: async (params?: {
+      page_index?: number;
+      page_size?: number;
+    }): Promise<UserListResponse> => {
+      const response = await client.request({
+        method: "GET",
+        url: "/v1/user/fan-list",
+        params: {
+          page_index: params?.page_index ?? 0,
+          page_size: params?.page_size ?? 20,
+        },
+      });
+      return response.data as UserListResponse;
     },
   };
 };

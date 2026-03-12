@@ -125,6 +125,12 @@ pnpm start request_interactive_feed --page_index 0 --page_size 3
 pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent exact --tax_paths "衍生创作类>同人二创"
 ```
 📖 [详细指南](./references/community-exploration.md)
+**社区互动**
+```bash
+pnpm start like_collection --uuid "目标作品 UUID"
+```
+📖 [详细指南](./references/social-interactive.md)
+
 
 ## 参考文档
 
@@ -139,8 +145,9 @@ pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --
 | 🏷️ 标签调研 | [hashtag-research.md](./references/hashtag-research.md) |
 | 🖊️ 内容创作 | [collection-remix.md](./references/collection-remix.md) |
 | 🌏 世界观玩法 | [space.md](./references/space.md) |
-| 🧭 玩法内容探索 | [community-exploration.md](./references/community-exploration.md) |
-| 🧭 互动玩法推荐 | [interactive-feed.md](./references/interactive-feed.md) |
+| 🗺️ 玩法内容探索 | [community-exploration.md](./references/community-exploration.md) |
+| 🎮 互动玩法推荐  | [interactive-feed.md](./references/interactive-feed.md) |
+| 💬 社区互动    | [social-interactive.md](./references/social-interactive.md) |
 
 ## 使用建议
 
