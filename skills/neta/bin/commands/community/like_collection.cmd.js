@@ -11,12 +11,11 @@ export const likeCollectionCmd = createCommand({
     title: meta.title,
     description: meta.description,
     inputSchema: z.object({
-        uuid: z.string().describe("作品 UUID"),
+        uuid: z.string(),
         is_cancel: z
             .boolean()
             .optional()
             .default(false)
-            .describe("是否取消点赞，true 为取消点赞，false 为点赞"),
     }),
     outputSchema: z.object({
         success: z.boolean(),
@@ -24,14 +23,13 @@ export const likeCollectionCmd = createCommand({
     }),
 }, async ({ uuid, is_cancel }, { apis, log }) => {
     log.debug("like_collection: uuid: %s, is_cancel: %s", uuid, is_cancel ? "true" : "false");
-    const action = is_cancel ? "取消点赞" : "点赞";
-    log.info(`like_collection: ${action}作品：%s`, uuid);
+    const action = is_cancel ? "unliked" : "liked";
     const success = await apis.collection.likeCollection(uuid, { is_cancel });
     if (!success) {
-        throw new Error(`${action}失败`);
+        throw new Error(`${action} fail`);
     }
     return {
         success: true,
-        message: `${action}成功`,
+        message: `${action} success`,
     };
 });

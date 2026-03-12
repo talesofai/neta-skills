@@ -16,8 +16,7 @@ export const getFanListCmd = createCommand({
             .int()
             .min(0)
             .optional()
-            .default(0)
-            .describe("页码，从 0 开始"),
+            .default(0),
         page_size: z
             .number()
             .int()
@@ -25,7 +24,6 @@ export const getFanListCmd = createCommand({
             .max(50)
             .optional()
             .default(20)
-            .describe("每页数量，最大 50"),
     }),
     outputSchema: z.object({
         total: z.number(),
