@@ -43,7 +43,7 @@ npx skills add talesofai/neta-skills/skills/neta
 
 #### Available Commands
 
-The skill includes **18 commands** for various tasks:
+The skill includes **26 commands** for various tasks:
 
 | Category | Command | Description |
 |----------|---------|-------------|
@@ -51,9 +51,11 @@ The skill includes **18 commands** for various tasks:
 | | `make_video` | Generate videos from images and prompts |
 | | `make_song` | Compose songs with custom prompts and lyrics |
 | | `remove_background` | Remove the background from an image |
-| **Characters** | `search_character_or_elementum` | Search for characters and style elements |
-| | `request_character_or_elementum` | Fetch character or elementum details by name or UUID |
-| **Community** | `get_hashtag_info` | Get details and metrics for a specific hashtag |
+| | `edit_collection` | Edit an existing collection (name, description, tags, status, etc.) |
+| | `publish_collection` | Publish or update a collection |
+| | `search_character_or_elementum` | Search reusable TCP building blocks (characters / elements / flows) |
+| **Characters** | `request_character_or_elementum` | Fetch character or elementum details by name or UUID |
+| **Community** | `get_hashtag_info` | Get details and lore for a specific hashtag |
 | | `get_hashtag_characters` | Get a list of characters under a hashtag |
 | | `get_hashtag_collections` | Get curated collections under a hashtag |
 | | `read_collection` | Read details for a specific collection (玩法) |
@@ -65,6 +67,12 @@ The skill includes **18 commands** for various tasks:
 | | `suggest_categories` | Get navigation suggestions for taxonomy categories |
 | | `validate_tax_path` | Validate that a taxonomy path is valid |
 | | `suggest_content` | Discover content via recommend, search, or exact filter modes |
+| | `get_fan_list` | Get the list of users who follow the current user |
+| | `get_subscribe_list` | Get the list of creators the current user follows |
+| | `favor_collection` | Favorite or unfavorite a collection |
+| | `like_collection` | Like or unlike a collection |
+| | `subscribe_user` | Follow or unfollow a creator |
+| | `create_comment` | Create a comment on a collection |
 
 ---
 
@@ -144,7 +152,7 @@ Both the AI agent skills and the CLI require the following environment configura
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `NETA_TOKEN` | ✅ | - | Your Neta Art API access token. |
-| `NETA_BASE_URL` | ❌ | `https://api.talesofai.cn` | Base URL for the Neta API. |
+| `NETA_API_BASE_URL` | ❌ | `https://api.talesofai.cn` | Base URL for the Neta API. |
 
 ---
 

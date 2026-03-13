@@ -45,7 +45,7 @@ npx skills add talesofai/neta-skills/skills/neta
 
 #### 可用指令总览
 
-当前技能共包含 **18 个命令**，覆盖创作、角色与社区探索等场景：
+当前技能共包含 **26 个命令**，覆盖创作、角色与社区探索等场景：
 
 | 分类 | 命令 | 说明 |
 |------|------|------|
@@ -53,8 +53,10 @@ npx skills add talesofai/neta-skills/skills/neta
 | | `make_video` | 基于图片与动作描述生成视频 |
 | | `make_song` | 基于风格与歌词生成歌曲 |
 | | `remove_background` | 移除图片背景 |
-| **角色 Characters** | `search_character_or_elementum` | 搜索角色与风格元素 |
-| | `request_character_or_elementum` | 通过名称或 UUID 获取角色 / 元素详情 |
+| | `edit_collection` | 编辑已有玩法合集（名称、描述、标签、状态等） |
+| | `publish_collection` | 发布或更新玩法合集内容 |
+| | `search_character_or_elementum` | 搜索可复用的 TCP（角色 / 元素 / 玩法模块） |
+| **角色 Characters** | `request_character_or_elementum` | 通过名称或 UUID 获取角色 / 元素详情 |
 | **社区 Community** | `get_hashtag_info` | 查询标签基础信息与 worldbuilding lore |
 | | `get_hashtag_characters` | 获取标签下的角色列表 |
 | | `get_hashtag_collections` | 获取标签下的玩法合集 |
@@ -67,6 +69,12 @@ npx skills add talesofai/neta-skills/skills/neta
 | | `suggest_categories` | 按层级获取玩法分类导航 |
 | | `validate_tax_path` | 验证分类路径是否有效 |
 | | `suggest_content` | 推荐 / 搜索 / 精确筛选三模式内容流 |
+| | `get_fan_list` | 获取当前用户的粉丝列表 |
+| | `get_subscribe_list` | 获取当前用户关注的创作者列表 |
+| | `favor_collection` | 收藏 / 取消收藏玩法合集 |
+| | `like_collection` | 点赞 / 取消点赞玩法合集 |
+| | `subscribe_user` | 关注 / 取消关注创作者 |
+| | `create_comment` | 对玩法合集创建评论 |
 
 更详细的中文 CLI 示例与最佳实践，请参考 `skills/neta/SKILL.md` 以及 `skills/neta/references/` 目录下的文档。
 
@@ -151,7 +159,7 @@ neta-skills/
 | 变量名 | 必需 | 默认值 | 说明 |
 |--------|------|--------|------|
 | `NETA_TOKEN` | ✅ | - | Neta Art API 访问令牌 |
-| `NETA_BASE_URL` | ❌ | `https://api.talesofai.cn` | Neta API 网关地址 |
+| `NETA_API_BASE_URL` | ❌ | `https://api.talesofai.cn` | Neta API 网关地址 |
 
 ---
 
