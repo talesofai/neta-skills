@@ -1,12 +1,12 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
 const meta = parseMeta(
-  z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+  Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
   }),
   import.meta,
 );
@@ -16,23 +16,14 @@ export const subscribeUserCmd = createCommand(
     name: meta.name,
     title: meta.title,
     description: meta.description,
-    inputSchema: z.object({
-      user_uuid: z.string(),
-      is_cancel: z.boolean().optional().default(false),
-    }),
-    outputSchema: z.object({
-      success: z.boolean(),
-      subscribe_status: z.string().nullable().optional(),
-      message: z.string(),
+    inputSchema: Type.Object({
+      user_uuid: Type.String(),
+      is_cancel: Type.Boolean({
+        default: false,
+      }),
     }),
   },
-  async ({ user_uuid, is_cancel }, { apis, log }) => {
-    log.debug(
-      "subscribe_user: user_uuid: %s, is_cancel: %s",
-      user_uuid,
-      is_cancel ? "true" : "false",
-    );
-
+  async ({ user_uuid, is_cancel }, { apis }) => {
     const action = is_cancel ? "unsubscribe" : "subscribe";
 
     const result = await apis.user.subscribeUser({

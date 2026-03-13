@@ -1,19 +1,20 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
-import {
-  suggestKeywordsV1Parameters,
-  suggestKeywordsV1ResultSchema,
-} from "../schema.ts";
 
 const meta = parseMeta(
-  z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+  Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
   }),
   import.meta,
 );
+
+const suggestKeywordsV1Parameters = Type.Object({
+  prefix: Type.String({ minLength: 1 }),
+  size: Type.Integer({ minimum: 1, maximum: 50, default: 10 }),
+});
 
 export const suggestKeywords = createCommand(
   {
@@ -21,11 +22,8 @@ export const suggestKeywords = createCommand(
     title: meta.title,
     description: meta.description,
     inputSchema: suggestKeywordsV1Parameters,
-    outputSchema: suggestKeywordsV1ResultSchema,
   },
-  async ({ prefix, size }, { log, apis }) => {
-    log.debug("suggest_keywords: prefix: %s, size: %d", prefix, size);
-
+  async ({ prefix, size }, { apis }) => {
     const result = await apis.recsys.suggestKeywords({
       prefix,
       size,

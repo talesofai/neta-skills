@@ -1,12 +1,12 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
 const meta = parseMeta(
-  z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+  Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
   }),
   import.meta,
 );
@@ -16,27 +16,14 @@ export const createCommentCmd = createCommand(
     name: meta.name,
     title: meta.title,
     description: meta.description,
-    inputSchema: z.object({
-      content: z.string().min(1).max(500),
-      parent_uuid: z.string(),
-      parent_type: z.enum(["collection"]),
-      at_users: z.string().optional().default(""),
-    }),
-    outputSchema: z.object({
-      success: z.boolean(),
-      comment_uuid: z.string().optional(),
-      message: z.string(),
+    inputSchema: Type.Object({
+      content: Type.String({ minLength: 1, maxLength: 500 }),
+      parent_uuid: Type.String(),
+      parent_type: Type.Union([Type.Literal("collection")]),
+      at_users: Type.String({ default: "" }),
     }),
   },
-  async ({ content, parent_uuid, parent_type, at_users }, { apis, log }) => {
-    log.debug(
-      "create_comment: content: %s, parent_uuid: %s, parent_type: %s, at_users: %s",
-      content,
-      parent_uuid,
-      parent_type,
-      at_users,
-    );
-
+  async ({ content, parent_uuid, parent_type, at_users }, { apis }) => {
     const atUsersArray = at_users
       ? at_users
           .split(",")

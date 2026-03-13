@@ -1,5 +1,34 @@
-import type { ZodObject, z } from "zod";
+import {
+  type Static,
+  type TBoolean,
+  type TInteger,
+  type TLiteral,
+  type TNumber,
+  type TObject,
+  type TOptional,
+  type TSchema,
+  type TString,
+  type TUnion,
+  Type,
+} from "@sinclair/typebox";
 import type { Apis } from "../apis/index.ts";
+
+export type SupportedSchema = TObject<{
+  [key: string]:
+    | TNumber
+    | TInteger
+    | TString
+    | TBoolean
+    | TUnion<TLiteral[]>
+    | TLiteral
+    | TOptional<TInteger | TNumber | TString | TBoolean | TUnion<TLiteral[]>>;
+}>;
+
+export const Nullable = <T extends TSchema>(schema: T) =>
+  Type.Unsafe<Static<T> | null>({
+    ...schema,
+    nullable: true,
+  });
 
 export interface UserData {
   id: number;
@@ -10,64 +39,26 @@ export interface CommandExtra {
   user: UserData | null;
   apis: Apis;
   log: Pick<Console, "error" | "warn" | "info" | "debug">;
-  sendNotification: (notification: {
-    method: "notifications/progress";
-    params: {
-      progressToken: string | number;
-      progress: number;
-      total: number;
-      message: string;
-    };
-  }) => Promise<void>;
-  _meta?: {
-    progressToken?: string;
-  } & {
-    inherit?: {
-      collection_uuid?: string;
-      picture_uuid?: string;
-    };
-    entrance_uuid?: string;
-    toolcall_uuid?: string;
-  };
 }
 
-type SchemaOutput<T extends ZodObject | undefined> = T extends undefined
-  ? never
-  : z.infer<T>;
+export type CommandExecute<Input extends SupportedSchema> = (
+  args: Static<Input>,
+  extra: CommandExtra,
+) => Promise<unknown>;
 
-export type CommandExecute<
-  Input extends ZodObject | undefined,
-  Output extends ZodObject | undefined,
-> = Input extends undefined
-  ? (
-      extra: CommandExtra,
-    ) => Promise<SchemaOutput<Output>> | SchemaOutput<Output>
-  : (
-      args: SchemaOutput<Input>,
-      extra: CommandExtra,
-    ) => Promise<SchemaOutput<Output>> | SchemaOutput<Output>;
-
-export interface Command<
-  Output extends ZodObject | undefined,
-  Input extends ZodObject | undefined = undefined,
-> {
+export interface Command<Input extends SupportedSchema> {
   name: string;
   title?: string;
   description?: string;
   inputSchema?: Input;
-  outputSchema?: Output;
-  validate?: (extra: CommandExtra) => Promise<boolean> | boolean;
-  execute: CommandExecute<Input, Output>;
+  execute: CommandExecute<Input>;
   _IS_COMMAND__: true;
 }
 
-export const createCommand = <
-  Output extends ZodObject | undefined,
-  Input extends ZodObject | undefined = undefined,
->(
-  command: Omit<Command<Output, Input>, "_IS_COMMAND__" | "execute">,
-  execute: CommandExecute<Input, Output>,
-): Command<Output, Input> => {
+export const createCommand = <Input extends SupportedSchema>(
+  command: Omit<Command<Input>, "execute" | "_IS_COMMAND__">,
+  execute: CommandExecute<Input>,
+): Command<Input> => {
   return {
     ...command,
     execute,
@@ -77,7 +68,7 @@ export const createCommand = <
 
 export const isCommand = (
   value: unknown,
-): value is Command<ZodObject | undefined, ZodObject | undefined> => {
+): value is Command<SupportedSchema> => {
   return (
     typeof value === "object" && value !== null && "_IS_COMMAND__" in value
   );

@@ -35,13 +35,13 @@
   },
   "dependencies": {
     "@commander-js/extra-typings": "^14.0.0",
+    "@sinclair/typebox": "^0.34.48",
     "axios": "^1.7.9",
     "commander": "^14.0.0",
     "dotenv": "^16.4.7",
     "dotenv-flow": "^4.1.0",
     "qs": "^6.15.0",
-    "yaml": "^2.8.2",
-    "zod": "^4.3.6"
+    "yaml": "^2.8.2"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

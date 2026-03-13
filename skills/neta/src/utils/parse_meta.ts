@@ -1,10 +1,11 @@
 import { readFileSync } from "node:fs";
+import type { TSchema } from "@sinclair/typebox";
+import { Value } from "@sinclair/typebox/value";
 import yaml from "yaml";
-import type { ZodObject } from "zod";
 
 const locale = "zh_cn";
 
-export const parseMeta = <T extends ZodObject>(
+export const parseMeta = <T extends TSchema>(
   schema: T,
   importMeta: ImportMeta,
 ) => {
@@ -12,5 +13,6 @@ export const parseMeta = <T extends ZodObject>(
     importMeta.filename.replace(/\.(ts|js)$/, `.${locale}.yml`),
     "utf-8",
   );
-  return schema.parse(yaml.parse(file));
+  const data = yaml.parse(file);
+  return Value.Decode(schema, data);
 };

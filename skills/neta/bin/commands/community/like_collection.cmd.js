@@ -1,25 +1,22 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.js";
 import { createCommand } from "../factory.js";
-const meta = parseMeta(z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+const meta = parseMeta(Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
 }), import.meta);
 export const likeCollectionCmd = createCommand({
     name: meta.name,
     title: meta.title,
     description: meta.description,
-    inputSchema: z.object({
-        uuid: z.string(),
-        is_cancel: z.boolean().optional().default(false),
+    inputSchema: Type.Object({
+        uuid: Type.String(),
+        is_cancel: Type.Boolean({
+            default: false,
+        }),
     }),
-    outputSchema: z.object({
-        success: z.boolean(),
-        message: z.string(),
-    }),
-}, async ({ uuid, is_cancel }, { apis, log }) => {
-    log.debug("like_collection: uuid: %s, is_cancel: %s", uuid, is_cancel ? "true" : "false");
+}, async ({ uuid, is_cancel }, { apis }) => {
     const action = is_cancel ? "unliked" : "liked";
     const success = await apis.collection.likeCollection(uuid, { is_cancel });
     if (!success) {

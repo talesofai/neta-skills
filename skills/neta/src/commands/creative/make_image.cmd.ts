@@ -1,22 +1,38 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { buildMakeImagePayload } from "../../apis/types.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { polling } from "../../utils/polling.ts";
 import { createCommand } from "../factory.ts";
-import {
-  makeImageV1Parameters,
-  type TaskResult,
-  taskResultSchema,
-} from "../schema.ts";
 
 const meta = parseMeta(
-  z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+  Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
+    parameters: Type.Object({
+      prompt: Type.String(),
+      aspect: Type.String(),
+    }),
   }),
   import.meta,
 );
+
+const makeImageV1Parameters = Type.Object({
+  prompt: Type.String({ description: meta.parameters.prompt }),
+  aspect: Type.Union(
+    [
+      Type.Literal("3:4"),
+      Type.Literal("16:9"),
+      Type.Literal("4:3"),
+      Type.Literal("9:16"),
+      Type.Literal("1:1"),
+    ],
+    {
+      default: "3:4",
+      description: meta.parameters.aspect,
+    },
+  ),
+});
 
 export const makeImage = createCommand(
   {
@@ -24,52 +40,27 @@ export const makeImage = createCommand(
     title: meta.title,
     description: meta.description,
     inputSchema: makeImageV1Parameters,
-    outputSchema: taskResultSchema,
   },
-  async ({ prompt, aspect }, { log, apis, _meta, sendNotification }) => {
+  async ({ prompt, aspect }, { log, apis }) => {
     const createTask = async () => {
       const vtokens = (await apis.prompt.parseVtokens(prompt)) ?? [];
 
-      const payload = buildMakeImagePayload(
-        vtokens ?? [],
-        {
-          make_image_aspect: aspect ?? "3:4",
-          context_model_series: "8_image_edit",
-          entrance_uuid: _meta?.entrance_uuid,
-          toolcall_uuid: _meta?.toolcall_uuid,
-        },
-        {
-          collection_uuid: _meta?.inherit?.collection_uuid,
-          picture_uuid: _meta?.inherit?.picture_uuid,
-        },
-      );
+      const payload = buildMakeImagePayload(vtokens ?? [], {
+        make_image_aspect: aspect ?? "3:4",
+        context_model_series: "8_image_edit",
+      });
 
-      log.info("make_image: payload: %o", payload);
       return await apis.artifact.makeImage(payload);
     };
 
     const task_uuid = await createTask();
-    log.info("make_image: task: %s", task_uuid);
+    log.debug("task: %s", task_uuid);
 
-    const startTime = Date.now();
-    const duration = 60 * 1000;
     const timeout = 60 * 1000 * 10;
     const res = await polling(
       () => apis.artifact.task(task_uuid),
       async (result) => {
-        await sendNotification({
-          method: "notifications/progress",
-          params: {
-            progressToken: _meta?.progressToken ?? task_uuid,
-            progress: Math.min(
-              Number(((Date.now() - startTime) / duration).toFixed(2)),
-              1,
-            ),
-            total: 1,
-            message: `${task_uuid} - ${result.task_status}`,
-          },
-        });
-        log.debug("make_image: polling: %o", result);
+        log.debug("polling: %o", result);
         return (
           result.task_status !== "PENDING" &&
           result.task_status !== "MODERATION"
@@ -80,19 +71,13 @@ export const makeImage = createCommand(
     );
 
     if (res.isTimeout) {
-      const structuredContent = {
+      return {
         task_uuid,
         task_status: "TIMEOUT",
         artifacts: [],
-      } satisfies TaskResult;
-
-      log.info("task: timeout: %o", structuredContent);
-      return structuredContent;
+      };
     }
 
-    const structuredContent = res.result;
-    log.info("make_image: result: %o", structuredContent);
-
-    return structuredContent;
+    return res.result;
   },
 );

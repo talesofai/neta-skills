@@ -5,10 +5,11 @@ import {
   type Command as CommanderCommand,
   Option,
 } from "@commander-js/extra-typings";
-import type { ZodObject } from "zod";
+import { type TLiteral, Type } from "@sinclair/typebox";
+import { Default, Value } from "@sinclair/typebox/value";
 import { createApis } from "../apis/index.ts";
 import { ApiResponseError } from "../utils/errors.ts";
-import { type Command, isCommand } from "./factory.ts";
+import { type Command, isCommand, type SupportedSchema } from "./factory.ts";
 
 export const loadCommands = async (domains: string[]) => {
   const cmdFiles = await Promise.all(
@@ -35,13 +36,7 @@ export const loadCommands = async (domains: string[]) => {
           const value = module[name];
           return isCommand(value);
         })
-        .map(
-          (name) =>
-            module[name] as Command<
-              ZodObject | undefined,
-              ZodObject | undefined
-            >,
-        );
+        .map((name) => module[name] as Command<SupportedSchema>);
     }),
   ).then((commands) => commands.flat());
 };
@@ -60,7 +55,7 @@ export const buildCommands = async (
     // biome-ignore lint/complexity/noBannedTypes: ignore type error
     {}
   >,
-  commands: Command<ZodObject | undefined, ZodObject | undefined>[],
+  commands: Command<SupportedSchema>[],
 ) => {
   const { api_base_url, token } = cli.opts();
 
@@ -84,44 +79,21 @@ export const buildCommands = async (
     return null;
   });
 
-  const filteredCommands: Command<
-    ZodObject | undefined,
-    ZodObject | undefined
-  >[] = [];
-
-  for (const cmd of commands) {
-    if (!cmd.validate) {
-      filteredCommands.push(cmd);
-      continue;
-    }
-
-    const validated = await cmd.validate({
-      apis,
-      user,
-      log: logger,
-      sendNotification: () => Promise.resolve(),
-    });
-
-    if (validated) {
-      filteredCommands.push(cmd);
-    }
-  }
-
-  return filteredCommands.map((cmd) => {
+  return commands.map((cmd) => {
     const command = cli.command(cmd.name);
     command.description(cmd.title || cmd.description || "");
-    const inputSchema = cmd.inputSchema?.toJSONSchema();
+    const inputSchema = cmd.inputSchema;
 
-    if (inputSchema?.properties) {
-      Object.entries(inputSchema.properties).forEach(([key, property]) => {
+    if (inputSchema && "properties" in inputSchema) {
+      const properties = inputSchema.properties;
+
+      if (!properties) return command;
+
+      Object.entries(properties).forEach(([key, property]) => {
         if (typeof property !== "object") return;
-        if (property.type === "object")
-          throw new Error("Object type options is not supported");
-        if (property.type === "array")
-          throw new Error("Array type options is not supported");
 
         const option = new Option(
-          `--${key} <${property.type}>`,
+          `--${key} <${property["type"]}>`,
           property.description,
         );
 
@@ -129,9 +101,8 @@ export const buildCommands = async (
           option.default(property.default);
         }
 
-        if (property.enum) {
-          // @ts-expect-error -- ignore type error
-          option.choices(property.enum);
+        if (property["anyOf"]) {
+          option.choices(property["anyOf"].map((item: TLiteral) => item.const));
         }
 
         if (
@@ -162,97 +133,57 @@ export const buildCommands = async (
     }
 
     command.action(async (args) => {
-      if (cmd.inputSchema) {
-        // @ts-expect-error -- ignore type error
-        const result = await cmd
-          // @ts-expect-error -- ignore type error
-          .execute(cmd.inputSchema.parse(args), {
-            apis,
-            user,
-            log: IS_DEV
-              ? logger
-              : {
-                  error: () => {},
-                  warn: () => {},
-                  info: () => {},
-                  debug: () => {},
-                },
-            _meta: {},
-            sendNotification: () => Promise.resolve(),
-          })
-          .catch((e: unknown) => {
-            if (e instanceof ApiResponseError) {
-              logger.error({
-                error: {
-                  type: e.name,
-                  code: e.code,
-                  message: e.message,
-                },
-              });
-              return null;
-            }
+      const type = cmd.inputSchema ?? Type.Object({});
+      const input = Value.Decode(type, Default(type, args));
 
-            if (e instanceof Error) {
-              logger.error({
-                error: {
-                  type: e.name,
-                  message: e.message,
-                },
-              });
-              return null;
-            }
+      if (IS_DEV) {
+        logger.debug("command: %s, params: %o", cmd.name, input);
+      }
 
-            logger.error(e);
+      const result = await cmd
+        .execute(input, {
+          apis,
+          user,
+          log: IS_DEV
+            ? logger
+            : {
+                error: () => {},
+                warn: () => {},
+                info: () => {},
+                debug: () => {},
+              },
+        })
+        .catch((e: unknown) => {
+          if (e instanceof ApiResponseError) {
+            logger.error({
+              error: {
+                type: e.name,
+                code: e.code,
+                message: e.message,
+              },
+            });
             return null;
-          });
+          }
 
-        if (!result) return;
-        logger.info(JSON.stringify(result));
+          if (e instanceof Error) {
+            logger.error({
+              error: {
+                type: e.name,
+                message: e.message,
+              },
+            });
+            return null;
+          }
+
+          logger.error(e);
+          return null;
+        });
+
+      if (!result) return;
+
+      if (IS_DEV) {
+        logger.debug(result);
       } else {
-        // @ts-expect-error -- ignore type error
-        const result = await cmd
-          // @ts-expect-error -- ignore type error
-          .execute({
-            apis,
-            user,
-            log: IS_DEV
-              ? logger
-              : {
-                  error: () => {},
-                  warn: () => {},
-                  info: () => {},
-                  debug: () => {},
-                },
-            _meta: {},
-            sendNotification: () => Promise.resolve(),
-          })
-          .catch((e: unknown) => {
-            if (e instanceof ApiResponseError) {
-              logger.error({
-                error: {
-                  type: e.name,
-                  code: e.code,
-                  message: e.message,
-                },
-              });
-              return null;
-            }
-
-            if (e instanceof Error) {
-              logger.error({
-                error: {
-                  type: e.name,
-                  message: e.message,
-                },
-              });
-              return null;
-            }
-
-            logger.error(e);
-            return null;
-          });
-
-        if (!result) return;
         logger.info(JSON.stringify(result));
       }
     });

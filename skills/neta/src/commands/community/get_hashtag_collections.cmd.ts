@@ -1,19 +1,24 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
-import {
-  fetchSelectedCollectionsByActivityV1ResultSchema,
-  fetchSelectedCollectionsByHashtagV1Parameters,
-} from "../schema.ts";
 
 const meta = parseMeta(
-  z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+  Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
   }),
   import.meta,
 );
+
+const fetchSelectedCollectionsByHashtagV1Parameters = Type.Object({
+  hashtag: Type.String(),
+  page_index: Type.Integer({ minimum: 0, default: 0 }),
+  page_size: Type.Integer({ minimum: 1, maximum: 100, default: 20 }),
+  sort_by: Type.Union([Type.Literal("highlight_mark_time")], {
+    default: "highlight_mark_time",
+  }),
+});
 
 export const getHashtagCollections = createCommand(
   {
@@ -21,7 +26,6 @@ export const getHashtagCollections = createCommand(
     title: meta.title,
     description: meta.description,
     inputSchema: fetchSelectedCollectionsByHashtagV1Parameters,
-    outputSchema: fetchSelectedCollectionsByActivityV1ResultSchema,
   },
   async (
     {
@@ -30,16 +34,8 @@ export const getHashtagCollections = createCommand(
       page_size = 20,
       sort_by = "highlight_mark_time",
     },
-    { log, apis },
+    { apis },
   ) => {
-    log.debug(
-      "get_hashtag_collections: hashtag: %s, page_index: %d, page_size: %d, sort_by: %s",
-      hashtag,
-      page_index,
-      page_size,
-      sort_by,
-    );
-
     // 通过hashtag获取对应的activity_uuid
     const hashtagResult = await apis.hashtag.fetchHashtag(hashtag);
     const activityDetail = hashtagResult?.activity_detail;
@@ -48,12 +44,6 @@ export const getHashtagCollections = createCommand(
     if (!activity_uuid) {
       throw new Error(`Hashtag "${hashtag}" 未关联任何活动空间`);
     }
-
-    log.debug(
-      "get_hashtag_collections: Resolved hashtag %s to activity_uuid %s",
-      hashtag,
-      activity_uuid,
-    );
 
     const result = await apis.activity.fetchSelectedCollections(activity_uuid, {
       page_index,
