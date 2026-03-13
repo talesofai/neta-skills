@@ -1,13 +1,13 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { isVerseCTA } from "../../apis/collection.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
 const mete = parseMeta(
-  z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+  Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
   }),
   import.meta,
 );
@@ -17,8 +17,8 @@ export const readCollectionCmd = createCommand(
     name: mete.name,
     title: mete.title,
     description: mete.description,
-    inputSchema: z.object({
-      uuid: z.string(),
+    inputSchema: Type.Object({
+      uuid: Type.String(),
     }),
   },
   async ({ uuid }, { apis }) => {

@@ -1,21 +1,33 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { polling } from "../../utils/polling.ts";
 import { createCommand } from "../factory.ts";
-import {
-  makeSongV1Parameters,
-  type TaskResult,
-  taskResultSchema,
-} from "../schema.ts";
 
 const meta = parseMeta(
-  z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+  Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
+    parameters: Type.Object({
+      prompt: Type.String(),
+      lyrics: Type.String(),
+    }),
   }),
   import.meta,
 );
+
+const makeSongV1Parameters = Type.Object({
+  prompt: Type.String({
+    minLength: 10,
+    maxLength: 2000,
+    description: meta.parameters.prompt,
+  }),
+  lyrics: Type.String({
+    minLength: 10,
+    maxLength: 3500,
+    description: meta.parameters.lyrics,
+  }),
+});
 
 export const makeSong = createCommand(
   {
@@ -23,39 +35,22 @@ export const makeSong = createCommand(
     title: meta.title,
     description: meta.description,
     inputSchema: makeSongV1Parameters,
-    outputSchema: taskResultSchema,
   },
-  async ({ prompt, lyrics }, { apis, _meta, log, sendNotification }) => {
+  async ({ prompt, lyrics }, { apis, log }) => {
     const createTask = async () => {
       return apis.artifact.makeSong(prompt, lyrics, {
         entrance: "SONG,VERSE",
-        entrance_uuid: _meta?.entrance_uuid,
-        toolcall_uuid: _meta?.toolcall_uuid,
       });
     };
 
     const task_uuid = await createTask();
-    log.info("make_song: task: %s", task_uuid);
+    log.debug("task: %s", task_uuid);
 
-    const startTime = Date.now();
-    const duration = 60 * 1000;
     const timeout = 60 * 1000 * 5;
     const res = await polling(
       () => apis.artifact.task(task_uuid),
       async (result) => {
-        await sendNotification({
-          method: "notifications/progress",
-          params: {
-            progressToken: _meta?.progressToken ?? task_uuid,
-            progress: Math.min(
-              Number(((Date.now() - startTime) / duration).toFixed(2)),
-              1,
-            ),
-            total: 1,
-            message: `${task_uuid} - ${result.task_status}`,
-          },
-        });
-        log.debug("make_song: polling: %o", result);
+        log.debug("polling: %o", result);
         return (
           result.task_status !== "PENDING" &&
           result.task_status !== "MODERATION"
@@ -66,19 +61,13 @@ export const makeSong = createCommand(
     );
 
     if (res.isTimeout) {
-      const structuredContent = {
+      return {
         task_uuid,
         task_status: "TIMEOUT",
         artifacts: [],
-      } satisfies TaskResult;
-
-      log.info("make_song: timeout: %o", structuredContent);
-      return structuredContent;
+      };
     }
 
-    const structuredContent = res.result;
-    log.info("make_song: result: %o", structuredContent);
-
-    return structuredContent;
+    return res.result;
   },
 );

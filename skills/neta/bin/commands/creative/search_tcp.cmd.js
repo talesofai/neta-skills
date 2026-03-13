@@ -1,20 +1,30 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.js";
 import { createCommand } from "../factory.js";
-import { searchCharacterOrElementumV1Parameters, searchCharacterOrElementumV1ResultSchema, } from "../schema.js";
-const meta = parseMeta(z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+const meta = parseMeta(Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
 }), import.meta);
+const searchCharacterOrElementumV1Parameters = Type.Object({
+    keywords: Type.String(),
+    parent_type: Type.Union([
+        Type.Literal("character"),
+        Type.Literal("elementum"),
+        Type.Literal("both"),
+    ], { default: "both" }),
+    sort_scheme: Type.Union([Type.Literal("exact"), Type.Literal("best")], {
+        default: "best",
+    }),
+    page_index: Type.Integer({ minimum: 0, default: 0 }),
+    page_size: Type.Integer({ minimum: 1, maximum: 50, default: 10 }),
+});
 export const searchCharacterOrElementum = createCommand({
     name: meta.name,
     title: meta.title,
     description: meta.description,
     inputSchema: searchCharacterOrElementumV1Parameters,
-    outputSchema: searchCharacterOrElementumV1ResultSchema,
-}, async ({ keywords, parent_type, sort_scheme, page_index, page_size }, { log, apis }) => {
-    log.debug("search_tcp: keywords: %s, parent_type: %s, sort_scheme: %s, page_index: %d, page_size: %d", keywords, parent_type, sort_scheme, page_index, page_size);
+}, async ({ keywords, parent_type, sort_scheme, page_index, page_size }, { apis }) => {
     const result = await apis.tcp.searchTCPs({
         keywords,
         page_index,

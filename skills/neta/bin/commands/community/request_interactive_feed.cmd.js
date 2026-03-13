@@ -1,34 +1,34 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.js";
 import { createCommand } from "../factory.js";
-const meta = parseMeta(z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+const meta = parseMeta(Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
 }), import.meta);
-export const requestInteractiveFeedInputSchema = z.object({
-    page_index: z.number().int().min(0).optional().default(0),
-    page_size: z.number().int().min(1).max(40).optional().default(20),
-    biz_trace_id: z.string().optional(),
-    scene: z.string().optional(),
-    collection_uuid: z.string().optional(),
-    target_collection_uuid: z.string().optional(),
-    target_user_uuid: z.string().optional(),
+export const requestInteractiveFeedInputSchema = Type.Object({
+    page_index: Type.Integer({ minimum: 0, default: 0 }),
+    page_size: Type.Integer({ minimum: 1, maximum: 40, default: 20 }),
+    biz_trace_id: Type.Optional(Type.String()),
+    scene: Type.String({ default: "agent_intent" }),
+    collection_uuid: Type.Optional(Type.String()),
+    target_collection_uuid: Type.Optional(Type.String()),
+    target_user_uuid: Type.Optional(Type.String()),
 });
 // 复用 collection.ts 中的类型定义
-export const requestInteractiveFeedOutputSchema = z.object({
-    module_list_header: z.null(),
-    module_list: z.array(z.object({
-        data_id: z.string(),
-        module_id: z.string(),
-        template_id: z.string(),
-        json_data: z.record(z.string(), z.unknown()),
+export const requestInteractiveFeedOutputSchema = Type.Object({
+    module_list_header: Type.Null(),
+    module_list: Type.Array(Type.Object({
+        data_id: Type.String(),
+        module_id: Type.String(),
+        template_id: Type.String(),
+        json_data: Type.Record(Type.String(), Type.Unknown()),
     })),
-    page_data: z.object({
-        page_index: z.number().optional(),
-        page_size: z.number().optional(),
-        has_next_page: z.boolean().optional(),
-        biz_trace_id: z.string().optional(),
+    page_data: Type.Object({
+        page_index: Type.Optional(Type.Number()),
+        page_size: Type.Optional(Type.Number()),
+        has_next_page: Type.Optional(Type.Boolean()),
+        biz_trace_id: Type.Optional(Type.String()),
     }),
 });
 export const requestInteractiveFeed = createCommand({
@@ -36,9 +36,7 @@ export const requestInteractiveFeed = createCommand({
     title: meta.title,
     description: meta.description,
     inputSchema: requestInteractiveFeedInputSchema,
-    outputSchema: requestInteractiveFeedOutputSchema,
-}, async (params, { log, apis }) => {
-    log.debug("request_interactive_feed: params: %o", params);
+}, async (params, { apis }) => {
     const result = await apis.feeds.interactiveList({
         page_index: params.page_index,
         page_size: params.page_size,

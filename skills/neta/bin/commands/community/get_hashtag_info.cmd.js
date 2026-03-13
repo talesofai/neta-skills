@@ -1,20 +1,20 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.js";
 import { createCommand } from "../factory.js";
-import { fetchHashtagV1Parameters, fetchHashtagV1ResultSchema, } from "../schema.js";
-const meta = parseMeta(z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+const meta = parseMeta(Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
 }), import.meta);
+const fetchHashtagV1Parameters = Type.Object({
+    hashtag: Type.String(),
+});
 export const getHashtagInfo = createCommand({
     name: meta.name,
     title: meta.title,
     description: meta.description,
     inputSchema: fetchHashtagV1Parameters,
-    outputSchema: fetchHashtagV1ResultSchema,
-}, async ({ hashtag }, { log, apis }) => {
-    log.debug("get_hashtag_info: hashtag: %s", hashtag);
+}, async ({ hashtag }, { apis }) => {
     const result = await apis.hashtag.fetchHashtag(hashtag);
     // 转换API返回结果为工具输出格式
     const activityDetail = result["activity_detail"];
@@ -27,17 +27,16 @@ export const getHashtagInfo = createCommand({
             review_users: activityDetail.review_users?.map((user) => ({
                 uuid: user.uuid,
                 name: user.name,
-            })),
+            })) ?? null,
         }
-        : undefined;
-    const simplifiedHashtag = {
-        name: result.name,
-        lore: result.lore || [],
-        activity_detail: simplifiedActivityDetail,
-        hashtag_heat: result["hashtag_heat"],
-        subscribe_count: result["subscribe_count"],
-    };
+        : null;
     return {
-        hashtag: simplifiedHashtag,
+        hashtag: {
+            name: result.name,
+            lore: result.lore || [],
+            activity_detail: simplifiedActivityDetail,
+            hashtag_heat: result.hashtag_heat,
+            subscribe_count: result.subscribe_count,
+        },
     };
 });

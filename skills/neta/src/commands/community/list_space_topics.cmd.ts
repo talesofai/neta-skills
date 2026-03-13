@@ -1,14 +1,14 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
 const meta = parseMeta(
-  z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
-    parameters: z.object({
-      space_uuid: z.string(),
+  Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
+    parameters: Type.Object({
+      space_uuid: Type.String(),
     }),
   }),
   import.meta,
@@ -19,8 +19,8 @@ export const listSpaceTopics = createCommand(
     name: meta.name,
     title: meta.title,
     description: meta.description,
-    inputSchema: z.object({
-      space_uuid: z.string(),
+    inputSchema: Type.Object({
+      space_uuid: Type.String(),
     }),
   },
   async ({ space_uuid }, { apis }) => {

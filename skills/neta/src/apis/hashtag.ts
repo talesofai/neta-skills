@@ -23,6 +23,8 @@ export type HashtagInfo = {
   activity_detail: {
     uuid: string;
   } | null;
+  hashtag_heat: number | null;
+  subscribe_count: number | null;
   [key: string]: unknown;
 };
 

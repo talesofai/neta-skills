@@ -1,3 +1,8 @@
+import { Type, } from "@sinclair/typebox";
+export const Nullable = (schema) => Type.Unsafe({
+    ...schema,
+    nullable: true,
+});
 export const createCommand = (command, execute) => {
     return {
         ...command,

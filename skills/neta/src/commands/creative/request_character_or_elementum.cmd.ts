@@ -1,20 +1,34 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import type { CharacterAssign, ElementumAssign } from "../../apis/types.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
-import {
-  requestCharacterOrElementumV1Parameters,
-  requestCharacterOrElementumV1ResultSchema,
-} from "../schema.ts";
 
 const meta = parseMeta(
-  z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
+  Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
+    parameters: Type.Object({
+      name: Type.String(),
+      uuid: Type.String(),
+      parent_type: Type.String(),
+    }),
   }),
   import.meta,
 );
+
+const requestCharacterOrElementumV1Parameters = Type.Object({
+  name: Type.Optional(Type.String({ description: meta.parameters.name })),
+  uuid: Type.Optional(Type.String({ description: meta.parameters.uuid })),
+  parent_type: Type.Union(
+    [
+      Type.Literal("character"),
+      Type.Literal("elementum"),
+      Type.Literal("both"),
+    ],
+    { default: "both", description: meta.parameters.parent_type },
+  ),
+});
 
 export const requestCharacterOrElementum = createCommand(
   {
@@ -22,13 +36,8 @@ export const requestCharacterOrElementum = createCommand(
     title: meta.title,
     description: meta.description,
     inputSchema: requestCharacterOrElementumV1Parameters,
-    outputSchema: requestCharacterOrElementumV1ResultSchema,
   },
   async ({ name, uuid, parent_type }, { log, apis }) => {
-    log.debug(
-      `request_character_or_elementum: name: ${name}, uuid: ${uuid}, parent_type: ${parent_type}`,
-    );
-
     const targetType: ("character" | "elementum")[] =
       parent_type === "both" ? ["character", "elementum"] : [parent_type];
 
@@ -38,12 +47,10 @@ export const requestCharacterOrElementum = createCommand(
       }
 
       if (uuid) {
-        log.debug(`request_character_or_elementum by uuid: ${uuid}`);
         return await apis.tcp.tcpProfile(uuid);
       }
 
       if (name) {
-        log.debug(`request_character_or_elementum by name: ${name}`);
         const res = await apis.tcp.searchTCPs({
           keywords: name,
           page_index: 0,
@@ -73,8 +80,6 @@ export const requestCharacterOrElementum = createCommand(
       throw new Error(`未找到角色或元素: ${name || uuid}`);
     }
 
-    log.info(`request_character_or_elementum: tcp: ${JSON.stringify(tcp)}`);
-
     if (tcp.type === "oc" || tcp.type === "official") {
       if (!targetType.includes("character")) {
         throw new Error(
@@ -95,10 +100,6 @@ export const requestCharacterOrElementum = createCommand(
         header_img: tcp.config.header_img,
       } satisfies CharacterAssign;
 
-      log.info(
-        `request_character_or_elementum: assign: ${JSON.stringify(assignValue)}`,
-      );
-
       return {
         detail: assignValue,
       };
@@ -118,10 +119,6 @@ export const requestCharacterOrElementum = createCommand(
         description: tcp.oc_bio.description,
         avatar_img: tcp.config.avatar_img,
       } satisfies ElementumAssign;
-
-      log.info(
-        `request_character_or_elementum: assign: ${JSON.stringify(assignValue)}`,
-      );
 
       return {
         detail: assignValue,

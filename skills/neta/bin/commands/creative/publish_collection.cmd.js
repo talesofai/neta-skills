@@ -1,29 +1,31 @@
-import z from "zod";
+import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.js";
 import { createCommand } from "../factory.js";
-const meta = parseMeta(z.object({
-    name: z.string(),
-    title: z.string(),
-    description: z.string(),
-    parameters: z.object({
-        name: z.string(),
-        description: z.string(),
-        status: z.string(),
-        artifacts: z.string(),
-        hashtags: z.string(),
+const meta = parseMeta(Type.Object({
+    name: Type.String(),
+    title: Type.String(),
+    description: Type.String(),
+    parameters: Type.Object({
+        name: Type.String(),
+        description: Type.String(),
+        status: Type.String(),
+        artifacts: Type.String(),
+        hashtags: Type.String(),
     }),
 }), import.meta);
 export const publishCollection = createCommand({
     name: meta.name,
     title: meta.title,
     description: meta.description,
-    inputSchema: z.object({
-        name: z.string().describe(meta.parameters.name),
-        description: z.string().describe(meta.parameters.description),
-        status: z.enum(["PRIVATE", "PUBLISHED"]).describe(meta.parameters.status),
-        artifacts: z.string().describe(meta.parameters.artifacts),
-        hashtags: z.string().optional().describe(meta.parameters.hashtags),
-        remix_instruct: z.string().optional(),
+    inputSchema: Type.Object({
+        name: Type.String({ description: meta.parameters.name }),
+        description: Type.String({ description: meta.parameters.description }),
+        status: Type.Union([Type.Literal("PRIVATE"), Type.Literal("PUBLISHED")], {
+            description: meta.parameters.status,
+        }),
+        artifacts: Type.String({ description: meta.parameters.artifacts }),
+        hashtags: Type.Optional(Type.String({ description: meta.parameters.hashtags })),
+        remix_instruct: Type.Optional(Type.String()),
     }),
 }, async ({ name, description, status, hashtags, artifacts, remix_instruct }, { apis }) => {
     const tags = await Promise.all(hashtags?.split(",")?.map((tag) => apis.hashtag.createHashtag(tag)) ?? []);
