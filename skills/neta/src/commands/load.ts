@@ -5,8 +5,8 @@ import {
   type Command as CommanderCommand,
   Option,
 } from "@commander-js/extra-typings";
-import type { TLiteral } from "@sinclair/typebox";
-import { Value } from "@sinclair/typebox/value";
+import { type TLiteral, Type } from "@sinclair/typebox";
+import { Default, Value } from "@sinclair/typebox/value";
 import { createApis } from "../apis/index.ts";
 import { ApiResponseError } from "../utils/errors.ts";
 import { type Command, isCommand, type SupportedSchema } from "./factory.ts";
@@ -133,10 +133,8 @@ export const buildCommands = async (
     }
 
     command.action(async (args) => {
-      const input =
-        cmd.inputSchema !== undefined
-          ? Value.Decode(cmd.inputSchema, args)
-          : {};
+      const type = cmd.inputSchema ?? Type.Object({});
+      const input = Value.Decode(type, Default(type, args));
 
       if (IS_DEV) {
         logger.debug("command: %s, params: %o", cmd.name, input);

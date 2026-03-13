@@ -10,7 +10,8 @@ import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { Option, } from "@commander-js/extra-typings";
-import { Value } from "@sinclair/typebox/value";
+import { Type } from "@sinclair/typebox";
+import { Default, Value } from "@sinclair/typebox/value";
 import { createApis } from "../apis/index.js";
 import { ApiResponseError } from "../utils/errors.js";
 import { isCommand } from "./factory.js";
@@ -91,9 +92,8 @@ export const buildCommands = async (cli, commands) => {
             });
         }
         command.action(async (args) => {
-            const input = cmd.inputSchema !== undefined
-                ? Value.Decode(cmd.inputSchema, args)
-                : {};
+            const type = cmd.inputSchema ?? Type.Object({});
+            const input = Value.Decode(type, Default(type, args));
             if (IS_DEV) {
                 logger.debug("command: %s, params: %o", cmd.name, input);
             }
