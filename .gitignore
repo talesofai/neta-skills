@@ -33,3 +33,5 @@ coverage/
 tmp/
 temp/
 .cache/
+
+./bin/

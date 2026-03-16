@@ -1,5 +1,0 @@
-name: request_interactive_feed
-title: 获取互动推荐列表
-description: 获取互动内容推荐列表，支持分页和多种筛选参数。根据传入参数自动判断场景（首页/个人主页/相关性 Feed 等）。
-
-

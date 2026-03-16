@@ -1,4 +1,3 @@
-pnpm -r type-check
-pnpm -r build
-pnpm -r validate
+pnpm type-check
+pnpm validate
 pnpm lint-staged

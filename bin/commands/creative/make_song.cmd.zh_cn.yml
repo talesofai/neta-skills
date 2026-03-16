@@ -1,7 +1,0 @@
-name: make_song
-title: 生成歌曲
-description: 输入歌词和歌曲描述，进行歌曲生成
-parameters:
-  prompt: 音乐的描述,用于指定风格、情绪和场景。例如"流行音乐, 难过, 适合在下雨的晚上"。
-  lyrics: |
-    歌曲的歌词。使用 \n 分隔每行。你可以在歌词中加入 [Intro], [Verse], [Pre Chorus], [Chorus], [Interlude], [Bridge], [Outro], [Post Chorus], [Transition], [Break], [Hook], [Build Up], [Inst], [Solo] 等结构标签来优化生成的音乐结构。

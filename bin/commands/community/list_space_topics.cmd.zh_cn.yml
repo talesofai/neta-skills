@@ -1,6 +1,0 @@
-name: list_space_topics
-title: 获取空间内话题（子空间）
-description: 获取空间内话题（子空间）
-
-parameters:
-  space_uuid: 空间UUID

@@ -1,3 +1,0 @@
-name: suggest_keywords
-title: 🔍 获取搜索关键词的自动补全建议
-description: 基于用户输入的前缀，返回相关的搜索关键词建议（Search Keyword Autocomplete）
