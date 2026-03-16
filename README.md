@@ -43,6 +43,22 @@
 npx skills add talesofai/neta-skills/skills/neta
 ```
 
+如果你希望在 Agent 中按功能模块更精细地控制权限，也可以分别安装拆分后的技能：
+
+```bash
+# 社区 / 标签 / 空间探索
+npx skills add talesofai/neta-skills/skills/neta-community
+
+# 图片 / 视频 / 歌曲创作
+npx skills add talesofai/neta-skills/skills/neta-creative
+
+# 关键词 / 标签 / 分类 / 内容推荐与检索
+npx skills add talesofai/neta-skills/skills/neta-suggest
+
+# 空间导航与探索（space / topic）
+npx skills add talesofai/neta-skills/skills/neta-space
+```
+
 #### 可用指令总览
 
 当前技能共包含 **26 个命令**，覆盖创作、角色与社区探索等场景：
@@ -80,22 +96,25 @@ npx skills add talesofai/neta-skills/skills/neta
 
 ---
 
-### 🛠️ CLI 使用（本地调试与自动化）
+### 🛠️ CLI 使用（`@talesofai/neta-cli`）
 
-统一技能内置了 CLI，方便在本地或 CI 中调试与批量调用。
+项目同时提供了一个独立的 CLI 包 `@talesofai/neta-cli`，适合在本地终端、脚本和 CI 中直接调用 Neta API。
 
-#### 安装与构建
+#### 安装 CLI
 
 ```bash
-# 1. 克隆仓库并安装依赖
-git clone https://github.com/talesofai/neta-skills.git
-cd neta-skills
-corepack enabled
-pnpm i
-pnpm -r build
+# 全局安装（推荐）
+npm install -g @talesofai/neta-cli
 
-# 2. 配置环境变量
-# 在环境中设置 NETA_TOKEN，或在项目根目录创建 .env
+# 或者使用 npx / pnpm dlx 临时调用
+npx @talesofai/neta-cli --help
+pnpm dlx @talesofai/neta-cli --help
+```
+
+配置环境变量：
+
+```bash
+# 在环境中设置 NETA_TOKEN，或在你的 .env / .env.local 中配置
 export NETA_TOKEN=your_token_here
 ```
 
@@ -103,16 +122,16 @@ export NETA_TOKEN=your_token_here
 
 ```bash
 # 查看帮助
-pnpm start:skills --help
-pnpm start:skills make_image --help
+neta-cli --help
+neta-cli make_image --help
 
 # 示例：生成一张图片
-pnpm start:skills make_image \
+neta-cli make_image \
   --prompt "夜晚的赛博朋克城市，霓虹灯，高楼大厦，雨中街道" \
   --aspect "16:9"
 
 # 示例：搜索角色或元素
-pnpm start:skills search_character_or_elementum \
+neta-cli search_character_or_elementum \
   --keywords "幻想" \
   --parent_type "character"
 ```
@@ -124,19 +143,22 @@ pnpm start:skills search_character_or_elementum \
 ```text
 neta-skills/
 ├── skills/
-│   └── neta/                   # 统一 Neta 技能（含 CLI）
-│       ├── SKILL.md            # 技能说明与中文用法示例
-│       ├── package.json        # 子包依赖配置
-│       ├── src/
-│       │   ├── cli.ts          # CLI 入口
-│       │   ├── apis/           # API Client（activity, artifact, audio, verse 等）
-│       │   ├── commands/       # 各类命令实现（assign, community, verse 等）
-│       │   └── utils/          # 通用工具
-│       ├── bin/                # 构建后的 JS 产物
-│       ├── scripts/            # 构建与发布脚本
-│       └── references/         # 最佳实践与工作流参考文档
-├── .env.example                # 环境变量示例
-└── package.json                # 根包配置
+│   ├── neta/                       # 统一 Neta 技能（Agent 优先，仍然维护）
+│   │   ├── SKILL.md                # 技能说明与中文用法示例
+│   │   ├── package.json            # 子包依赖配置
+│   │   ├── src/                    # Agent / skills 实现
+│   │   └── references/             # 最佳实践与工作流参考文档（面向 Agent）
+│   ├── neta-community/             # 社区 / 标签 / 空间探索相关技能
+│   ├── neta-creative/              # 图片 / 视频 / 歌曲等创作相关技能
+│   ├── neta-suggest/               # 推荐 / 搜索 / 分类导航等探索技能
+│   └── neta-space/                 # 空间与话题导航 / 探索技能
+├── packages/
+│   └── neta-cli/                   # CLI 包（发布名：@talesofai/neta-cli）
+│       ├── bin/                    # CLI 入口构建产物
+│       ├── src/                    # 仅 CLI 相关的源码（命令、IO 等）
+│       └── scripts/                # 构建 / 发布 / 校验脚本
+├── .env.example                    # 环境变量示例
+└── package.json                    # 根包配置
 ```
 
 ---
