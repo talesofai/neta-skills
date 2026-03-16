@@ -1,0 +1,18 @@
+name: update_elementum
+title: 更新元素
+description: |
+  更新已有风格元素的属性。只传入需要修改的字段，未传入的字段保持不变。
+
+  使用说明：
+    - tcp_uuid 是元素的唯一标识，通过 create_elementum 或 request_character_or_elementum 获取
+    - 传入 "" 空字符串可清空 description 等可选字段
+    - 若更换代表图，传入新的 artifact_uuid（来自 make_image 的 artifacts[0].uuid）
+
+parameters:
+  tcp_uuid: 元素的 TCP UUID，必填
+  name: 新的元素名称（最多32字符），不传则保持不变
+  artifact_uuid: 新的代表图素材 UUID（来自 make_image 的 artifacts[0].uuid），不传则保持不变
+  prompt: 新的图像模型生图指令，不传则保持不变
+  description: 新的 Agent 使用说明，不传则保持不变，传 "" 可清空
+  ref_image_uuid: 新的参考图素材 UUID，不传则保持不变
+  accessibility: 新的可见性（PUBLIC/PRIVATE），不传则保持不变

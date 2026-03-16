@@ -35,3 +35,4 @@ temp/
 .cache/
 
 bin/
+.claude/

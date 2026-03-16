@@ -1,0 +1,41 @@
+name: create_character
+title: 创建角色
+description: |
+  创建一个新的原创角色（OC）并生成对应的角色 Token（TCP）。
+
+  角色创建后可在 make_image 中通过 @角色名 引用。
+
+  使用说明：
+    - avatar_artifact_uuid 来自 make_image 工具返回的 artifacts[0].uuid，即角色预览图的素材 UUID
+    - prompt 只写纯视觉特征，不写性格、故事背景
+    - trigger 必须为英文识别词，供图像模型和语言模型识别角色用
+
+  字段说明：
+    - name：角色名称，最多32字符
+    - prompt：纯视觉描述，供图像模型直接读取（生理特征、服装、特殊标志）
+    - trigger：英文识别词，如 1girl, Ada Wong, black hair, red dress, spy
+    - description：供 Agent 和用户阅读，应包含外貌摘要 + 角色背景/故事
+
+parameters:
+  name: 角色名称（最多32字符）
+  gender: 角色性别，默认 "自由"
+  avatar_artifact_uuid: 角色头像的素材 UUID，来自 make_image 返回的 artifacts[0].uuid
+  prompt: |
+    纯视觉特征描述，供图像模型直接读取。
+    - 只写：生理特征、服装、特殊标志
+    - 不写：性格、故事、背景
+    - 示例："long black hair, red qipao dress, blue eyes, gun holster on thigh"
+  trigger: |
+    英文识别词，供语言模型和图像模型识别角色。
+    - 必须为英文
+    - 包含：性别词（1girl/1boy）、角色姓名、突出外貌特征、IP系列
+    - 示例："1girl, Ada Wong, black hair, red dress, spy, resident evil series"
+  accessibility: 可见性，PUBLIC（公开）或 PRIVATE（私密），默认 PUBLIC
+  age: 角色年龄（可选）
+  interests: 角色兴趣爱好（可选）
+  persona: 角色性格描述（可选）
+  description: |
+    角色简介，供 Agent 和用户阅读。
+    - 应包含：外貌摘要 + 角色背景故事/世界观
+    - 示例："艾达·王，黑发红裙的神秘间谍，游走于各方势力之间，真实目的无人知晓。"
+  occupation: 角色职业（可选）
