@@ -1,8 +1,22 @@
-# 玩法内容探索最佳实践
+---
+name: neta-suggest
+description: Neta API 内容推荐技能 - 内容推荐技能提供了一套完整的内容发现和筛选工具，支持从宽泛到精确的渐进式探索。包括关键词建议、标签推荐、分类导航和智能内容流四大功能模块。
+---
 
-## 概述
+# Neta Suggest Skill
 
-玩法内容探索技能提供了一套完整的内容发现和筛选工具，支持从宽泛到精确的渐进式探索。包括关键词建议、标签推荐、分类导航和智能内容流四大功能模块。
+## 前置条件
+
+确保已设置环境变量 `NETA_TOKEN`。
+
+确保已安装 Neta Cli
+```
+npm i @talesofai/neta-cli -g
+```
+
+```
+pnpm add -g @talesofai/neta-cli
+```
 
 ## 核心技能
 

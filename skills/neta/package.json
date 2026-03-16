@@ -1,5 +1,5 @@
 {
-  "name": "@neta/skills-neta",
+  "name": "@talesofai/neta-cli",
   "version": "0.5.0",
   "description": "A skill for interacting with Neta API to generate images, videos, songs, and manage characters/elements.",
   "type": "module",
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/talesofai/neta-skills#readme",
   "bin": {
-    "neta-skills": "bin/cli.js"
+    "neta-cli": "bin/cli.js"
   },
   "scripts": {
     "dev": "NODE_ENV=development node src/cli.ts",
@@ -47,5 +47,9 @@
     "@types/node": "^22.10.2",
     "@types/qs": "^6.14.0",
     "glob": "^13.0.6"
-  }
+  },
+  "files": [
+    "bin",
+    "package.json"
+  ]
 }

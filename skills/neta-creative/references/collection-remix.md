@@ -14,7 +14,7 @@
 你需要使用 `read_collection` 指令获取参考信息进行 Remix（二创）、复现或改编，以满足用户需求
 
 ```bash
-neta-cli read_collection --uuid "玩法-uuid"
+neta-cli read_collection --uuid "作品-uuid"
 ```
 
 **返回内容**

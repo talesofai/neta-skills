@@ -231,4 +231,3 @@ neta-cli search_character_or_elementum --keywords "关键词" > search_cache/关
 ## 相关文档
 
 - [图片生成](./image-generation.md) - 基于角色信息生成图片
-- [标签查询](./hashtag-research.md) - 通过标签发现角色
