@@ -1,45 +1,76 @@
 {
-  "name": "neta-skills",
-  "version": "0.1.0",
-  "description": "Neta API pi coding agent skills",
-  "private": true,
+  "name": "@talesofai/neta-skills",
+  "version": "0.5.0",
+  "description": "Neta API pi coding agent skills for interacting with Neta API to generate images, videos, songs, and manage characters/elements.",
   "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/talesofai/neta-skills.git"
   },
+  "bugs": {
+    "url": "https://github.com/talesofai/neta-skills/issues"
+  },
+  "homepage": "https://github.com/talesofai/neta-skills#readme",
   "keywords": [
     "neta",
-    "skills",
-    "pi-coding-agent",
-    "ai",
+    "api",
+    "skill",
+    "pi-agent",
     "image-generation",
-    "video-generation"
+    "video-generation",
+    "ai"
   ],
   "author": "Neta Team",
   "license": "MIT",
   "engines": {
-    "node": ">=2.0.0"
+    "node": ">=22.0.0"
   },
   "packageManager": "pnpm@10.25.0",
+  "bin": {
+    "neta-cli": "bin/cli.js"
+  },
   "scripts": {
     "lint": "biome check . --write --unsafe",
-    "validate:skill": "cd skills/neta && npm run validate",
-    "type-check:skill": "cd skills/neta && npm run type-check",
-    "check": "pnpm lint && pnpm type-check:skill && pnpm validate:skill",
-    "dev:skills": "pnpm --filter @neta/skills-neta dev",
-    "start:skills": "pnpm --filter @neta/skills-neta start",
-    "build:skills": "pnpm --filter @neta/skills-neta build",
+    "validate": "skills-ref to-prompt ./skills/neta ./skills/neta-community ./skills/neta-creative ./skills/neta-suggest ./skills/neta-space",
+    "type-check": "tsc --noEmit",
+    "check": "pnpm lint && pnpm type-check && pnpm validate",
     "changelog": "changeset",
     "bump": "changeset version",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build": "rimraf bin && tsc",
+    "postbuild": "node scripts/postbuild.js",
+    "dev": "NODE_ENV=development node src/cli.ts",
+    "start": "node bin/cli.js"
+  },
+  "dependencies": {
+    "@commander-js/extra-typings": "^14.0.0",
+    "@sinclair/typebox": "^0.34.48",
+    "axios": "^1.7.9",
+    "commander": "^14.0.0",
+    "dotenv": "^16.4.7",
+    "dotenv-flow": "^4.1.0",
+    "qs": "^6.15.0",
+    "skills-ref": "^0.1.5",
+    "yaml": "^2.8.2"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.8",
     "@changesets/cli": "^2.29.8",
+    "@types/node": "^22.10.2",
+    "@types/qs": "^6.14.0",
+    "glob": "^13.0.6",
     "husky": "^9.1.7",
     "lint-staged": "^16.3.1",
     "rimraf": "^6.1.3",
     "typescript": "^5.9.3"
-  }
+  },
+  "files": [
+    "bin",
+    "skills",
+    "package.json",
+    "README.md",
+    "README.en.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ]
 }
