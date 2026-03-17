@@ -26,20 +26,19 @@ const meta = parseMeta(
 
 const createCharacterParameters = Type.Object({
   name: Type.String({ description: meta.parameters.name }),
-  gender: Type.Optional(
-    Type.String({ description: meta.parameters.gender, default: "自由" }),
+  gender: Type.Union(
+    [Type.Literal("自由"), Type.Literal("男"), Type.Literal("女")],
+    { description: meta.parameters.gender, default: "自由" },
   ),
   avatar_artifact_uuid: Type.String({
     description: meta.parameters.avatar_artifact_uuid,
   }),
   prompt: Type.String({ description: meta.parameters.prompt }),
   trigger: Type.String({ description: meta.parameters.trigger }),
-  accessibility: Type.Optional(
-    Type.Union([Type.Literal("PUBLIC"), Type.Literal("PRIVATE")], {
-      default: "PUBLIC",
-      description: meta.parameters.accessibility,
-    }),
-  ),
+  accessibility: Type.Union([Type.Literal("PUBLIC"), Type.Literal("PRIVATE")], {
+    default: "PUBLIC",
+    description: meta.parameters.accessibility,
+  }),
   age: Type.Optional(Type.String({ description: meta.parameters.age })),
   interests: Type.Optional(
     Type.String({ description: meta.parameters.interests }),
@@ -84,7 +83,7 @@ export const createCharacter = createCommand(
       trigger,
       // IMAGE_EDIT uses avatar in its pipeline; pass ref_image_uuid = avatar for backend consistency
       ref_image_uuid: avatar_artifact_uuid,
-      accessibility: accessibility ?? "PUBLIC",
+      accessibility,
       age,
       interests,
       persona,

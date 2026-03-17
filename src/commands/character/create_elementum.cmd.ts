@@ -29,12 +29,10 @@ const createElementumParameters = Type.Object({
   ref_image_uuid: Type.Optional(
     Type.String({ description: meta.parameters.ref_image_uuid }),
   ),
-  accessibility: Type.Optional(
-    Type.Union([Type.Literal("PUBLIC"), Type.Literal("PRIVATE")], {
-      default: "PUBLIC",
-      description: meta.parameters.accessibility,
-    }),
-  ),
+  accessibility: Type.Union([Type.Literal("PUBLIC"), Type.Literal("PRIVATE")], {
+    default: "PUBLIC",
+    description: meta.parameters.accessibility,
+  }),
 });
 
 export const createElementum = createCommand(
@@ -54,7 +52,7 @@ export const createElementum = createCommand(
       prompt,
       description,
       ref_image_uuid,
-      accessibility: accessibility ?? "PUBLIC",
+      accessibility,
     });
   },
 );
