@@ -8,7 +8,7 @@ Detailed description and filling specifications for all fields in `create_elemen
 
 ### `name`
 
-Element name, max 32 characters.
+Element name, max 128 characters.
 
 - Recommend short, distinctive names
 - Reference in `make_image` via `/ElementName` after creation

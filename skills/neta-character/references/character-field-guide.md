@@ -8,7 +8,7 @@ Detailed description and filling specifications for all fields in `create_charac
 
 ### `name`
 
-Character name, max 32 characters.
+Character name, max 128 characters.
 
 - Chinese or English acceptable
 - Recommend using character's real name for easy `@CharacterName` referencing
