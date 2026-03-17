@@ -1,11 +1,11 @@
 ---
 name: neta-elementum
-description: Neta Elementum Alchemy Skill - Guides users through creating or updating style element (Elementum) Tokens (TCP). Elementum encapsulates a visual concept (scene, prop, clothing, weapon, pose, atmosphere, meme, etc.) and can be referenced in make_image via /ElementName after creation. Use this skill when users want to create new elements, encapsulate visual styles or concepts, or modify existing elements.
+description: Neta Elementum Alchemy Skill - Guides users through creating or updating style element (Elementum) VTokens (Virtual Tokens, TCP). Elementum encapsulates a visual concept (scene, prop, clothing, weapon, pose, atmosphere, meme, etc.) and can be referenced in make_image via /ElementName after creation. Use this skill when users want to create new Elementa, encapsulate visual styles or concepts, or modify existing Elementa.
 ---
 
 # Neta Elementum Skill
 
-Through the "Elementum Alchemy" workflow, forge any visual concept into a reusable element Token (TCP/Elementum). Can be referenced in `make_image` via `/ElementName` after creation.
+Through the "Elementum Alchemy" workflow, forge any visual concept into a reusable VToken (Virtual Token, TCP/Elementum). Can be referenced in `make_image` via `/ElementName` after creation.
 
 > This skill requires the **neta-creative** skill to use `make_image` for visual previews.
 

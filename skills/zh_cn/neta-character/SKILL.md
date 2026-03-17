@@ -1,11 +1,11 @@
 ---
 name: neta-character
-description: Neta 角色铸造技能 - 引导用户创建或更新二次元/文化IP/原创角色（OC）Token（TCP）。包含视觉预览、角色立档、背景故事确认等完整创作流程。当用户想要创建新角色、修改已有角色、或开始角色设计创作时使用此技能。
+description: Neta 角色锻造技能 - 引导用户创建或更新动漫/文化IP/原创角色（OC）VToken（虚拟Token，TCP）。包含视觉预览、角色文档、背景故事确认等完整创作流程。当用户想要创建新角色、修改已有角色、或开始角色设计时使用此技能。
 ---
 
 # Neta Character Skill
 
-引导用户从灵感到铸造，完成专属角色 Token（TCP/OC）的创建与管理。角色创建后可在 `make_image` 中通过 `@角色名` 引用。
+引导用户从灵感到铸造，完成专属角色 VToken（虚拟Token，TCP/OC）的创建与管理。角色创建后可在 `make_image` 中通过 `@角色名` 引用。
 
 > 本技能需要配合 **neta-creative** 技能使用 `make_image` 进行视觉预览。
 

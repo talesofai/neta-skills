@@ -1,11 +1,11 @@
 ---
 name: neta-elementum
-description: Neta 元素炼金技能 - 引导用户创建或更新风格元素（Elementum）Token（TCP）。Elementum 是对一个可视化概念（场景、道具、服装、武器、姿势、氛围、梗图等）的封装，创建后可在 make_image 中通过 /元素名 引用。当用户想要创建新元素、封装某个视觉风格或概念、修改已有元素时使用此技能。
+description: Neta 元素(Elementum)炼金技能 - 引导用户创建或更新风格元素（Elementum）VToken（虚拟Token，TCP）。Elementum 是对一个可视化概念（场景、道具、服装、武器、姿势、氛围、梗图等）的封装，创建后可在 make_image 中通过 /元素名 引用。当用户想要创建新元素(Elementum)、封装某个视觉风格或概念、修改已有元素时使用此技能。
 ---
 
 # Neta Elementum Skill
 
-通过「元素炼金」工作流，将任意可视化概念铸造为可复用的元素 Token（TCP/Elementum）。创建后可在 `make_image` 中通过 `/元素名` 引用。
+通过「元素(Elementum)炼金」工作流，将任意可视化概念铸造为可复用的 VToken（虚拟Token，TCP/Elementum）。创建后可在 `make_image` 中通过 `/元素名` 引用。
 
 > 本技能需要配合 **neta-creative** 技能使用 `make_image` 进行视觉预览。
 

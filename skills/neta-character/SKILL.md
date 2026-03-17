@@ -1,11 +1,11 @@
 ---
 name: neta-character
-description: Neta Character Forging Skill - Guides users through creating or updating anime/cultural IP/original character (OC) Tokens (TCP). Includes visual preview, character documentation, backstory confirmation, and complete creative workflow. Use this skill when users want to create new characters, modify existing ones, or begin character design.
+description: Neta Character Forging Skill - Guides users through creating or updating anime/cultural IP/original character (OC) VTokens (Virtual Tokens, TCP). Includes visual preview, character documentation, backstory confirmation, and complete creative workflow. Use this skill when users want to create new characters, modify existing ones, or begin character design.
 ---
 
 # Neta Character Skill
 
-Guide users from inspiration to forging, completing the creation and management of exclusive character Tokens (TCP/OC). Characters can be referenced in `make_image` via `@CharacterName` after creation.
+Guide users from inspiration to forging, completing the creation and management of exclusive character VTokens (Virtual Tokens, TCP/OC). Characters can be referenced in `make_image` via `@CharacterName` after creation.
 
 > This skill requires the **neta-creative** skill to use `make_image` for visual previews.
 
