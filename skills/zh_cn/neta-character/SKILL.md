@@ -77,7 +77,11 @@ neta-cli update_character \
 ### 查询已有角色
 
 ```bash
-# 搜索角色（关键词匹配）
+# 列出我的角色（当前用户创建的角色）
+neta-cli list_my_characters
+neta-cli list_my_characters --keyword "艾达" --page_size 10
+
+# 搜索角色（全站关键词匹配）
 neta-cli search_character_or_elementum --keywords "角色名" --parent_type "character"
 
 # 获取角色完整详情（含 tcp_uuid）

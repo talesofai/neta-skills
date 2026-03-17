@@ -77,7 +77,11 @@ neta-cli update_character \
 ### Query Existing Characters
 
 ```bash
-# Search characters (keyword matching)
+# List my characters (created by current user)
+neta-cli list_my_characters
+neta-cli list_my_characters --keyword "Ada" --page_size 10
+
+# Search characters (global search, keyword matching)
 neta-cli search_character_or_elementum --keywords "character name" --parent_type "character"
 
 # Get full character details (including tcp_uuid)

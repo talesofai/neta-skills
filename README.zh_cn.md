@@ -78,8 +78,10 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 | | `search_character_or_elementum` | 搜索可复用的 TCP（角色 / 元素 / 玩法模块） |
 | **VToken 管理** | `create_character` | 创建角色 VToken（消耗电量） |
 | | `update_character` | 更新现有角色 VToken |
+| | `list_my_characters` | 列出当前用户创建的所有角色 |
 | | `create_elementum` | 创建元素 VToken（消耗电量） |
 | | `update_elementum` | 更新现有元素 VToken |
+| | `list_my_elementum` | 列出当前用户创建的所有元素 |
 | **角色 Characters** | `request_character_or_elementum` | 通过名称或 UUID 获取角色 / 元素详情 |
 | **社区 Community** | `get_hashtag_info` | 查询标签基础信息与 worldbuilding lore |
 | | `get_hashtag_characters` | 获取标签下的角色列表 |

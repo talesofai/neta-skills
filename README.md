@@ -76,8 +76,10 @@ The skill includes **30 commands** for various tasks:
 | | `search_character_or_elementum` | Search reusable TCP building blocks (characters / elements / flows) |
 | **VToken Management** | `create_character` | Create a character VToken (consumes credits) |
 | | `update_character` | Update an existing character VToken |
+| | `list_my_characters` | List all characters created by the current user |
 | | `create_elementum` | Create an elementum VToken (consumes credits) |
 | | `update_elementum` | Update an existing elementum VToken |
+| | `list_my_elementum` | List all elementa created by the current user |
 | **Characters** | `request_character_or_elementum` | Fetch character or elementum details by name or UUID |
 | **Community** | `get_hashtag_info` | Get details and lore for a specific hashtag |
 | | `get_hashtag_characters` | Get a list of characters under a hashtag |

@@ -64,7 +64,11 @@ neta-cli update_elementum \
 ### Query Existing Elementa
 
 ```bash
-# Search elements (keyword matching)
+# List my elementa (created by current user)
+neta-cli list_my_elementum
+neta-cli list_my_elementum --keyword "village" --page_size 10
+
+# Search elements (global search, keyword matching)
 neta-cli search_character_or_elementum --keywords "element name" --parent_type "elementum"
 
 # Get full element details (including tcp_uuid)

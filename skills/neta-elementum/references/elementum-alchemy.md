@@ -102,6 +102,10 @@ neta-cli make_image \
 - Adjust keyword order (earlier words have higher weight)
 - Add art style terms to stabilize output style
 
+### After Image Generation
+
+After `make_image` returns, **display the generated image to the user** using `artifacts[0].url` and ask if it matches their vision before proceeding.
+
 ---
 
 ## Stage 3: Refinement & Encapsulation

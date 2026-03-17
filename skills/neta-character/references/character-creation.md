@@ -63,6 +63,10 @@ neta-cli make_image --prompt "Long black hair, red qipao dress, blue eyes, side 
 - Fix overall style first, then refine local features
 - If there's a reference IP (e.g., "Resident Evil"), add style terms to the description
 
+### After Image Generation
+
+After `make_image` returns, **display the generated image to the user** using `artifacts[0].url` and ask if they're satisfied before proceeding.
+
 ---
 
 ## Stage 2: Character Documentation

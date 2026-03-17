@@ -64,7 +64,11 @@ neta-cli update_elementum \
 ### 查询已有元素
 
 ```bash
-# 搜索元素（关键词匹配）
+# 列出我的元素（当前用户创建的元素）
+neta-cli list_my_elementum
+neta-cli list_my_elementum --keyword "村庄" --page_size 10
+
+# 搜索元素（全站关键词匹配）
 neta-cli search_character_or_elementum --keywords "元素名" --parent_type "elementum"
 
 # 获取元素完整详情（含 tcp_uuid）

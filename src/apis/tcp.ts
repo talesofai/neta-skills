@@ -144,6 +144,30 @@ export const createTcpApis = (client: AxiosInstance) => {
       .then((res) => res.data);
   };
 
+  const listMyTCPs = async (query: {
+    user_uuid: string;
+    parent_type: "oc" | "elementum";
+    page_index?: number;
+    page_size?: number;
+    keyword?: string;
+  }) => {
+    return client
+      .get<
+        GenericPagination<{
+          uuid: string;
+          name: string;
+          type: "oc" | "official" | "elementum";
+          config: {
+            avatar_img?: string;
+            header_img?: string;
+          };
+          accessibility?: string;
+          status?: string;
+        }>
+      >("/v2/travel/parent", { params: query })
+      .then((res) => res.data);
+  };
+
   return {
     searchTCPs,
     tcpProfile,
@@ -151,6 +175,7 @@ export const createTcpApis = (client: AxiosInstance) => {
     updateCharacter,
     createElementum,
     updateElementum,
+    listMyTCPs,
   };
 };
 
