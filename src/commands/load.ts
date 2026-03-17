@@ -9,7 +9,7 @@ import { type TLiteral, Type } from "@sinclair/typebox";
 import { Default, Value } from "@sinclair/typebox/value";
 import { createApis } from "../apis/index.ts";
 import { ApiResponseError } from "../utils/errors.ts";
-import { getLocale, setLocale } from "../utils/parse_meta.ts";
+import { setLocale } from "../utils/parse_meta.ts";
 import { type Command, isCommand, type SupportedSchema } from "./factory.ts";
 
 export const loadCommands = async (domains: string[]) => {
@@ -117,15 +117,10 @@ export const buildCommands = async (
     command.action(async (args) => {
       const { api_base_url, token } = cli.opts();
 
-      const _locale = getLocale();
-
       const baseUrl =
         typeof api_base_url === "string"
           ? api_base_url
-          : (process.env["NETA_API_BASE_URL"] ??
-            (_locale === "zh_cn"
-              ? "https://api.talesofai.cn"
-              : "https://api.talesofai.com"));
+          : (process.env["NETA_API_BASE_URL"] ?? "https://api.talesofai.com");
 
       const apis = createApis({
         baseUrl,

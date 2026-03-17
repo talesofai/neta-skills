@@ -174,7 +174,7 @@ Both the AI agent skills and the CLI require the following environment configura
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `NETA_TOKEN` | ✅ | - | Your Neta Art API access token. |
-| `NETA_API_BASE_URL` | ❌ | `zh_cn`: `https://api.talesofai.cn`; `en_us`: `https://api.talesofai.com` | Base URL for the Neta API. |
+| `NETA_API_BASE_URL` | ❌ | default: `https://api.talesofai.com` | Base URL for the Neta API. |
 
 #### i18n and locale detection
 

@@ -181,7 +181,7 @@ neta-skills/
 | 变量名 | 必需 | 默认值 | 说明 |
 |--------|------|--------|------|
 | `NETA_TOKEN` | ✅ | - | Neta Art API 访问令牌 |
-| `NETA_API_BASE_URL` | ❌ | zh_cn: `https://api.talesofai.cn`；en_us: `https://api.talesofai.com` | Neta API 网关地址 |
+| `NETA_API_BASE_URL` | ❌ | default: `https://api.talesofai.com` | Neta API 网关地址 |
 
 #### 多语言与本地化（i18n）
 

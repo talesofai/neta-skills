@@ -1,6 +1,6 @@
 {
   "name": "@talesofai/neta-skills",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Neta API pi coding agent skills for interacting with Neta API to generate images, videos, songs, and manage characters/elements.",
   "type": "module",
   "repository": {

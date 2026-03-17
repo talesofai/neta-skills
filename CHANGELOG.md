@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.8.0
+
+### Minor Changes
+
+- use https://api.talesofai.com for default api endpoint
+
 ## 0.7.0
 
 ### Minor Changes
