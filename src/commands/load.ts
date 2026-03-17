@@ -59,7 +59,11 @@ export const buildCommands = async (
 ) => {
   setLocale();
 
-  const commands = await loadCommands(["creative", "community", "character"]);
+  const commands = await loadCommands([
+    "creative",
+    "community",
+    "character_elementum",
+  ]);
 
   return commands.map((cmd) => {
     const command = cli.command(cmd.name);
