@@ -20,7 +20,7 @@ Applies to the `make_image` and `remove_background` commands.
 **Example:**
 
 ```text
-@character_name, /MangaStyle, 参考图-1234567890, 参考图-1234567891, keyword1, keyword2…
+@character_name, /MangaStyle, ref_img-1234567890, ref_img-1234567891, keyword1, keyword2…
 ```
 
 **Notes:**
