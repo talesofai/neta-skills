@@ -1,0 +1,41 @@
+name: create_character
+title: Create Character
+description: |
+  Create a new original character (OC) and generate a character Token (TCP).
+
+  After creation, the character can be referenced in make_image using @CharacterName.
+
+  Usage Notes:
+    - avatar_artifact_uuid comes from make_image response artifacts[0].uuid (the preview image artifact UUID)
+    - prompt should only describe visual features, not personality or backstory
+    - trigger must be in English for image and language model recognition
+
+  Field Descriptions:
+    - name: Character name, max 128 characters
+    - prompt: Visual description for image models (physical features, clothing, distinctive marks)
+    - trigger: English recognition tags, e.g., "1girl, Ada Wong, black hair, red dress, spy"
+    - description: For Agents and users to read, should include appearance summary + backstory
+
+parameters:
+  name: Character name (max 128 characters)
+  gender: 'Character gender. English: male, female, neutral, other. Chinese: 男, 女, 自由, 其他. Defaults to neutral/自由'
+  avatar_artifact_uuid: Character avatar artifact UUID from make_image response artifacts[0].uuid
+  prompt: |
+    Visual description for image models.
+    - Only include: physical features, clothing, distinctive marks
+    - Exclude: personality, story, background
+    - Example: "long black hair, red qipao dress, blue eyes, gun holster on thigh"
+  trigger: |
+    English recognition tags for LLM and image models.
+    - Must be in English
+    - Include: gender tag (1girl/1boy), character name, key features, IP series
+    - Example: "1girl, Ada Wong, black hair, red dress, spy, elegant, resident evil series"
+  accessibility: Visibility, PUBLIC or PRIVATE, defaults to PUBLIC
+  age: Character age (optional)
+  interests: Character interests and hobbies (optional)
+  persona: Character personality description (optional)
+  description: |
+    Character description for Agents and users to read.
+    - Should include: appearance summary + backstory/worldview
+    - Example: "Ada Wong, a mysterious spy with black hair and red dress. Her true identity is unknown, and she has repeatedly appeared as a middleman in Resident Evil incidents."
+  occupation: Character occupation (optional)

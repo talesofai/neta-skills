@@ -1,191 +1,191 @@
-# 角色创建引导
+# Character Creation Guide
 
-完整的角色铸造工作流程，从灵感到 Token 落地。
-
----
-
-## 创作流程总览
-
-```
-第一段：视觉预览
-  └─ 用自然语言描述角色外貌 → make_image 生成预览图
-  └─ 反复迭代，直到视觉满意
-
-第二段：角色立档
-  └─ 确认 trigger（英文识别词）
-  └─ 提炼 prompt（纯视觉特征标签）
-  └─ 填写 description（外貌摘要 + 背景故事）
-  └─ 补充人物信息（姓名、性别、年龄、职业、性格、兴趣）
-
-第三段：确认创建
-  └─ 向用户展示完整设定，确认无误
-  └─ 调用 create_character，传入预览图的 artifact_uuid
-```
+Complete character forging workflow from inspiration to Token deployment.
 
 ---
 
-## 第一段：视觉预览
+## Creation Workflow Overview
 
-**目标：** 让用户对角色外貌有直观感受，确认满意后再立档。
+```
+Stage 1: Visual Preview
+  └─ Describe character appearance in natural language → Generate preview with make_image
+  └─ Iterate until visually satisfied
 
-### 引导提问
+Stage 2: Character Documentation
+  └─ Confirm trigger (English recognition tags)
+  └─ Refine prompt (pure visual feature tags)
+  └─ Fill in description (appearance summary + backstory)
+  └─ Supplement character info (name, gender, age, occupation, personality, interests)
 
-在开始生图前，引导用户明确以下信息：
+Stage 3: Confirmation
+  └─ Show complete settings to user, confirm correctness
+  └─ Call create_character with preview image's artifact_uuid
+```
 
-- 角色的基本外貌（发色、发型、体型、肤色）
-- 服装风格（现代、古代、科幻、奇幻等）
-- 有无特殊标志（纹身、武器、配饰、独特眼睛等）
-- 参考风格（是否有参考角色或 IP 系列）
+---
 
-### 生图规范
+## Stage 1: Visual Preview
 
-预览阶段**只使用纯文本描述**，不引用 `@角色名` 或 `/元素`（角色尚未创建）。
+**Goal:** Give users an intuitive sense of character appearance, confirm satisfaction before documentation.
+
+### Guiding Questions
+
+Before generating images, guide users to clarify:
+
+- Basic appearance (hair color, hairstyle, body type, skin tone)
+- Clothing style (modern, ancient, sci-fi, fantasy, etc.)
+- Distinctive marks (tattoos, weapons, accessories, unique eyes, etc.)
+- Reference style (reference characters or IP series)
+
+### Image Generation Guidelines
+
+For preview stage **only use plain text descriptions**, no `@CharacterName` or `/element` references (character doesn't exist yet).
 
 ```bash
-# 全身预览（推荐首次）
+# Full body preview (recommended for first time)
 neta-cli make_image \
-  --prompt "长黑发，红色旗袍，蓝色眼睛，大腿枪套，修长身形，冷峻神情，白色背景，全身像，动漫风格" \
+  --prompt "Long black hair, red qipao dress, blue eyes, thigh gun holster, slender figure, cold expression, white background, full body, anime style" \
   --aspect "3:4"
 
-# 头像特写
+# Portrait close-up
 neta-cli make_image \
-  --prompt "长黑发，蓝色眼睛，冷峻神情，精致五官，头像特写，动漫风格" \
+  --prompt "Long black hair, blue eyes, cold expression, delicate features, portrait close-up, anime style" \
   --aspect "1:1"
 
-# 三视图（外观确认后）
-neta-cli make_image --prompt "长黑发，红色旗袍，蓝色眼睛，正面视图，白色背景，全身像" --aspect "3:4"
-neta-cli make_image --prompt "长黑发，红色旗袍，蓝色眼睛，侧面视图，白色背景，全身像" --aspect "3:4"
+# Three views (after appearance confirmation)
+neta-cli make_image --prompt "Long black hair, red qipao dress, blue eyes, front view, white background, full body" --aspect "3:4"
+neta-cli make_image --prompt "Long black hair, red qipao dress, blue eyes, side view, white background, full body" --aspect "3:4"
 ```
 
-### 迭代建议
+### Iteration Suggestions
 
-- 如果生成结果不理想，逐步调整描述细节
-- 先固定整体风格，再细化局部特征
-- 如果有参考 IP（如《生化危机》），在描述中加入风格词
+- If generation results are unsatisfactory, gradually adjust description details
+- Fix overall style first, then refine local features
+- If there's a reference IP (e.g., "Resident Evil"), add style terms to the description
 
 ---
 
-## 第二段：角色立档
+## Stage 2: Character Documentation
 
-视觉满意后，进行完整角色立档。
+After visual satisfaction, proceed with complete character documentation.
 
-### trigger 填写规范
+### Trigger Guidelines
 
-> **必须为英文**，这是图像模型和语言模型的识别锚点。
+> **Must be in English** - This is the recognition anchor for image and language models.
 
-**格式推荐：**
+**Recommended format:**
 ```
-[性别词], [角色姓名], [发色+发型], [服装特征], [性格/职业词], [IP系列（如有）]
+[gender tag], [character name], [hair color + style], [clothing features], [personality/occupation tags], [IP series (if any)]
 ```
 
-**示例：**
+**Example:**
 ```
 1girl, Ada Wong, long black hair, red qipao dress, gun holster, spy, elegant, cold expression, resident evil series
 ```
 
-**注意事项：**
-- 性别词优先（`1girl` / `1boy` / `1person`）
-- 角色的英文姓名（如有）尽量保留，提升跨模型识别率
-- 服装和外貌特征选最突出、最具辨识度的
-- 避免过于抽象的词（如 "mysterious"），优先视觉可描述的词
+**Notes:**
+- Gender tag first (`1girl` / `1boy` / `1person`)
+- Character's English name (if any) should be kept to improve cross-model recognition
+- Select the most prominent, most distinctive clothing and appearance features
+- Avoid overly abstract words (e.g., "mysterious"), prioritize visually describable words
 
-### prompt 填写规范
+### Prompt Guidelines
 
-> **纯视觉描述，供图像模型直读**，是 trigger 的详细化版本。
+> **Pure visual description for image models**, detailed version of trigger.
 
-**填写原则：**
-- 只写：生理特征、服装、配饰、特殊标志
-- 不写：性格、故事、职业、背景
-- 语言风格：英文标签为佳，逗号分隔，简洁精准
+**Filling principles:**
+- Only write: physical features, clothing, accessories, distinctive marks
+- Don't write: personality, story, occupation, background
+- Language style: English tags preferred, comma-separated, concise and precise
 
-**示例：**
+**Example:**
 ```
 long black hair, red qipao dress, blue eyes, gun holster on thigh, slender figure, pale skin, small earrings
 ```
 
-### description 填写规范
+### Description Guidelines
 
-> **供 Agent 和用户阅读**，是角色的"人物档案"。
+> **For Agents and users to read**, the character's "profile".
 
-**推荐结构：**
+**Recommended structure:**
 ```
-[角色姓名]，[外貌摘要一句话]。[背景/身份/来源]。[性格/特点]。[与世界观的关系/特殊能力]。
-```
-
-**示例：**
-```
-艾达·王，黑发红裙的神秘间谍，常以性感优雅的形象示人。真实身份不明，多次以中间人身份活跃于生化危机事件之中，行事独立，目的难以预测。精通格斗与潜入，具备高超情报处理能力。
+[Character name], [one-sentence appearance summary]. [Background/identity/source]. [Personality/characteristics]. [Relationship to worldview/special abilities].
 ```
 
-**注意：** description 直接影响 Agent 在后续创作（如对话、场景设计）中对角色的理解，请尽量写清楚。
+**Example:**
+```
+Ada Wong, a mysterious spy with black hair and red dress, often appearing in a sexy and elegant image. Her true identity is unknown, and she has repeatedly appeared as a middleman in Resident Evil incidents, acting independently with unpredictable purposes. Skilled in combat and infiltration, possessing advanced intelligence processing capabilities.
+```
+
+**Note:** Description directly affects how Agents understand the character in subsequent creations (dialogue, scene design), please write clearly.
 
 ---
 
-## 第三段：确认创建
+## Stage 3: Confirmation
 
-### 创建前确认
+### Pre-Creation Confirmation
 
-向用户展示完整设定：
+Show complete settings to user:
 
 ```
-角色名：Ada Wong
-性别：女
-年龄：28
-职业：间谍
-性格：神秘冷静，目的不明，游走于各方势力之间
-兴趣：情报收集，格斗，精密机械
-trigger：1girl, Ada Wong, long black hair, red qipao dress, gun holster, spy, elegant, resident evil series
-prompt：long black hair, red qipao dress, blue eyes, gun holster on thigh, slender figure
-description：艾达·王，黑发红裙的神秘间谍…
-头像：artifacts[0].uuid = xxxxxxxx
+Character Name: Ada Wong
+Gender: Female
+Age: 28
+Occupation: Spy
+Personality: Mysterious and calm, purpose unknown, moves between factions
+Interests: Intelligence gathering, combat, precision machinery
+Trigger: 1girl, Ada Wong, long black hair, red qipao dress, gun holster, spy, elegant, resident evil series
+Prompt: long black hair, red qipao dress, blue eyes, gun holster on thigh, slender figure
+Description: Ada Wong, a mysterious spy with black hair and red dress...
+Avatar: artifacts[0].uuid = xxxxxxxx
 ```
 
-确认用户满意后，执行创建：
+After user confirmation, execute creation:
 
 ```bash
 neta-cli create_character \
   --name "Ada Wong" \
-  --avatar_artifact_uuid "预览图的artifacts[0].uuid" \
+  --avatar_artifact_uuid "preview image's artifacts[0].uuid" \
   --prompt "long black hair, red qipao dress, blue eyes, gun holster on thigh, slender figure" \
   --trigger "1girl, Ada Wong, long black hair, red qipao dress, gun holster, spy, elegant, resident evil series" \
-  --gender "女" \
+  --gender "female" \
   --age "28" \
-  --occupation "间谍" \
-  --persona "神秘冷静，目的不明，游走于各方势力之间" \
-  --interests "情报收集，格斗，精密机械" \
-  --description "艾达·王，黑发红裙的神秘间谍，真实身份不明，多次以中间人身份活跃于生化危机事件之中。" \
+  --occupation "spy" \
+  --persona "Mysterious and calm, purpose unknown, moves between factions" \
+  --interests "intelligence gathering, combat, precision machinery" \
+  --description "Ada Wong, a mysterious spy with black hair and red dress. Her true identity is unknown, and she has repeatedly appeared as a middleman in Resident Evil incidents." \
   --accessibility "PUBLIC"
 ```
 
-### 创建成功后
+### After Successful Creation
 
-创建成功后，API 返回 `tcp_uuid`。告知用户：
-- 角色 UUID（tcp_uuid），用于后续更新
-- 如何在 make_image 中引用：`@Ada Wong`
-
----
-
-## 常见场景
-
-### 二次元/文化 IP 角色
-
-适用于复现已有 IP 角色（如游戏、动漫角色）：
-
-1. 先搜索是否已有该角色的 Token：`neta-cli search_character_or_elementum --keywords "角色名" --parent_type "character"`
-2. 如果有，可直接使用或基于现有 Token 二创
-3. 如果没有，按上述流程创建，trigger 中注明 IP 系列
-
-### 原创角色（OC）
-
-适用于从零设计的原创角色：
-
-1. 和用户充分探讨角色定位（种族、职业、世界观）
-2. 视觉预览阶段多迭代几次，确保独特性
-3. description 中补充世界观背景，增强后续创作可用性
+After successful creation, API returns `tcp_uuid`. Inform user:
+- Character UUID (tcp_uuid), for future updates
+- How to reference in make_image: `@Ada Wong`
 
 ---
 
-## 相关文档
+## Common Scenarios
 
-- [角色更新引导](./character-update.md) - 创建后的修改流程
-- [字段说明手册](./character-field-guide.md) - 所有字段的详细说明
+### Anime/Cultural IP Characters
+
+For recreating existing IP characters (e.g., game, anime characters):
+
+1. First search if character Token already exists: `neta-cli search_character_or_elementum --keywords "character name" --parent_type "character"`
+2. If exists, can use directly or create derivative based on existing Token
+3. If not, follow above workflow, note IP series in trigger
+
+### Original Characters (OC)
+
+For original characters designed from scratch:
+
+1. Discuss character positioning with user (race, occupation, worldview)
+2. Iterate more during visual preview stage to ensure uniqueness
+3. Supplement worldview background in description to enhance subsequent creation usability
+
+---
+
+## Related Documentation
+
+- [Character Update Guide](./character-update.md) - Post-creation modification workflow
+- [Field Reference Manual](./character-field-guide.md) - Detailed description of all fields

@@ -10,8 +10,8 @@ description: |
 
 parameters:
   tcp_uuid: 角色的 TCP UUID，必填
-  name: 新的角色名称（最多32字符），不传则保持不变
-  gender: 新的性别，不传则保持不变
+  name: 新的角色名称（最多128字符），不传则保持不变
+  gender: '新的性别。中文：男、女、自由、其他。English: male, female, neutral, other。不传则保持不变'
   avatar_artifact_uuid: 新的头像素材 UUID（来自 make_image 的 artifacts[0].uuid），不传则保持不变
   prompt: |
     新的视觉特征描述（纯视觉，英文标签为佳），不传则保持不变。

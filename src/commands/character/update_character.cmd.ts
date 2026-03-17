@@ -30,7 +30,21 @@ const meta = parseMeta(
 const updateCharacterParameters = Type.Object({
   tcp_uuid: Type.String({ description: meta.parameters.tcp_uuid }),
   name: Type.Optional(Type.String({ description: meta.parameters.name })),
-  gender: Type.Optional(Type.String({ description: meta.parameters.gender })),
+  gender: Type.Optional(
+    Type.Union(
+      [
+        Type.Literal("男"),
+        Type.Literal("女"),
+        Type.Literal("自由"),
+        Type.Literal("其他"),
+        Type.Literal("male"),
+        Type.Literal("female"),
+        Type.Literal("neutral"),
+        Type.Literal("other"),
+      ],
+      { description: meta.parameters.gender },
+    ),
+  ),
   avatar_artifact_uuid: Type.Optional(
     Type.String({ description: meta.parameters.avatar_artifact_uuid }),
   ),

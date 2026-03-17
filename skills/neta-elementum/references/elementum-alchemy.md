@@ -1,193 +1,193 @@
-# 元素炼金引导
+# Elementum Alchemy Guide
 
-将任意可视化概念铸造为可复用 Elementum Token 的完整工作流程。
+Complete workflow for forging any visual concept into a reusable Elementum Token.
 
 ---
 
-## 炼金流程总览
+## Alchemy Workflow Overview
 
 ```
-第一段：概念确认
-  └─ 明确元素类别（场景/道具/风格/姿势等）
-  └─ 理解核心视觉特征和使用场景
+Stage 1: Concept Confirmation
+  └─ Clarify element category (scene/prop/style/pose/etc.)
+  └─ Understand core visual features and usage scenarios
 
-第二段：视觉预览
-  └─ 根据概念起草 prompt
-  └─ 用 make_image 生成代表图
-  └─ 迭代调整，直到视觉准确表达概念
+Stage 2: Visual Preview
+  └─ Draft prompt based on concept
+  └─ Generate representative image with make_image
+  └─ Iterate until visual accurately expresses concept
 
-第三段：提炼封装
-  └─ 精炼 prompt（可直接用于 make_image 的生图指令）
-  └─ 撰写 description（供 Agent 理解如何使用该元素）
-  └─ 确定名称
+Stage 3: Refinement & Encapsulation
+  └─ Refine prompt (direct image generation instruction for make_image)
+  └─ Write description (usage guide for Agents)
+  └─ Confirm name
 
-第四段：确认铸造
-  └─ 向用户展示完整配置，确认无误
-  └─ 调用 create_elementum
+Stage 4: Confirmation & Forging
+  └─ Show complete configuration to user, confirm correctness
+  └─ Call create_elementum
 ```
 
 ---
 
-## 第一段：概念确认
+## Stage 1: Concept Confirmation
 
-在开始生图前，和用户确认清楚：
+Before generating images, confirm with user:
 
-- **这个元素表示什么概念？** — 是场景、物品、风格、还是姿势？
-- **核心视觉特征是什么？** — 颜色、材质、氛围、构图？
-- **使用场景是什么？** — 将搭配什么角色或场景使用？
-- **有无参考图？** — 游戏截图、现实照片、参考画面等
+- **What concept does this element represent?** — Scene, item, style, or pose?
+- **What are the core visual features?** — Color, material, atmosphere, composition?
+- **What is the usage scenario?** — What characters or scenes will it be paired with?
+- **Any reference images?** — Game screenshots, real photos, reference scenes
 
-**引导提问示例：**
-> "你想封装的这个概念，最突出的视觉特征是什么？是场景环境，还是某个具体物品/风格？"
+**Example guiding questions:**
+> "What visual concept do you want to encapsulate? What are its most prominent features — is it an environment, or a specific item/style?"
 
 ---
 
-## 第二段：视觉预览
+## Stage 2: Visual Preview
 
-根据元素类别选择合适的生图策略。
+Choose appropriate generation strategy based on element category.
 
-### 场景/环境类
+### Scene/Environment
 
 ```bash
-# 全景展示
+# Panorama view
 neta-cli make_image \
-  --prompt "生化危机4风格欧洲中世纪村庄，破旧石屋，燃烧篝火，浓雾弥漫，枯木，恐怖压抑氛围，写实风格，无人" \
+  --prompt "Resident Evil 4 style European medieval village, dilapidated stone houses, burning bonfire, thick fog, dead trees, horror atmosphere, realistic style, no people" \
   --aspect "16:9"
 
-# 氛围特写
+# Atmosphere close-up
 neta-cli make_image \
-  --prompt "破旧石屋墙面，苔藓，火把，浓雾，近景，写实风格" \
+  --prompt "Dilapidated stone house wall, moss, torch, thick fog, close-up, realistic style" \
   --aspect "3:4"
 ```
 
-### 物品/道具类
+### Items/Props
 
 ```bash
-# 物品展示（白背景，清晰展示细节）
+# Item showcase (white background, clear detail)
 neta-cli make_image \
-  --prompt "古老皮质魔法书，金色封印符文，略微破旧，白色背景，游戏道具图标风格" \
+  --prompt "Ancient leather magic book, golden seal runes, slightly worn, white background, game item icon style" \
   --aspect "1:1"
 ```
 
-### 风格/艺术类
+### Style/Artistic
 
 ```bash
-# 风格测试（用通用场景验证风格）
+# Style test (verify style with generic scene)
 neta-cli make_image \
-  --prompt "水墨风格，山水，竹林，留白，中国传统绘画美学，极简" \
+  --prompt "Ink wash painting style, mountains and water, bamboo forest, negative space, traditional Chinese painting aesthetics, minimalist" \
   --aspect "3:4"
 ```
 
-### 姿势/动作类
+### Poses/Actions
 
 ```bash
-# 姿势展示（配合角色）
+# Pose showcase (with character)
 neta-cli make_image \
-  --prompt "女性角色，战斗站姿，双手握剑，侧身，动感构图，白色背景，全身像" \
+  --prompt "Female character, battle stance, two-handed sword, side profile, dynamic composition, white background, full body" \
   --aspect "3:4"
 ```
 
-### 梗图/表情包类
+### Memes/Expressions
 
 ```bash
-# 梗图复现
+# Meme recreation
 neta-cli make_image \
-  --prompt "动漫风格女性，微微皱眉，手指向右侧，'这就是命运' 表情，轻松幽默" \
+  --prompt "Anime style female, slight frown, pointing to right, 'this is destiny' expression, lighthearted and humorous" \
   --aspect "1:1"
 ```
 
-### 迭代建议
+### Iteration Suggestions
 
-- 如果概念比较抽象，先生几张看看方向
-- 调整关键词顺序（靠前的词权重更高）
-- 加入艺术风格词稳定输出风格
-
----
-
-## 第三段：提炼封装
-
-### prompt 撰写规范
-
-> **这是最终存入元素的生图指令，将直接传给 `make_image` 模型读取**。
-
-**原则：**
-- 清晰、可组合 — 能和其他描述词拼接使用
-- 不要包含特定角色描述 — 元素应与角色无关（除非就是姿势类元素）
-- 精准描述核心视觉特征，避免模糊词
-
-**对比示例：**
-
-| 太模糊 ❌ | 精准 ✅ |
-|----------|--------|
-| `废弃村庄` | `生化危机4风格欧洲中世纪废弃村庄，破旧石屋，燃烧篝火，浓雾弥漫，恐怖压抑氛围` |
-| `古代武器` | `日本武士刀，细长刀身，紫色刀鞘，金属质感，微微发光` |
-| `有趣的姿势` | `女性角色，回眸站姿，长发飘动，侧身45度，白色背景` |
-
-### description 撰写规范
-
-> **这是供 Agent 读取的使用说明**，告诉 Agent 这个元素是什么、怎么用、有什么注意事项。
-
-**推荐格式：**
-```
-此元素表示[概念描述]。使用时[使用方法和搭配建议]。参考图展示[参考图说明]。[注意事项（如有）]。
-```
-
-**示例（场景类）：**
-```
-此元素表示生化危机4标志性的废弃欧洲中世纪村庄场景，充满恐怖压抑氛围。
-使用时搭配角色引用（@角色名）和夜晚、阴暗、恐怖等描述词，适合恐怖题材或游戏场景生图。
-参考图为原版RE4游戏村庄场景的视觉风格复现。
-注意：此元素以环境为主，生图时若需要人物，请单独在 prompt 中描述角色动作和位置。
-```
-
-**示例（风格类）：**
-```
-此元素表示日式水墨画风格，强调留白美学与意境感。
-使用时可搭配任意场景或角色，在 prompt 中加入 "水墨风格" 会自动激活该元素的视觉特征。
-参考图为传统水墨山水画风格测试图。适合诗意、古典、东方美学题材。
-```
-
-**示例（道具类）：**
-```
-此元素表示一本充满神秘感的古老魔法书，封面有金色符文。
-使用时将此元素作为画面中的道具引用，搭配魔法师角色或魔幻场景。
-参考图展示了书的整体外观和材质细节。可搭配 "手持魔法书"、"魔法书漂浮" 等动作描述。
-```
+- If concept is abstract, generate a few to see direction first
+- Adjust keyword order (earlier words have higher weight)
+- Add art style terms to stabilize output style
 
 ---
 
-## 第四段：确认铸造
+## Stage 3: Refinement & Encapsulation
 
-向用户展示完整配置：
+### Prompt Guidelines
+
+> **This is the final image generation instruction stored in the element, passed directly to `make_image` models.**
+
+**Principles:**
+- Clear, composable — Can be combined with other description words
+- Don't include specific character descriptions — Elements should be character-independent (unless it's a pose element)
+- Precisely describe core visual features, avoid vague words
+
+**Comparison examples:**
+
+| Too vague ❌ | Precise ✅ |
+|-------------|-----------|
+| `abandoned village` | `Resident Evil 4 style European medieval abandoned village, dilapidated stone houses, burning bonfire, thick fog, horror atmosphere` |
+| `ancient weapon` | `Japanese katana, slender blade, purple scabbard, golden handguard, steel edge, metallic reflection, white background` |
+| `interesting pose` | `Female character, looking back stance, flowing long hair, 45-degree side profile, white background, full body` |
+
+### Description Guidelines
+
+> **This is the usage guide for Agents**, telling Agents what this element is, how to use it, and any注意事项.
+
+**Recommended format:**
+```
+This element represents [concept description]. Use by [method and pairing suggestions]. Reference image shows [description]. [Notes (if any)].
+```
+
+**Example (scene):**
+```
+This element represents the iconic abandoned European medieval village from Resident Evil 4, filled with horror atmosphere.
+Use with character references (@CharacterName) and night, dark, horror description words, suitable for horror or game-style image generation.
+Reference image is a recreation of the original RE4 game village scene.
+Note: This element is environment-focused; if characters are needed in generation, separately describe character actions and positions in prompt.
+```
+
+**Example (style):**
+```
+This element represents Japanese ink wash painting style, emphasizing negative space aesthetics and artistic conception.
+Can be used with any scene or character; adding "ink wash style" to prompt will activate this element's visual features.
+Reference image is traditional ink wash landscape style test image. Suitable for poetic, classical, Eastern aesthetics.
+```
+
+**Example (prop):**
+```
+This element represents a mysterious ancient magic book with golden runes on the cover.
+Use as a prop reference in scenes, pairing with magician characters or fantasy scenes.
+Reference image shows the book's overall appearance and material details. Can be paired with "holding magic book", "magic book floating" action descriptions.
+```
+
+---
+
+## Stage 4: Confirmation & Forging
+
+Show complete configuration to user:
 
 ```
-元素名：RE4村庄
-prompt：生化危机4风格欧洲中世纪村庄，破旧石屋，燃烧篝火，浓雾弥漫，枯木，恐怖压抑氛围，写实风格
-description：此元素表示生化危机4标志性的废弃欧洲村庄场景…
-代表图：artifacts[0].uuid = xxxxxxxx
+Element Name: RE4 Village
+Prompt: Resident Evil 4 style European medieval village, dilapidated stone houses, burning bonfire, thick fog, dead trees, horror atmosphere, realistic style
+Description: This element represents the iconic abandoned European village from RE4...
+Representative Image: artifacts[0].uuid = xxxxxxxx
 ```
 
-确认后执行：
+After confirmation, execute:
 
 ```bash
 neta-cli create_elementum \
-  --name "RE4村庄" \
-  --artifact_uuid "代表图的artifacts[0].uuid" \
-  --prompt "生化危机4风格欧洲中世纪村庄，破旧石屋，燃烧篝火，浓雾弥漫，枯木，恐怖压抑氛围，写实风格" \
-  --description "此元素表示生化危机4标志性的废弃欧洲村庄场景，充满恐怖压抑氛围。使用时搭配角色引用和夜晚、阴暗等描述词，适合恐怖题材生图。参考图为原版RE4游戏村庄场景的视觉风格复现。" \
+  --name "RE4 Village" \
+  --artifact_uuid "representative image's artifacts[0].uuid" \
+  --prompt "Resident Evil 4 style European medieval village, dilapidated stone houses, burning bonfire, thick fog, dead trees, horror atmosphere, realistic style" \
+  --description "This element represents the iconic abandoned European village from Resident Evil 4, filled with horror atmosphere. Use with character references and night, dark description words, suitable for horror image generation. Reference image is a recreation of the original RE4 game village scene." \
   --accessibility "PUBLIC"
 ```
 
-### 创建成功后
+### After Successful Creation
 
-创建成功后，API 返回 `tcp_uuid`。告知用户：
-- 元素 UUID（tcp_uuid），用于后续更新
-- 如何在 make_image 中引用：`/RE4村庄`
-- 示例用法：`neta-cli make_image --prompt "@Ada Wong, /RE4村庄, 夜晚，战斗姿态" --aspect "3:4"`
+After successful creation, API returns `tcp_uuid`. Inform user:
+- Element UUID (tcp_uuid), for future updates
+- How to reference in make_image: `/RE4 Village`
+- Example usage: `neta-cli make_image --prompt "@Ada Wong, /RE4 Village, night, battle stance" --aspect "3:4"`
 
 ---
 
-## 相关文档
+## Related Documentation
 
-- [元素更新引导](./elementum-update.md) - 创建后的修改流程
-- [字段说明手册](./elementum-field-guide.md) - 所有字段的详细说明
+- [Elementum Update Guide](./elementum-update.md) - Post-creation modification workflow
+- [Field Reference Manual](./elementum-field-guide.md) - Detailed description of all fields

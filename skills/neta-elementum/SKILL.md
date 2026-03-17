@@ -1,19 +1,19 @@
 ---
 name: neta-elementum
-description: Neta 元素炼金技能 - 引导用户创建或更新风格元素（Elementum）Token（TCP）。Elementum 是对一个可视化概念（场景、道具、服装、武器、姿势、氛围、梗图等）的封装，创建后可在 make_image 中通过 /元素名 引用。当用户想要创建新元素、封装某个视觉风格或概念、修改已有元素时使用此技能。
+description: Neta Elementum Alchemy Skill - Guides users through creating or updating style element (Elementum) Tokens (TCP). Elementum encapsulates a visual concept (scene, prop, clothing, weapon, pose, atmosphere, meme, etc.) and can be referenced in make_image via /ElementName after creation. Use this skill when users want to create new elements, encapsulate visual styles or concepts, or modify existing elements.
 ---
 
 # Neta Elementum Skill
 
-通过「元素炼金」工作流，将任意可视化概念铸造为可复用的元素 Token（TCP/Elementum）。创建后可在 `make_image` 中通过 `/元素名` 引用。
+Through the "Elementum Alchemy" workflow, forge any visual concept into a reusable element Token (TCP/Elementum). Can be referenced in `make_image` via `/ElementName` after creation.
 
-> 本技能需要配合 **neta-creative** 技能使用 `make_image` 进行视觉预览。
+> This skill requires the **neta-creative** skill to use `make_image` for visual previews.
 
-## 前置条件
+## Prerequisites
 
-确保已设置环境变量 `NETA_TOKEN`。
+Ensure the environment variable `NETA_TOKEN` is set.
 
-确保已安装最新版本的 Neta Cli
+Ensure the latest version of Neta CLI is installed:
 ```
 neta-cli --version
 0.5.0
@@ -23,79 +23,79 @@ neta-cli --version
 npm i @talesofai/neta-cli@latest -g
 ```
 
-## 命令使用
+## Command Usage
 
-### 创建元素
+### Create Elementum
 
-**完整炼金流程（推荐）**
+**Full Alchemy Flow (Recommended)**
 
-遵循「概念确认 → 视觉预览 → 提炼封装 → 确认铸造」四段式流程。
+Follow the four-stage workflow: "Concept Confirmation → Visual Preview → Refinement → Confirmation".
 
-📖 [炼金引导](./references/elementum-alchemy.md) - 完整炼金工作流程与最佳实践
+📖 [Alchemy Guide](./references/elementum-alchemy.md) - Complete alchemy workflow and best practices
 
 ```bash
 neta-cli create_elementum \
-  --name "RE4村庄" \
-  --artifact_uuid "make_image返回的artifacts[0].uuid" \
-  --prompt "生化危机4风格欧洲中世纪村庄，破旧石屋，燃烧篝火，浓雾弥漫，枯木，恐怖压抑氛围，写实风格" \
-  --description "此元素表示生化危机4标志性的废弃欧洲村庄场景。使用时搭配夜晚、角色人物、恐怖氛围等描述词，可与角色引用同用。参考图为原版游戏村庄截图风格的复现。" \
+  --name "RE4 Village" \
+  --artifact_uuid "artifacts[0].uuid from make_image response" \
+  --prompt "Resident Evil 4 style European medieval village, dilapidated stone houses, burning bonfire, thick fog, dead trees, horror atmosphere, realistic style" \
+  --description "This element represents the iconic abandoned European village from Resident Evil 4. Use with night, character descriptions, horror atmosphere. Reference image recreates the original game village style." \
   --accessibility "PUBLIC"
 ```
 
-### 更新元素
+### Update Elementum
 
-**有针对性地修改（只传需要改的字段）**
+**Targeted Modifications (Only pass fields you want to change)**
 
-📖 [更新引导](./references/elementum-update.md) - 更新场景与流程
-
-```bash
-# 重新生图后更换代表图
-neta-cli update_elementum \
-  --tcp_uuid "元素的tcp_uuid" \
-  --artifact_uuid "新make_image返回的artifacts[0].uuid" \
-  --prompt "更新后的生图指令"
-
-# 只更新 Agent 使用说明
-neta-cli update_elementum \
-  --tcp_uuid "元素的tcp_uuid" \
-  --description "更新后的使用说明"
-```
-
-### 查询已有元素
+📖 [Update Guide](./references/elementum-update.md) - Update scenarios and workflow
 
 ```bash
-# 搜索元素（关键词匹配）
-neta-cli search_character_or_elementum --keywords "元素名" --parent_type "elementum"
+# Update representative image after regenerating
+neta-cli update_elementum \
+  --tcp_uuid "element's tcp_uuid" \
+  --artifact_uuid "new artifacts[0].uuid from make_image" \
+  --prompt "updated image generation instruction"
 
-# 获取元素完整详情（含 tcp_uuid）
-neta-cli request_character_or_elementum --name "元素名"
+# Only update Agent usage guide
+neta-cli update_elementum \
+  --tcp_uuid "element's tcp_uuid" \
+  --description "updated usage guide"
 ```
 
-## 参考文档
+### Query Existing Elementa
 
-| 场景 | 文档 |
-|------|------|
-| ⚗️ 元素炼金引导 | [elementum-alchemy.md](./references/elementum-alchemy.md) |
-| 🔧 元素更新引导 | [elementum-update.md](./references/elementum-update.md) |
-| 📋 字段说明手册 | [elementum-field-guide.md](./references/elementum-field-guide.md) |
+```bash
+# Search elements (keyword matching)
+neta-cli search_character_or_elementum --keywords "element name" --parent_type "elementum"
 
-## Elementum 能表示什么
+# Get full element details (including tcp_uuid)
+neta-cli request_character_or_elementum --name "element name"
+```
 
-Elementum 是对一个**可视化概念**的封装，适用范围很广：
+## Reference Documentation
 
-| 类别 | 示例 |
-|------|------|
-| 场景/环境 | 废弃村庄、赛博朋克街道、星空沙漠 |
-| 道具/物品 | 古老魔法书、未来武器、神圣圣杯 |
-| 服装/风格 | 汉服、赛博朋克战甲、洛丽塔裙 |
-| 姿势/动作 | 战斗站姿、回眸、飞跃动作 |
-| 氛围/光影 | 午后阳光、赛博霓虹、神秘暗影 |
-| 艺术风格 | 水墨风、像素风、漫画线稿 |
-| 梗图/表情包 | "这就是命运" 梗、星战女孩 |
+| Scenario | Document |
+|----------|----------|
+| ⚗️ Elementum Alchemy Guide | [elementum-alchemy.md](./references/elementum-alchemy.md) |
+| 🔧 Elementum Update Guide | [elementum-update.md](./references/elementum-update.md) |
+| 📋 Field Reference Manual | [elementum-field-guide.md](./references/elementum-field-guide.md) |
 
-## 使用建议
+## What Elementum Can Represent
 
-1. **先预览再铸造** - 用 `make_image` 生成元素代表图，确认视觉满意后再调用 `create_elementum`；`artifact_uuid` 即为代表图的 `artifacts[0].uuid`
-2. **prompt 给图像模型读** - `prompt` 是直接传给 `make_image` 的生图指令，语言要清晰、可组合、简洁精准；写完后应该能直接粘贴到 `make_image --prompt` 中使用
-3. **description 给 Agent 读** - `description` 告诉 Agent 这个元素是什么、适合怎么用、有什么注意事项；格式建议："此元素表示[概念]，使用时[方法]，参考图展示[说明]"
-4. **ref_image 用于风格锚定** - 如果有特定参考图（如游戏截图、参考画面），传入 `ref_image_uuid` 让图像模型锚定视觉风格
+Elementum encapsulates a **visual concept**, with wide applicability:
+
+| Category | Examples |
+|----------|----------|
+| Scene/Environment | Abandoned village, cyberpunk street, starry desert |
+| Props/Items | Ancient magic book, future weapon, holy grail |
+| Clothing/Style | Hanfu, cyberpunk armor, Lolita dress |
+| Poses/Actions | Battle stance, looking back, leap action |
+| Atmosphere/Lighting | Afternoon sunlight, cyber neon, mysterious shadow |
+| Art Styles | Ink wash, pixel art, comic line art |
+| Memes/Expressions | "This is destiny" meme, Star Wars girl |
+
+## Usage Recommendations
+
+1. **Preview before forging** - Use `make_image` to generate element representative images, confirm satisfaction before calling `create_elementum`; `artifact_uuid` is the `artifacts[0].uuid` from the representative image
+2. **prompt for image models** - `prompt` is the direct image generation instruction passed to `make_image`, should be clear, composable, concise and precise; after writing, it should be pasteable directly into `make_image --prompt`
+3. **description for Agents** - `description` tells Agents what this element is, how to use it, and any注意事项; recommended format: "This element represents [concept], use by [method], reference image shows [description]"
+4. **ref_image for style anchoring** - If there's a specific reference image (e.g., game screenshot, reference scene), pass `ref_image_uuid` to let image models anchor the visual style

@@ -28,7 +28,16 @@ const meta = parseMeta(
 const createCharacterParameters = Type.Object({
   name: Type.String({ description: meta.parameters.name }),
   gender: Type.Union(
-    [Type.Literal("自由"), Type.Literal("男"), Type.Literal("女")],
+    [
+      Type.Literal("男"),
+      Type.Literal("女"),
+      Type.Literal("自由"),
+      Type.Literal("其他"),
+      Type.Literal("male"),
+      Type.Literal("female"),
+      Type.Literal("neutral"),
+      Type.Literal("other"),
+    ],
     { description: meta.parameters.gender, default: "自由" },
   ),
   avatar_artifact_uuid: Type.String({
