@@ -55,11 +55,17 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-suggest
 
 # 空间导航与探索（space / topic）
 npx skills add talesofai/neta-skills/skills/zh_cn/neta-space
+
+# 角色 VToken 创建与管理
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-character
+
+# 元素 VToken 创建与管理
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 ```
 
 ### 可用指令总览
 
-当前技能共包含 **26 个命令**，覆盖创作、角色与社区探索等场景：
+当前技能共包含 **30 个命令**，覆盖创作、角色与社区探索等场景：
 
 | 分类 | 命令 | 说明 |
 |------|------|------|
@@ -70,6 +76,10 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-space
 | | `edit_collection` | 编辑已有玩法合集（名称、描述、标签、状态等） |
 | | `publish_collection` | 发布或更新玩法合集内容 |
 | | `search_character_or_elementum` | 搜索可复用的 TCP（角色 / 元素 / 玩法模块） |
+| **VToken 管理** | `create_character` | 创建角色 VToken（消耗电量） |
+| | `update_character` | 更新现有角色 VToken |
+| | `create_elementum` | 创建元素 VToken（消耗电量） |
+| | `update_elementum` | 更新现有元素 VToken |
 | **角色 Characters** | `request_character_or_elementum` | 通过名称或 UUID 获取角色 / 元素详情 |
 | **社区 Community** | `get_hashtag_info` | 查询标签基础信息与 worldbuilding lore |
 | | `get_hashtag_characters` | 获取标签下的角色列表 |
@@ -147,12 +157,16 @@ neta-skills/
 │   ├── neta-creative/              # 英文图片 / 视频 / 歌曲创作相关技能
 │   ├── neta-suggest/               # 英文推荐 / 搜索 / 分类导航技能
 │   ├── neta-space/                 # 英文空间与话题导航 / 探索技能
+│   ├── neta-character/             # 英文角色 VToken 创建与管理技能
+│   ├── neta-elementum/             # 英文元素 VToken 创建与管理技能
 │   └── zh_cn/                      # 中文本地化技能与参考文档
 │       ├── neta/
 │       ├── neta-community/
 │       ├── neta-creative/
 │       ├── neta-suggest/
-│       └── neta-space/
+│       ├── neta-space/
+│       ├── neta-character/
+│       └── neta-elementum/
 ├── src/                            # CLI 对应的 TypeScript 源码
 │   ├── apis/                       # 封装后的 Neta API 调用
 │   ├── commands/                   # CLI 命令定义（TS + YAML 描述）
@@ -182,6 +196,7 @@ neta-skills/
 - **图片与视频生成**：提示词结构、宽高比选择、从图到视频的完整链路。
 - **歌曲与 MV 创作**：歌词模板、风格设计、MV 视觉规划与多场景组合。
 - **角色与标签调研**：如何通过角色 / 标签 / 空间找到合适的创作方向。
+- **角色与元素创建**：角色创建和元素炼金的工作流。
 - **玩法内容探索**：使用 `suggest_*` 与 `suggest_content` 构建渐进式探索闭环。
 
 ---
