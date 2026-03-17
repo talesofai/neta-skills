@@ -6,6 +6,7 @@ description: |
   角色创建后可在 make_image 中通过 @角色名 引用。
 
   使用说明：
+    - 角色创建需要消耗电量；拥有无限电量或特殊权限的用户不受影响
     - avatar_artifact_uuid 来自 make_image 工具返回的 artifacts[0].uuid，即角色预览图的素材 UUID
     - prompt 只写纯视觉特征，不写性格、故事背景
     - trigger 必须为英文识别词，供图像模型和语言模型识别角色用
@@ -14,7 +15,7 @@ description: |
     - name：角色名称，最多128字符
     - prompt：纯视觉描述，供图像模型直接读取（生理特征、服装、特殊标志）
     - trigger：英文识别词，如 1girl, Ada Wong, black hair, red dress, spy
-    - description：供 Agent 和用户阅读，应包含外貌摘要 + 角色背景/故事
+    - description：供 Agent 和用户阅读，应包含外貌摘要 + 角色背景故事。多写一些可以获得更深的角色扮演体验（最多1000字符）
 
 parameters:
   name: 角色名称（最多128字符）
@@ -36,6 +37,7 @@ parameters:
   persona: 角色性格描述（可选）
   description: |
     角色简介，供 Agent 和用户阅读。
-    - 应包含：外貌摘要 + 角色背景故事/世界观
+    - 应包含：外貌摘要 + 角色背景故事/世界观/动机
+    - 多写一些可以获得更深的角色扮演体验和更丰富的角色互动（最多1000字符）
     - 示例："艾达·王，黑发红裙的神秘间谍，游走于各方势力之间，真实目的无人知晓。"
   occupation: 角色职业（可选）

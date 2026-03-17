@@ -6,6 +6,7 @@ description: |
   After creation, the character can be referenced in make_image using @CharacterName.
 
   Usage Notes:
+    - Character creation costs credits; users with unlimited credits or special privileges are not affected
     - avatar_artifact_uuid comes from make_image response artifacts[0].uuid (the preview image artifact UUID)
     - prompt should only describe visual features, not personality or backstory
     - trigger must be in English for image and language model recognition
@@ -14,7 +15,7 @@ description: |
     - name: Character name, max 128 characters
     - prompt: Visual description for image models (physical features, clothing, distinctive marks)
     - trigger: English recognition tags, e.g., "1girl, Ada Wong, black hair, red dress, spy"
-    - description: For Agents and users to read, should include appearance summary + backstory
+    - description: For Agents and users to read, should include appearance summary + backstory. Write more for deeper roleplay (up to 1000 characters).
 
 parameters:
   name: Character name (max 128 characters)
@@ -36,6 +37,7 @@ parameters:
   persona: Character personality description (optional)
   description: |
     Character description for Agents and users to read.
-    - Should include: appearance summary + backstory/worldview
+    - Should include: appearance summary + backstory/worldview/motivations
+    - Write more for deeper roleplay and richer character interactions (up to 1000 characters)
     - Example: "Ada Wong, a mysterious spy with black hair and red dress. Her true identity is unknown, and she has repeatedly appeared as a middleman in Resident Evil incidents."
   occupation: Character occupation (optional)

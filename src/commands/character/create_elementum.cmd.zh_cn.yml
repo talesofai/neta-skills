@@ -6,6 +6,7 @@ description: |
   元素代表一个可视化概念（场景、道具、服装、武器、姿势、梗图等），创建后可在 make_image 中通过 /元素名 引用。
 
   使用说明：
+    - 元素创建需要消耗电量；拥有无限电量或特殊权限的用户不受影响
     - artifact_uuid 来自 make_image 工具返回的 artifacts[0].uuid，即元素预览图的素材 UUID
     - prompt 是直接传给图像模型的生图指令，应清晰、可组合
     - description 是给 Agent 读取的元说明，告诉 Agent 这个元素是什么、怎么用
@@ -15,7 +16,7 @@ description: |
     - description：Agent 读取的使用说明，格式建议："此元素表示X，使用时搭配Y，参考图为Z"
 
 parameters:
-  name: 元素名称（最多32字符）
+  name: 元素名称（最多128字符）
   artifact_uuid: 元素代表图的素材 UUID，来自 make_image 返回的 artifacts[0].uuid
   prompt: |
     图像模型直读的生图指令。

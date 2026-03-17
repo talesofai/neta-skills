@@ -6,6 +6,7 @@ description: |
   An element represents a visual concept (scene, prop, clothing, weapon, pose, meme, etc.). After creation, it can be referenced in make_image using /ElementName.
 
   Usage Notes:
+    - Elementum creation costs credits; users with unlimited credits or special privileges are not affected
     - artifact_uuid comes from make_image response artifacts[0].uuid (the preview image artifact UUID)
     - prompt is the direct image generation instruction passed to the image model
     - description is metadata for Agents explaining what this element is and how to use it
@@ -15,7 +16,7 @@ description: |
     - description: Agent-facing usage guide, format: "This element represents X, use with Y, reference image shows Z"
 
 parameters:
-  name: Element name (max 32 characters)
+  name: Element name (max 128 characters)
   artifact_uuid: Element representative image artifact UUID from make_image response artifacts[0].uuid
   prompt: |
     Direct image generation instruction for the model.

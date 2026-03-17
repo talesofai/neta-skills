@@ -23,5 +23,8 @@ parameters:
   age: New age, omit to keep unchanged, pass "" to clear
   interests: New interests, omit to keep unchanged, pass "" to clear
   persona: New personality description, omit to keep unchanged, pass "" to clear
-  description: New character description, omit to keep unchanged, pass "" to clear
+  description: |
+    New character description, omit to keep unchanged, pass "" to clear.
+    - Should include: appearance summary + backstory/worldview/motivations
+    - Write more for deeper roleplay and richer character interactions (up to 1000 characters)
   occupation: New occupation, omit to keep unchanged, pass "" to clear
