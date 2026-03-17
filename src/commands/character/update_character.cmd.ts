@@ -1,6 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import type { CreateCharacterParams } from "../../apis/tcp.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
+import { mapProfileToCharacterAssign } from "../../utils/tcp_mapper.ts";
 import { createCommand } from "../factory.ts";
 
 const meta = parseMeta(
@@ -95,6 +96,7 @@ export const updateCharacter = createCommand(
     if (description !== undefined) params.description = description;
     if (occupation !== undefined) params.occupation = occupation;
 
-    return await apis.tcp.updateCharacter(tcp_uuid, params);
+    const result = await apis.tcp.updateCharacter(tcp_uuid, params);
+    return { detail: mapProfileToCharacterAssign(result) };
   },
 );

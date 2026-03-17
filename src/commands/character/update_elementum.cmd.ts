@@ -1,6 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import type { CreateElementumParams } from "../../apis/tcp.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
+import { mapProfileToElementumAssign } from "../../utils/tcp_mapper.ts";
 import { createCommand } from "../factory.ts";
 
 const meta = parseMeta(
@@ -69,6 +70,7 @@ export const updateElementum = createCommand(
     if (ref_image_uuid !== undefined) params.ref_image_uuid = ref_image_uuid;
     if (accessibility !== undefined) params.accessibility = accessibility;
 
-    return await apis.tcp.updateElementum(tcp_uuid, params);
+    const result = await apis.tcp.updateElementum(tcp_uuid, params);
+    return { detail: mapProfileToElementumAssign(result) };
   },
 );

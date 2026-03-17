@@ -1,10 +1,46 @@
 import type { AxiosInstance } from "axios";
 import type { GenericPagination, OriginalCharacterProfile } from "./types.ts";
 
+// Legacy minimal response (deprecated)
 type TCPResponse = {
   tcp_uuid: string;
   name: string;
   type: string;
+};
+
+// Rich TCP profile response from v3 endpoints (matches TravelCharacterParentProfileDto)
+export type TCPProfileConfig = {
+  avatar_img?: string;
+  header_img?: string;
+};
+
+export type TCPProfileBio = {
+  name?: string;
+  age?: string;
+  interests?: string;
+  persona?: string;
+  description?: string;
+  occupation?: string;
+};
+
+export type TravelCharacterParentProfileDto = {
+  uuid: string;
+  name: string;
+  type: "oc" | "official" | "elementum";
+  config: TCPProfileConfig;
+  oc_bio: TCPProfileBio;
+  gender?: string;
+  world_id?: number;
+  owner_tc_uuid?: string;
+  owner_tc_traits?: unknown[];
+  owner_profile?: unknown;
+  hashtags?: string[];
+  can_submit_appeal?: boolean;
+  status?: string;
+  accessibility?: string;
+  platform?: string;
+  ref_uuid?: string;
+  user_id?: number;
 };
 
 export type TCPAccessibility = "PUBLIC" | "PRIVATE";
@@ -74,7 +110,7 @@ export const createTcpApis = (client: AxiosInstance) => {
 
   const createCharacter = async (params: CreateCharacterParams) => {
     return client
-      .post<TCPResponse>("/v3/oc/character", params)
+      .post<TravelCharacterParentProfileDto>("/v3/oc/character", params)
       .then((res) => res.data);
   };
 
@@ -83,13 +119,16 @@ export const createTcpApis = (client: AxiosInstance) => {
     params: Partial<CreateCharacterParams>,
   ) => {
     return client
-      .patch<TCPResponse>(`/v3/oc/character/${tcp_uuid}`, params)
+      .patch<TravelCharacterParentProfileDto>(
+        `/v3/oc/character/${tcp_uuid}`,
+        params,
+      )
       .then((res) => res.data);
   };
 
   const createElementum = async (params: CreateElementumParams) => {
     return client
-      .post<TCPResponse>("/v3/oc/elementum", params)
+      .post<TravelCharacterParentProfileDto>("/v3/oc/elementum", params)
       .then((res) => res.data);
   };
 
@@ -98,7 +137,10 @@ export const createTcpApis = (client: AxiosInstance) => {
     params: Partial<CreateElementumParams>,
   ) => {
     return client
-      .patch<TCPResponse>(`/v3/oc/elementum/${tcp_uuid}`, params)
+      .patch<TravelCharacterParentProfileDto>(
+        `/v3/oc/elementum/${tcp_uuid}`,
+        params,
+      )
       .then((res) => res.data);
   };
 
@@ -111,3 +153,5 @@ export const createTcpApis = (client: AxiosInstance) => {
     updateElementum,
   };
 };
+
+export type { TCPResponse };

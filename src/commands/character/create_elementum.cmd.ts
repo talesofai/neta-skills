@@ -1,5 +1,6 @@
 import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.ts";
+import { mapProfileToElementumAssign } from "../../utils/tcp_mapper.ts";
 import { createCommand } from "../factory.ts";
 
 const meta = parseMeta(
@@ -46,7 +47,7 @@ export const createElementum = createCommand(
     { name, artifact_uuid, prompt, description, ref_image_uuid, accessibility },
     { apis },
   ) => {
-    return await apis.tcp.createElementum({
+    const result = await apis.tcp.createElementum({
       name,
       artifact_uuid,
       prompt,
@@ -54,5 +55,6 @@ export const createElementum = createCommand(
       ref_image_uuid,
       accessibility,
     });
+    return { detail: mapProfileToElementumAssign(result) };
   },
 );

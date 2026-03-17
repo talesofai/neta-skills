@@ -1,5 +1,6 @@
 import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.ts";
+import { mapProfileToCharacterAssign } from "../../utils/tcp_mapper.ts";
 import { createCommand } from "../factory.ts";
 
 const meta = parseMeta(
@@ -75,7 +76,7 @@ export const createCharacter = createCommand(
     },
     { apis },
   ) => {
-    return await apis.tcp.createCharacter({
+    const result = await apis.tcp.createCharacter({
       name,
       gender,
       avatar_artifact_uuid,
@@ -90,5 +91,7 @@ export const createCharacter = createCommand(
       description,
       occupation,
     });
+
+    return { detail: mapProfileToCharacterAssign(result) };
   },
 );
