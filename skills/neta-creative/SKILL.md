@@ -22,15 +22,15 @@ Also ensure the latest Neta CLI is installed:
 
 ```bash
 neta-cli --version
-0.6.0
+0.7.0
 ```
 
 ```bash
-npm i @talesofai/neta-cli@latest -g
+npm i @talesofai/neta-skills@latest -g
 ```
 
 ```bash
-pnpm add -g @talesofai/neta-cli@latest
+pnpm add -g @talesofai/neta-skills@latest
 ```
 
 ## Commands

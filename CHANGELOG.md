@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.7.0
+
+### Minor Changes
+
+- docs fix
+
 ## 0.6.0
 
 ### Minor Changes

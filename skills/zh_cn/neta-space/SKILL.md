@@ -24,15 +24,15 @@ description: Neta API 空间与世界观浏览技能——按空间/标签维度
 确保已安装最新版本的 Neta Cli
 ```
 neta-cli --version
-0.6.0
+0.7.0
 ```
 
 ```
-npm i @talesofai/neta-cli@latest -g
+npm i @talesofai/neta-skills@latest -g
 ```
 
 ```
-pnpm add -g @talesofai/neta-cli@latest
+pnpm add -g @talesofai/neta-skills@latest
 ```
 
 ## 空间

@@ -92,19 +92,19 @@ The skill includes **26 commands** for various tasks:
 
 ---
 
-### 🛠️ CLI Usage (`@talesofai/neta-cli`)
+### 🛠️ CLI Usage (`@talesofai/neta-skills`)
 
-The project also ships a standalone CLI package `@talesofai/neta-cli` for testing, scripting, and CI automation.
+The project also ships a standalone CLI package `@talesofai/neta-skills` for testing, scripting, and CI automation.
 
 #### Install CLI
 
 ```bash
 # Global install (recommended)
-npm install -g @talesofai/neta-cli
+npm install -g @talesofai/neta-skills
 
 # Or use npx / pnpm dlx without global install
-npx @talesofai/neta-cli --help
-pnpm dlx @talesofai/neta-cli --help
+npx @talesofai/neta-skills --help
+pnpm dlx @talesofai/neta-skills --help
 ```
 
 Configure your environment:
@@ -145,7 +145,7 @@ neta-skills/
 │   ├── neta-suggest/               # Discovery & suggestion skill
 │   └── neta-space/                 # Space navigation & exploration skill
 ├── packages/
-│   └── neta-cli/                   # Published CLI package (@talesofai/neta-cli)
+│   └── neta-cli/                   # Published CLI package (@talesofai/neta-skills)
 │       ├── bin/                    # Compiled JS CLI entry
 │       ├── src/                    # CLI-only source (commands, IO, etc.)
 │       └── scripts/                # Build / post-build / validation scripts

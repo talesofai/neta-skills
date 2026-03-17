@@ -96,19 +96,19 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-space
 
 ---
 
-### 🛠️ CLI 使用（`@talesofai/neta-cli`）
+### 🛠️ CLI 使用（`@talesofai/neta-skills`）
 
-项目同时提供了一个独立的 CLI 包 `@talesofai/neta-cli`，适合在本地终端、脚本和 CI 中直接调用 Neta API。
+项目同时提供了一个独立的 CLI 包 `@talesofai/neta-skills`，适合在本地终端、脚本和 CI 中直接调用 Neta API。
 
 #### 安装 CLI
 
 ```bash
 # 全局安装（推荐）
-npm install -g @talesofai/neta-cli
+npm install -g @talesofai/neta-skills
 
 # 或者使用 npx / pnpm dlx 临时调用
-npx @talesofai/neta-cli --help
-pnpm dlx @talesofai/neta-cli --help
+npx @talesofai/neta-skills --help
+pnpm dlx @talesofai/neta-skills --help
 ```
 
 配置环境变量：
@@ -153,7 +153,7 @@ neta-skills/
 │   ├── neta-suggest/               # 推荐 / 搜索 / 分类导航等探索技能
 │   └── neta-space/                 # 空间与话题导航 / 探索技能
 ├── packages/
-│   └── neta-cli/                   # CLI 包（发布名：@talesofai/neta-cli）
+│   └── neta-cli/                   # CLI 包（发布名：@talesofai/neta-skills）
 │       ├── bin/                    # CLI 入口构建产物
 │       ├── src/                    # 仅 CLI 相关的源码（命令、IO 等）
 │       └── scripts/                # 构建 / 发布 / 校验脚本
