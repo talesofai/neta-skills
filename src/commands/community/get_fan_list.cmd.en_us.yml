@@ -1,0 +1,4 @@
+name: get_fan_list
+title: Get Fans List
+description: Retrieve the list of followers (fans) of the current user, with pagination support.
+

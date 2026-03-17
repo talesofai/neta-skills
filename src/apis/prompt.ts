@@ -6,6 +6,7 @@ import {
   stringToPrompts,
   type Vtokens,
 } from "../utils/prompts.ts";
+import type { createArtifactApis } from "./artifact.ts";
 import type { createTcpApis } from "./tcp.ts";
 import type { CharacterAssign, ElementumAssign } from "./types.ts";
 
@@ -14,6 +15,7 @@ const PRESET_DOMAIN_IMG_REF = "APP/单图/图生图";
 export const createPromptApis = (
   client: AxiosInstance,
   tcpApis: ReturnType<typeof createTcpApis>,
+  artifactApis: ReturnType<typeof createArtifactApis>,
 ) => {
   const parseVtokens = async (
     prompt: string,
@@ -24,9 +26,23 @@ export const createPromptApis = (
     },
   ): Promise<Vtokens[]> => {
     const insPrompts = stringToPrompts(prompt, options);
-    const imgModes = insPrompts.some((p) => p.type === "ref_image")
-      ? await img2imgModes()
-      : [];
+    const refImages = insPrompts.filter((p) => p.type === "ref_image");
+
+    const artifacts = await artifactApis
+      .artifactDetail(refImages.map((p) => p.ref_img_uuid ?? ""))
+      .catch(() => []);
+
+    artifacts.forEach((artifact) => {
+      if (!artifact) return;
+      if (artifact.status !== "SUCCESS") return;
+      if (artifact.modality !== "PICTURE") return;
+      if (!artifact.url) return;
+      const refImage = refImages.find((p) => p.ref_img_uuid === artifact.uuid);
+      if (!refImage) return;
+      refImage.value = artifact.url;
+    });
+
+    const imgModes = refImages.length > 0 ? await img2imgModes() : [];
 
     const resPrompts = await Promise.all(
       insPrompts.map(async (p) => {
@@ -46,7 +62,8 @@ export const createPromptApis = (
           if (p.value === REF_IMG_PROMPT_PLACEHOLDER) return null;
           if (!p.ref_img_uuid) return null;
           if (!p.value) return null;
-          const imgMode = imgModes.find((m) => m.name === p.name);
+          const imgMode =
+            imgModes.find((m) => m.name === p.name) ?? imgModes[0];
           if (!imgMode) return null;
 
           return {

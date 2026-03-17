@@ -37,26 +37,26 @@
 
 ### 🚀 在 Agent 中使用技能
 
-在你的 Agent 环境中安装统一的 [`neta`](skills/neta/SKILL.md) 技能：
+在你的 Agent 环境中安装统一的 [`neta`](skills/zh_cn/neta/SKILL.md) 技能：
 
 ```bash
-npx skills add talesofai/neta-skills/skills/neta
+npx skills add talesofai/neta-skills/skills/zh_cn/neta
 ```
 
 如果你希望在 Agent 中按功能模块更精细地控制权限，也可以分别安装拆分后的技能：
 
 ```bash
 # 社区 / 标签 / 空间探索
-npx skills add talesofai/neta-skills/skills/neta-community
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-community
 
 # 图片 / 视频 / 歌曲创作
-npx skills add talesofai/neta-skills/skills/neta-creative
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-creative
 
 # 关键词 / 标签 / 分类 / 内容推荐与检索
-npx skills add talesofai/neta-skills/skills/neta-suggest
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-suggest
 
 # 空间导航与探索（space / topic）
-npx skills add talesofai/neta-skills/skills/neta-space
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-space
 ```
 
 #### 可用指令总览
@@ -181,7 +181,26 @@ neta-skills/
 | 变量名 | 必需 | 默认值 | 说明 |
 |--------|------|--------|------|
 | `NETA_TOKEN` | ✅ | - | Neta Art API 访问令牌 |
-| `NETA_API_BASE_URL` | ❌ | `https://api.talesofai.cn` | Neta API 网关地址 |
+| `NETA_API_BASE_URL` | ❌ | zh_cn: `https://api.talesofai.cn`；en_us: `https://api.talesofai.com` | Neta API 网关地址 |
+
+#### 多语言与本地化（i18n）
+
+CLI 与 Skills 会根据系统与环境变量自动选择使用的语言：
+
+- 系统语言或环境变量以 `zh` 开头（如 `zh_CN`、`en_US`）→ 使用 `zh_cn` 文案与元数据；
+- 其他语言环境 → 默认使用 `en_us` 文案与元数据。
+
+在终端环境中，可以通过以下方式影响语言选择：
+
+- 操作系统语言设置（macOS / Linux / Windows）；
+- Shell 中的本地化环境变量：`LC_ALL`、`LC_MESSAGES`、`LANG`、`LANGUAGE` 等。
+
+在需要强制指定语言时，推荐在运行命令前显式设置环境变量，例如：
+
+```bash
+LC_ALL=zh_CN.UTF-8 neta-cli make_image --help
+LANG=en_US.UTF-8 neta-cli make_image --help
+```
 
 ---
 
@@ -195,16 +214,16 @@ corepack enabled
 pnpm i
 
 # TypeScript 类型检查
-pnpm -r type-check
+pnpm type-check
 
 # 代码检查（lint）
 pnpm lint
 
 # 本地调试技能（watch / dev）
-pnpm dev:skills <command> [options]
+pnpm dev <command> [options]
 
 # 构建 bin 脚本
-pnpm -r build
+pnpm build
 ```
 
 ---

@@ -1,6 +1,12 @@
 name: request_character_or_elementum
 title: 请求角色或元素
 description: 通过名称(精确匹配)或UUID获取角色或元素的详细信息
+errors:
+  missing_id: 必须提供 name 或 uuid 参数之一
+  not_found: 未找到角色或元素 {identifier}
+  type_mismatch_character: 找到的类型为 "character"（角色），但指定了 parent_type="elementum"（风格元素）。请调整 parent_type 参数或使用不同的名称搜索。
+  type_mismatch_elementum: 找到的类型为 "elementum"（风格元素），但指定了 parent_type="character"（角色）。请调整 parent_type 参数或使用不同的名称搜索。
+  unknown_type: 未知 TCP 类型 {type}
 parameters:
   name: |
     角色或元素的名称(精确匹配)

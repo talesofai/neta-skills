@@ -1,0 +1,4 @@
+name: suggest_categories
+title: 📂 Suggest Category Hierarchy
+description: Return navigation suggestions for the requested level in the content category hierarchy (category navigation suggestions).
+

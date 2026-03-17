@@ -1,0 +1,4 @@
+name: suggest_keywords
+title: 🔍 Suggest Search Keywords
+description: Return suggested search keywords based on a user‑provided prefix (search keyword autocomplete).
+

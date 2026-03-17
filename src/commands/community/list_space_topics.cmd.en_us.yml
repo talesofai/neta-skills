@@ -1,0 +1,7 @@
+name: list_space_topics
+title: List Topics in Space
+description: List topics (sub‑spaces) within a space.
+
+parameters:
+  space_uuid: UUID of the space.
+

@@ -1,0 +1,4 @@
+name: suggest_tags
+title: 🏷️ Suggest Related Tags
+description: Return related tag suggestions based on a full search keyword (tag matching suggestions).
+

@@ -1,0 +1,10 @@
+remove_background:
+  name: remove_background
+  title: Remove Image Background
+  description: Remove the background of an input image while preserving the main subject, and return an image with a transparent background.
+
+remove_background_nocrop:
+  name: remove_background_nocrop
+  title: Remove Image Background (No Cropping)
+  description: Remove the background of the input image and return a transparent‑background image without cropping transparent edges.
+

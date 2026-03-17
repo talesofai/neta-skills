@@ -7,6 +7,9 @@ const meta = parseMeta(
     name: Type.String(),
     title: Type.String(),
     description: Type.String(),
+    errors: Type.Object({
+      no_activity_space: Type.String(),
+    }),
   }),
   import.meta,
 );
@@ -42,7 +45,12 @@ export const getHashtagCollections = createCommand(
     const activity_uuid = activityDetail?.uuid;
 
     if (!activity_uuid) {
-      throw new Error(`Hashtag "${hashtag}" 未关联任何活动空间`);
+      throw new Error(
+        meta.errors.no_activity_space.replace(
+          "{hashtag}",
+          String(hashtag ?? "").trim(),
+        ),
+      );
     }
 
     const result = await apis.activity.fetchSelectedCollections(activity_uuid, {

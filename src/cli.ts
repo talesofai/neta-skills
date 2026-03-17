@@ -2,7 +2,7 @@
 import { program } from "@commander-js/extra-typings";
 import dotenv from "dotenv-flow";
 import pkg from "../package.json" with { type: "json" };
-import { buildCommands, loadCommands } from "./commands/load.ts";
+import { buildCommands } from "./commands/load.ts";
 
 // Load environment variables
 dotenv.config();
@@ -12,14 +12,13 @@ program
   .description("NETA CLI - Neta API Client")
   .version(pkg.version);
 
-const commands = await loadCommands(["creative", "community"]);
-await buildCommands(
-  program
-    .option("--token", "neta token (default: from env NETA_TOKEN)")
-    .option(
-      "--api_base_url",
-      "api base url (default: from env NETA_API_BASE_URL)",
-    ),
-  commands,
-);
-program.parse(process.argv);
+const cli = program
+  .option("--token <string>", "neta token (default: from env NETA_TOKEN)")
+  .option(
+    "--api_base_url <string>",
+    "api base url (default: NETA_API_BASE_URL or locale-based default)",
+  );
+
+await buildCommands(cli);
+
+cli.parse(process.argv);

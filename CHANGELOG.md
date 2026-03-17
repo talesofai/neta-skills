@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.6.0
+
+### Minor Changes
+
+- i18n changes for commands
+
 ## 0.5.0
 
 ### Minor Changes

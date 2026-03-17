@@ -1,109 +1,123 @@
 ---
 name: neta-community
-description: Neta API 社区技能——浏览互动推荐流、查看作品详情、进行点赞等社区互动，并在社区语境下基于标签和角色浏览内容。当用户想“随便看看大家在玩什么”“刷推荐流”“对作品进行互动”时使用本技能；不负责分类/关键词层面的调研与复杂推荐筛选（这些由 neta-suggest 负责），也不直接生成图片/视频/歌曲（由 neta-creative 负责）。
+description: Neta API community skill — browse interactive feeds, view collection details, like and interact with content, and browse content by tags and characters in a community context. Use this skill when the user wants to “see what people are making”, “scroll the feed”, or “interact with works”. Do not use it for taxonomy/keyword‑level research (handled by neta-suggest) or for generating images/videos/songs (handled by neta-creative).
 ---
 
 # Neta Community Skill
 
-用于与 Neta API 交互，进行社区内容浏览、互动及标签查询。
+Used to interact with the Neta API for community feed browsing, interactions, and tag‑based queries.
 
 ## Instructions
 
-1. 对于「**看社区里有什么内容**」「刷时间线/推荐流」「对作品点赞或互动」这类任务，可按以下方式使用本 skill：
-2. 推荐使用流程：
-   - 使用推荐流命令获取内容列表；
-   - 通过作品详情命令查看单个作品；
-   - 根据需要对作品进行点赞等互动。
-3. 若用户需要「按分类/关键词做系统性调研或复杂筛选」，应切换到 `neta-suggest`。
-4. 若用户希望直接**创作新内容**（图片/视频/歌曲/MV），应切换到 `neta-creative`。
+1. For tasks like **“see what’s in the community”**, **“scroll the feed”**, or **“like or interact with works”**, use this skill as follows:
+2. Recommended flow:
+   - Use the feed command to fetch a list of recommended content.
+   - Use the collection‑detail command to inspect a specific work.
+   - Perform likes and other interactions on works as needed.
+3. If the user needs **systematic research or complex filtering by categories/keywords**, switch to `neta-suggest`.
+4. If the user wants to **create new content** (images/videos/songs/MVs), switch to `neta-creative`.
 
-## 前置条件
+## Prerequisites
 
-确保已设置环境变量 `NETA_TOKEN`。
+Make sure the `NETA_TOKEN` environment variable is set.
 
-确保已安装最新版本的 Neta Cli
-```
+Install the latest version of the Neta CLI:
+
+```bash
 neta-cli --version
-0.5.0
+0.6.0
 ```
 
-```
+```bash
 npm i @talesofai/neta-cli@latest -g
 ```
 
-```
+```bash
 pnpm add -g @talesofai/neta-cli@latest
 ```
 
-## 命令使用
+## Commands
 
-### 内容推荐流
+### Feed
 
-**推荐流获取**
+**Get interactive feed**
+
 ```bash
 neta-cli request_interactive_feed --page_index 0 --page_size 3
 ```
 
-**获取内容详细信息**
+**Get collection details**
+
 ```bash
-neta-cli read_collection --uuid "作品-uuid"
+neta-cli read_collection --uuid "collection-uuid"
 ```
 
-📖 [详细指南](./references/interactive-feed.md)
+📖 [Detailed guide](./references/interactive-feed.md)
 
-### 社区互动
+### Community interactions
+
 ```bash
-neta-cli like_collection --uuid "目标作品 UUID"
-```
-📖 [详细指南](./references/social-interactive.md)
-
-### 标签查询
-
-**获取标签信息**
-```bash
-neta-cli get_hashtag_info --hashtag "标签名"
-```
-📖 [详细指南](./references/hashtag-research.md) - 调研流程、分析方法
-
-**获取标签角色**
-```bash
-neta-cli get_hashtag_characters --hashtag "标签名" --sort_by "hot"
+neta-cli like_collection --uuid "target collection UUID"
 ```
 
-**获取标签合集**
+📖 [Detailed guide](./references/social-interactive.md)
+
+### Tag queries
+
+**Get tag info**
+
 ```bash
-neta-cli get_hashtag_collections --hashtag "标签名"
+neta-cli get_hashtag_info --hashtag "tag_name"
 ```
 
-### 角色查询
+📖 [Detailed guide](./references/hashtag-research.md) — research flow and analysis methods.
 
-**搜索角色**
-```bash
-neta-cli search_character_or_elementum --keywords "关键词" --parent_type "character" --sort_scheme "exact"
-```
-📖 [详细指南](./references/character-search.md) - 搜索策略、参数选择
+**Get characters under a tag**
 
-**获取角色详情**
 ```bash
-neta-cli request_character_or_elementum --name "角色名"
+neta-cli get_hashtag_characters --hashtag "tag_name" --sort_by "hot"
 ```
 
-**通过 UUID 查询**
+**Get collections under a tag**
+
+```bash
+neta-cli get_hashtag_collections --hashtag "tag_name"
+```
+
+### Character queries
+
+**Search characters**
+
+```bash
+neta-cli search_character_or_elementum --keywords "keywords" --parent_type "character" --sort_scheme "exact"
+``]
+
+📖 [Detailed guide](./references/character-search.md) — search strategies and parameter choices.
+
+**Get character details**
+
+```bash
+neta-cli request_character_or_elementum --name "character_name"
+```
+
+**Query by UUID**
+
 ```bash
 neta-cli request_character_or_elementum --uuid "uuid"
 ```
 
-## 参考文档
+## Reference docs
 
-| 场景 | 文档 |
-|------|------|
-| 🎮 互动玩法推荐  | [interactive-feed.md](./references/interactive-feed.md) |
-| 💬 社区互动    | [social-interactive.md](./references/social-interactive.md) |
-| 🏷️ 标签调研 | [hashtag-research.md](./references/hashtag-research.md) |
-| 👤 角色查询 | [character-search.md](./references/character-search.md) |
+| Scenario                 | Doc                                               |
+|--------------------------|---------------------------------------------------|
+| 🎮 Interactive feed      | [interactive-feed.md](./references/interactive-feed.md) |
+| 💬 Community interactions| [social-interactive.md](./references/social-interactive.md) |
+| 🏷️ Tag research         | [hashtag-research.md](./references/hashtag-research.md)   |
+| 👤 Character queries     | [character-search.md](./references/character-search.md)   |
 
-## 使用建议
+## Usage tips
 
-1. **先浏览后互动**：先通过推荐流了解整体内容分布，再对感兴趣的作品进行点赞等互动。
-2. **结合标签使用**：在社区语境下使用标签与角色查询，可以快速聚焦到相关作品集合。
-3. **与调研/创作 skill 联动**：当需要更深入的标签/分类调研时配合 `neta-suggest`，当需要从社区作品出发进行二创时配合 `neta-creative`。
+1. **Browse before interacting**: use the feed first to understand the overall content landscape, then interact (like, etc.) with the works that matter.
+2. **Leverage tags**: combining tag queries with character searches quickly focuses on the most relevant set of works.
+3. **Combine with research/creation skills**: use `neta-suggest` for deeper tag/category research, and `neta-creative` when you want to create derivative works based on community content.
+

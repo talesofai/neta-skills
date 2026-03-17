@@ -174,7 +174,26 @@ Both the AI agent skills and the CLI require the following environment configura
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `NETA_TOKEN` | ✅ | - | Your Neta Art API access token. |
-| `NETA_API_BASE_URL` | ❌ | `https://api.talesofai.cn` | Base URL for the Neta API. |
+| `NETA_API_BASE_URL` | ❌ | `zh_cn`: `https://api.talesofai.cn`; `en_us`: `https://api.talesofai.com` | Base URL for the Neta API. |
+
+#### i18n and locale detection
+
+The CLI and skills automatically detect the current locale and map it to internal language variants:
+
+- Locales starting with `zh` (for example, `zh_CN`, `en_US`) → use `zh_cn` docs and metadata.
+- All other locales → default to `en_us` docs and metadata.
+
+In terminal environments, locale is typically controlled by:
+
+- Your operating system language settings (macOS / Linux / Windows), and
+- Environment variables such as `LC_ALL`, `LC_MESSAGES`, `LANG`, and `LANGUAGE`.
+
+If you want to force a specific language for a single command, you can prefix it with the desired locale, for example:
+
+```bash
+LC_ALL=zh_CN.UTF-8 neta-cli make_image --help
+LANG=en_US.UTF-8 neta-cli make_image --help
+```
 
 ---
 
@@ -188,16 +207,16 @@ corepack enabled
 pnpm i
 
 # Run TypeScript type checking
-pnpm -r type-check
+pnpm type-check
 
 # Run lint
 pnpm lint
 
 # Test CLI commands locally
-pnpm dev:skills <command> [options]
+pnpm dev <command> [options]
 
 # Build bin scripts
-pnpm -r build
+pnpm build
 ```
 
 ---

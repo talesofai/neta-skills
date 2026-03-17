@@ -1,0 +1,5 @@
+name: suggest_content
+title: 🧠 Content Suggestion Engine (Recommend/Search/Exact Modes)
+description: |
+  Return a personalized content feed according to the specified intent and filters (content feed suggestion).
+

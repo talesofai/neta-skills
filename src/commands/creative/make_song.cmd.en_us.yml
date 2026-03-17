@@ -1,0 +1,8 @@
+name: make_song
+title: Generate Song
+description: Generate a song from lyrics and a high-level musical description.
+parameters:
+  prompt: A description of the music, used to specify style, mood, and scenario. For example "Pop music, sad, suitable for a rainy night."
+  lyrics: |
+    The lyrics of the song. Use \n to separate each line. You can add structure tags such as [Intro], [Verse], [Pre Chorus], [Chorus], [Interlude], [Bridge], [Outro], [Post Chorus], [Transition], [Break], [Hook], [Build Up], [Inst], [Solo] to guide the musical structure.
+

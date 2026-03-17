@@ -1,0 +1,16 @@
+name: search_character_or_elementum
+title: Search Characters and Elementums
+description: |
+  Search for characters and style elementums, supporting both exact and fuzzy matching.
+
+  Usage:
+    - Use this tool to fuzzily search and browse characters or style elementums.
+    - If you need to fetch full details of a character or elementum by name, use request_character_or_elementum instead.
+
+  Terminology:
+    - Character (character): people or characters such as "Neta", "Hatsune Miku", "Satoru Gojo".
+    - Elementum (elementum): also called "element"; includes concepts like art styles, world settings, memes, and story fragments, for example "manga style", "cyberpunk style", "school romance setting".
+
+  Search tips:
+    - You can first use search_character_or_elementum to find the exact name, then call request_character_or_elementum to get details.
+

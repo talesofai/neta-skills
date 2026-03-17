@@ -1,0 +1,10 @@
+name: publish_collection
+title: Publish Collection
+description: Publish a collection.
+parameters:
+  name: Collection title.
+  description: Short description of the collection.
+  status: Publish status of the collection, either PRIVATE or PUBLISHED.
+  artifacts: List of collection assets, minimum 1 and maximum 12 items. Example picture_uuid,picture_uuid
+  hashtags: List of collection hashtags. Example hashtag_name,hashtag_name
+

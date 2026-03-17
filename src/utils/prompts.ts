@@ -1,4 +1,4 @@
-interface CharacteVtoken {
+interface CharacterVtoken {
   type: "official_character_vtoken_adaptor" | "oc_vtoken_adaptor";
   name: string;
   uuid: string;
@@ -21,7 +21,7 @@ export const mapTCP2Tag = (
     name: string;
   },
   weight = 1,
-): CharacteVtoken | ElementumVtoken => {
+): CharacterVtoken | ElementumVtoken => {
   if (tcp.type === "elementum") {
     return {
       uuid: tcp.uuid,
@@ -72,7 +72,7 @@ type FreetextVtoken = {
 };
 
 export type Vtokens =
-  | CharacteVtoken
+  | CharacterVtoken
   | ElementumVtoken
   | RefImageVtoken
   | FreetextVtoken;
@@ -211,24 +211,29 @@ function stringToPrompt(
     return { type: "character", name, weight, value: "" };
   }
 
-  // if (str.startsWith("<") && str.endsWith(">")) {
-  //   const [name, weight] = extractWeight(str.slice(1, -1));
-  //   return { type: "style", name, weight };
-  // }
-
   if (str.startsWith("/")) {
     const [name, weight] = extractWeight(str.slice(1));
     return { type: "elementum", name, weight };
   }
 
   if (str.startsWith("参考图-") || str.startsWith("图片捏-")) {
-    const [modeAndValue, weight] = extractWeight(str.slice(4));
-    const idx = modeAndValue.indexOf("-");
-    const mode = idx !== -1 ? modeAndValue.slice(0, idx) : modeAndValue;
-    const uuid = idx !== -1 ? modeAndValue.slice(idx + 1) : undefined;
+    const [uuid, weight] = extractWeight(str.slice(4));
     const refImageUrl = uuid ? options?.refImages?.[uuid] : undefined;
     return {
-      name: mode ?? "",
+      name: "",
+      type: "ref_image",
+      value: refImageUrl ?? REF_IMG_PROMPT_PLACEHOLDER,
+      weight,
+      sub_type: "v1",
+      ref_img_uuid: uuid ?? null,
+    };
+  }
+
+  if (str.startsWith("ref_img-")) {
+    const [uuid, weight] = extractWeight(str.slice(8));
+    const refImageUrl = uuid ? options?.refImages?.[uuid] : undefined;
+    return {
+      name: "",
       type: "ref_image",
       value: refImageUrl ?? REF_IMG_PROMPT_PLACEHOLDER,
       weight,
@@ -238,16 +243,26 @@ function stringToPrompt(
   }
 
   if (
-    (str.startsWith("(参考图") || str.startsWith("(图片捏")) &&
+    (str.startsWith("(参考图-") || str.startsWith("(图片捏-")) &&
     str.endsWith(")")
   ) {
-    const [modeAndValue, weight] = extractWeight(str.slice(4, -1));
-    const idx = modeAndValue.indexOf("-");
-    const mode = idx !== -1 ? modeAndValue.slice(0, idx) : modeAndValue;
-    const uuid = idx !== -1 ? modeAndValue.slice(idx + 1) : undefined;
+    const [uuid, weight] = extractWeight(str.slice(5, -1));
     const refImageUrl = uuid ? options?.refImages?.[uuid] : undefined;
     return {
-      name: mode ?? "",
+      name: "",
+      type: "ref_image",
+      value: refImageUrl ?? REF_IMG_PROMPT_PLACEHOLDER,
+      weight,
+      sub_type: "v1",
+      ref_img_uuid: uuid ?? null,
+    };
+  }
+
+  if (str.startsWith("(ref_img-") && str.endsWith(")")) {
+    const [uuid, weight] = extractWeight(str.slice(9, -1));
+    const refImageUrl = uuid ? options?.refImages?.[uuid] : undefined;
+    return {
+      name: "",
       type: "ref_image",
       value: refImageUrl ?? REF_IMG_PROMPT_PLACEHOLDER,
       weight,
@@ -261,14 +276,18 @@ function stringToPrompt(
     return { type: "text", value, weight };
   }
 
-  // if (str.startsWith("/不要")) {
-  //   return {
-  //     type: "negative",
-  //     value: str.slice(3),
-  //   };
-  // }
-
   if (str === "参考图" || str === "图片捏") {
+    return {
+      name: "",
+      type: "ref_image",
+      value: REF_IMG_PROMPT_PLACEHOLDER,
+      weight: 1,
+      sub_type: "v1",
+      ref_img_uuid: null,
+    };
+  }
+
+  if (str === "ref_img") {
     return {
       name: "",
       type: "ref_image",

@@ -42,8 +42,8 @@ export const createApis = (option: {
   );
 
   const tcp = createTcpApis(client);
-  const prompt = createPromptApis(client, tcp);
   const artifact = createArtifactApis(client);
+  const prompt = createPromptApis(client, tcp, artifact);
   const gpt = createGptApis(client);
   const audio = createAudioApis(client);
   const hashtag = createHashtagApis(client);

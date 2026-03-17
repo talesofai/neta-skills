@@ -8,6 +8,13 @@ const meta = parseMeta(
     name: Type.String(),
     title: Type.String(),
     description: Type.String(),
+    errors: Type.Object({
+      missing_id: Type.String(),
+      not_found: Type.String(),
+      type_mismatch_character: Type.String(),
+      type_mismatch_elementum: Type.String(),
+      unknown_type: Type.String(),
+    }),
     parameters: Type.Object({
       name: Type.String(),
       uuid: Type.String(),
@@ -43,7 +50,7 @@ export const requestCharacterOrElementum = createCommand(
 
     const getTcp = async () => {
       if (!uuid && !name) {
-        throw new Error("必须提供name或uuid参数之一");
+        throw new Error(meta.errors.missing_id);
       }
 
       if (uuid) {
@@ -77,14 +84,17 @@ export const requestCharacterOrElementum = createCommand(
 
     const tcp = await getTcp();
     if (!tcp) {
-      throw new Error(`未找到角色或元素: ${name || uuid}`);
+      throw new Error(
+        meta.errors.not_found.replace(
+          "{identifier}",
+          String((name || uuid) ?? "").trim(),
+        ),
+      );
     }
 
     if (tcp.type === "oc" || tcp.type === "official") {
       if (!targetType.includes("character")) {
-        throw new Error(
-          `找到的类型为"character"（角色），但指定了parent_type="elementum"（风格元素）。请调整parent_type参数或使用不同的名称搜索。`,
-        );
+        throw new Error(meta.errors.type_mismatch_character);
       }
 
       const assignValue = {
@@ -107,9 +117,7 @@ export const requestCharacterOrElementum = createCommand(
 
     if (tcp.type === "elementum") {
       if (!targetType.includes("elementum")) {
-        throw new Error(
-          `找到的类型为"elementum"（风格元素），但指定了parent_type="character"（角色）。请调整parent_type参数或使用不同的名称搜索。`,
-        );
+        throw new Error(meta.errors.type_mismatch_elementum);
       }
 
       const assignValue = {
@@ -127,6 +135,8 @@ export const requestCharacterOrElementum = createCommand(
 
     log.warn(`request_character_or_elementum: unknown tcp type: ${tcp.type}`);
 
-    throw new Error(`未知TCP类型: ${tcp.type}`);
+    throw new Error(
+      meta.errors.unknown_type.replace("{type}", String(tcp.type)),
+    );
   },
 );

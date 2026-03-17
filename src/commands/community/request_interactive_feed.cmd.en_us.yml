@@ -1,0 +1,4 @@
+name: request_interactive_feed
+title: Get Interactive Feed
+description: Retrieve interactive content feeds with pagination and multiple filter options, automatically inferring the scenario (home, profile, related feed, etc.) from parameters.
+

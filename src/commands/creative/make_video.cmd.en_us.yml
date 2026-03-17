@@ -1,0 +1,17 @@
+name: make_video
+title: Generate Video
+description: Generate a video based on a single reference image and a detailed prompt.
+parameters:
+  image_source: |
+    The image URL to use as the first frame of the video.
+    Only one image can be referenced. For multi‑character or multi‑shot scenarios, first use make_image to create a composite image and then use it as the video reference image.
+  prompt: |
+    A full natural language prompt that drives video generation.
+    Single‑shot scenes: include scene, characters, actions, style, camera movement, lighting, atmosphere, etc. Make sure character motion is natural and smooth.
+    Multi‑shot scenes: prompt structure = overall description + shot index + timestamp + shot content + aesthetic control + stylization + audio description (voice / sound effects / background music).
+      - Overall description: briefly summarize the whole video, including story theme, narrative style, main emotion or key events.
+      - Shot index: assign an index to each shot to distinguish different segments of the video.
+      - Timestamp: specify the time range of each shot in the video timeline to keep content aligned with time.
+      - Shot content: describe what key characters or objects are doing in each shot, including actions, dialogue, expressions, poses, etc.
+  model: Video generation model. Use model_w to generate 10‑second multi‑shot videos with audio, and model_s to generate 5‑second single‑shot videos without audio.
+

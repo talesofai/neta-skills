@@ -1,0 +1,4 @@
+name: get_hashtag_characters
+title: Get Characters Under Hashtag
+description: Retrieve the list of characters associated with a given hashtag.
+

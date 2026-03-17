@@ -1,111 +1,119 @@
 ---
 name: neta
-description: Neta 能力索引与路由 skill——帮助选择合适的 Neta 相关 skill（neta-space / neta-creative / neta-community / neta-suggest）。当需要了解 Neta 整体能力、决定当前任务该用哪个 skill 或从旧文档迁移时使用本 skill。
+description: Neta capability index and routing skill — help choose the appropriate Neta‑related skill (neta-space / neta-creative / neta-community / neta-suggest). Use this skill when you need to understand Neta’s overall capabilities, decide which skill fits the current task, or migrate from older documentation that referenced the monolithic neta skill.
 ---
 
 # Neta Skill
 
-用于**总览和路由** Neta 相关技能，而不再直接执行具体命令。
+Used for **overview and routing** of Neta‑related skills, rather than executing concrete commands directly.
 
-> 本 skill 以前是一个「大而全」的 Neta 交互 skill，现已拆分为多个专职 skill。优先使用下方列出的子 skill；仅在需要了解能力地图或从旧文档迁移时使用本 skill。
+> This skill used to be a “kitchen‑sink” Neta interaction skill. It has now been split into multiple focused skills. Prefer using the skills listed below; use this skill only to understand the capability map or when migrating from older docs.
 
-## 安装子 Skills
+## Installing sub‑skills
 
-在支持 `skills add` 的环境中，可以按需安装：
+In environments that support `skills add`, install sub‑skills as needed:
 
 ```bash
-# 空间与世界观
+# Spaces and worldbuilding
 npx skills add talesofai/neta-skills/skills/neta-space
 
-# 内容创作（图片/视频/歌曲/MV）
+# Creative content (images/videos/songs/MVs)
 npx skills add talesofai/neta-skills/skills/neta-creative
 
-# 社区浏览与互动
+# Community browsing and interactions
 npx skills add talesofai/neta-skills/skills/neta-community
 
-# 内容调研与推荐
+# Research and content suggestions
 npx skills add talesofai/neta-skills/skills/neta-suggest
 ```
 
 ## Instructions
 
-1. **判断当前任务类型**：先根据用户需求判断是「空间游览」「内容创作」「社区互动」「内容调研/推荐」中的哪一类。
-2. **选择对应子 skill**：
-   - 空间/世界观/玩法结构 → 使用 `neta-space`
-   - 生成图片/视频/歌曲/MV、拆解创作思路 → 使用 `neta-creative`
-   - 浏览推荐流、查看作品详情、点赞互动、社区视角浏览 → 使用 `neta-community`
-   - 关键词/标签/分类/推荐流调研、从宽到窄找题材 → 使用 `neta-suggest`
-3. **仅在边界不清或需要解释时使用本 skill**，帮用户说明应该选择哪一个子 skill。
+1. **Identify the task type**: classify the user’s need as one of: “space exploration”, “content creation”, “community interaction”, or “research/recommendation”.
+2. **Choose the corresponding sub‑skill**:
+   - Spaces/worldbuilding/gameplay structure → use `neta-space`
+   - Image/video/song/MV creation and idea deconstruction → use `neta-creative`
+   - Browsing feeds, viewing collection details, liking/interacting, community‑centric views → use `neta-community`
+   - Keyword/tag/category research and recommendation, progressive exploration from broad to narrow → use `neta-suggest`
+3. Use this skill only when boundaries are unclear or when you need to explain which sub‑skill to pick.
 
-## 能力地图与子 Skill 说明
+## Capability map and sub‑skill overview
 
-### 1. 空间与世界观：`neta-space`
+### 1. Spaces and worldbuilding: `neta-space`
 
-负责：
-- 列出可供游览的空间
-- 获取空间/标签的世界观设定（lore）
-- 获取空间的子空间、空间内角色与玩法 collections
+Responsibilities:
 
-适用场景：
-- 用户提到「世界观/宇宙/空间/场景设定」
-- 想按空间/活动来浏览玩法和内容
+- List all available spaces.
+- Fetch worldbuilding (lore) for spaces/hashtags.
+- Fetch sub‑spaces, characters, and gameplay collections within a space.
 
-详见 `skills/neta-space/SKILL.md`。
+Use when:
 
-### 2. 内容创作：`neta-creative`
+- The user talks about “worlds/universes/spaces/scene settings”.
+- They want to browse gameplay and content organized by spaces/activities.
 
-负责：
-- 生成图片、视频、歌曲、MV
-- 移除图片背景
-- 角色搜索与详情（创作语境下使用）
-- 通过 `read_collection` 从作品反向拆解创作思路
+See `skills/neta-space/SKILL.md` for full details.
 
-适用场景：
-- 用户要「生成/修改 图片/视频/歌曲/MV」
-- 想根据角色/设定进行创作
-- 想分析某个作品的创作思路
+### 2. Content creation: `neta-creative`
 
-详见 `skills/neta-creative/SKILL.md`。
+Responsibilities:
 
-### 3. 社区浏览与互动：`neta-community`
+- Generate images, videos, songs, and MVs.
+- Remove image backgrounds.
+- Search and inspect characters (in a creation context).
+- Deconstruct creative ideas from existing collections via `read_collection`.
 
-负责：
-- 获取互动推荐流
-- 查看作品详情（社区语境下）
-- 点赞等社区互动
-- 基于标签/角色的社区内容浏览
+Use when:
 
-适用场景：
-- 用户想「随便看看大家在玩什么」「刷推荐流」
-- 想对作品进行点赞等互动
+- The user wants to “create/edit images/videos/songs/MVs”.
+- They want to create based on character settings or stories.
+- They want to analyze the creative intent behind an existing work.
 
-详见 `skills/neta-community/SKILL.md`。
+See `skills/neta-creative/SKILL.md` for full details.
 
-### 4. 内容调研与推荐引擎：`neta-suggest`
+### 3. Community browsing and interactions: `neta-community`
 
-负责：
-- 关键词建议（`suggest_keywords`）
-- 标签建议（`suggest_tags`）
-- 分类体系导航与路径验证（`suggest_categories` / `validate_tax_path`）
-- 多模式内容推荐流（`suggest_content`）
+Responsibilities:
 
-适用场景：
-- 用户没有明确目标，只是「找个方向」「找题材」
-- 想了解热门标签/分类结构/高热内容分布
-- 内容创作前的系统性调研
+- Fetch interactive recommendation feeds.
+- View collection details (in a community context).
+- Like/unlike or otherwise interact with content.
+- Browse community content grouped by tags or characters.
 
-详见 `skills/neta-suggest/SKILL.md`。
+Use when:
 
-## 迁移说明（从旧 neta skill）
+- The user says “show me what people are doing”, “scroll the feed”.
+- They want to like or interact with specific works.
 
-如果遇到旧文档或指令中引用了 `neta` skill 下的命令，请按下表迁移到新的专职 skill：
+See `skills/neta-community/SKILL.md` for full details.
 
-| 旧能力                     | 新 skill            |
-|----------------------------|--------------------|
-| 空间/标签世界观、空间游览 | `neta-space`       |
-| 图片/视频/歌曲/MV 创作     | `neta-creative`    |
-| 作品详情、推荐流、点赞互动 | `neta-community`   |
-| 关键词/标签/分类/推荐调研 | `neta-suggest`     |
+### 4. Research and recommendation engine: `neta-suggest`
 
-今后的实现中，请优先调用这些子 skill，不再在本 skill 中添加新的命令示例。
+Responsibilities:
+
+- Keyword suggestions (`suggest_keywords`).
+- Tag suggestions (`suggest_tags`).
+- Category navigation and path validation (`suggest_categories` / `validate_tax_path`).
+- Multi‑mode content feeds (`suggest_content`).
+
+Use when:
+
+- The user has no clear target and wants ideas/topics.
+- They want to understand popular tags/category structure/content distribution.
+- They need systematic research before creating content.
+
+See `skills/neta-suggest/SKILL.md` for full details.
+
+## Migration notes (from legacy neta skill)
+
+If you encounter older docs or scripts that call commands directly under `neta`, migrate them according to this table:
+
+| Legacy capability                           | New skill        |
+|---------------------------------------------|------------------|
+| Space/tag lore and space browsing           | `neta-space`     |
+| Image/video/song/MV creation                | `neta-creative`  |
+| Collection details, feeds, likes/interacts  | `neta-community` |
+| Keyword/tag/category/recommendation research| `neta-suggest`   |
+
+For new development, always prefer the focused sub‑skills and avoid adding new command examples directly to this skill.
 

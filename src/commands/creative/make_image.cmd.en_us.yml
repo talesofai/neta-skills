@@ -1,0 +1,20 @@
+name: make_image
+title: Generate Image
+description: Generate images from text prompts and/or reference images.
+parameters:
+  prompt: |
+    The prompt for image generation.
+      - It can include:
+        - Characters: reference characters with @character_name; this includes the full character definition.
+        - Visual elements: reference style elements with /element_name, for example /MangaStyle.
+        - Reference images: reference existing images with the pattern ref_img-uuid, e.g. "ref_img-1234567890". At most 14 images are supported.
+        - Natural language phrases: describe the desired scene in detail. If you do not reference a character, you should describe the character’s appearance here.
+      - Notes:
+        - Provide as much context and intent as possible. Narrative descriptions of the scene almost always produce better and more coherent images than a flat list of disconnected keywords.
+        - Character references must appear in the form @character_name, e.g. @Neta.
+        - Element references must appear in the form /elementum_name, e.g. /MangaStyle.
+        - When referencing characters or elements, separate them with spaces or commas, for example: "@character_name, /elementum_name, walking on campus".
+        - For image editing or image‑to‑image tasks, always include the proper reference image variables.
+      - Example (character + element): @character_name, /elementum_name, ref_img-1234567890, ref_img-1234567891, keyword1, keyword2…
+  aspect: Image aspect ratio
+
