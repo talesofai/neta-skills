@@ -34,4 +34,4 @@ tmp/
 temp/
 .cache/
 
-./bin/
+bin/

@@ -1,11 +1,18 @@
 ---
 name: neta-creative
-description: Neta API 创作技能 - 生成图片、视频、歌曲、搜索角色/元素、获取创作思路。当需要创作 AI 内容、查询角色信息时使用此技能。
+description: Neta API 创作技能——生成图片、视频、歌曲、MV，并从现有作品中拆解创作思路。当用户需要生成或修改图片/视频/歌曲/MV，或基于角色设定与现有作品进行创作时使用本技能；不处理推荐流与标签/分类调研（这些由 neta-community 与 neta-suggest 负责）。
 ---
 
 # Neta Creative Skill
 
-用于与 Neta API 交互，支持多媒体内容创作和角色查询。
+用于与 Neta API 交互，支持多媒体内容创作和创作相关的角色查询。
+
+## Instructions
+
+1. 处理「**创作或修改具体作品**」（图片/视频/歌曲/MV/去背）相关任务时，可按以下顺序组织流程：
+   - 在创作前，通过**角色查询**获取标准设定，再进行图片/视频/歌曲生成；
+   - 需要从已有作品中反向分析创作思路时，使用 `read_collection` 并结合参考文档中的拆解方法。
+2. 如果在创作过程中发现需求实际上更偏向「刷推荐/随便看看/做题材调研」，可以结合 `neta-community` 或 `neta-suggest` 的能力配合使用。
 
 ## 前置条件
 
@@ -95,8 +102,4 @@ neta-cli read_collection --uuid "作品-uuid"
 | 🎵 歌曲创作 | [song-creation.md](./references/song-creation.md) |
 | 🎞️ MV 制作 | [song-mv.md](./references/song-mv.md) |
 | 👤 角色查询 | [character-search.md](./references/character-search.md) |
-| 🖊️ 内容创作 | [collection-remix.md](./references/collection-remix.md) |
-
-## 使用建议
-
-1. **先查询后创作** - 使用角色查询获取标准设定，确保创作符合官方设定
+| 🖊️ 内容创作思路 | [collection-remix.md](./references/collection-remix.md) |

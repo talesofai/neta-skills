@@ -1,166 +1,111 @@
 ---
 name: neta
-description: Neta API 交互技能 - 游览空间、生成图片、视频、歌曲，搜索角色/元素，管理标签内容。当需要创作 AI 内容、查询角色信息、获取标签数据时使用此技能。
+description: Neta 能力索引与路由 skill——帮助选择合适的 Neta 相关 skill（neta-space / neta-creative / neta-community / neta-suggest）。当需要了解 Neta 整体能力、决定当前任务该用哪个 skill 或从旧文档迁移时使用本 skill。
 ---
 
 # Neta Skill
 
-用于与 Neta API 交互，支持多媒体内容创作和角色/标签查询。
+用于**总览和路由** Neta 相关技能，而不再直接执行具体命令。
 
-## 前置条件
+> 本 skill 以前是一个「大而全」的 Neta 交互 skill，现已拆分为多个专职 skill。优先使用下方列出的子 skill；仅在需要了解能力地图或从旧文档迁移时使用本 skill。
 
-确保已设置环境变量 `NETA_TOKEN`。
+## 安装子 Skills
 
-确保已安装最新版本的 Neta Cli
-```
-neta-cli --version
-0.5.0
-```
-
-```
-npm i @talesofai/neta-cli@latest -g
-```
-
-```
-pnpm add -g @talesofai/neta-cli@latest
-```
-
-## 命令使用
-
-### 空间
-
-**获取可供游览的空间**
+在支持 `skills add` 的环境中，可以按需安装：
 
 ```bash
-neta-cli list_spaces
+# 空间与世界观
+npx skills add talesofai/neta-skills/skills/neta-space
+
+# 内容创作（图片/视频/歌曲/MV）
+npx skills add talesofai/neta-skills/skills/neta-creative
+
+# 社区浏览与互动
+npx skills add talesofai/neta-skills/skills/neta-community
+
+# 内容调研与推荐
+npx skills add talesofai/neta-skills/skills/neta-suggest
 ```
 
-**获取空间详情**
-```
-neta-cli get_hashtag_info --hashtag "空间标签名"
-```
+## Instructions
 
-**获取空间的子空间**
+1. **判断当前任务类型**：先根据用户需求判断是「空间游览」「内容创作」「社区互动」「内容调研/推荐」中的哪一类。
+2. **选择对应子 skill**：
+   - 空间/世界观/玩法结构 → 使用 `neta-space`
+   - 生成图片/视频/歌曲/MV、拆解创作思路 → 使用 `neta-creative`
+   - 浏览推荐流、查看作品详情、点赞互动、社区视角浏览 → 使用 `neta-community`
+   - 关键词/标签/分类/推荐流调研、从宽到窄找题材 → 使用 `neta-suggest`
+3. **仅在边界不清或需要解释时使用本 skill**，帮用户说明应该选择哪一个子 skill。
 
-```bash
-neta-cli list_space_topics --space_uuid "空间 uuid"
-```
+## 能力地图与子 Skill 说明
 
-📖 [详细指南](./references/space.md) - 空间介绍
+### 1. 空间与世界观：`neta-space`
 
-### 内容创作
+负责：
+- 列出可供游览的空间
+- 获取空间/标签的世界观设定（lore）
+- 获取空间的子空间、空间内角色与玩法 collections
 
-**生成图片**
-```bash
-neta-cli make_image --prompt "@角色名，/风格元素，参考图-全图参考-图片uuid，描述词，描述词" --aspect "3:4"
-```
-📖 [详细指南](./references/image-generation.md) - 提示词结构、宽高比选择、用例
+适用场景：
+- 用户提到「世界观/宇宙/空间/场景设定」
+- 想按空间/活动来浏览玩法和内容
 
-**生成视频**
-```bash
-neta-cli make_video --image_source "图片 URL" --prompt "动作描述" --model "model_s"
-```
-📖 [详细指南](./references/video-generation.md) - 动作描述原则、模型选择
+详见 `skills/neta-space/SKILL.md`。
 
-**生成歌曲**
-```bash
-neta-cli make_song --prompt "风格描述" --lyrics "歌词内容"
-```
-📖 [详细指南](./references/song-creation.md) - 风格提示词、歌词格式
+### 2. 内容创作：`neta-creative`
 
-**制作 MV**
+负责：
+- 生成图片、视频、歌曲、MV
+- 移除图片背景
+- 角色搜索与详情（创作语境下使用）
+- 通过 `read_collection` 从作品反向拆解创作思路
 
-结合歌曲和视频生成完整 MV。
+适用场景：
+- 用户要「生成/修改 图片/视频/歌曲/MV」
+- 想根据角色/设定进行创作
+- 想分析某个作品的创作思路
 
-📖 [详细指南](./references/song-mv.md) - 完整工作流程
+详见 `skills/neta-creative/SKILL.md`。
 
-**移除背景**
-```bash
-neta-cli remove_background --input_image "image_url"
-```
+### 3. 社区浏览与互动：`neta-community`
 
-### 角色查询
+负责：
+- 获取互动推荐流
+- 查看作品详情（社区语境下）
+- 点赞等社区互动
+- 基于标签/角色的社区内容浏览
 
-**搜索角色**
-```bash
-neta-cli search_character_or_elementum --keywords "关键词" --parent_type "character" --sort_scheme "exact"
-```
-📖 [详细指南](./references/character-search.md) - 搜索策略、参数选择
+适用场景：
+- 用户想「随便看看大家在玩什么」「刷推荐流」
+- 想对作品进行点赞等互动
 
-**获取角色详情**
-```bash
-neta-cli request_character_or_elementum --name "角色名"
-```
+详见 `skills/neta-community/SKILL.md`。
 
-**通过 UUID 查询**
-```bash
-neta-cli request_character_or_elementum --uuid "uuid"
-```
+### 4. 内容调研与推荐引擎：`neta-suggest`
 
-### 标签管理
+负责：
+- 关键词建议（`suggest_keywords`）
+- 标签建议（`suggest_tags`）
+- 分类体系导航与路径验证（`suggest_categories` / `validate_tax_path`）
+- 多模式内容推荐流（`suggest_content`）
 
-**获取标签信息**
-```bash
-neta-cli get_hashtag_info --hashtag "标签名"
-```
-📖 [详细指南](./references/hashtag-research.md) - 调研流程、分析方法
+适用场景：
+- 用户没有明确目标，只是「找个方向」「找题材」
+- 想了解热门标签/分类结构/高热内容分布
+- 内容创作前的系统性调研
 
-**获取标签角色**
-```bash
-neta-cli get_hashtag_characters --hashtag "标签名" --sort_by "hot"
-```
+详见 `skills/neta-suggest/SKILL.md`。
 
-**获取标签合集**
-```bash
-neta-cli get_hashtag_collections --hashtag "标签名"
-```
+## 迁移说明（从旧 neta skill）
 
-**获取玩法信息**
-```bash
-neta-cli read_collection --uuid "玩法-uuid"
-```
+如果遇到旧文档或指令中引用了 `neta` skill 下的命令，请按下表迁移到新的专职 skill：
 
-### 内容玩法探索
+| 旧能力                     | 新 skill            |
+|----------------------------|--------------------|
+| 空间/标签世界观、空间游览 | `neta-space`       |
+| 图片/视频/歌曲/MV 创作     | `neta-creative`    |
+| 作品详情、推荐流、点赞互动 | `neta-community`   |
+| 关键词/标签/分类/推荐调研 | `neta-suggest`     |
 
-**玩法内容推荐列表**
-```bash
-neta-cli request_interactive_feed --page_index 0 --page_size 3
-```
-📖 [详细指南](./references/interactive-feed.md)
+今后的实现中，请优先调用这些子 skill，不再在本 skill 中添加新的命令示例。
 
-**社区玩法内容探索**
-```bash
-neta-cli suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent exact --tax_paths "衍生创作类>同人二创"
-```
-📖 [详细指南](./references/community-exploration.md)
-**社区互动**
-```bash
-neta-cli like_collection --uuid "目标作品 UUID"
-```
-📖 [详细指南](./references/social-interactive.md)
-
-
-## 参考文档
-
-| 场景 | 文档 |
-|------|------|
-| 🌍 世界观 | [space.md](./references/space.md) |
-| 🎨 图片生成 | [image-generation.md](./references/image-generation.md) |
-| 🎬 视频生成 | [video-generation.md](./references/video-generation.md) |
-| 🎵 歌曲创作 | [song-creation.md](./references/song-creation.md) |
-| 🎞️ MV 制作 | [song-mv.md](./references/song-mv.md) |
-| 👤 角色查询 | [character-search.md](./references/character-search.md) |
-| 🏷️ 标签调研 | [hashtag-research.md](./references/hashtag-research.md) |
-| 🖊️ 内容创作 | [collection-remix.md](./references/collection-remix.md) |
-| 🌏 世界观玩法 | [space.md](./references/space.md) |
-| 🗺️ 玩法内容探索 | [community-exploration.md](./references/community-exploration.md) |
-| 🎮 互动玩法推荐  | [interactive-feed.md](./references/interactive-feed.md) |
-| 💬 社区互动    | [social-interactive.md](./references/social-interactive.md) |
-
-## 使用建议
-
-1. **先查询后创作** - 使用角色查询获取标准设定，确保创作符合官方设定
-2. **先调研后规划** - 使用标签调研了解热门元素和创作方向
-3. **提示词具体化** - 避免抽象描述，使用详细的要素组合
-4. **迭代测试** - 先用快速模型测试，满意后再用高质量模型
-5. **渐进式探索** - 从宽到窄逐步探索：浏览分类 → 发现标签 → 验证路径 → 获取内容
