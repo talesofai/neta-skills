@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.10.0
+
+### Minor Changes
+
+- bump npm package version
+
 ## 0.9.0
 
 ### Minor Changes

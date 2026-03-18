@@ -16,7 +16,7 @@ description: Neta 元素(Elementum)炼金技能 - 引导用户创建或更新风
 确保已安装最新版本的 Neta Cli
 ```
 neta-cli --version
-0.9.0
+0.10.0
 ```
 
 ```

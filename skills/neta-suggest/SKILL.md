@@ -20,7 +20,7 @@ Install the latest version of the Neta CLI:
 
 ```bash
 neta-cli --version
-0.9.0
+0.10.0
 ```
 
 ```bash
