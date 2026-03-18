@@ -38,13 +38,7 @@ pnpm add -g @talesofai/neta-skills@latest
 
 ## Commands
 
-### Feed
-
-**Get interactive feed**
-
-```bash
-neta-cli request_interactive_feed --page_index 0 --page_size 3
-```
+### Collection
 
 **Get collection details**
 
@@ -110,7 +104,6 @@ neta-cli request_character_or_elementum --uuid "uuid"
 
 | Scenario                 | Doc                                               |
 |--------------------------|---------------------------------------------------|
-| 🎮 Interactive feed      | [interactive-feed.md](./references/interactive-feed.md) |
 | 💬 Community interactions| [social-interactive.md](./references/social-interactive.md) |
 | 🏷️ Tag research         | [hashtag-research.md](./references/hashtag-research.md)   |
 | 👤 Character queries     | [character-search.md](./references/character-search.md)   |
