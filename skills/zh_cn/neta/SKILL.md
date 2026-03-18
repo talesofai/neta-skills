@@ -25,16 +25,20 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-community
 
 # 内容调研与推荐
 npx skills add talesofai/neta-skills/skills/zh_cn/neta-suggest
+
+# 角色创建与管理
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-character
 ```
 
 ## Instructions
 
-1. **判断当前任务类型**：先根据用户需求判断是「空间游览」「内容创作」「社区互动」「内容调研/推荐」中的哪一类。
+1. **判断当前任务类型**：先根据用户需求判断是「空间游览」「内容创作」「社区互动」「内容调研/推荐」「角色创建/管理」中的哪一类。
 2. **选择对应子 skill**：
    - 空间/世界观/玩法结构 → 使用 `neta-space`
    - 生成图片/视频/歌曲/MV、拆解创作思路 → 使用 `neta-creative`
    - 浏览推荐流、查看作品详情、点赞互动、社区视角浏览 → 使用 `neta-community`
    - 关键词/标签/分类/推荐流调研、从宽到窄找题材 → 使用 `neta-suggest`
+   - 创建或管理动漫/文化IP/原创角色（VToken/TCP/OC）→ 使用 `neta-character`
 3. **仅在边界不清或需要解释时使用本 skill**，帮用户说明应该选择哪一个子 skill。
 
 ## 能力地图与子 Skill 说明
@@ -96,6 +100,21 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-suggest
 
 详见 `skills/zh_cn/neta-suggest/SKILL.md`。
 
+### 5. 角色创建与管理：`neta-character`
+
+负责：
+- 创建新角色为 VToken（虚拟Token，TCP/OC）
+- 更新已有角色资料（视觉外观、背景故事、性格设定）
+- 查询和搜索角色
+- 创建前生成角色预览图
+
+适用场景：
+- 用户想要「创建新角色」「做个 OC」「设计角色」
+- 用户想要「修改角色设定」「更新角色背景故事」「换角色外观」
+- 用户想要「列出我的角色」或「搜索角色」
+
+详见 `skills/zh_cn/neta-character/SKILL.md`。
+
 ## 迁移说明（从旧 neta skill）
 
 如果遇到旧文档或指令中引用了 `neta` skill 下的命令，请按下表迁移到新的专职 skill：
@@ -106,6 +125,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-suggest
 | 图片/视频/歌曲/MV 创作     | `neta-creative`    |
 | 作品详情、推荐流、点赞互动 | `neta-community`   |
 | 关键词/标签/分类/推荐调研 | `neta-suggest`     |
+| 角色创建与管理             | `neta-character`   |
 
 今后的实现中，请优先调用这些子 skill，不再在本 skill 中添加新的命令示例。
 

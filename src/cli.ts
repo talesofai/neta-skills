@@ -12,12 +12,10 @@ program
   .description("NETA CLI - Neta API Client")
   .version(pkg.version);
 
-const cli = program
-  .option("--token <string>", "neta token (default: from env NETA_TOKEN)")
-  .option(
-    "--api_base_url <string>",
-    "api base url (default: NETA_API_BASE_URL or locale-based default)",
-  );
+const cli = program.option(
+  "--api_base_url <string>",
+  "api base url (default: NETA_API_BASE_URL or locale-based default)",
+);
 
 await buildCommands(cli);
 
