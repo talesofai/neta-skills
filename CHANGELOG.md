@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.9.0
+
+### Minor Changes
+
+- add commands about character create and management
+
 ## 0.8.0
 
 ### Minor Changes

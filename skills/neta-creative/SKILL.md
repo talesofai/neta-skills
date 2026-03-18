@@ -22,7 +22,7 @@ Also ensure the latest Neta CLI is installed:
 
 ```bash
 neta-cli --version
-0.8.0
+0.9.0
 ```
 
 ```bash

@@ -16,7 +16,7 @@ Ensure the environment variable `NETA_TOKEN` is set.
 Ensure the latest version of Neta CLI is installed:
 ```
 neta-cli --version
-0.5.0
+0.9.0
 ```
 
 ```

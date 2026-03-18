@@ -24,7 +24,7 @@ description: Neta API 空间与世界观浏览技能——按空间/标签维度
 确保已安装最新版本的 Neta Cli
 ```
 neta-cli --version
-0.8.0
+0.9.0
 ```
 
 ```

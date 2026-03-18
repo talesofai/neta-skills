@@ -51,7 +51,6 @@ export const buildCommands = async (
     [],
     {
       api_base_url?: string;
-      token?: string;
     },
     // biome-ignore lint/complexity/noBannedTypes: ignore type error
     {}
@@ -119,7 +118,7 @@ export const buildCommands = async (
     }
 
     command.action(async (args) => {
-      const { api_base_url, token } = cli.opts();
+      const { api_base_url } = cli.opts();
 
       const baseUrl =
         typeof api_base_url === "string"
@@ -129,10 +128,7 @@ export const buildCommands = async (
       const apis = createApis({
         baseUrl,
         headers: {
-          "x-token":
-            typeof token === "string"
-              ? token
-              : (process.env["NETA_TOKEN"] ?? ""),
+          "x-token": process.env["NETA_TOKEN"] ?? "",
           "x-platform": "nieta-app/web",
         },
       });

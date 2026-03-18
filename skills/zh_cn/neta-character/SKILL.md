@@ -16,7 +16,7 @@ description: Neta 角色锻造技能 - 引导用户创建或更新动漫/文化I
 确保已安装最新版本的 Neta Cli
 ```
 neta-cli --version
-0.5.0
+0.9.0
 ```
 
 ```
