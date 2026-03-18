@@ -4,7 +4,7 @@
 [![Node](https://img.shields.io/badge/Node-%3E%3D20-green)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 
-[English](./README.md) · [简体中文](./README.zh_cn.md.md)
+[English](./README.md) · [简体中文](./README.zh_cn.md)
 
 ---
 
