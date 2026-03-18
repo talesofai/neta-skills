@@ -28,6 +28,9 @@ npx skills add talesofai/neta-skills/skills/neta-suggest
 
 # Character creation and management
 npx skills add talesofai/neta-skills/skills/neta-character
+
+# Elementum (visual style/concept) creation and management
+npx skills add talesofai/neta-skills/skills/neta-elementum
 ```
 
 ## Instructions
@@ -39,6 +42,7 @@ npx skills add talesofai/neta-skills/skills/neta-character
    - Browsing feeds, viewing collection details, liking/interacting, community-centric views → use `neta-community`
    - Keyword/tag/category research and recommendation, progressive exploration from broad to narrow → use `neta-suggest`
    - Creating or managing anime/cultural IP/original characters (VTokens/TCP/OC) → use `neta-character`
+   - Creating or managing visual style elements (scenes, props, clothing, poses, atmospheres, memes) → use `neta-elementum`
 3. Use this skill only when boundaries are unclear or when you need to explain which sub-skill to pick.
 
 ## Capability map and sub-skill overview
@@ -125,6 +129,23 @@ Use when:
 
 See `skills/neta-character/SKILL.md` for full details.
 
+### 6. Elementum (visual style/concept) creation and management: `neta-elementum`
+
+Responsibilities:
+
+- Create new Elementa (visual concepts) as VTokens (TCP/Elementum).
+- Update existing Elementum settings (representative images, prompts, descriptions).
+- Query and search for Elementa.
+- Generate visual previews before Elementum creation.
+
+Use when:
+
+- The user wants to "create a visual element", "make an Elementum", or "encapsulate a style".
+- The user wants to create reusable visual concepts (scenes, props, clothing, poses, atmospheres, memes).
+- The user wants to "list my Elementa" or "search for Elementa".
+
+See `skills/neta-elementum/SKILL.md` for full details.
+
 ## Migration notes (from legacy neta skill)
 
 If you encounter older docs or scripts that call commands directly under `neta`, migrate them according to this table:
@@ -136,6 +157,7 @@ If you encounter older docs or scripts that call commands directly under `neta`,
 | Collection details, feeds, likes/interacts  | `neta-community` |
 | Keyword/tag/category/recommendation research| `neta-suggest`   |
 | Character creation and management           | `neta-character` |
+| Elementum (visual style/concept) creation   | `neta-elementum` |
 
 For new development, always prefer the focused sub-skills and avoid adding new command examples directly to this skill.
 

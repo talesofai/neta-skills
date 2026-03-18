@@ -28,6 +28,9 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-suggest
 
 # 角色创建与管理
 npx skills add talesofai/neta-skills/skills/zh_cn/neta-character
+
+# 元素（视觉风格/概念）创建与管理
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 ```
 
 ## Instructions
@@ -39,6 +42,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-character
    - 浏览推荐流、查看作品详情、点赞互动、社区视角浏览 → 使用 `neta-community`
    - 关键词/标签/分类/推荐流调研、从宽到窄找题材 → 使用 `neta-suggest`
    - 创建或管理动漫/文化IP/原创角色（VToken/TCP/OC）→ 使用 `neta-character`
+   - 创建或管理视觉风格元素（场景、道具、服装、姿势、氛围、梗）→ 使用 `neta-elementum`
 3. **仅在边界不清或需要解释时使用本 skill**，帮用户说明应该选择哪一个子 skill。
 
 ## 能力地图与子 Skill 说明
@@ -115,6 +119,21 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-character
 
 详见 `skills/zh_cn/neta-character/SKILL.md`。
 
+### 6. 元素（视觉风格/概念）创建与管理：`neta-elementum`
+
+负责：
+- 创建新元素（视觉概念）为 VToken（TCP/Elementum）
+- 更新已有元素设置（代表图、prompt、描述）
+- 查询和搜索元素
+- 创建前生成视觉预览图
+
+适用场景：
+- 用户想要「创建视觉元素」「做个 Elementum」「封装一个风格」
+- 用户想创建可复用的视觉概念（场景、道具、服装、姿势、氛围、梗）
+- 用户想要「列出我的元素」或「搜索元素」
+
+详见 `skills/neta-elementum/SKILL.md`。
+
 ## 迁移说明（从旧 neta skill）
 
 如果遇到旧文档或指令中引用了 `neta` skill 下的命令，请按下表迁移到新的专职 skill：
@@ -126,6 +145,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-character
 | 作品详情、推荐流、点赞互动 | `neta-community`   |
 | 关键词/标签/分类/推荐调研 | `neta-suggest`     |
 | 角色创建与管理             | `neta-character`   |
+| 元素（视觉风格/概念）创建  | `neta-elementum`   |
 
 今后的实现中，请优先调用这些子 skill，不再在本 skill 中添加新的命令示例。
 
