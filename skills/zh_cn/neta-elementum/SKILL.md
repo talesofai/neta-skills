@@ -20,7 +20,7 @@ neta-cli --version
 ```
 
 ```
-npm i @talesofai/neta-cli@latest -g
+npm i @talesofai/neta-skills@latest -g
 ```
 
 ## 命令使用
