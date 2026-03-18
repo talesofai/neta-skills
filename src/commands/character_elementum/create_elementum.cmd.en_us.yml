@@ -1,0 +1,30 @@
+name: create_elementum
+title: Create Elementum
+description: |
+  Create a new style element (Elementum) and generate an element Token (TCP).
+
+  An element represents a visual concept (scene, prop, clothing, weapon, pose, meme, etc.). After creation, it can be referenced in make_image using /ElementName.
+
+  Usage Notes:
+    - Elementum creation costs credits; users with unlimited credits or special privileges are not affected
+    - artifact_uuid comes from make_image response artifacts[0].uuid (the preview image artifact UUID)
+    - prompt is the direct image generation instruction passed to the image model
+    - description is metadata for Agents explaining what this element is and how to use it
+
+  Field Descriptions:
+    - prompt: Direct image generation instruction for the model
+    - description: Agent-facing usage guide, format: "This element represents X, use with Y, reference image shows Z"
+
+parameters:
+  name: Element name (max 128 characters)
+  artifact_uuid: Element representative image artifact UUID from make_image response artifacts[0].uuid
+  prompt: |
+    Direct image generation instruction for the model.
+    - Should be clear visual description that can be combined with other prompts
+    - Example: "Resident Evil 4 style European medieval village, dilapidated stone houses, burning bonfire, thick fog, horror atmosphere"
+  description: |
+    Agent-facing metadata explaining this element.
+    - Recommended format: "This element represents [concept], use by [method], reference image shows [description]"
+    - Example: "This element represents the RE4 abandoned village's horror atmosphere. Use with night, fog, character descriptions. Reference image is a recreation of the original village scene."
+  ref_image_uuid: Concept anchor reference image artifact UUID (optional), used for visual style anchoring
+  accessibility: Visibility, PUBLIC or PRIVATE, defaults to PUBLIC

@@ -1,0 +1,30 @@
+name: update_character
+title: 更新角色
+description: |
+  更新已有角色的属性。只传入需要修改的字段，未传入的字段保持不变。
+
+  使用说明：
+    - tcp_uuid 是角色的唯一标识，通过 create_character 或 request_character_or_elementum 获取
+    - 传入 "" 空字符串可清空某个可选字段
+    - 若更换头像，同时传入新的 avatar_artifact_uuid（来自 make_image 的 artifacts[0].uuid）
+
+parameters:
+  tcp_uuid: 角色的 TCP UUID，必填
+  name: 新的角色名称（最多128字符），不传则保持不变
+  gender: '新的性别。中文：男、女、自由、其他。English: male, female, neutral, other。不传则保持不变'
+  avatar_artifact_uuid: 新的头像素材 UUID（来自 make_image 的 artifacts[0].uuid），不传则保持不变
+  prompt: |
+    新的视觉特征描述（纯视觉，英文标签为佳），不传则保持不变。
+    - 示例："long black hair, red qipao dress, blue eyes"
+  trigger: |
+    新的英文识别词，不传则保持不变。
+    - 示例："1girl, Ada Wong, black hair, red dress, spy"
+  accessibility: 新的可见性（PUBLIC/PRIVATE），不传则保持不变
+  age: 新的年龄，不传则保持不变，传 "" 可清空
+  interests: 新的兴趣爱好，不传则保持不变，传 "" 可清空
+  persona: 新的性格描述，不传则保持不变，传 "" 可清空
+  description: |
+    新的角色简介，不传则保持不变，传 "" 可清空。
+    - 应包含：外貌摘要 + 角色背景故事/世界观/动机
+    - 多写一些可以获得更深的角色扮演体验和更丰富的角色互动（最多1000字符）
+  occupation: 新的职业，不传则保持不变，传 "" 可清空

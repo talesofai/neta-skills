@@ -53,11 +53,17 @@ npx skills add talesofai/neta-skills/skills/neta-suggest
 
 # Space navigation & exploration
 npx skills add talesofai/neta-skills/skills/neta-space
+
+# Character VToken creation and management
+npx skills add talesofai/neta-skills/skills/neta-character
+
+# Elementum VToken creation and management
+npx skills add talesofai/neta-skills/skills/neta-elementum
 ```
 
 ### Available Commands
 
-The skill includes **26 commands** for various tasks:
+The skill includes **30 commands** for various tasks:
 
 | Category | Command | Description |
 |----------|---------|-------------|
@@ -68,6 +74,12 @@ The skill includes **26 commands** for various tasks:
 | | `edit_collection` | Edit an existing collection (name, description, tags, status, etc.) |
 | | `publish_collection` | Publish or update a collection |
 | | `search_character_or_elementum` | Search reusable TCP building blocks (characters / elements / flows) |
+| **VToken Management** | `create_character` | Create a character VToken (consumes credits) |
+| | `update_character` | Update an existing character VToken |
+| | `list_my_characters` | List all characters created by the current user |
+| | `create_elementum` | Create an elementum VToken (consumes credits) |
+| | `update_elementum` | Update an existing elementum VToken |
+| | `list_my_elementum` | List all elementa created by the current user |
 | **Characters** | `request_character_or_elementum` | Fetch character or elementum details by name or UUID |
 | **Community** | `get_hashtag_info` | Get details and lore for a specific hashtag |
 | | `get_hashtag_characters` | Get a list of characters under a hashtag |
@@ -139,12 +151,16 @@ neta-skills/
 │   ├── neta-creative/              # Image / video / song creation skills (EN)
 │   ├── neta-suggest/               # Discovery & suggestion skills (EN)
 │   ├── neta-space/                 # Space navigation & exploration skills (EN)
+│   ├── neta-character/             # Character VToken creation & management (EN)
+│   ├── neta-elementum/             # Elementum VToken creation & management (EN)
 │   └── zh_cn/                      # Chinese-localized skills & references
 │       ├── neta/
 │       ├── neta-community/
 │       ├── neta-creative/
 │       ├── neta-suggest/
-│       └── neta-space/
+│       ├── neta-space/
+│       ├── neta-character/
+│       └── neta-elementum/
 ├── src/                            # TypeScript source for the CLI
 │   ├── apis/                       # Typed Neta API client helpers
 │   ├── commands/                   # CLI command definitions (TS + YAML meta)
@@ -176,6 +192,7 @@ Agents use these references to learn the optimal sequence of actions, parameter 
 - **Image & Video Generation:** Best practices for chaining prompts, generating assets, and assembling videos.
 - **Song & MV Creation:** Workflows for composing songs and creating music videos with synchronized visuals.
 - **Character & Hashtag Research:** Processes for finding trending content, searching characters, and utilizing community trends.
+- **Character & Elementum Creation:** Character creation and elementum alchemy workflows.
 
 ---
 

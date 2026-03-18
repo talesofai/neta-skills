@@ -1,0 +1,18 @@
+name: update_elementum
+title: Update Elementum
+description: |
+  Update attributes of an existing element. Only pass fields that need to be changed; unchanged fields remain as-is.
+
+  Usage Notes:
+    - tcp_uuid is the unique element identifier, obtained from create_elementum or request_character_or_elementum
+    - Pass an empty string "" to clear the description field
+    - To change representative image, pass the new artifact_uuid (from make_image artifacts[0].uuid)
+
+parameters:
+  tcp_uuid: Element's TCP UUID, required
+  name: New element name (max 32 characters), omit to keep unchanged
+  artifact_uuid: New representative image artifact UUID (from make_image artifacts[0].uuid), omit to keep unchanged
+  prompt: New image generation instruction, omit to keep unchanged
+  description: New Agent usage guide, omit to keep unchanged, pass "" to clear
+  ref_image_uuid: New reference image artifact UUID, omit to keep unchanged
+  accessibility: New visibility (PUBLIC/PRIVATE), omit to keep unchanged

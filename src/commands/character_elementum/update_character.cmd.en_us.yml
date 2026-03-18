@@ -1,0 +1,30 @@
+name: update_character
+title: Update Character
+description: |
+  Update attributes of an existing character. Only pass fields that need to be changed; unchanged fields remain as-is.
+
+  Usage Notes:
+    - tcp_uuid is the unique character identifier, obtained from create_character or request_character_or_elementum
+    - Pass an empty string "" to clear optional fields
+    - To change avatar, pass the new avatar_artifact_uuid (from make_image artifacts[0].uuid)
+
+parameters:
+  tcp_uuid: Character's TCP UUID, required
+  name: New character name (max 128 characters), omit to keep unchanged
+  gender: 'New gender. English: male, female, neutral, other. Chinese: 男, 女, 自由, 其他. Omit to keep unchanged'
+  avatar_artifact_uuid: New avatar artifact UUID (from make_image artifacts[0].uuid), omit to keep unchanged
+  prompt: |
+    New visual description (English tags preferred), omit to keep unchanged.
+    - Example: "long black hair, red qipao dress, blue eyes"
+  trigger: |
+    New English recognition tags, omit to keep unchanged.
+    - Example: "1girl, Ada Wong, black hair, red dress, spy"
+  accessibility: New visibility (PUBLIC/PRIVATE), omit to keep unchanged
+  age: New age, omit to keep unchanged, pass "" to clear
+  interests: New interests, omit to keep unchanged, pass "" to clear
+  persona: New personality description, omit to keep unchanged, pass "" to clear
+  description: |
+    New character description, omit to keep unchanged, pass "" to clear.
+    - Should include: appearance summary + backstory/worldview/motivations
+    - Write more for deeper roleplay and richer character interactions (up to 1000 characters)
+  occupation: New occupation, omit to keep unchanged, pass "" to clear

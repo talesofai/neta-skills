@@ -31,7 +31,7 @@
   },
   "scripts": {
     "lint": "biome check . --write --unsafe",
-    "validate": "skills-ref to-prompt ./skills/neta ./skills/neta-community ./skills/neta-creative ./skills/neta-suggest ./skills/neta-space",
+    "validate": "skills-ref to-prompt ./skills/neta ./skills/neta-community ./skills/neta-creative ./skills/neta-suggest ./skills/neta-space ./skills/neta-character ./skills/neta-elementum",
     "type-check": "tsc --noEmit",
     "check": "pnpm lint && pnpm type-check && pnpm validate",
     "changelog": "changeset",

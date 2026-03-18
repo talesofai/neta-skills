@@ -1,0 +1,18 @@
+name: list_my_characters
+title: 列出我的角色
+description: |
+  列出当前用户创建的所有角色。
+
+  返回当前用户自己创建的角色分页列表，包括 PUBLIC 和 PRIVATE 角色。
+  适用于查找之前会话创建的角色，用于更新或引用。
+
+  使用说明：
+    - 需要设置 NETA_TOKEN
+    - 仅返回当前用户的角色
+    - 可使用 keyword 参数过滤结果
+    - 返回角色 UUID (tcp_uuid)、名称、头像图片、可见性和状态
+
+parameters:
+  keyword: 按名称搜索角色的关键词（可选）
+  page_index: 分页页码，默认为 0
+  page_size: 每页结果数量（1-50），默认为 20
