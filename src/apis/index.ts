@@ -17,6 +17,7 @@ import { createRecsysApis } from "./recsys.ts";
 import { createSpaceApis } from "./space.ts";
 import { createTaskApis } from "./task.ts";
 import { createTcpApis } from "./tcp.ts";
+import { createTravelCampaignApis } from "./travel_campaign.ts";
 import type { PromiseResult } from "./types.ts";
 import { createUserApis } from "./user.ts";
 import { createVerseApis } from "./verse.ts";
@@ -56,6 +57,7 @@ export const createApis = (option: {
   const feeds = createFeedsApis(client);
   const space = createSpaceApis(client);
   const recsys = createRecsysApis(client);
+  const travelCampaign = createTravelCampaignApis(client);
 
   return {
     tcp,
@@ -73,6 +75,7 @@ export const createApis = (option: {
     feeds,
     space,
     recsys,
+    travelCampaign,
   };
 };
 

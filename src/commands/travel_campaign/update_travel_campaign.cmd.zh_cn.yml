@@ -1,0 +1,24 @@
+name: update_travel_campaign
+title: 更新奇遇剧本
+description: |
+  更新已有的奇遇剧本。只需指定要修改的字段——未提供的字段保持不变。
+
+  使用说明：
+    - 只有剧本创建者才能更新
+    - 传入空字符串 "" 作为 tcp_uuid 可解绑角色
+    - 文本字段的修改需经过内容审核
+    - 图片字段的修改需经过图片审核
+
+parameters:
+  campaign_uuid: 要更新的剧本 UUID（必填）
+  name: 剧本标题，最多 128 字符（可选）
+  mission_plot: 核心剧情/场景描述（可选）
+  subtitle: 显示在剧本卡片上的一行标语（可选）
+  status: "PUBLISHED（公开）或 DRAFT（私密）（可选）"
+  header_img: 剧本卡片缩略图 URL（可选）
+  background_img: 故事氛围背景图 URL（可选）
+  mission_task: 玩家目标和互动规则（可选）
+  mission_plot_attention: AI 行为约束和风格指南（可选）
+  tcp_uuid: |
+    要绑定为默认主角/NPC 的角色 UUID（可选）。
+    传入空字符串 "" 解绑当前角色。

@@ -1,0 +1,23 @@
+name: request_travel_campaign
+title: Get Travel Campaign Details
+description: |
+  Get full details of a Travel Campaign including mission plot, task, and AI constraints.
+
+  This is the primary command for "play mode" — load a campaign before starting a storytelling session.
+
+  Agent Play Mode Workflow:
+    1. Call this command with the campaign UUID
+    2. Incorporate mission_plot as the story foundation in your context
+    3. Use mission_task as the player objectives and rules
+    4. Apply mission_plot_attention as hard constraints on your behavior
+    5. If default_tcp is present, roleplay that character during the session
+
+  Response Fields:
+    - mission_plot: The core story scenario and world context
+    - mission_task: Player objectives and interaction rules
+    - mission_plot_attention: AI behavior constraints — follow these strictly
+    - default_tcp: Bound character info (if any) for roleplay
+    - header_img / background_img: Visual context for scene descriptions
+
+parameters:
+  campaign_uuid: UUID of the campaign to retrieve (required)

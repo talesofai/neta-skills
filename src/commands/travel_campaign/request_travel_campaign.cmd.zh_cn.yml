@@ -1,0 +1,23 @@
+name: request_travel_campaign
+title: 获取奇遇剧本详情
+description: |
+  获取奇遇剧本的完整详情，包括剧情、任务和 AI 约束。
+
+  这是「游玩模式」的核心命令——在开始故事讲述会话前加载剧本。
+
+  Agent 游玩模式工作流：
+    1. 用剧本 UUID 调用此命令
+    2. 将 mission_plot 作为故事基础纳入上下文
+    3. 将 mission_task 作为玩家目标和规则
+    4. 将 mission_plot_attention 作为对你行为的硬性约束严格遵守
+    5. 如果存在 default_tcp，在会话中扮演该角色
+
+  响应字段：
+    - mission_plot：核心故事场景和世界背景
+    - mission_task：玩家目标和互动规则
+    - mission_plot_attention：AI 行为约束——严格遵守
+    - default_tcp：绑定角色信息（如有）用于角色扮演
+    - header_img / background_img：场景描述的视觉参考
+
+parameters:
+  campaign_uuid: 要获取的剧本 UUID（必填）

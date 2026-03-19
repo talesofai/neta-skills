@@ -1,0 +1,46 @@
+name: create_travel_campaign
+title: 创建奇遇剧本
+description: |
+  创建一个新的奇遇剧本（故事冒险），包含剧情设定、规则，并可选择绑定角色。
+
+  奇遇剧本是 AI 驱动的交互式故事体验，Agent 同时担任 DM 并扮演角色。
+
+  使用说明：
+    - 剧本创建免费（不消耗电量）
+    - 剧本与任务以成对形式创建
+    - 创建后使用 `request_travel_campaign` 加载完整详情用于故事讲述
+    - 所有文本字段均进行内容审核
+
+  字段说明：
+    - name：剧本标题，最多 128 字符
+    - mission_plot：核心剧情/场景描述，Agent 用于讲述故事的叙事基础
+    - mission_task：玩家目标和互动规则
+    - mission_plot_attention：AI 行为约束和风格指南（应该/不应该做什么）
+    - subtitle：显示在剧本卡片上的一行标语
+    - status：PUBLISHED（公开，他人可见）或 DRAFT（私密）
+    - header_img：卡片缩略图 URL
+    - background_img：故事氛围背景图 URL
+    - tcp_uuid：绑定角色（TCP）作为 Agent 将扮演的默认主角/NPC
+
+parameters:
+  name: 剧本标题，最多 128 字符
+  mission_plot: |
+    核心故事和场景描述——叙事基础。
+    设定世界背景、初始情境、关键剧情元素和氛围。
+    示例：「一个暴风雨的夜晚，一封神秘的邀请函送达，邀请玩家前往一座被遗忘的庄园...」
+  subtitle: 显示在剧本卡片上的一行标语或钩子（可选）
+  status: "PUBLISHED（公开，他人可见）或 DRAFT（私密）。默认 PUBLISHED"
+  header_img: 剧本卡片缩略图 URL（可选）
+  background_img: 故事氛围背景图 URL（可选）
+  mission_task: |
+    玩家目标和互动规则。
+    玩家应该完成什么？如何与故事互动？
+    示例：「探索庄园，揭开三个隐藏的秘密。」
+  mission_plot_attention: |
+    AI 行为约束和风格指南。
+    指定语调偏好、内容边界和叙事机制。
+    示例：「保持哥特式恐怖氛围。避免 graphic violence。玩家的选择必须有可见的后果。」
+  tcp_uuid: |
+    要绑定为默认主角/NPC 的角色（TCP）UUID（可选）。
+    Agent 在故事讲述过程中将扮演此角色。
+    必须引用已 PUBLISHED 且 PUBLIC 的角色。传入空字符串 "" 解绑。

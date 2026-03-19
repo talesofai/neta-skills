@@ -1,0 +1,24 @@
+name: update_travel_campaign
+title: Update Travel Campaign
+description: |
+  Update an existing Travel Campaign. Only specify fields that need to change — omitted fields remain unchanged.
+
+  Usage Notes:
+    - You must be the creator of the campaign to update it
+    - To unbind a character, pass tcp_uuid as empty string ""
+    - Changes to text fields are subject to content moderation
+    - Changes to image fields are subject to image moderation
+
+parameters:
+  campaign_uuid: UUID of the campaign to update (required)
+  name: Campaign title, max 128 characters (optional)
+  mission_plot: Core story/scenario description (optional)
+  subtitle: One-line tagline shown on the campaign card (optional)
+  status: "PUBLISHED (public) or DRAFT (private) (optional)"
+  header_img: Campaign card thumbnail image URL (optional)
+  background_img: Atmospheric background image URL (optional)
+  mission_task: Player objectives and interaction rules (optional)
+  mission_plot_attention: AI behavior constraints and style guidelines (optional)
+  tcp_uuid: |
+    Character UUID to bind as default protagonist/NPC (optional).
+    Pass empty string "" to unbind the current character.
