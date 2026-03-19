@@ -11,12 +11,10 @@ Through the "Elementum Alchemy" workflow, forge any visual concept into a reusab
 
 ## Prerequisites
 
-Ensure the environment variable `NETA_TOKEN` is set.
-
 Ensure the latest version of Neta CLI is installed:
 ```
 neta-cli --version
-0.10.0
+0.11.0
 ```
 
 ```

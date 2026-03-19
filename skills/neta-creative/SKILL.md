@@ -16,13 +16,11 @@ Used to interact with the Neta API for multimedia content creation and creationâ
 
 ## Prerequisites
 
-Make sure the `NETA_TOKEN` environment variable is set.
-
 Also ensure the latest Neta CLI is installed:
 
 ```bash
 neta-cli --version
-0.10.0
+0.11.0
 ```
 
 ```bash

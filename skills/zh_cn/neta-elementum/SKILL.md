@@ -11,12 +11,10 @@ description: Neta 元素(Elementum)炼金技能 - 引导用户创建或更新风
 
 ## 前置条件
 
-确保已设置环境变量 `NETA_TOKEN`。
-
 确保已安装最新版本的 Neta Cli
 ```
 neta-cli --version
-0.10.0
+0.11.0
 ```
 
 ```

@@ -5,7 +5,9 @@ import pkg from "../package.json" with { type: "json" };
 import { buildCommands } from "./commands/load.ts";
 
 // Load environment variables
-dotenv.config();
+dotenv.config({
+  silent: true,
+});
 
 program
   .name("neta")

@@ -19,12 +19,10 @@ description: Neta API 空间与世界观浏览技能——按空间/标签维度
 
 ## 前置条件
 
-确保已设置环境变量 `NETA_TOKEN`。
-
 确保已安装最新版本的 Neta Cli
 ```
 neta-cli --version
-0.10.0
+0.11.0
 ```
 
 ```

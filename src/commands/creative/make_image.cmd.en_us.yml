@@ -17,4 +17,6 @@ parameters:
         - For image editing or image‑to‑image tasks, always include the proper reference image variables.
       - Example (character + element): @character_name, /elementum_name, ref_img-1234567890, ref_img-1234567891, keyword1, keyword2…
   aspect: Image aspect ratio
-
+  width: Image width
+  height: Image height
+  model_series: Image generation model

@@ -12,6 +12,9 @@ const meta = parseMeta(
     parameters: Type.Object({
       prompt: Type.String(),
       aspect: Type.String(),
+      width: Type.String(),
+      height: Type.String(),
+      model_series: Type.String(),
     }),
   }),
   import.meta,
@@ -32,6 +35,27 @@ const makeImageV1Parameters = Type.Object({
       description: meta.parameters.aspect,
     },
   ),
+  width: Type.Optional(
+    Type.Integer({
+      description: meta.parameters.width,
+      minimum: 256,
+      maximum: 2048,
+    }),
+  ),
+  height: Type.Optional(
+    Type.Integer({
+      description: meta.parameters.height,
+      minimum: 256,
+      maximum: 2048,
+    }),
+  ),
+  model_series: Type.Union(
+    [Type.Literal("8_image_edit"), Type.Literal("3_noobxl")],
+    {
+      default: "8_image_edit",
+      description: meta.parameters.model_series,
+    },
+  ),
 });
 
 export const makeImage = createCommand(
@@ -41,13 +65,15 @@ export const makeImage = createCommand(
     description: meta.description,
     inputSchema: makeImageV1Parameters,
   },
-  async ({ prompt, aspect }, { log, apis }) => {
+  async ({ prompt, aspect, model_series, width, height }, { log, apis }) => {
     const createTask = async () => {
       const vtokens = (await apis.prompt.parseVtokens(prompt)) ?? [];
 
       const payload = buildMakeImagePayload(vtokens ?? [], {
         make_image_aspect: aspect ?? "3:4",
-        context_model_series: "8_image_edit",
+        width,
+        height,
+        context_model_series: model_series,
       });
 
       return await apis.artifact.makeImage(payload);

@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.11.0
+
+### Minor Changes
+
+- make image command support size params and model selection
+
 ## 0.10.0
 
 ### Minor Changes

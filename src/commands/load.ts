@@ -78,7 +78,7 @@ export const buildCommands = async (
         if (typeof property !== "object") return;
 
         const option = new Option(
-          `--${key} <${property["type"]}>`,
+          `--${key} <${property["type"] ?? "string"}>`,
           property.description,
         );
 

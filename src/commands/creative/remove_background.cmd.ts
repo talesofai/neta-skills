@@ -33,7 +33,7 @@ export const removeBackground = createCommand(
   async ({ input_image }, { apis, log }) => {
     const createTask = async () => {
       return apis.artifact.postProcess(input_image, "0_null/抠图SEG", {
-        entrance: "PICTURE,PURE,VERSE",
+        entrance: "PICTURE,CLI",
       });
     };
 
@@ -76,7 +76,7 @@ export const removeBackgroundNoCrop = createCommand(
   async ({ input_image }, { apis, log }) => {
     const createTask = async () => {
       return apis.artifact.postProcess(input_image, "0_null/抠图SEG", {
-        entrance: "PICTURE,PURE,VERSE",
+        entrance: "PICTURE,CLI",
       });
     };
 

@@ -39,7 +39,7 @@ export const makeSong = createCommand(
   async ({ prompt, lyrics }, { apis, log }) => {
     const createTask = async () => {
       return apis.artifact.makeSong(prompt, lyrics, {
-        entrance: "SONG,VERSE",
+        entrance: "SONG,CLI",
       });
     };
 

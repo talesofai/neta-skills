@@ -22,15 +22,20 @@ export type MakeImageEntrance =
   | "PICTURE,OC_PREVIEW"
   | "PICTURE,INTERACTIVE"
   | "PICTURE,VERSE"
-  | "PICTURE,PURE,VERSE";
+  | "PICTURE,PURE,VERSE"
+  | "PICTURE,CLI";
 
-export type MakeVideoEntrance = "VIDEO,VERSE" | "VIDEO,PURE" | "VIDEO";
+export type MakeVideoEntrance =
+  | "VIDEO,VERSE"
+  | "VIDEO,PURE"
+  | "VIDEO"
+  | "VIDEO,CLI";
 
-export type EditImageEntrance = "IMAGE_EDIT,VERSE";
+export type EditImageEntrance = "IMAGE_EDIT,VERSE" | "IMAGE_EDIT,CLI";
 
-export type EditHtmlEntrance = "HTML,VERSE";
+export type EditHtmlEntrance = "HTML,VERSE" | "HTML,CLI";
 
-export type MakeSongEntrance = "SONG,VERSE";
+export type MakeSongEntrance = "SONG,VERSE" | "SONG,CLI";
 
 export interface TaskMeta {
   entrance?:
@@ -136,6 +141,8 @@ export const buildMakeImagePayload = (
   vtokens: Vtokens[],
   options: {
     make_image_aspect: "1:1" | "3:4" | "4:3" | "9:16" | "16:9";
+    width?: number;
+    height?: number;
     advanced_translator?: boolean;
     negative_freetext?: string;
     context_model_series?: string;
@@ -148,6 +155,8 @@ export const buildMakeImagePayload = (
 ) => {
   const {
     make_image_aspect,
+    width,
+    height,
     advanced_translator,
     negative_freetext,
     context_model_series,
@@ -157,18 +166,38 @@ export const buildMakeImagePayload = (
     toolcall_uuid,
   } = options;
 
-  const imageAspect = IMAGE_GENERATE_ASPECTS.find(
-    (a) => a.aspect === make_image_aspect,
-  )?.size ?? [576, 768];
+  const size = ((): [number, number] => {
+    // use custom width and height
+    if (width && height) {
+      return [width, height];
+    }
+
+    const aspectSize = IMAGE_GENERATE_ASPECTS.find(
+      (a) => a.aspect === make_image_aspect,
+    )?.size ?? [576, 768];
+
+    // use custom width and fix height by aspect ratio
+    if (width) {
+      return [width, (aspectSize[1] / aspectSize[0]) * width];
+    }
+
+    // use custom height and fix width by aspect ratio
+    if (height) {
+      return [(aspectSize[0] / aspectSize[1]) * height, height];
+    }
+
+    // use aspect ratio preset size
+    return aspectSize;
+  })();
 
   return {
     storyId: "DO_NOT_USE",
     jobType: "universal",
     rawPrompt: vtokens,
-    width: imageAspect[0],
-    height: imageAspect[1],
+    width: size[0],
+    height: size[1],
     meta: {
-      entrance: "PICTURE,VERSE",
+      entrance: "PICTURE,CLI",
       entrance_uuid,
       manuscript_uuid,
       assign_key,
@@ -208,7 +237,7 @@ export const buildMakeVideoPayload = (
     work_flow_model,
     inherit_params,
     meta: {
-      entrance: "VIDEO,VERSE",
+      entrance: "VIDEO,CLI",
       entrance_uuid,
       manuscript_uuid,
       assign_key,

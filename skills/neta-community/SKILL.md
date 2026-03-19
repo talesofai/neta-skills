@@ -19,13 +19,11 @@ Used to interact with the Neta API for community feed browsing, interactions, an
 
 ## Prerequisites
 
-Make sure the `NETA_TOKEN` environment variable is set.
-
 Install the latest version of the Neta CLI:
 
 ```bash
 neta-cli --version
-0.10.0
+0.11.0
 ```
 
 ```bash
