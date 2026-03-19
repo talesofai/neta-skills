@@ -19,6 +19,3 @@ parameters:
   background_img: Atmospheric background image URL (optional)
   mission_task: Player objectives and interaction rules (optional)
   mission_plot_attention: AI behavior constraints and style guidelines (optional)
-  tcp_uuid: |
-    Character UUID to bind as default protagonist/NPC (optional).
-    Pass empty string "" to unbind the current character.

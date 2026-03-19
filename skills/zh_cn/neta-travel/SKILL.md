@@ -36,8 +36,7 @@ neta-cli create_travel_campaign \
   --name "被遗忘的庄园" \
   --mission_plot "一个暴风雨的夜晚，一封神秘的邀请函送达，邀请玩家前往一座被遗忘的庄园，那里埋藏着家族秘密和幽灵的存在..." \
   --mission_task "探索庄园，揭开三个隐藏的秘密，并决定是帮助被困的幽灵找到安息，还是夺取他们的力量。" \
-  --mission_plot_attention "保持哥特式恐怖氛围。玩家的选择有永久性后果。避免 graphic violence——专注于心理紧张和神秘感。" \
-  --status "PUBLISHED"
+  --mission_plot_attention "保持哥特式恐怖氛围。玩家的选择有永久性后果。避免 graphic violence——专注于心理紧张和神秘感。"
 ```
 
 ### 更新奇遇剧本
@@ -50,15 +49,6 @@ neta-cli update_travel_campaign \
   --campaign_uuid "campaign-uuid-here" \
   --mission_plot "更新的剧情，包含更详细的转折..."
 
-# 更改绑定角色
-neta-cli update_travel_campaign \
-  --campaign_uuid "campaign-uuid-here" \
-  --tcp_uuid "character-uuid-here"
-
-# 解绑角色
-neta-cli update_travel_campaign \
-  --campaign_uuid "campaign-uuid-here" \
-  --tcp_uuid ""
 ```
 
 ### 列出我的奇遇剧本
@@ -141,7 +131,6 @@ neta-cli request_travel_campaign --campaign_uuid "campaign-uuid-here"
 | `mission_plot_attention` | AI 指南 | 语气、限制、机制 |
 | `header_img` | 卡片缩略图 | 图像生成的 URL |
 | `background_img` | 氛围背景图 | 图像生成的 URL |
-| `tcp_uuid` | 绑定角色 | 扮演此角色 |
 
 ## 最佳实践
 
@@ -153,11 +142,7 @@ neta-cli request_travel_campaign --campaign_uuid "campaign-uuid-here"
    - 使用 `mission_plot_attention` 指定 AI 不应做的事
    - 尽早设定边界以避免偏离
 
-3. **角色绑定**：
-   - 当有特定主角/NPC 需要 Agent 扮演时绑定 TCP
-   - 不绑定则为纯 DM 模式或玩家驱动角色创建
-
-4. **迭代完善**：
+3. **迭代完善**：
    - 从简单开始，用 `request_travel_campaign` 测试
    - 基于试玩反馈使用 `update_travel_campaign` 完善
 

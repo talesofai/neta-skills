@@ -20,7 +20,6 @@ description: |
     - status: PUBLISHED (visible to others) or DRAFT (private)
     - header_img: Card thumbnail image URL
     - background_img: Atmospheric background image URL
-    - tcp_uuid: Bind a character (TCP) as the default protagonist/NPC the agent will roleplay
 
 parameters:
   name: Campaign title, max 128 characters
@@ -40,7 +39,3 @@ parameters:
     AI behavior constraints and style guidelines.
     Specify tone preferences, content boundaries, and narrative mechanics.
     Example: "Maintain Gothic horror atmosphere. Avoid graphic violence. Player choices must have visible consequences."
-  tcp_uuid: |
-    UUID of a character (TCP) to bind as the default protagonist/NPC (optional).
-    The agent will roleplay this character during storytelling.
-    Must reference a PUBLISHED, PUBLIC character. Pass empty string "" to unbind.

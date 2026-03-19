@@ -17,7 +17,6 @@ const meta = parseMeta(
       background_img: Type.String(),
       mission_task: Type.String(),
       mission_plot_attention: Type.String(),
-      tcp_uuid: Type.String(),
     }),
   }),
   import.meta,
@@ -56,9 +55,6 @@ const updateTravelCampaignParameters = Type.Object({
   mission_plot_attention: Type.Optional(
     Type.String({ description: meta.parameters.mission_plot_attention }),
   ),
-  tcp_uuid: Type.Optional(
-    Type.String({ description: meta.parameters.tcp_uuid }),
-  ),
 });
 
 export const updateTravelCampaign = createCommand(
@@ -79,7 +75,6 @@ export const updateTravelCampaign = createCommand(
       background_img,
       mission_task,
       mission_plot_attention,
-      tcp_uuid,
     },
     { apis },
   ) => {
@@ -92,7 +87,6 @@ export const updateTravelCampaign = createCommand(
       background_img,
       mission_task,
       mission_plot_attention,
-      tcp_uuid,
     });
 
     return {

@@ -20,7 +20,6 @@ description: |
     - status：PUBLISHED（公开，他人可见）或 DRAFT（私密）
     - header_img：卡片缩略图 URL
     - background_img：故事氛围背景图 URL
-    - tcp_uuid：绑定角色（TCP）作为 Agent 将扮演的默认主角/NPC
 
 parameters:
   name: 剧本标题，最多 128 字符
@@ -40,7 +39,3 @@ parameters:
     AI 行为约束和风格指南。
     指定语调偏好、内容边界和叙事机制。
     示例：「保持哥特式恐怖氛围。避免 graphic violence。玩家的选择必须有可见的后果。」
-  tcp_uuid: |
-    要绑定为默认主角/NPC 的角色（TCP）UUID（可选）。
-    Agent 在故事讲述过程中将扮演此角色。
-    必须引用已 PUBLISHED 且 PUBLIC 的角色。传入空字符串 "" 解绑。

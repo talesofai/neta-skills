@@ -36,8 +36,7 @@ neta-cli create_travel_campaign \
   --name "The Forgotten Mansion" \
   --mission_plot "A mysterious letter arrives on a stormy night, inviting the player to a forgotten mansion where family secrets and ghostly presences await..." \
   --mission_task "Explore the mansion, uncover its three hidden secrets, and decide whether to help the trapped spirits find peace or seize their power." \
-  --mission_plot_attention "Maintain Gothic horror atmosphere. Player choices have permanent consequences. Avoid graphic violence - focus on psychological tension and mystery." \
-  --status "PUBLISHED"
+  --mission_plot_attention "Maintain Gothic horror atmosphere. Player choices have permanent consequences. Avoid graphic violence - focus on psychological tension and mystery."
 ```
 
 ### Update Travel Campaign
@@ -50,15 +49,6 @@ neta-cli update_travel_campaign \
   --campaign_uuid "campaign-uuid-here" \
   --mission_plot "Updated plot with more detailed twists..."
 
-# Change bound character
-neta-cli update_travel_campaign \
-  --campaign_uuid "campaign-uuid-here" \
-  --tcp_uuid "character-uuid-here"
-
-# Unbind character
-neta-cli update_travel_campaign \
-  --campaign_uuid "campaign-uuid-here" \
-  --tcp_uuid ""
 ```
 
 ### List My Travel Campaigns
@@ -141,7 +131,6 @@ When user wants to play a travel campaign:
 | `mission_plot_attention` | AI guidelines | Tone, restrictions, mechanics |
 | `header_img` | Card thumbnail image | URL from image generation |
 | `background_img` | Atmospheric background | URL from image generation |
-| `tcp_uuid` | Bound character | Roleplay as this character |
 
 ## Best Practices
 
@@ -153,11 +142,7 @@ When user wants to play a travel campaign:
    - Use `mission_plot_attention` for things the AI should NOT do
    - Set boundaries early to avoid drift
 
-3. **Character Binding**:
-   - Bind a TCP when there's a specific protagonist/NPC the agent should roleplay
-   - Leave unbound for pure DM mode or player-driven character creation
-
-4. **Iterative Refinement**:
+3. **Iterative Refinement**:
    - Start simple, test with `request_travel_campaign`
    - Use `update_travel_campaign` to refine based on playtesting
 

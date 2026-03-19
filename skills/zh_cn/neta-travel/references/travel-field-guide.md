@@ -91,20 +91,6 @@
   - **风格偏好**：「使用现在时，以有意义的选择结束」
 - **最佳实践**：具体而非模糊
 
-## 关系字段
-
-### tcp_uuid
-- **类型**: 字符串 (UUID)
-- **必需**: 否
-- **描述**: 用于角色扮演的绑定角色
-- **用途**:
-  - Agent 将在故事讲述中扮演此角色
-  - 角色必须是 PUBLIC 和 PUBLISHED
-  - 可通过传空字符串 "" 取消绑定
-- **查找角色**:
-  - 使用 `list_my_characters` 查看你创建的角色
-  - 使用 `create_character` 创建新角色
-
 ## 响应字段（只读）
 
 ### uuid
@@ -136,8 +122,6 @@ TravelCampaign
     ├── mission_plot (故事基础)
     ├── mission_task (玩家目标)
     └── mission_plot_attention (AI 约束)
-└── 可选关系
-    └── tcp_uuid → default_tcp (绑定角色)
 ```
 
 ## 常见模式
@@ -167,7 +151,6 @@ background_img: "https://oss.talesofai.cn/picture/..."
 mission_plot: "广泛的世界构建..."
 mission_task: "生存7天，找到原型，选择信任谁"
 mission_plot_attention: "基调：粗粝但充满希望。没有性内容。玩家能动性至关重要。"
-tcp_uuid: "character-uuid-here"
 ```
 
 ## 验证规则
@@ -175,9 +158,8 @@ tcp_uuid: "character-uuid-here"
 1. **name**: 必需，最多 128 字符
 2. **mission_plot**: 必需，输入时裁剪，不能为空
 3. **status**: 必须是 "PUBLISHED" 或 "DRAFT"
-4. **tcp_uuid**: 如提供，角色必须存在且为 PUBLIC 和 PUBLISHED
-5. **所有文本字段**: 受内容审核（违规返回 HTTP 451）
-6. **图片**: 受图片内容审核（违规返回 HTTP 420）
+4. **所有文本字段**: 受内容审核（违规返回 HTTP 451）
+5. **图片**: 受图片内容审核（违规返回 HTTP 420）
 
 ## 更新行为
 

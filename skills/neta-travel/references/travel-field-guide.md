@@ -91,20 +91,6 @@ Complete reference for all Travel Campaign fields and their usage.
   - **Style preferences**: "Use present tense, end with meaningful choices"
 - **Best Practice**: Be specific rather than vague
 
-## Relationship Fields
-
-### tcp_uuid
-- **Type**: String (UUID)
-- **Required**: No
-- **Description**: Bound character for roleplay
-- **Usage**:
-  - Agent will roleplay this character during storytelling
-  - Character must be PUBLISHED and PUBLIC
-  - Can be unset by passing empty string ""
-- **Finding Characters**:
-  - Use `list_my_characters` to see your created characters
-  - Use `create_character` to make a new one
-
 ## Response Fields (Read-Only)
 
 ### uuid
@@ -136,8 +122,6 @@ TravelCampaign
     ├── mission_plot (story foundation)
     ├── mission_task (player goals)
     └── mission_plot_attention (AI constraints)
-└── Optional Relation
-    └── tcp_uuid → default_tcp (bound character)
 ```
 
 ## Common Patterns
@@ -167,7 +151,6 @@ background_img: "https://oss.talesofai.cn/picture/..."
 mission_plot: "Extensive world building..."
 mission_task: "Survive 7 days, find the prototype, choose who to trust"
 mission_plot_attention: "Tone: gritty but hopeful. No sexual content. Player agency paramount."
-tcp_uuid: "character-uuid-here"
 ```
 
 ## Validation Rules
@@ -175,9 +158,8 @@ tcp_uuid: "character-uuid-here"
 1. **name**: Required, max 128 characters
 2. **mission_plot**: Required, trimmed on input, must not be empty
 3. **status**: Must be "PUBLISHED" or "DRAFT"
-4. **tcp_uuid**: If provided, character must exist, be PUBLISHED and PUBLIC
-5. **All text fields**: Subject to content moderation (HTTP 451 on violation)
-6. **Images**: Subject to image content moderation (HTTP 420 on violation)
+4. **All text fields**: Subject to content moderation (HTTP 451 on violation)
+5. **Images**: Subject to image content moderation (HTTP 420 on violation)
 
 ## Update Behavior
 

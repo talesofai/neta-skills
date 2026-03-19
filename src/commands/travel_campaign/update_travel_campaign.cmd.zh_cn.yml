@@ -19,6 +19,3 @@ parameters:
   background_img: 故事氛围背景图 URL（可选）
   mission_task: 玩家目标和互动规则（可选）
   mission_plot_attention: AI 行为约束和风格指南（可选）
-  tcp_uuid: |
-    要绑定为默认主角/NPC 的角色 UUID（可选）。
-    传入空字符串 "" 解绑当前角色。

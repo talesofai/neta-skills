@@ -42,7 +42,6 @@ export type CreateTravelCampaignParams = {
   background_img?: string;
   mission_task?: string;
   mission_plot_attention?: string;
-  tcp_uuid?: string;
 };
 
 export type UpdateTravelCampaignParams = {
@@ -54,7 +53,6 @@ export type UpdateTravelCampaignParams = {
   mission_plot?: string;
   mission_task?: string;
   mission_plot_attention?: string;
-  tcp_uuid?: string;
 };
 
 export const createTravelCampaignApis = (client: AxiosInstance) => {
