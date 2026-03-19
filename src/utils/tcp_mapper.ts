@@ -41,7 +41,7 @@ export function mapProfileToElementumAssign(
 
 /**
  * Map backend default_travel_character_parent to agent-facing CharacterAssign.
- * Bio fields are not available in the campaign DTO, so they are null.
+ * Bio fields are absent in the campaign DTO and are omitted.
  */
 export function mapDefaultTcp(
   parent: TravelCampaignBigramDTO["default_travel_character_parent"],
@@ -51,11 +51,6 @@ export function mapDefaultTcp(
     type: "character",
     uuid: parent.uuid,
     name: parent.name,
-    age: null,
-    interests: null,
-    persona: null,
-    description: null,
-    occupation: null,
     avatar_img: parent.config?.avatar_img ?? null,
     header_img: parent.config?.header_img ?? null,
   };

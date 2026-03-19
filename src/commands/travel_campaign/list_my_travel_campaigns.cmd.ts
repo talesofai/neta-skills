@@ -26,7 +26,7 @@ export const listMyTravelCampaigns = createCommand(
   },
   async ({ page_index, page_size }, { user, apis }) => {
     if (!user) {
-      throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
+      throw new Error("Not authenticated. Please check your NETA_TOKEN.");
     }
 
     const result = await apis.travelCampaign.listMyCampaigns({
