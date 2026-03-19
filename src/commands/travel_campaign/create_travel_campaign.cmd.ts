@@ -70,8 +70,12 @@ export const createTravelCampaign = createCommand(
       mission_task,
       mission_plot_attention,
     },
-    { apis },
+    { user, apis },
   ) => {
+    if (!user) {
+      throw new Error("Not authenticated. Please check your NETA_TOKEN.");
+    }
+
     const result = await apis.travelCampaign.createCampaign({
       name,
       mission_plot,

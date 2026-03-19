@@ -76,18 +76,29 @@ export const updateTravelCampaign = createCommand(
       mission_task,
       mission_plot_attention,
     },
-    { apis },
+    { user, apis },
   ) => {
-    const result = await apis.travelCampaign.updateCampaign(campaign_uuid, {
-      name,
-      mission_plot,
-      subtitle,
-      status,
-      header_img,
-      background_img,
-      mission_task,
-      mission_plot_attention,
-    });
+    if (!user) {
+      throw new Error("Not authenticated. Please check your NETA_TOKEN.");
+    }
+
+    const patch = Object.fromEntries(
+      Object.entries({
+        name,
+        mission_plot,
+        subtitle,
+        status,
+        header_img,
+        background_img,
+        mission_task,
+        mission_plot_attention,
+      }).filter(([, v]) => v !== undefined),
+    );
+
+    const result = await apis.travelCampaign.updateCampaign(
+      campaign_uuid,
+      patch,
+    );
 
     return {
       uuid: result.uuid,

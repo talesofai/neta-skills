@@ -13,12 +13,10 @@ Create and experience AI-driven interactive story adventures (Travel Campaigns).
 
 ## Prerequisites
 
-Ensure environment variable `NETA_TOKEN` is set.
-
 Ensure latest Neta CLI is installed:
 ```
 neta-cli --version
-0.8.0
+0.11.0
 ```
 
 ```
@@ -147,7 +145,7 @@ When user wants to play a travel campaign:
    - Start simple, test with `request_travel_campaign`
    - Use `update_travel_campaign` to refine based on playtesting
 
-5. **Content Moderation**:
+4. **Content Moderation**:
    - All text fields are moderated on creation/update
    - Avoid content that violates community guidelines
 
