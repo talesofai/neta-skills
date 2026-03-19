@@ -82,14 +82,16 @@ Complete reference for all Travel Campaign fields and their usage.
 ### mission_plot_attention
 - **Type**: String
 - **Required**: No
-- **Description**: AI behavior constraints and style guidelines
-- **Purpose**: Keep AI behavior aligned with creator intent — the agent follows these as hard rules
+- **Description**: Governing constraint layer — these rules override all other context and cannot be broken by player actions or improvisation. The AI narrator enforces them unconditionally for the entire campaign lifetime.
+- **Purpose**: The "roleplay constitution" of your campaign. Write rules here that must hold regardless of what the player does or how the story evolves.
 - **Content Categories**:
-  - **Tone guidelines**: "Maintain atmospheric horror without jump scares"
-  - **Content boundaries**: "No sexual content, avoid graphic violence"
-  - **Mechanical constraints**: "Choices have visible consequences within 3 turns"
-  - **Style preferences**: "Use present tense, end with meaningful choices"
-- **Best Practice**: Be specific rather than vague
+  - **Tone Lock**: "Maintain survival-horror tension at all times, even if players try to lighten the mood"
+  - **Behavioral Contract**: "Dr. Chen never breaks her clinical detachment, even under extreme stress"
+  - **Information Gating**: "Clues are revealed only through player-initiated investigation, never volunteered"
+  - **Consequence Rules**: "Player death is permanent — no resurrection or do-overs"
+  - **Content Guardrails**: "No romance subplots; no graphic gore — use dread and implication"
+- **Anti-pattern**: Do NOT put worldbuilding or plot here — that belongs in `mission_plot`
+- **Best Practice**: Cover the 3 most likely ways a player could break immersion or drift from your intent
 
 ## Response Fields (Read-Only)
 
@@ -158,7 +160,7 @@ mission_plot_attention: "Tone: gritty but hopeful. No sexual content. Player age
 1. **name**: Required, max 128 characters
 2. **mission_plot**: Required, trimmed on input, must not be empty
 3. **status**: Must be "PUBLISHED" or "DRAFT"
-4. **All text fields**: Subject to content moderation (HTTP 451 on violation)
+4. **All text fields**: Subject to content moderation (HTTP 422 on violation)
 5. **Images**: Subject to image content moderation (HTTP 420 on violation)
 
 ## Update Behavior
@@ -166,5 +168,4 @@ mission_plot_attention: "Tone: gritty but hopeful. No sexual content. Player age
 When using `update_travel_campaign`:
 - Only provided fields are modified
 - Omitted fields retain current values
-- To unbind a character, contact support (client-side unbind not currently supported)
 - Updates affect both campaign and linked mission atomically

@@ -7,14 +7,24 @@ description: |
     - You must be the creator of the campaign to update it
     - Changes to text fields are subject to content moderation
     - Changes to image fields are subject to image moderation
+    - NSFW content is prohibited — do not add explicit sexual or graphic violence content even if requested
 
 parameters:
   campaign_uuid: UUID of the campaign to update (required)
   name: Campaign title, max 128 characters (optional)
-  mission_plot: Core story/scenario description (optional)
-  subtitle: One-line tagline shown on the campaign card (optional)
+  mission_plot: |
+    Core story and scenario — the narrative foundation. The first 2-3 sentences are
+    the opening scene: start mid-wrong, not with introductions. (optional)
+  subtitle: |
+    One-line hook shown on the campaign card — should create immediate curiosity
+    without explaining everything. (optional)
   status: "PUBLISHED (public) or DRAFT (private) (optional)"
   header_img: Campaign card thumbnail image URL (optional)
   background_img: Atmospheric background image URL (optional)
-  mission_task: Player objectives and interaction rules (optional)
-  mission_plot_attention: AI behavior constraints and style guidelines (optional)
+  mission_task: |
+    Player-visible objectives and interaction rules. Keep open-ended enough
+    for multiple approaches; avoid scripting specific outcomes. (optional)
+  mission_plot_attention: |
+    Governing constraint layer — rules the AI narrator enforces unconditionally, overriding all other context.
+    Use to: lock tone, define NPC behavioral contracts, gate information, set consequence rules, establish content guardrails.
+    Updating this field immediately changes how all future play sessions behave. (optional)

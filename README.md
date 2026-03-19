@@ -23,6 +23,7 @@ You can get your access token from the [Neta Open Portal](https://www.neta.art/o
 - 👤 **Character & Style Management:** Search, fetch details, and manage characters and stylistic elements.
 - 🏷️ **Community Integrations:** Explore trending hashtags, popular characters, and curated collections.
 - 🧭 **Smart Discovery & Suggestions:** Explore interactive feeds and get keyword, tag, and category suggestions for progressive content discovery.
+- 📖 **Interactive Story Adventures:** Craft and play AI-driven narrative campaigns (Travel) — the agent acts as DM and character roleplayer for immersive interactive fiction.
 - 🤖 **Agent First:** Designed from the ground up to plug into your favorite AI agent frameworks.
 
 ---
@@ -59,14 +60,21 @@ npx skills add talesofai/neta-skills/skills/neta-character
 
 # Elementum VToken creation and management
 npx skills add talesofai/neta-skills/skills/neta-elementum
+
+# AI-driven interactive story adventures (Travel Campaigns)
+npx skills add talesofai/neta-skills/skills/neta-travel
 ```
 
 ### Available Commands
 
-The skill includes **30 commands** for various tasks:
+The skill includes **34 commands** for various tasks:
 
 | Category | Command | Description |
 |----------|---------|-------------|
+| **Travel Campaigns** | `create_travel_campaign` | Create an AI-driven interactive story adventure |
+| | `update_travel_campaign` | Update an existing travel campaign |
+| | `list_my_travel_campaigns` | List your created travel campaigns |
+| | `request_travel_campaign` | Load full campaign details for play mode |
 | **Creation** | `make_image` | Generate images from text prompts |
 | | `make_video` | Generate videos from images and prompts |
 | | `make_song` | Compose songs with custom prompts and lyrics |
@@ -153,6 +161,7 @@ neta-skills/
 │   ├── neta-space/                 # Space navigation & exploration skills (EN)
 │   ├── neta-character/             # Character VToken creation & management (EN)
 │   ├── neta-elementum/             # Elementum VToken creation & management (EN)
+│   ├── neta-travel/                # Interactive story adventures / Travel Campaigns (EN)
 │   └── zh_cn/                      # Chinese-localized skills & references
 │       ├── neta/
 │       ├── neta-community/
@@ -160,7 +169,8 @@ neta-skills/
 │       ├── neta-suggest/
 │       ├── neta-space/
 │       ├── neta-character/
-│       └── neta-elementum/
+│       ├── neta-elementum/
+│       └── neta-travel/
 ├── src/                            # TypeScript source for the CLI
 │   ├── apis/                       # Typed Neta API client helpers
 │   ├── commands/                   # CLI command definitions (TS + YAML meta)
@@ -193,6 +203,7 @@ Agents use these references to learn the optimal sequence of actions, parameter 
 - **Song & MV Creation:** Workflows for composing songs and creating music videos with synchronized visuals.
 - **Character & Hashtag Research:** Processes for finding trending content, searching characters, and utilizing community trends.
 - **Character & Elementum Creation:** Character creation and elementum alchemy workflows.
+- **Travel Campaign Crafting & Play:** Multi-turn story creation workflow (Craft Mode), interactive session management (Play Mode), field reference, and complete genre examples. See `skills/neta-travel/references/`.
 
 ---
 

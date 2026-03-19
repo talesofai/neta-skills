@@ -11,6 +11,41 @@ Create and experience AI-driven interactive story adventures (Travel Campaigns).
 > - **Craft Mode**: Multi-turn collaborative story creation with the user
 > - **Play Mode**: Interactive storytelling using an established campaign
 
+## Quick Start
+
+Three commands to go from idea to playable campaign:
+
+```bash
+# 1. Create
+neta-cli create_travel_campaign \
+  --name "Raccoon General: Final Shift" \
+  --mission_plot "The last maintenance log entry is dated three weeks ago..." \
+  --mission_task "Survive the night. Find Dr. Strauss. Discover what Umbrella did." \
+  --mission_plot_attention "Maintain survival-horror dread. Dr. Strauss does not trust players immediately. No graphic gore — horror through implication."
+
+# 2. Verify
+neta-cli request_travel_campaign --campaign_uuid "returned-uuid-here"
+
+# 3. Play
+# Load the campaign, build your context, begin the story
+```
+
+See `references/travel-examples.md` for complete worked examples across genres.
+
+## What Makes an Exceptional Campaign
+
+Five principles that separate Tier 3 campaigns from basic ones:
+
+1. **The world exists without the player.** NPCs have goals that don't depend on the player's presence. The situation was already in motion before the player arrived.
+
+2. **The opening drops you in, mid-wrong.** The first sentence of `mission_plot` presents something already broken — not an introduction, not context. Something is already wrong.
+
+3. **`mission_plot_attention` is a constitution, not a wish list.** It covers the three most likely ways a player will break immersion, and specifies in-world mechanisms to handle each.
+
+4. **Information asymmetry is the engine.** The player suspects more than they know. The truth, when earned, recontextualizes everything before it.
+
+5. **No perfect answers.** The best moral dilemmas have no clean resolution. Choosing the right thing costs something real.
+
 ## Prerequisites
 
 Ensure latest Neta CLI is installed:
@@ -134,19 +169,23 @@ When user wants to play a travel campaign:
 ## Best Practices
 
 1. **Plot vs Task Separation**:
-   - `mission_plot` = What IS (the world, situation)
-   - `mission_task` = What to DO (player goals)
+   - `mission_plot` = What IS (the world, the situation, the hook — not a summary)
+   - `mission_task` = What to DO (player objectives — visible to the player)
+   - `mission_plot_attention` = The governing rules (invisible constitutional layer — what the AI enforces unconditionally)
 
-2. **Attention as Constraints**:
-   - Use `mission_plot_attention` for things the AI should NOT do
-   - Set boundaries early to avoid drift
+2. **`mission_plot_attention` is optional but powerful**:
+   - When present: these rules override all other context. The AI enforces them regardless of player actions.
+   - When absent: the AI derives tone and constraints naturally from `mission_plot`.
+   - Tip: cover the 3 most likely ways a player could break immersion or drift from your intent.
 
 3. **Iterative Refinement**:
    - Start simple, test with `request_travel_campaign`
-   - Use `update_travel_campaign` to refine based on playtesting
+   - Use `update_travel_campaign` to tighten `mission_plot_attention` after the first playtest
+   - Note where the AI drifted — that's what to add to attention
 
-4. **Content Moderation**:
+4. **Content Policy**:
    - All text fields are moderated on creation/update
+   - NSFW content (sexual, explicit violence, harassment) is prohibited — do not craft or engage with it
    - Avoid content that violates community guidelines
 
 ## Reference Documents
@@ -156,3 +195,4 @@ When user wants to play a travel campaign:
 | 📝 Craft Workflow | [travel-crafting.md](./references/travel-crafting.md) |
 | 🎮 Play Workflow | [travel-playing.md](./references/travel-playing.md) |
 | 📋 Field Guide | [travel-field-guide.md](./references/travel-field-guide.md) |
+| ✨ Worked Examples | [travel-examples.md](./references/travel-examples.md) |

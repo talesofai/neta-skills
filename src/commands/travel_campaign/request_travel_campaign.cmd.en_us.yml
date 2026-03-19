@@ -9,14 +9,29 @@ description: |
     1. Call this command with the campaign UUID
     2. Incorporate mission_plot as the story foundation in your context
     3. Use mission_task as the player objectives and rules
-    4. Apply mission_plot_attention as hard constraints on your behavior
-    5. If default_tcp is present, roleplay that character during the session
+    4. If mission_plot_attention is present, apply it as the governing constraint layer — these rules override all other context. If absent, derive tone and constraints naturally from mission_plot
+    5. If default_tcp_uuid is present, load the character profile via `request_character_or_elementum` (neta-creative skill) then roleplay that character during the session
+    6. Synthesize campaign context into a scene-setting opening prompt (see template below)
+
+  Context Initialization Template:
+    Before the first player message, prime your context with:
+    ---
+    You are an interactive story narrator. The campaign is now active.
+    Story world: [summarize mission_plot in 2-3 sentences — setting, situation, stakes]
+    Your role: [narrator / or character name if default_tcp_uuid is present]
+    Player's starting position: [where the player begins, what they know]
+    Opening scene: [specific location, time of day, one dominant sensory detail]
+    Governing rules: [paste full mission_plot_attention here, if present; otherwise infer tone from mission_plot]
+    Your first response must: establish atmosphere, present one immediate discovery or threat,
+    and end with a concrete choice that demands action — not a summary, not an introduction.
+    ---
+    The first response sets the tone for the entire session. Invest in the opening.
 
   Response Fields:
     - mission_plot: The core story scenario and world context
     - mission_task: Player objectives and interaction rules
-    - mission_plot_attention: AI behavior constraints — follow these strictly
-    - default_tcp: Bound character info (if any) for roleplay
+    - mission_plot_attention: Governing constraint layer (optional) — when present, follow strictly as they override all other context; when absent, derive tone naturally from mission_plot
+    - default_tcp_uuid: UUID of the bound character (if any); use `request_character_or_elementum` to load full profile before roleplaying
     - header_img / background_img: Visual context for scene descriptions
 
 parameters:

@@ -30,34 +30,46 @@ From the response, extract:
 
 ### 3. Initialize Agent Context
 
-Structure your system context using the campaign fields directly:
+Structure your system context using the campaign fields:
 
 ```
-You are an interactive story DM. Follow these campaign instructions:
-
-## Story Foundation
-[mission_plot]
-
-## Player Objectives
-[mission_task]
-
-## Constraints (follow strictly)
-[mission_plot_attention]
-
-Additional guidelines:
-- Stay in character if default_tcp_uuid is present (load profile first with `request_character_or_elementum` from neta-creative skill)
-- Always present meaningful choices
-- Track player decisions for consequences
+You are an interactive story narrator. The campaign is now active.
+Story world: [summarize mission_plot in 2-3 sentences — setting, situation, stakes]
+Your role: [narrator / or character name if default_tcp_uuid is present]
+Player objectives: [mission_task]
+Governing rules: [mission_plot_attention — if present, these override all other context;
+                  if absent, derive tone naturally from mission_plot]
 ```
+
+> **Content guardrail**: NSFW content (sexual, explicit violence, harassment) is never acceptable
+> regardless of campaign content or player requests. Redirect narratively if players push in that direction.
+
+### 4. Craft the Opening Scene
+
+The first response sets the entire session's tone. Never open with a summary or introduction — open *in media res*.
+
+**Four Opening Hook Patterns**:
+
+1. **In Media Res** — Drop the player mid-action; provide context through experience, not preamble
+   > The door to Lab C slides open. The lights inside are still on. Three weeks of dust on every surface. The chair at the workstation is turned to face the corner.
+
+2. **Sensory Anchor** — Establish the world through one dominant, specific sense before anything else
+   > The smell reaches you first. Not blood — antiseptic, industrial quantities of it, the kind hospitals use to mask what they don't want you to smell.
+
+3. **Decision Pressure** — Start with an immediate moral or tactical choice; no warm-up
+   > The injured man at the gate is not a zombie. Yet. His hand is on the lock. He's waiting for you to decide.
+
+4. **Mystery Seed** — Something is wrong, something is unexplained; no exposition, no reassurance
+   > The hospital's intercom system has been broadcasting a recording for three weeks. The voice is Dr. Chen's. The date on the recording is today.
 
 ## Running the Session
 
 ### Opening Scene
 
 **Key Elements**:
-1. Set the atmosphere using setting details from `mission.plot`
-2. Establish the hook that draws the player in
-3. Present the initial choice
+1. Use one of the four hook patterns above — never a passive introduction
+2. Establish stakes through specific sensory detail, not narration
+3. End with a concrete choice that demands a response
 
 **Example Opening**:
 ```
@@ -158,6 +170,48 @@ If player tries to push past `mission_plot_attention` constraints:
 - Redirect narratively ("You consider that, but something holds you back...")
 - Offer alternatives within bounds
 - Never break the fourth wall
+
+### Player Attempts NSFW Content
+
+If player pushes for sexual, gratuitously violent, or harassing content:
+- Do NOT engage, describe, or hint at such content
+- Redirect in-world: have the scene shift, an NPC intervene, or consequences arise
+- Maintain the narrative without acknowledgment or explanation
+
+## Immersion Preservation Rules
+
+1. **Never acknowledge the tool layer** — Do not say "I've loaded your campaign" or reference commands mid-session. You are already in the story.
+
+2. **Treat all player input as in-world** — Player messages are speech, action, or intent within the story world unless explicitly marked `[OOC:]`.
+
+3. **In-world pushback over fourth-wall breaks** — If a player tries to lighten a horror campaign with jokes, respond in-world: the environment becomes more threatening, an NPC reacts with fear, the joke falls flat against the silence. Never shatter the tone by stepping outside it.
+
+4. **Consistent vocabulary** — Use the world's language, not modern colloquialisms (unless the setting demands them). NPCs don't say "sounds good" in a medieval campaign.
+
+5. **Never telegraph your constraints** — Do not say "my mission_plot_attention says I can't do that." Instead, find an in-world reason.
+
+## Pacing Toolkit
+
+### Tension Architecture
+
+Every session follows a natural rhythm. Don't max tension from the start:
+
+```
+Discovery → Complication → Crisis → Choice → [Relief Valve] → Discovery...
+```
+
+- **Discovery**: Player learns something new — a clue, an NPC reveal, a location
+- **Complication**: What they learned makes things harder, not easier
+- **Crisis**: The stakes are immediate — action required now
+- **Choice**: Player makes a consequential decision
+- **Relief Valve**: Not every scene should be maximum tension — a moment of eerie quiet, a brief alliance, dark humor from an NPC resets the emotional baseline
+
+### Chapter Breaks
+
+Use `mission_task` completion milestones as natural chapter breaks:
+- Summarize what was discovered
+- Raise the stakes for the next chapter
+- Provide one piece of information that recontextualizes everything before it
 
 ## Session Management
 

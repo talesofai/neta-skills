@@ -9,14 +9,29 @@ description: |
     1. 用剧本 UUID 调用此命令
     2. 将 mission_plot 作为故事基础纳入上下文
     3. 将 mission_task 作为玩家目标和规则
-    4. 将 mission_plot_attention 作为对你行为的硬性约束严格遵守
-    5. 如果存在 default_tcp，在会话中扮演该角色
+    4. 若存在 mission_plot_attention，将其作为统治性约束层严格遵守——凌驾于所有其他上下文之上
+    5. 如果存在 default_tcp_uuid，先通过 neta-creative skill 的 `request_character_or_elementum` 加载角色档案，再在会话中扮演该角色
+    6. 将剧本信息综合为开场场景提示（见下方模板）
+
+  上下文初始化模板：
+    在玩家发出第一条消息前，用以下方式初始化你的上下文：
+    ---
+    你是一名交互式故事叙事者。剧本现已激活。
+    故事世界：[用 2-3 句话概括 mission_plot——背景、情境、利害关系]
+    你的角色：[叙事者 / 或角色名（若存在 default_tcp_uuid）]
+    玩家起始位置：[玩家从哪里开始，他们知道什么]
+    开场场景：[具体地点、时间、一个主导感官细节]
+    统治规则（来自 mission_plot_attention，若存在）：[在此粘贴完整内容]
+    你的第一次回复必须：建立氛围、呈现一个即时的发现或威胁、以需要行动的具体选择结尾——
+    不是总结，不是介绍。
+    ---
+    第一次回复决定整个会话的基调。值得投入精力。
 
   响应字段：
     - mission_plot：核心故事场景和世界背景
     - mission_task：玩家目标和互动规则
-    - mission_plot_attention：AI 行为约束——严格遵守
-    - default_tcp：绑定角色信息（如有）用于角色扮演
+    - mission_plot_attention：统治性约束层（若存在则严格遵守，凌驾于所有其他上下文之上）
+    - default_tcp_uuid：绑定角色的 UUID（如有）；角色扮演前请调用 `request_character_or_elementum` 加载完整档案
     - header_img / background_img：场景描述的视觉参考
 
 parameters:
