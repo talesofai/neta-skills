@@ -111,7 +111,7 @@ When user wants to play a travel campaign:
    - `mission_plot` → the story foundation for your context
    - `mission_task` → player objectives and rules
    - `mission_plot_attention` → hard constraints on your behavior, follow strictly
-   - `default_tcp_uuid` → if present, this is the UUID of a Neta character (TCP) bound to the campaign. Call `request_character` from the neta-character skill to load the full character profile (bio, persona, traits) before roleplaying
+   - `default_tcp_uuid` → if present, this is the UUID of a Neta character (TCP) bound to the campaign. Call `request_character_or_elementum` from the neta-creative skill to load the full character profile (bio, persona, traits) before roleplaying
 
 4. **Begin Storytelling**:
    - Set the scene using `mission_plot`
@@ -131,7 +131,7 @@ When user wants to play a travel campaign:
 | `mission_plot_attention` | AI guidelines | Tone, restrictions, mechanics |
 | `header_img` | Card thumbnail image | URL from image generation |
 | `background_img` | Atmospheric background | URL from image generation |
-| `default_tcp_uuid` | Bound Neta character UUID | Use `request_character` to load full profile |
+| `default_tcp_uuid` | Bound Neta character UUID | Use `request_character_or_elementum` (neta-creative skill) to load full profile |
 
 ## Best Practices
 

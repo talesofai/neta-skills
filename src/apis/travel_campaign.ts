@@ -58,7 +58,7 @@ export type UpdateTravelCampaignParams = {
 export const createTravelCampaignApis = (client: AxiosInstance) => {
   const createCampaign = async (params: CreateTravelCampaignParams) => {
     return client
-      .post<TravelCampaignBigramDTO>("/travel/campaign/", params)
+      .post<TravelCampaignBigramDTO>("/v3/travel/campaign/", params)
       .then((res) => res.data);
   };
 
@@ -67,7 +67,7 @@ export const createTravelCampaignApis = (client: AxiosInstance) => {
     params: UpdateTravelCampaignParams,
   ) => {
     return client
-      .patch<TravelCampaignBigramDTO>(`/travel/campaign/${uuid}`, params)
+      .patch<TravelCampaignBigramDTO>(`/v3/travel/campaign/${uuid}`, params)
       .then((res) => res.data);
   };
 
@@ -77,7 +77,7 @@ export const createTravelCampaignApis = (client: AxiosInstance) => {
     page_size?: number;
   }) => {
     return client
-      .get<GenericPagination<TravelCampaignBigramDTO>>("/travel/campaigns", {
+      .get<GenericPagination<TravelCampaignBigramDTO>>("/v3/travel/campaigns", {
         params: query,
       })
       .then((res) => res.data);
@@ -85,7 +85,7 @@ export const createTravelCampaignApis = (client: AxiosInstance) => {
 
   const getCampaign = async (uuid: string) => {
     return client
-      .get<TravelCampaignBigramDTO>(`/travel/campaign/${uuid}`)
+      .get<TravelCampaignBigramDTO>(`/v3/travel/campaign/${uuid}`)
       .then((res) => res.data);
   };
 

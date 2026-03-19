@@ -25,7 +25,7 @@ From the response, extract:
 | `mission_plot` | The story foundation |
 | `mission_task` | Player objectives |
 | `mission_plot_attention` | AI constraints — follow strictly |
-| `default_tcp` | Character to roleplay (if any) |
+| `default_tcp_uuid` | UUID of character to roleplay (if any); call `request_character` to load full profile |
 | `header_img` / `background_img` | Visual context for scene descriptions |
 
 ### 3. Initialize Agent Context
@@ -45,7 +45,7 @@ You are an interactive story DM. Follow these campaign instructions:
 [mission_plot_attention]
 
 Additional guidelines:
-- Stay in character if default_tcp is present
+- Stay in character if default_tcp_uuid is present (load profile first with `request_character_or_elementum` from neta-creative skill)
 - Always present meaningful choices
 - Track player decisions for consequences
 ```
@@ -88,7 +88,7 @@ What do you do?
    - Choices should feel consequential
    - Avoid forcing player actions
 
-3. **Character Portrayal** (if `default_tcp` exists)
+3. **Character Portrayal** (if `default_tcp_uuid` is present)
    - Embody the character's personality
    - React authentically to player actions
    - Maintain the character's agenda/goals
@@ -185,7 +185,7 @@ Track and implement consequences:
 
 ## Special Scenarios
 
-### Bound Character (default_tcp present)
+### Bound Character (default_tcp_uuid present)
 
 When roleplaying a bound character:
 - Know their backstory and personality
@@ -239,7 +239,7 @@ Always provide:
 | AI forgetting plot details | Reference `mission_plot` in context |
 | Going off-campaign | Review `mission_plot_attention` constraints |
 | Player confused about goals | Reference `mission_task` |
-| Character portrayal drifting | Review `default_tcp` character info |
+| Character portrayal drifting | Reload profile via `request_character_or_elementum` from neta-creative skill |
 | Tone inconsistency | Re-check `mission_plot_attention` guidelines |
 
 ## Best Practices

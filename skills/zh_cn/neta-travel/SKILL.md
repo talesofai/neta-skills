@@ -111,7 +111,7 @@ neta-cli request_travel_campaign --campaign_uuid "campaign-uuid-here"
    - `mission_plot` → 纳入上下文的故事基础
    - `mission_task` → 玩家目标和规则
    - `mission_plot_attention` → 对你行为的硬性约束，严格遵守
-   - `default_tcp_uuid` → 如存在，这是绑定到剧本的 Neta 角色（TCP）UUID。在开始角色扮演前，请调用 neta-character skill 中的 `request_character` 加载完整角色档案（生平、人格、特质）
+   - `default_tcp_uuid` → 如存在，这是绑定到剧本的 Neta 角色（TCP）UUID。在开始角色扮演前，请调用 neta-creative skill 中的 `request_character_or_elementum` 加载完整角色档案（生平、人格、特质）
 
 4. **开始故事讲述**：
    - 使用 `mission_plot` 设定场景
@@ -131,7 +131,7 @@ neta-cli request_travel_campaign --campaign_uuid "campaign-uuid-here"
 | `mission_plot_attention` | AI 指南 | 语气、限制、机制 |
 | `header_img` | 卡片缩略图 | 图像生成的 URL |
 | `background_img` | 氛围背景图 | 图像生成的 URL |
-| `default_tcp_uuid` | 绑定 Neta 角色 UUID | 使用 `request_character` 加载完整档案 |
+| `default_tcp_uuid` | 绑定 Neta 角色 UUID | 使用 `request_character_or_elementum`（neta-creative skill）加载完整档案 |
 
 ## 最佳实践
 

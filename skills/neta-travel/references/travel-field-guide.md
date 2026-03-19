@@ -109,9 +109,9 @@ Complete reference for all Travel Campaign fields and their usage.
 - **Type**: Object `{ uuid, nick_name }`
 - **Description**: User who created the campaign (returned by `request_travel_campaign`)
 
-### default_tcp (response shape)
-- **Type**: Object `{ uuid, name, avatar_img }` or null
-- **Description**: Bound character details for roleplay context
+### default_tcp_uuid (response field)
+- **Type**: String (UUID) or null
+- **Description**: UUID of the Neta character (TCP) bound to this campaign. Use `request_character_or_elementum` from the neta-creative skill to load the full character profile (bio, persona, traits) before roleplaying.
 
 ## Field Relationships
 
@@ -166,5 +166,5 @@ mission_plot_attention: "Tone: gritty but hopeful. No sexual content. Player age
 When using `update_travel_campaign`:
 - Only provided fields are modified
 - Omitted fields retain current values
-- Setting `tcp_uuid` to `""` unbinds the character
+- To unbind a character, contact support (client-side unbind not currently supported)
 - Updates affect both campaign and linked mission atomically
