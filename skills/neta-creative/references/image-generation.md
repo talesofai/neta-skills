@@ -32,9 +32,27 @@ Applicable to `make_image` and `remove_background` commands.
 
 ## Model Selection
 
-- **3_noobxl**: Style-oriented single-character image generation, using danbooru tag format for prompts. Excellent at various art styles and style combinations, not skilled at complex scenes, multiple characters, or images with text. Prefer this model when users specify specific characters and style elements for stylized character images.
+- **3_noobxl**: Single-character style-oriented image generation, using danbooru tag format for prompts. Excellent at various art styles and style combinations, not skilled at complex scenes, multiple characters, or images with text. Prefer this model when users specify specific characters and style elements for stylized character images.
+
+Generate a stylized character standing illustration
+
+```bash
+neta-cli make_image \
+  --prompt "@Neta#996, /comic style, character standing illustration" \
+  --aspect "3:4" \
+  --model_series "3_noobxl"
+```
 
 - **8_image_edit (default)**: Versatile high-end image generation model, using natural language descriptions for prompts, supporting multiple image inputs. Excellent at following complex instructions and presenting high-fidelity text, multi-character rendering, and images with text. Not skilled at refined art styles. Can be used for sequential art (comic panels/storyboards), adding and removing elements, inpainting (semantic mask), style transfer, combining multiple images to bring things to life, etc. Prefer this model when multiple characters are involved, reference images contain complex visual structures and text content, or when modifying/adjusting specified images
+
+Generate a multi-panel comic
+
+```bash
+neta-cli make_image \
+  --prompt "@Neta#996, multi-panel funny comic" \
+  --aspect "3:4" \
+  --model_series "8_image_edit"
+```
 
 ## Aspect Ratio Selection
 
