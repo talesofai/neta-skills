@@ -5,7 +5,6 @@ description: |
 
   Usage Notes:
     - You must be the creator of the campaign to update it
-    - To unbind a character, pass tcp_uuid as empty string ""
     - Changes to text fields are subject to content moderation
     - Changes to image fields are subject to image moderation
 

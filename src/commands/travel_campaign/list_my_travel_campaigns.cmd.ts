@@ -1,5 +1,6 @@
 import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.ts";
+import { mapDefaultTcp } from "../../utils/tcp_mapper.ts";
 import { createCommand } from "../factory.ts";
 
 const meta = parseMeta(
@@ -23,8 +24,7 @@ export const listMyTravelCampaigns = createCommand(
     description: meta.description,
     inputSchema: listMyTravelCampaignsParameters,
   },
-  async ({ page_index, page_size }, { apis }) => {
-    const user = await apis.user.me();
+  async ({ page_index, page_size }, { user, apis }) => {
     if (!user) {
       throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
     }
@@ -45,14 +45,7 @@ export const listMyTravelCampaigns = createCommand(
         subtitle: item.subtitle,
         status: item.status,
         header_img: item.header_img,
-        default_tcp: item.default_travel_character_parent
-          ? {
-              uuid: item.default_travel_character_parent.uuid,
-              name: item.default_travel_character_parent.name,
-              avatar_img:
-                item.default_travel_character_parent.config?.avatar_img,
-            }
-          : null,
+        default_tcp: mapDefaultTcp(item.default_travel_character_parent),
       })),
     };
   },

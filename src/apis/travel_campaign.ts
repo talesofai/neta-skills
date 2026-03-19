@@ -6,7 +6,7 @@ export type TravelCampaignBigramDTO = {
   name: string;
   subtitle?: string;
   type: string;
-  status: string;
+  status: "PUBLISHED" | "DRAFT" | "DELETED" | "BANNED";
   header_img?: string;
   background_img?: string;
   ctime?: string;
@@ -89,17 +89,10 @@ export const createTravelCampaignApis = (client: AxiosInstance) => {
       .then((res) => res.data);
   };
 
-  const deleteCampaign = async (uuid: string) => {
-    return client
-      .delete<string>(`/travel/campaign/${uuid}`)
-      .then((res) => res.data);
-  };
-
   return {
     createCampaign,
     updateCampaign,
     listMyCampaigns,
     getCampaign,
-    deleteCampaign,
   };
 };
