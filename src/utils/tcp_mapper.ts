@@ -1,5 +1,4 @@
 import type { TravelCharacterParentProfileDto } from "../apis/tcp.ts";
-import type { TravelCampaignBigramDTO } from "../apis/travel_campaign.ts";
 import type { CharacterAssign, ElementumAssign } from "../apis/types.ts";
 
 /**
@@ -36,23 +35,6 @@ export function mapProfileToElementumAssign(
     name: profile.name,
     description: profile.oc_bio?.description ?? null,
     avatar_img: profile.config?.avatar_img ?? null,
-  };
-}
-
-/**
- * Map backend default_travel_character_parent to agent-facing CharacterAssign.
- * Bio fields are absent in the campaign DTO and are omitted.
- */
-export function mapDefaultTcp(
-  parent: TravelCampaignBigramDTO["default_travel_character_parent"],
-): CharacterAssign | null {
-  if (!parent) return null;
-  return {
-    type: "character",
-    uuid: parent.uuid,
-    name: parent.name,
-    avatar_img: parent.config?.avatar_img ?? null,
-    header_img: parent.config?.header_img ?? null,
   };
 }
 

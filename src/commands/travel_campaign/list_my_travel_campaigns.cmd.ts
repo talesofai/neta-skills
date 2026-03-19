@@ -1,6 +1,5 @@
 import { Type } from "@sinclair/typebox";
 import { parseMeta } from "../../utils/parse_meta.ts";
-import { mapDefaultTcp } from "../../utils/tcp_mapper.ts";
 import { createCommand } from "../factory.ts";
 
 const meta = parseMeta(
@@ -45,7 +44,7 @@ export const listMyTravelCampaigns = createCommand(
         subtitle: item.subtitle,
         status: item.status,
         header_img: item.header_img,
-        default_tcp: mapDefaultTcp(item.default_travel_character_parent),
+        default_tcp_uuid: item.default_travel_character_parent?.uuid ?? null,
       })),
     };
   },
