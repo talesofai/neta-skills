@@ -14,18 +14,18 @@ const meta = parseMeta(
   import.meta,
 );
 
-const requestTravelCampaignParameters = Type.Object({
+const requestAdventureCampaignParameters = Type.Object({
   campaign_uuid: Type.String({
     description: meta.parameters.campaign_uuid,
   }),
 });
 
-export const requestTravelCampaign = createCommand(
+export const requestAdventureCampaign = createCommand(
   {
     name: meta.name,
     title: meta.title,
     description: meta.description,
-    inputSchema: requestTravelCampaignParameters,
+    inputSchema: requestAdventureCampaignParameters,
   },
   async ({ campaign_uuid }, { apis }) => {
     const campaign = await apis.travelCampaign.getCampaign(campaign_uuid);

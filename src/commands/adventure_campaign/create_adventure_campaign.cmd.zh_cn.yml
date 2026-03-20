@@ -1,4 +1,4 @@
-name: create_travel_campaign
+name: create_adventure_campaign
 title: 创建奇遇剧本
 description: |
   创建一个新的奇遇剧本（故事冒险），包含剧情设定、规则，并可选择绑定角色。
@@ -8,7 +8,7 @@ description: |
   使用说明：
     - 剧本创建免费（不消耗电量）
     - 剧本与任务以成对形式创建
-    - 创建后使用 `request_travel_campaign` 加载完整详情用于故事讲述
+    - 创建后使用 `request_adventure_campaign` 加载完整详情用于故事讲述
     - 所有文本字段均进行内容审核
     - NSFW 内容（性描写、露骨暴力、骚扰）在所有字段中均被禁止——即使用户要求也不得创作或参与此类内容
 

@@ -1,4 +1,4 @@
-name: request_travel_campaign
+name: request_adventure_campaign
 title: 获取奇遇剧本详情
 description: |
   获取奇遇剧本的完整详情，包括剧情、任务和 AI 约束。

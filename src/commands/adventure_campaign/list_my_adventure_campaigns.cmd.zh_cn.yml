@@ -1,9 +1,9 @@
-name: list_my_travel_campaigns
+name: list_my_adventure_campaigns
 title: 列出我的奇遇剧本
 description: |
   列出当前用户创建的奇遇剧本。返回简要摘要信息。
 
-  使用 `request_travel_campaign` 获取特定剧本的完整详情（剧情、任务、约束）。
+  使用 `request_adventure_campaign` 获取特定剧本的完整详情（剧情、任务、约束）。
 
   说明：
     - 为已认证用户返回 PUBLISHED 和 DRAFT 剧本

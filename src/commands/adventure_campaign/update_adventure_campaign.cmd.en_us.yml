@@ -1,7 +1,7 @@
-name: update_travel_campaign
-title: Update Travel Campaign
+name: update_adventure_campaign
+title: Update Adventure Campaign
 description: |
-  Update an existing Travel Campaign. Only specify fields that need to change — omitted fields remain unchanged.
+  Update an existing Adventure Campaign. Only specify fields that need to change — omitted fields remain unchanged.
 
   Usage Notes:
     - You must be the creator of the campaign to update it

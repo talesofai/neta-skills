@@ -64,7 +64,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-character
 npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 
 # AI 驱动的交互式故事冒险（奇遇剧本）
-npx skills add talesofai/neta-skills/skills/zh_cn/neta-travel
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-adventure
 ```
 
 ### 可用指令总览
@@ -73,10 +73,10 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-travel
 
 | 分类 | 命令 | 说明 |
 |------|------|------|
-| **奇遇剧本 Travel** | `create_travel_campaign` | 创建 AI 驱动的交互式故事冒险剧本 |
-| | `update_travel_campaign` | 更新已有奇遇剧本 |
-| | `list_my_travel_campaigns` | 列出你创建的奇遇剧本 |
-| | `request_travel_campaign` | 加载完整剧本详情（游玩模式） |
+| **奇遇剧本 Adventure** | `create_adventure_campaign` | 创建 AI 驱动的交互式故事冒险剧本 |
+| | `update_adventure_campaign` | 更新已有奇遇剧本 |
+| | `list_my_adventure_campaigns` | 列出你创建的奇遇剧本 |
+| | `request_adventure_campaign` | 加载完整剧本详情（游玩模式） |
 | **创作 Creation** | `make_image` | 基于提示词生成图片 |
 | | `make_video` | 基于图片与动作描述生成视频 |
 | | `make_song` | 基于风格与歌词生成歌曲 |
@@ -169,7 +169,7 @@ neta-skills/
 │   ├── neta-space/                 # 英文空间与话题导航 / 探索技能
 │   ├── neta-character/             # 英文角色 VToken 创建与管理技能
 │   ├── neta-elementum/             # 英文元素 VToken 创建与管理技能
-│   ├── neta-travel/                # 英文交互式故事冒险（奇遇剧本）技能
+│   ├── neta-adventure/                # 英文交互式故事冒险（奇遇剧本）技能
 │   └── zh_cn/                      # 中文本地化技能与参考文档
 │       ├── neta/
 │       ├── neta-community/
@@ -178,7 +178,7 @@ neta-skills/
 │       ├── neta-space/
 │       ├── neta-character/
 │       ├── neta-elementum/
-│       └── neta-travel/
+│       └── neta-adventure/
 ├── src/                            # CLI 对应的 TypeScript 源码
 │   ├── apis/                       # 封装后的 Neta API 调用
 │   ├── commands/                   # CLI 命令定义（TS + YAML 描述）
@@ -210,7 +210,7 @@ neta-skills/
 - **角色与标签调研**：如何通过角色 / 标签 / 空间找到合适的创作方向。
 - **角色与元素创建**：角色创建和元素炼金的工作流。
 - **玩法内容探索**：使用 `suggest_*` 与 `suggest_content` 构建渐进式探索闭环。
-- **奇遇剧本创作与游玩**：多轮协作故事创作工作流（创作模式）、交互式会话管理（游玩模式）、字段手册，以及含历史穿越、末世生存、武侠江湖的完整类型范例。见 `skills/zh_cn/neta-travel/references/`。
+- **奇遇剧本创作与游玩**：多轮协作故事创作工作流（创作模式）、交互式会话管理（游玩模式）、字段手册，以及含历史穿越、末世生存、武侠江湖的完整类型范例。见 `skills/zh_cn/neta-adventure/references/`。
 
 ---
 

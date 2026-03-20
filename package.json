@@ -1,6 +1,6 @@
 {
   "name": "@talesofai/neta-skills",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "Neta API pi coding agent skills for interacting with Neta API to generate images, videos, songs, and manage characters/elements.",
   "type": "module",
   "repository": {
@@ -31,7 +31,7 @@
   },
   "scripts": {
     "lint": "biome check . --write --unsafe",
-    "validate": "skills-ref to-prompt ./skills/neta ./skills/neta-community ./skills/neta-creative ./skills/neta-suggest ./skills/neta-space ./skills/neta-character ./skills/neta-elementum ./skills/neta-travel",
+    "validate": "skills-ref to-prompt ./skills/neta ./skills/neta-community ./skills/neta-creative ./skills/neta-suggest ./skills/neta-space ./skills/neta-character ./skills/neta-elementum ./skills/neta-adventure",
     "type-check": "tsc --noEmit",
     "check": "pnpm lint && pnpm type-check && pnpm validate",
     "changelog": "changeset",

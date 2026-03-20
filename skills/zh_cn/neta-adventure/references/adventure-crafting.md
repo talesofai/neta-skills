@@ -24,7 +24,7 @@
 2. Agent 立即生成全部五个字段，行内标注假设。
 3. 以可读散文（而非 JSON）呈现，附简短的「我假设了 X」说明。
 4. 用户反馈 → Agent 只修改变化的字段，不大规模重写。
-5. 用户明确确认 → 调用 `create_travel_campaign`。
+5. 用户明确确认 → 调用 `create_adventure_campaign`。
 
 **边缘情况**
 - 对话中途转向 → 从对话历史综合信息，立即生成新草稿。
@@ -35,7 +35,7 @@
 
 ## 五个字段作为一个整体
 
-生成前，参考 `travel-examples.md` 了解各类型的范例。
+生成前，参考 `adventure-examples.md` 了解各类型的范例。
 
 ### `mission_plot` — 是什么
 像开篇段落一样写，而非摘要。世界、情境、钩子。从「已经出了问题」开始——第一句话就是 AI 体验到的第一件事，它决定整个会话的氛围。
@@ -70,9 +70,9 @@ Victoria（绑定角色）有自己的议程；她提供信息但不解决问题
 
 ## 创建后
 
-立即调用 `request_travel_campaign` 确认字段正确存储——尤其是 `mission_plot_attention`，它统治所有后续游玩会话。
+立即调用 `request_adventure_campaign` 确认字段正确存储——尤其是 `mission_plot_attention`，它统治所有后续游玩会话。
 
-首次试玩后，注意 AI 漂移的地方；用 `update_travel_campaign` 在那些节点收紧 `mission_plot_attention`。
+首次试玩后，注意 AI 漂移的地方；用 `update_adventure_campaign` 在那些节点收紧 `mission_plot_attention`。
 
 ---
 

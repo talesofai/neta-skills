@@ -22,7 +22,7 @@ const meta = parseMeta(
   import.meta,
 );
 
-const updateTravelCampaignParameters = Type.Object({
+const updateAdventureCampaignParameters = Type.Object({
   campaign_uuid: Type.String({
     description: meta.parameters.campaign_uuid,
   }),
@@ -57,12 +57,12 @@ const updateTravelCampaignParameters = Type.Object({
   ),
 });
 
-export const updateTravelCampaign = createCommand(
+export const updateAdventureCampaign = createCommand(
   {
     name: meta.name,
     title: meta.title,
     description: meta.description,
-    inputSchema: updateTravelCampaignParameters,
+    inputSchema: updateAdventureCampaignParameters,
   },
   async (
     {

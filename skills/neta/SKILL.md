@@ -1,6 +1,6 @@
 ---
 name: neta
-description: Neta capability index and routing skill - help choose the appropriate Neta-related skill (neta-space / neta-creative / neta-community / neta-suggest). Use this skill when you need to understand Neta's overall capabilities, decide which skill fits the current task, or migrate from older documentation that referenced the monolithic neta skill.
+description: Neta capability index and routing skill - help choose the appropriate Neta-related skill (neta-space / neta-creative / neta-adventure / neta-community / neta-suggest). Use this skill when you need to understand Neta's overall capabilities, decide which skill fits the current task, or migrate from older documentation that referenced the monolithic neta skill.
 ---
 
 # Neta Skill
@@ -31,14 +31,18 @@ npx skills add talesofai/neta-skills/skills/neta-character
 
 # Elementum (visual style/concept) creation and management
 npx skills add talesofai/neta-skills/skills/neta-elementum
+
+# Interactive story adventures (Adventure Campaigns)
+npx skills add talesofai/neta-skills/skills/neta-adventure
 ```
 
 ## Instructions
 
-1. **Identify the task type**: classify the user's need as one of: "space exploration", "content creation", "community interaction", "research/recommendation", or "character creation/management".
+1. **Identify the task type**: classify the user's need as one of: "space exploration", "content creation", "interactive story adventures", "community interaction", "research/recommendation", or "character creation/management".
 2. **Choose the corresponding sub-skill**:
    - Spaces/worldbuilding/gameplay structure → use `neta-space`
    - Image/video/song/MV creation and idea deconstruction → use `neta-creative`
+   - Crafting or playing AI-driven story campaigns (Adventure Campaigns) → use `neta-adventure`
    - Browsing feeds, viewing collection details, liking/interacting, community-centric views → use `neta-community`
    - Keyword/tag/category research and recommendation, progressive exploration from broad to narrow → use `neta-suggest`
    - Creating or managing anime/cultural IP/original characters (VTokens/TCP/OC) → use `neta-character`
@@ -79,7 +83,22 @@ Use when:
 
 See `skills/neta-creative/SKILL.md` for full details.
 
-### 3. Community browsing and interactions: `neta-community`
+### 3. Interactive story adventures: `neta-adventure`
+
+Responsibilities:
+
+- Create and update Adventure Campaigns (`create_adventure_campaign`, `update_adventure_campaign`).
+- List the current user's campaigns (`list_my_adventure_campaigns`).
+- Load full campaign details for play mode (`request_adventure_campaign`).
+
+Use when:
+
+- The user wants to design, write, or refine an interactive story / narrative campaign with plot, tasks, and governing rules.
+- They want to run or continue a storytelling session as DM plus character roleplay from an existing campaign UUID.
+
+See `skills/neta-adventure/SKILL.md` for full details.
+
+### 4. Community browsing and interactions: `neta-community`
 
 Responsibilities:
 
@@ -95,7 +114,7 @@ Use when:
 
 See `skills/neta-community/SKILL.md` for full details.
 
-### 4. Research and recommendation engine: `neta-suggest`
+### 5. Research and recommendation engine: `neta-suggest`
 
 Responsibilities:
 
@@ -112,7 +131,7 @@ Use when:
 
 See `skills/neta-suggest/SKILL.md` for full details.
 
-### 5. Character creation and management: `neta-character`
+### 6. Character creation and management: `neta-character`
 
 Responsibilities:
 
@@ -129,7 +148,7 @@ Use when:
 
 See `skills/neta-character/SKILL.md` for full details.
 
-### 6. Elementum (visual style/concept) creation and management: `neta-elementum`
+### 7. Elementum (visual style/concept) creation and management: `neta-elementum`
 
 Responsibilities:
 
@@ -154,6 +173,7 @@ If you encounter older docs or scripts that call commands directly under `neta`,
 |---------------------------------------------|------------------|
 | Space/tag lore and space browsing           | `neta-space`     |
 | Image/video/song/MV creation                | `neta-creative`  |
+| Interactive story / Adventure Campaigns     | `neta-adventure` |
 | Collection details, feeds, likes/interacts  | `neta-community` |
 | Keyword/tag/category/recommendation research| `neta-suggest`   |
 | Character creation and management           | `neta-character` |

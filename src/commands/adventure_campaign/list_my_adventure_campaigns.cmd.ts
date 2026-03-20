@@ -15,7 +15,7 @@ const meta = parseMeta(
   import.meta,
 );
 
-const listMyTravelCampaignsParameters = Type.Object({
+const listMyAdventureCampaignsParameters = Type.Object({
   page_index: Type.Integer({
     minimum: 0,
     default: 0,
@@ -29,12 +29,12 @@ const listMyTravelCampaignsParameters = Type.Object({
   }),
 });
 
-export const listMyTravelCampaigns = createCommand(
+export const listMyAdventureCampaigns = createCommand(
   {
     name: meta.name,
     title: meta.title,
     description: meta.description,
-    inputSchema: listMyTravelCampaignsParameters,
+    inputSchema: listMyAdventureCampaignsParameters,
   },
   async ({ page_index, page_size }, { user, apis }) => {
     if (!user) {

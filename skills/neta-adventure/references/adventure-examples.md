@@ -1,4 +1,4 @@
-# Travel Campaign Examples
+# Adventure Campaign Examples
 
 Complete worked examples demonstrating all fields for different genres. Use these as reference for what exceptional campaigns look like — not templates to copy, but benchmarks to match.
 

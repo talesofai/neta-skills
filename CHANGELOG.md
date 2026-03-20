@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.13.0
+
+### Minor Changes
+
+- rename all "travel" keywords in docs、commands to "adventure"
+
 ## 0.12.0
 
 ### Minor Changes

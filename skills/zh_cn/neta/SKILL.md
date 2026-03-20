@@ -1,6 +1,6 @@
 ---
 name: neta
-description: Neta 能力索引与路由 skill——帮助选择合适的 Neta 相关 skill（neta-space / neta-creative / neta-community / neta-suggest）。当需要了解 Neta 整体能力、决定当前任务该用哪个 skill 或从旧文档迁移时使用本 skill。
+description: Neta 能力索引与路由 skill——帮助选择合适的 Neta 相关 skill（neta-space / neta-creative / neta-adventure / neta-community / neta-suggest）。当需要了解 Neta 整体能力、决定当前任务该用哪个 skill 或从旧文档迁移时使用本 skill。
 ---
 
 # Neta Skill
@@ -31,14 +31,18 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-character
 
 # 元素（视觉风格/概念）创建与管理
 npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
+
+# 交互式故事冒险（奇遇剧本 / Adventure Campaigns）
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-adventure
 ```
 
 ## Instructions
 
-1. **判断当前任务类型**：先根据用户需求判断是「空间游览」「内容创作」「社区互动」「内容调研/推荐」「角色创建/管理」中的哪一类。
+1. **判断当前任务类型**：先根据用户需求判断是「空间游览」「内容创作」「交互式故事冒险（奇遇剧本）」「社区互动」「内容调研/推荐」「角色创建/管理」中的哪一类。
 2. **选择对应子 skill**：
    - 空间/世界观/玩法结构 → 使用 `neta-space`
    - 生成图片/视频/歌曲/MV、拆解创作思路 → 使用 `neta-creative`
+   - 创作或游玩 AI 驱动的故事剧本（奇遇剧本 / Adventure Campaigns）→ 使用 `neta-adventure`
    - 浏览推荐流、查看作品详情、点赞互动、社区视角浏览 → 使用 `neta-community`
    - 关键词/标签/分类/推荐流调研、从宽到窄找题材 → 使用 `neta-suggest`
    - 创建或管理动漫/文化IP/原创角色（VToken/TCP/OC）→ 使用 `neta-character`
@@ -75,7 +79,20 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 
 详见 `skills/zh_cn/neta-creative/SKILL.md`。
 
-### 3. 社区浏览与互动：`neta-community`
+### 3. 交互式故事冒险（奇遇剧本）：`neta-adventure`
+
+负责：
+- 创建与更新奇遇剧本（`create_adventure_campaign`、`update_adventure_campaign`）
+- 列出当前用户创建的剧本（`list_my_adventure_campaigns`）
+- 加载完整剧本详情供游玩模式使用（`request_adventure_campaign`）
+
+适用场景：
+- 用户要「写故事 / 设计剧本 / 改剧情规则」等交互式叙事向需求
+- 用户持有剧本 UUID，要以 DM + 角色扮演方式推进或继续一局故事
+
+详见 `skills/zh_cn/neta-adventure/SKILL.md`。
+
+### 4. 社区浏览与互动：`neta-community`
 
 负责：
 - 获取互动推荐流
@@ -89,7 +106,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 
 详见 `skills/zh_cn/neta-community/SKILL.md`。
 
-### 4. 内容调研与推荐引擎：`neta-suggest`
+### 5. 内容调研与推荐引擎：`neta-suggest`
 
 负责：
 - 关键词建议（`suggest_keywords`）
@@ -104,7 +121,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 
 详见 `skills/zh_cn/neta-suggest/SKILL.md`。
 
-### 5. 角色创建与管理：`neta-character`
+### 6. 角色创建与管理：`neta-character`
 
 负责：
 - 创建新角色为 VToken（虚拟Token，TCP/OC）
@@ -119,7 +136,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 
 详见 `skills/zh_cn/neta-character/SKILL.md`。
 
-### 6. 元素（视觉风格/概念）创建与管理：`neta-elementum`
+### 7. 元素（视觉风格/概念）创建与管理：`neta-elementum`
 
 负责：
 - 创建新元素（视觉概念）为 VToken（TCP/Elementum）
@@ -132,7 +149,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 - 用户想创建可复用的视觉概念（场景、道具、服装、姿势、氛围、梗）
 - 用户想要「列出我的元素」或「搜索元素」
 
-详见 `skills/neta-elementum/SKILL.md`。
+详见 `skills/zh_cn/neta-elementum/SKILL.md`。
 
 ## 迁移说明（从旧 neta skill）
 
@@ -142,6 +159,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 |----------------------------|--------------------|
 | 空间/标签世界观、空间游览 | `neta-space`       |
 | 图片/视频/歌曲/MV 创作     | `neta-creative`    |
+| 交互式故事 / 奇遇剧本     | `neta-adventure`   |
 | 作品详情、推荐流、点赞互动 | `neta-community`   |
 | 关键词/标签/分类/推荐调研 | `neta-suggest`     |
 | 角色创建与管理             | `neta-character`   |

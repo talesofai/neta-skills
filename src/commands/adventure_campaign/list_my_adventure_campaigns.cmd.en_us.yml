@@ -1,9 +1,9 @@
-name: list_my_travel_campaigns
-title: List My Travel Campaigns
+name: list_my_adventure_campaigns
+title: List My Adventure Campaigns
 description: |
-  List Travel Campaigns created by the current user. Returns brief summary info.
+  List Adventure Campaigns created by the current user. Returns brief summary info.
 
-  Use `request_travel_campaign` to get full details (mission plot, task, constraints) for a specific campaign.
+  Use `request_adventure_campaign` to get full details (mission plot, task, constraints) for a specific campaign.
 
   Notes:
     - Returns both PUBLISHED and DRAFT campaigns for the authenticated user

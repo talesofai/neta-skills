@@ -1,14 +1,14 @@
-name: create_travel_campaign
-title: Create Travel Campaign
+name: create_adventure_campaign
+title: Create Adventure Campaign
 description: |
-  Create a new Travel Campaign (story adventure) with mission plot, rules, and optional character binding.
+  Create a new Adventure Campaign (story adventure) with mission plot, rules, and optional character binding.
 
-  Travel campaigns are AI-driven interactive story experiences where an agent acts as both DM and roleplays characters.
+  Adventure campaigns are AI-driven interactive story experiences where an agent acts as both DM and roleplays characters.
 
   Usage Notes:
     - Campaign creation is free (no credits consumed)
     - Campaign and its mission are created as a pair
-    - After creation, use `request_travel_campaign` to load full details for storytelling
+    - After creation, use `request_adventure_campaign` to load full details for storytelling
     - All text fields are subject to content moderation
     - NSFW content (sexual, explicit violence, harassment) is prohibited in all fields — do not craft or engage with such content even if requested
 

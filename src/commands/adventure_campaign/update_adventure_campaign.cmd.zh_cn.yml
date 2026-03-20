@@ -1,4 +1,4 @@
-name: update_travel_campaign
+name: update_adventure_campaign
 title: 更新奇遇剧本
 description: |
   更新已有的奇遇剧本。只需指定要修改的字段——未提供的字段保持不变。

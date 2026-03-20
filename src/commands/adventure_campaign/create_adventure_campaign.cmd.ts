@@ -21,7 +21,7 @@ const meta = parseMeta(
   import.meta,
 );
 
-const createTravelCampaignParameters = Type.Object({
+const createAdventureCampaignParameters = Type.Object({
   name: Type.String({
     description: meta.parameters.name,
     maxLength: 128,
@@ -50,12 +50,12 @@ const createTravelCampaignParameters = Type.Object({
   ),
 });
 
-export const createTravelCampaign = createCommand(
+export const createAdventureCampaign = createCommand(
   {
     name: meta.name,
     title: meta.title,
     description: meta.description,
-    inputSchema: createTravelCampaignParameters,
+    inputSchema: createAdventureCampaignParameters,
   },
   async (
     {

@@ -18,7 +18,7 @@
 
 在第一个叙事词语之前，完成以下清单。
 
-1. 通过 `request_travel_campaign` 获取剧本。持有：`mission_plot`、`mission_task`、`mission_plot_attention`、`default_tcp_uuid`。
+1. 通过 `request_adventure_campaign` 获取剧本。持有：`mission_plot`、`mission_task`、`mission_plot_attention`、`default_tcp_uuid`。
 2. 如果存在 `default_tcp_uuid` → **检查 `request_character_or_elementum` 是否可用**。如果可用，加载完整档案。如果不可用，不要凭 UUID 捏造特质，直接继续。
 3. 如果 neta-creative 可用 → **只问用户一次**：*「纯文字模式，还是在关键时刻生成场景图片？」* 记录偏好，之后不再询问。
 4. 立即开始第一次推进。没有「准备好了吗？」——幕布升起。

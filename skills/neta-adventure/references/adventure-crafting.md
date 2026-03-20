@@ -1,4 +1,4 @@
-# Travel Campaign Crafting Guide
+# Adventure Campaign Crafting Guide
 
 Craft mode: translate any concept seed into a complete, playable campaign. Default behavior is draft-first — generate immediately, refine surgically.
 
@@ -24,7 +24,7 @@ Calibrate to the user's mode from signals, not meta-questions.
 2. Agent generates ALL five fields immediately, labels assumptions inline.
 3. Present as readable prose, not JSON. Include a brief "I assumed X" note.
 4. User reacts → agent refines only the changed fields. No wholesale rewrites.
-5. One explicit confirm → call `create_travel_campaign`.
+5. One explicit confirm → call `create_adventure_campaign`.
 
 **Edge cases**
 - Mid-conversation pivot → synthesize from conversation history, generate a new draft immediately.
@@ -35,7 +35,7 @@ Calibrate to the user's mode from signals, not meta-questions.
 
 ## Five Fields as a Coherent System
 
-Before generating, consult `travel-examples.md` for range across genres.
+Before generating, consult `adventure-examples.md` for range across genres.
 
 ### `mission_plot` — What IS
 Write like an opening paragraph, not a summary. The world, the situation, the hook. Start mid-wrong — something is already broken. The first sentence is the first thing the AI experiences; it sets atmosphere for the entire session.
@@ -70,9 +70,9 @@ If `mission_plot` is a paranoid thriller, `mission_plot_attention` should enforc
 
 ## After Creation
 
-Call `request_travel_campaign` immediately to confirm fields are stored correctly — especially `mission_plot_attention`, which governs all future play sessions.
+Call `request_adventure_campaign` immediately to confirm fields are stored correctly — especially `mission_plot_attention`, which governs all future play sessions.
 
-After the first playtest, note where the AI drifted; use `update_travel_campaign` to tighten `mission_plot_attention` at those points.
+After the first playtest, note where the AI drifted; use `update_adventure_campaign` to tighten `mission_plot_attention` at those points.
 
 ---
 

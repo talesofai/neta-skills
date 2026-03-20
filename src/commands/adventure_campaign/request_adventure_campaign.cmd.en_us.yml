@@ -1,7 +1,7 @@
-name: request_travel_campaign
-title: Get Travel Campaign Details
+name: request_adventure_campaign
+title: Get Adventure Campaign Details
 description: |
-  Get full details of a Travel Campaign including mission plot, task, and AI constraints.
+  Get full details of an Adventure Campaign including mission plot, task, and AI constraints.
 
   This is the primary command for "play mode" — load a campaign before starting a storytelling session.
 

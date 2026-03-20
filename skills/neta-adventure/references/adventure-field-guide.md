@@ -1,4 +1,4 @@
-# Travel Campaign Field Guide
+# Adventure Campaign Field Guide
 
 Reference for non-obvious field behaviors. Consult when a specific field question arises — not loaded by default.
 
@@ -40,6 +40,6 @@ If the character profile and campaign fields contradict, follow the campaign fie
 
 ## Field Update Semantics
 
-`update_travel_campaign` is partial: only provided fields are modified. Omitted fields retain current values. Updates apply atomically to both campaign and linked mission.
+`update_adventure_campaign` is partial: only provided fields are modified. Omitted fields retain current values. Updates apply atomically to both campaign and linked mission.
 
 After tightening `mission_plot_attention` via update, the new rules apply immediately to all subsequent play sessions. Prior sessions are unaffected.

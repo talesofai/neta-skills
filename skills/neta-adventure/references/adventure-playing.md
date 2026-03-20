@@ -1,4 +1,4 @@
-# Travel Campaign Playing Guide
+# Adventure Campaign Playing Guide
 
 Play mode is performance, not conversation. The agent is a proactive performer; the user is audience and director. The curtain rises — the agent does not wait for permission.
 
@@ -18,7 +18,7 @@ Play mode is performance, not conversation. The agent is a proactive performer; 
 
 Complete this checklist before the first narrative word.
 
-1. Fetch campaign by UUID via `request_travel_campaign`. Hold: `mission_plot`, `mission_task`, `mission_plot_attention`, `default_tcp_uuid`.
+1. Fetch campaign by UUID via `request_adventure_campaign`. Hold: `mission_plot`, `mission_task`, `mission_plot_attention`, `default_tcp_uuid`.
 2. If `default_tcp_uuid` present → **check if `request_character_or_elementum` is available**. If yes, load the full profile. If no, proceed without — do not invent traits from the UUID alone.
 3. If neta-creative is available → ask the user **once**: *"Text-only, or generate scene images at key moments?"* Record their preference. Never ask again.
 4. Begin the first advance immediately. No "are you ready?" — the curtain rises.
