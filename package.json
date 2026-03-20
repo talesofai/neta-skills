@@ -43,6 +43,7 @@
     "start": "node bin/cli.js"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1013.0",
     "@commander-js/extra-typings": "^14.0.0",
     "@sinclair/typebox": "^0.34.48",
     "axios": "^1.7.9",
@@ -50,7 +51,9 @@
     "dayjs": "^1.11.20",
     "dotenv": "^16.4.7",
     "dotenv-flow": "^4.1.0",
+    "magic-bytes.js": "^1.13.0",
     "os-locale": "^8.0.0",
+    "p-limit": "^7.3.0",
     "qs": "^6.15.0",
     "skills-ref": "^0.1.5",
     "yaml": "^2.8.2"

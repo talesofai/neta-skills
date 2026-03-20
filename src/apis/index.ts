@@ -13,6 +13,7 @@ import {
   type HashtagInfo,
   type LoreEntry,
 } from "./hashtag.ts";
+import { createOssApis } from "./oss.ts";
 import { createPromptApis } from "./prompt.ts";
 import { createRecsysApis } from "./recsys.ts";
 import { createSpaceApis } from "./space.ts";
@@ -97,6 +98,7 @@ export const createApis = (option: {
   const recsys = createRecsysApis(client);
   const travelCampaign = createTravelCampaignApis(client);
   const commerce = createCommerceApis(client);
+  const oss = createOssApis(client);
 
   return {
     baseUrl,
@@ -117,6 +119,7 @@ export const createApis = (option: {
     recsys,
     travelCampaign,
     commerce,
+    oss,
   };
 };
 
