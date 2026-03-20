@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.12.0
+
+### Minor Changes
+
+- 0a03853: introduce neta-travel skill for creating and playing AI-driven interactive story adventures (travel campaigns)
+
 ## 0.11.0
 
 ### Minor Changes

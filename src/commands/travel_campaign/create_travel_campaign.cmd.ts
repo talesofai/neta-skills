@@ -32,12 +32,10 @@ const createTravelCampaignParameters = Type.Object({
   subtitle: Type.Optional(
     Type.String({ description: meta.parameters.subtitle }),
   ),
-  status: Type.Optional(
-    Type.Union([Type.Literal("PUBLISHED"), Type.Literal("DRAFT")], {
-      default: "PUBLISHED",
-      description: meta.parameters.status,
-    }),
-  ),
+  status: Type.Union([Type.Literal("PUBLISHED"), Type.Literal("DRAFT")], {
+    default: "PUBLISHED",
+    description: meta.parameters.status,
+  }),
   header_img: Type.Optional(
     Type.String({ description: meta.parameters.header_img }),
   ),

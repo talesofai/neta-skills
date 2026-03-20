@@ -25,7 +25,7 @@ Once mode is established, do not re-ask.
 **Create a campaign**
 
 ```bash
-neta-cli create_travel_campaign \
+npx -y @talesofai/neta-skills create_travel_campaign \
   --name "Raccoon General: Final Shift" \
   --mission_plot "The last maintenance log entry is dated three weeks ago..." \
   --mission_task "Survive the night. Find Dr. Strauss. Discover what Umbrella did." \
@@ -37,7 +37,7 @@ neta-cli create_travel_campaign \
 **Update a campaign** (only provided fields are changed)
 
 ```bash
-neta-cli update_travel_campaign \
+npx -y @talesofai/neta-skills update_travel_campaign \
   --campaign_uuid "campaign-uuid-here" \
   --mission_plot_attention "Updated governing rules..."
 ```
@@ -45,14 +45,14 @@ neta-cli update_travel_campaign \
 **List your campaigns**
 
 ```bash
-neta-cli list_my_travel_campaigns
-neta-cli list_my_travel_campaigns --page_index 0 --page_size 10
+npx -y @talesofai/neta-skills list_my_travel_campaigns
+npx -y @talesofai/neta-skills list_my_travel_campaigns --page_index 0 --page_size 10
 ```
 
 **Get campaign details**
 
 ```bash
-neta-cli request_travel_campaign --campaign_uuid "campaign-uuid-here"
+npx -y @talesofai/neta-skills request_travel_campaign --campaign_uuid "campaign-uuid-here"
 ```
 
 📖 [Play workflow](./references/travel-playing.md) — initialization, proactive advance, steering mechanics.
