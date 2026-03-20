@@ -55,6 +55,16 @@ Combine an audio track and video to create a full MV.
 npx -y @talesofai/neta-skills@latest remove_background --input_image "image_artifact_uuid"
 ```
 
+**Upload local image or video**
+
+Registers a file from disk as a Neta artifact (after upload and moderation). Use the returned **`uuid`** or **`url`** in `make_image` (`ref_img-…`), `make_video` (`--image_source` URL), `remove_background`, or collection commands.
+
+```bash
+npx -y @talesofai/neta-skills@latest upload --file_path "/path/to/file.png"
+```
+
+📖 [Media upload](./references/media-upload.md) — supported types, size limits, and how outputs map to each downstream command.
+
 ### Character queries
 
 **Search characters**
@@ -137,6 +147,7 @@ npx -y @talesofai/neta-skills@latest pay_premium_order --order_uuid "order-uuid"
 | 🎬 Video generation   | [video-generation.md](./references/video-generation.md) |
 | 🎵 Song generation    | [song-creation.md](./references/song-creation.md)       |
 | 🎞️ MV creation       | [song-mv.md](./references/song-mv.md)                   |
+| 📤 Local media upload | [media-upload.md](./references/media-upload.md)        |
 | 👤 Character queries  | [character-search.md](./references/character-search.md) |
 | 🖊️ Creative remixing | [collection-remix.md](./references/collection-remix.md) |
 | ⭐ Premium / subscribe | [premium.md](./references/premium.md)                   |

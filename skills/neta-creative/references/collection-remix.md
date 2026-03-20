@@ -38,9 +38,12 @@ You will typically use the following commands for remix workflows:
 - `make_video`
 - `make_song`
 
+If the user supplies **local images or videos** that are not in the collection payload, run **`upload`** first, then reference picture artifacts with **`ref_img-<uuid>`** in `make_image` or the artifact **`url`** in `make_video`. See [Media upload](./media-upload.md).
+
 📖 See also:
 
 - [Generate Images](./image-generation.md)
 - [Generate Videos](./video-generation.md)
 - [Generate Songs](./song-creation.md)
+- [Media upload](./media-upload.md)
 

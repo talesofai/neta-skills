@@ -10,7 +10,7 @@ Applicable to `make_image` and `remove_background` commands.
 
 - **Characters**: Use characters in the format "@character_name", e.g., "@character_name". The character name must be an exact string match—no modifications, no spaces, no simplified/traditional Chinese conversion. This reference contains the character's complete visual information.
 - **Image Elements**: Use built-in image elements in the format "/element_name", e.g., "/comic_style".
-- **Reference Images**: When using the 8_image_edit model, you can reference existing images as references using the format "reference-image-artifact_uuid", e.g., "reference-image-1234567890". A maximum of 14 images is supported.
+- **Reference Images**: When using the 8_image_edit model, reference existing picture artifacts with the pattern **`ref_img-<uuid>`**, e.g. `ref_img-1234567890` (matches the CLI prompt parser). A maximum of 14 images is supported.
 - **Chinese Natural Language Phrases**: Descriptive text composed of short phrases depicting the scene. If no character is referenced, describe the character's appearance within the natural language phrases.
 
 **Recommended Format:**
@@ -23,10 +23,10 @@ Applicable to `make_image` and `remove_background` commands.
 - Image elements must appear in the format "/name", e.g., "/comic_style"
 - For the 8_image_edit model, provide more context and intent. Describe the scene rather than just listing keywords. This model's core strength lies in its deep language understanding. Narrative descriptive paragraphs almost always generate better, more coherent images compared to strings of unrelated words
 - You can search for available characters or elements using search_character_or_elementum, and verify their availability using request_character_or_elementum before use
-- Reference images must appear in the format "reference-image-artifact_uuid", and can only use images obtained via `read_collection` or generated images as references
+- Reference images must use **`ref_img-<uuid>`** (artifact UUID). Sources include **`upload`** (local files), **`make_image` / `read_collection` outputs**, or other picture artifacts the user already owns
 - When referencing characters or elements, add spaces or commas before and after, e.g., "@Neta#996, /comic_style, walking in school"
 - For image modifications and other generations related to referencing the original image, be sure to use reference images with the 8_image_edit model
-- Example (referencing characters and elements): @Neta#996, /comic_style, reference-image-artifact_uuid, reference-image-artifact_uuid, phrase1, phrase2…
+- Example (referencing characters and elements): @Neta#996, /comic_style, ref_img-uuid, ref_img-uuid, phrase1, phrase2…
 - **When a specific character exists, use the character via @character_name rather than re-describing the character's appearance**
 ---
 
@@ -86,6 +86,12 @@ npx -y @talesofai/neta-skills@latest make_image \
 ```
 
 **Note: When using custom resolutions, excessively high or low values will cause image degradation. Try to keep values within the range [768-1536]**
+
+---
+
+## Local files as reference images
+
+If the user’s image only exists **on disk**, run **`upload`** first, then use the returned artifact UUID in the prompt as `ref_img-<uuid>`. Formats, size limits, and mapping to `make_video` / `remove_background` are documented in [Media upload](./media-upload.md).
 
 ---
 
@@ -163,3 +169,4 @@ npx -y @talesofai/neta-skills@latest remove_background --input_image "image_arti
 
 - [Character Search](./character-search.md) - Get character standard information
 - [Video Generation](./video-generation.md) - Convert images to dynamic videos
+- [Media upload](./media-upload.md) - Local files → artifacts for reference / video / cutout

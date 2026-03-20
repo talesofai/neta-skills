@@ -2,6 +2,8 @@
 
 适用于 `make_video` 命令。
 
+**用户上传的静图：** `make_video --image_source` 需要 **图片 URL 字符串**。在 **`upload`** 完成后，应使用输出 JSON 里素材的 **`url`** 字段（不要只传裸 UUID）。详见 [媒体上传](./media-upload.md)。
+
 ---
 
 ## 提示词原则
@@ -218,4 +220,5 @@ npx -y @talesofai/neta-skills@latest make_video \
 ## 相关文档
 
 - [图片生成](./image-generation.md) - 生成用于视频转换的图片
+- [媒体上传](./media-upload.md) - 本地静图作为 `image_source`
 - [歌曲 MV](./song-mv.md) - 结合歌曲和视频制作 MV

@@ -1,6 +1,6 @@
 name: upload
 title: Upload
-description: Upload a media file (image, video) to create a artifact.
+description: Upload a media file (image or video) to create an artifact.
 
 parameters:
   file_path: File path to upload (absolute path or relative path to command execution directory)
