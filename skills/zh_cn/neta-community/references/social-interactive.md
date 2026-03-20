@@ -6,20 +6,20 @@
 
 ```bash
 # 点赞作品
-neta-cli like_collection --uuid "目标作品 UUID"
+npx -y @talesofai/neta-skills like_collection --uuid "目标作品 UUID"
 
 # 取消点赞
-neta-cli like_collection --uuid "目标作品 UUID" --is_cancel true
+npx -y @talesofai/neta-skills like_collection --uuid "目标作品 UUID" --is_cancel true
 ```
 
 #### favor_collection - 收藏/取消收藏作品
 
 ```bash
 # 收藏作品
-neta-cli favor_collection --uuid "目标作品 UUID"
+npx -y @talesofai/neta-skills favor_collection --uuid "目标作品 UUID"
 
 # 取消收藏
-neta-cli favor_collection --uuid "目标作品 UUID" --is_cancel true
+npx -y @talesofai/neta-skills favor_collection --uuid "目标作品 UUID" --is_cancel true
 ```
 
 #### create_comment - 发布评论
@@ -33,13 +33,13 @@ neta-cli favor_collection --uuid "目标作品 UUID" --is_cancel true
 
 ```bash
 # 对作品发表评论（主评论）
-neta-cli create_comment \
+npx -y @talesofai/neta-skills create_comment \
   --parent_uuid "目标作品 UUID" \
   --parent_type "collection" \
   --content "老师，这个作品真的好棒啊！"
 
 # 对评论进行回复（楼中楼）
-neta-cli create_comment \
+npx -y @talesofai/neta-skills create_comment \
   --parent_uuid "目标评论 UUID" \
   --parent_type "comment" \
   --content "同意楼上的观点！"
@@ -53,21 +53,21 @@ neta-cli create_comment \
 
 ```bash
 # 关注用户
-neta-cli subscribe_user --user_uuid "目标用户 UUID" --is_cancel false
+npx -y @talesofai/neta-skills subscribe_user --user_uuid "目标用户 UUID" --is_cancel false
 
 # 取消关注
-neta-cli subscribe_user --user_uuid "目标用户 UUID" --is_cancel true
+npx -y @talesofai/neta-skills subscribe_user --user_uuid "目标用户 UUID" --is_cancel true
 ```
 
 #### get_subscribe_list - 查看我关注的人
 
 ```bash
-neta-cli get_subscribe_list --page_index 0 --page_size 10
+npx -y @talesofai/neta-skills get_subscribe_list --page_index 0 --page_size 10
 ```
 
 #### get_fan_list - 查看我的粉丝
 
 ```bash
-neta-cli get_fan_list --page_index 0 --page_size 10
+npx -y @talesofai/neta-skills get_fan_list --page_index 0 --page_size 10
 ```
 

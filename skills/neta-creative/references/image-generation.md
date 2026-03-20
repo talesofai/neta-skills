@@ -37,7 +37,7 @@ Applicable to `make_image` and `remove_background` commands.
 Generate a stylized character standing illustration
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@Neta#996, /comic style, character standing illustration" \
   --aspect "3:4" \
   --model_series "3_noobxl"
@@ -48,7 +48,7 @@ neta-cli make_image \
 Generate a multi-panel comic
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@Neta#996, multi-panel funny comic" \
   --aspect "3:4" \
   --model_series "8_image_edit"
@@ -69,7 +69,7 @@ neta-cli make_image \
 Generate a 3:4 character standing illustration
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@Neta#996, character standing illustration" \
   --aspect "3:4"
 ```
@@ -79,7 +79,7 @@ neta-cli make_image \
 Generate a 2:1 wide poster
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@Neta#996, wide poster" \
   --width "1536" \
   --height "768"
@@ -94,7 +94,7 @@ neta-cli make_image \
 ### Character Standing Illustration
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@Neta#996, sailor uniform, standing at the classroom door, sunlight streaming through the window, fresh and natural" \
   --aspect "3:4"
 ```
@@ -103,28 +103,28 @@ neta-cli make_image \
 
 ```bash
 # Front view
-neta-cli make_image --prompt "@character_name, front view, white background, full body" --aspect "3:4"
+npx -y @talesofai/neta-skills make_image --prompt "@character_name, front view, white background, full body" --aspect "3:4"
 
 # Side view
-neta-cli make_image --prompt "@character_name, side view, white background, full body" --aspect "3:4"
+npx -y @talesofai/neta-skills make_image --prompt "@character_name, side view, white background, full body" --aspect "3:4"
 
 # Back view
-neta-cli make_image --prompt "@character_name, back view, white background, full body" --aspect "3:4"
+npx -y @talesofai/neta-skills make_image --prompt "@character_name, back view, white background, full body" --aspect "3:4"
 ```
 
 ### Expression Sheet
 
 ```bash
-neta-cli make_image --prompt "@character_name, happy expression, close-up, white background" --aspect "1:1"
-neta-cli make_image --prompt "@character_name, angry expression, close-up, white background" --aspect "1:1"
-neta-cli make_image --prompt "@character_name, surprised expression, close-up, white background" --aspect "1:1"
-neta-cli make_image --prompt "@character_name, shy expression, close-up, white background" --aspect "1:1"
+npx -y @talesofai/neta-skills make_image --prompt "@character_name, happy expression, close-up, white background" --aspect "1:1"
+npx -y @talesofai/neta-skills make_image --prompt "@character_name, angry expression, close-up, white background" --aspect "1:1"
+npx -y @talesofai/neta-skills make_image --prompt "@character_name, surprised expression, close-up, white background" --aspect "1:1"
+npx -y @talesofai/neta-skills make_image --prompt "@character_name, shy expression, close-up, white background" --aspect "1:1"
 ```
 
 ### Background Removal
 
 ```bash
-neta-cli remove_background --input_image "image_uuid"
+npx -y @talesofai/neta-skills remove_background --input_image "image_uuid"
 ```
 ---
 
@@ -153,7 +153,7 @@ neta-cli remove_background --input_image "image_uuid"
 2. Save successful prompt templates
 3. First query character details to get standard descriptions
    ```bash
-   neta-cli request_character_or_elementum --name "character_name"
+   npx -y @talesofai/neta-skills request_character_or_elementum --name "character_name"
    ```
 4. Generate prompts based on character descriptions
 

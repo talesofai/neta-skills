@@ -36,7 +36,7 @@ Basic usage for browsing the home interactive feed.
 
 ```bash
 # Get home recommendations
-neta-cli request_interactive_feed --page_index 0 --page_size 10
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 --page_size 10
 ```
 
 **Characteristics:**
@@ -50,7 +50,7 @@ neta-cli request_interactive_feed --page_index 0 --page_size 10
 When you want full information for a specific collection:
 
 ```bash
-neta-cli read_collection --uuid "TARGET_COLLECTION_UUID"
+npx -y @talesofai/neta-skills read_collection --uuid "TARGET_COLLECTION_UUID"
 ```
 
 ### 3. Get similar content
@@ -58,7 +58,7 @@ neta-cli read_collection --uuid "TARGET_COLLECTION_UUID"
 Fetch recommendations related to a seed collection:
 
 ```bash
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 1 \
   --page_size 10 \
   --collection_uuid "SEED_COLLECTION_UUID"
@@ -74,7 +74,7 @@ neta-cli request_interactive_feed \
 View the original work and all its derivative (remix) works:
 
 ```bash
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 0 \
   --page_size 20 \
   --scene 'relation_feed_child' \
@@ -93,7 +93,7 @@ neta-cli request_interactive_feed \
 Fetch all works created by a specific user:
 
 ```bash
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 0 \
   --page_size 20 \
   --scene 'personal_feed' \
@@ -111,7 +111,7 @@ neta-cli request_interactive_feed \
 View child works under a parent work (e.g. in a comment context):
 
 ```bash
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 0 \
   --page_size 20 \
   --scene 'relation_feed_same' \
@@ -134,7 +134,7 @@ To keep recommendation results consistent across pages, you must use `biz_trace_
 
 ```bash
 # First request (page 0)
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 0 \
   --page_size 10 > /tmp/page0.json
 
@@ -142,13 +142,13 @@ neta-cli request_interactive_feed \
 BIZ_TRACE_ID=$(cat /tmp/page0.json | jq -r '.page_data.biz_trace_id')
 
 # Page 1
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 1 \
   --page_size 10 \
   --biz_trace_id "$BIZ_TRACE_ID"
 
 # Page 2
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 2 \
   --page_size 10 \
   --biz_trace_id "$BIZ_TRACE_ID"
@@ -160,23 +160,23 @@ neta-cli request_interactive_feed \
 
 ```bash
 # Page 0
-neta-cli request_interactive_feed --page_index 0 > /tmp/page0.json
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 > /tmp/page0.json
 BIZ_TRACE_ID_0=$(cat /tmp/page0.json | jq -r '.page_data.biz_trace_id')
 
 # Page 1
-neta-cli request_interactive_feed --page_index 1 --biz_trace_id "$BIZ_TRACE_ID_0" > /tmp/page1.json
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 1 --biz_trace_id "$BIZ_TRACE_ID_0" > /tmp/page1.json
 BIZ_TRACE_ID_1=$(cat /tmp/page1.json | jq -r '.page_data.biz_trace_id')
 
 # Page 2 (WRONG: should still use BIZ_TRACE_ID_0)
-neta-cli request_interactive_feed --page_index 2 --biz_trace_id "$BIZ_TRACE_ID_1"
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 2 --biz_trace_id "$BIZ_TRACE_ID_1"
 ```
 
 **❌ Wrong 2: never passing `biz_trace_id`**
 
 ```bash
-neta-cli request_interactive_feed --page_index 0
-neta-cli request_interactive_feed --page_index 1  # missing biz_trace_id
-neta-cli request_interactive_feed --page_index 2  # missing biz_trace_id
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 0
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 1  # missing biz_trace_id
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 2  # missing biz_trace_id
 ```
 
 Each call starts a new session, and recommendations may not be consistent.
@@ -186,7 +186,7 @@ Each call starts a new session, and recommendations may not be consistent.
 ### Combo 1: basic browsing
 
 ```bash
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 0 \
   --page_size 10
 ```
@@ -195,14 +195,14 @@ neta-cli request_interactive_feed \
 
 ```bash
 # Page 0
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 0 \
   --page_size 20 \
   --scene 'personal_feed' \
   --target_user_uuid "user-uuid"
 
 # Page 1 (using returned biz_trace_id)
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 1 \
   --page_size 20 \
   --scene 'personal_feed' \
@@ -214,7 +214,7 @@ neta-cli request_interactive_feed \
 
 ```bash
 # View child works for a parent collection
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 0 \
   --page_size 15 \
   --scene 'relation_feed_same' \
@@ -267,7 +267,7 @@ Cache feed results to avoid repeated calls:
 
 ```bash
 # Cache first page
-neta-cli request_interactive_feed --page_index 0 > /tmp/feed_cache.json
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 > /tmp/feed_cache.json
 
 # Reuse cache
 cat /tmp/feed_cache.json | jq '.module_list'
@@ -279,10 +279,10 @@ Preload the next page while the user is viewing the current one:
 
 ```bash
 # Current page
-neta-cli request_interactive_feed --page_index 0 > /tmp/page0.json &
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 > /tmp/page0.json &
 
 # Preload next page
-neta-cli request_interactive_feed --page_index 1 > /tmp/page1.prefetch.json &
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 1 > /tmp/page1.prefetch.json &
 wait
 ```
 
@@ -300,7 +300,7 @@ Check whether the returned `module_list` matches expectations:
 
 ```bash
 # Request with a specified biz_trace_id
-neta-cli request_interactive_feed \
+npx -y @talesofai/neta-skills request_interactive_feed \
   --page_index 1 \
   --biz_trace_id "your-biz-trace-id" > /tmp/response.json
 
@@ -311,7 +311,7 @@ cat /tmp/response.json | jq '.page_data.biz_trace_id'
 ### 3. Enable debug logs
 
 ```bash
-DEBUG=* neta-cli request_interactive_feed --page_index 0
+DEBUG=* npx -y @talesofai/neta-skills request_interactive_feed --page_index 0
 ```
 
 ## FAQ
@@ -336,11 +336,11 @@ Solutions:
 
 ```bash
 # Correct
-neta-cli request_interactive_feed --page_index 0 > /tmp/page0.json
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 > /tmp/page0.json
 BIZ_TRACE_ID=$(cat /tmp/page0.json | jq -r '.page_data.biz_trace_id')
 
-neta-cli request_interactive_feed --page_index 1 --biz_trace_id "$BIZ_TRACE_ID"
-neta-cli request_interactive_feed --page_index 2 --biz_trace_id "$BIZ_TRACE_ID"
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 1 --biz_trace_id "$BIZ_TRACE_ID"
+npx -y @talesofai/neta-skills request_interactive_feed --page_index 2 --biz_trace_id "$BIZ_TRACE_ID"
 ```
 
 ### Q: How to distinguish different content types in NORMAL modules?

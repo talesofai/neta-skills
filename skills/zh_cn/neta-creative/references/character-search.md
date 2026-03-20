@@ -20,7 +20,7 @@
 
 ```bash
 # 使用精确排序
-neta-cli search_character_or_elementum --keywords "角色全名" --sort_scheme "exact" --parent_type "character"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "角色全名" --sort_scheme "exact" --parent_type "character"
 ```
 
 ### 模糊搜索
@@ -29,17 +29,17 @@ neta-cli search_character_or_elementum --keywords "角色全名" --sort_scheme "
 
 ```bash
 # 使用相关性排序
-neta-cli search_character_or_elementum --keywords "关键词" --sort_scheme "best" --parent_type "both"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "关键词" --sort_scheme "best" --parent_type "both"
 ```
 
 ### 分页浏览
 
 ```bash
 # 第一页
-neta-cli search_character_or_elementum --keywords "魔法少女" --page_index 0 --page_size 10
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "魔法少女" --page_index 0 --page_size 10
 
 # 第二页
-neta-cli search_character_or_elementum --keywords "魔法少女" --page_index 1 --page_size 10
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "魔法少女" --page_index 1 --page_size 10
 ```
 
 ---
@@ -68,13 +68,13 @@ neta-cli search_character_or_elementum --keywords "魔法少女" --page_index 1 
 ### 通过名称
 
 ```bash
-neta-cli request_character_or_elementum --name "角色名"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "角色名"
 ```
 
 ### 通过 UUID
 
 ```bash
-neta-cli request_character_or_elementum --uuid "角色-uuid"
+npx -y @talesofai/neta-skills request_character_or_elementum --uuid "角色-uuid"
 ```
 
 ### 返回数据示例
@@ -104,10 +104,10 @@ neta-cli request_character_or_elementum --uuid "角色-uuid"
 
 ```bash
 # 1. 获取角色标准信息
-neta-cli request_character_or_elementum --name "初音未来"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "初音未来"
 
 # 2. 生成图片
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@初音未来，穿着标志性服装，手持大葱，舞台背景" \
   --aspect "3:4"
 ```
@@ -116,10 +116,10 @@ neta-cli make_image \
 
 ```bash
 # 1. 获取标签下的角色列表
-neta-cli get_hashtag_characters --hashtag "热门标签" --sort_by "hot"
+npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "热门标签" --sort_by "hot"
 
 # 2. 获取感兴趣角色的详情
-neta-cli request_character_or_elementum --name "角色名"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "角色名"
 
 # 3. 分析角色特征，确定创作方向
 ```
@@ -128,10 +128,10 @@ neta-cli request_character_or_elementum --name "角色名"
 
 ```bash
 # 搜索风格元素
-neta-cli search_character_or_elementum --keywords "赛博朋克" --parent_type "elementum"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "赛博朋克" --parent_type "elementum"
 
 # 获取元素详情
-neta-cli request_character_or_elementum --name "赛博朋克风格"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "赛博朋克风格"
 ```
 
 ---
@@ -143,28 +143,28 @@ neta-cli request_character_or_elementum --name "赛博朋克风格"
 有些角色有多个名称：
 ```bash
 # 尝试不同名称
-neta-cli search_character_or_elementum --keywords "角色全名" --sort_scheme "exact"
-neta-cli search_character_or_elementum --keywords "角色简称" --sort_scheme "exact"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "角色全名" --sort_scheme "exact"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "角色简称" --sort_scheme "exact"
 ```
 
 ### 组合关键词
 
 ```bash
 # 特征 + 类型
-neta-cli search_character_or_elementum --keywords "粉色头发 魔法少女" --parent_type "character"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "粉色头发 魔法少女" --parent_type "character"
 
 # 作品名 + 角色
-neta-cli search_character_or_elementum --keywords "作品名 角色名" --sort_scheme "exact"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "作品名 角色名" --sort_scheme "exact"
 ```
 
 ### 利用标签筛选
 
 ```bash
 # 先查标签
-neta-cli get_hashtag_info --hashtag "标签名"
+npx -y @talesofai/neta-skills get_hashtag_info --hashtag "标签名"
 
 # 再查标签下角色
-neta-cli get_hashtag_characters --hashtag "标签名"
+npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "标签名"
 ```
 
 ---
@@ -175,7 +175,7 @@ neta-cli get_hashtag_characters --hashtag "标签名"
 
 ```bash
 # 第一次查询并保存
-neta-cli request_character_or_elementum --name "角色名" > character_cache/角色名.json
+npx -y @talesofai/neta-skills request_character_or_elementum --name "角色名" > character_cache/角色名.json
 
 # 后续使用缓存数据
 cat character_cache/角色名.json
@@ -185,7 +185,7 @@ cat character_cache/角色名.json
 
 ```bash
 # 保存搜索结果
-neta-cli search_character_or_elementum --keywords "关键词" > search_cache/关键词.json
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "关键词" > search_cache/关键词.json
 ```
 
 ---

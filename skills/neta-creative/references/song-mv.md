@@ -17,7 +17,7 @@ Combine song generation and video generation to create full music videos.
 ### 1. Generate the song
 
 ```bash
-neta-cli make_song \
+npx -y @talesofai/neta-skills make_song \
   --prompt "Upbeat J‑Pop, energetic and youthful, mid‑fast tempo, electronic synths" \
   --lyrics "[lyrics content...]"
 ```
@@ -37,7 +37,7 @@ Decide the visual direction based on song style:
 ### 3. Generate MV cover
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "Design a cover image based on the song theme, 16:9 landscape, suitable as video thumbnail" \
   --aspect "16:9"
 ```
@@ -45,7 +45,7 @@ neta-cli make_image \
 ### 4. Generate video clips
 
 ```bash
-neta-cli make_video \
+npx -y @talesofai/neta-skills make_video \
   --image_source "<COVER_IMAGE_URL>" \
   --prompt "Dynamic effects matching the song mood, such as drifting particles and light changes" \
   --model "model_w"
@@ -59,7 +59,7 @@ neta-cli make_video \
 
 ```bash
 # 1. Generate song
-neta-cli make_song \
+npx -y @talesofai/neta-skills make_song \
   --prompt "Youthful J‑Pop, bright and energetic, electronic synths, about friendship and dreams" \
   --lyrics "[Verse 1]
   Morning sunlight on the window
@@ -67,12 +67,12 @@ neta-cli make_song \
   ..."
 
 # 2. Generate main MV visual
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "A teenage girl on a rooftop under blue sky and white clouds, school uniform skirt swaying, sunlight and hope, anime style" \
   --aspect "16:9"
 
 # 3. Generate dynamic effect
-neta-cli make_video \
+npx -y @talesofai/neta-skills make_video \
   --image_source "<IMAGE_URL_FROM_PREVIOUS_STEP>" \
   --prompt "Clouds drift slowly, skirt sways gently, hair moving in the wind, sunlight sparkling" \
   --model "model_w"
@@ -82,17 +82,17 @@ neta-cli make_video \
 
 ```bash
 # 1. Generate song
-neta-cli make_song \
+npx -y @talesofai/neta-skills make_song \
   --prompt "Gentle ballad, piano accompaniment, slow tempo, light sadness" \
   --lyrics "[lyrics content...]"
 
 # 2. Generate atmosphere image
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "Rainy night street, raindrops under streetlights, a lone figure, deep blue tones, cinematic feel" \
   --aspect "16:9"
 
 # 3. Generate dynamic effect
-neta-cli make_video \
+npx -y @talesofai/neta-skills make_video \
   --image_source "<IMAGE_URL>" \
   --prompt "Raindrops falling slowly, streetlight flickering slightly, misty air" \
   --model "model_w"
@@ -106,16 +106,16 @@ For full MVs, you can generate multiple scenes:
 
 ```bash
 # Scene 1: Verse
-neta-cli make_image --prompt "Scene 1 description" --aspect "16:9"
-neta-cli make_video --image_source "<URL1>" --prompt "Scene 1 motion"
+npx -y @talesofai/neta-skills make_image --prompt "Scene 1 description" --aspect "16:9"
+npx -y @talesofai/neta-skills make_video --image_source "<URL1>" --prompt "Scene 1 motion"
 
 # Scene 2: Chorus
-neta-cli make_image --prompt "Scene 2 description, more intense atmosphere" --aspect "16:9"
-neta-cli make_video --image_source "<URL2>" --prompt "Scene 2 motion with stronger effects"
+npx -y @talesofai/neta-skills make_image --prompt "Scene 2 description, more intense atmosphere" --aspect "16:9"
+npx -y @talesofai/neta-skills make_video --image_source "<URL2>" --prompt "Scene 2 motion with stronger effects"
 
 # Scene 3: Bridge
-neta-cli make_image --prompt "Scene 3 description, emotional shift" --aspect "16:9"
-neta-cli make_video --image_source "<URL3>" --prompt "Scene 3 motion"
+npx -y @talesofai/neta-skills make_image --prompt "Scene 3 description, emotional shift" --aspect "16:9"
+npx -y @talesofai/neta-skills make_video --image_source "<URL3>" --prompt "Scene 3 motion"
 ```
 
 ---

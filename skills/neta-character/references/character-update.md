@@ -16,7 +16,7 @@ Before updating, first get the character's `tcp_uuid`:
 
 ```bash
 # Search by character name
-neta-cli request_character_or_elementum --name "Ada Wong"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "Ada Wong"
 ```
 
 The `uuid` field in the response is the `tcp_uuid`.
@@ -34,7 +34,7 @@ User is unsatisfied with character appearance, needs to regenerate image and cha
 2. After confirmation, update avatar and prompt with new `artifacts[0].uuid`
 
 ```bash
-neta-cli update_character \
+npx -y @talesofai/neta-skills update_character \
   --tcp_uuid "character's tcp_uuid" \
   --avatar_artifact_uuid "new image's artifacts[0].uuid" \
   --prompt "updated visual features, e.g.: long black hair, updated outfit details"
@@ -45,7 +45,7 @@ neta-cli update_character \
 Character setting has changed, or initial backstory was incomplete.
 
 ```bash
-neta-cli update_character \
+npx -y @talesofai/neta-skills update_character \
   --tcp_uuid "character's tcp_uuid" \
   --description "updated complete character backstory" \
   --persona "updated personality description" \
@@ -58,7 +58,7 @@ neta-cli update_character \
 If character features are inaccurate when using `@CharacterName` for image generation, trigger may need optimization.
 
 ```bash
-neta-cli update_character \
+npx -y @talesofai/neta-skills update_character \
   --tcp_uuid "character's tcp_uuid" \
   --trigger "1girl, Ada Wong, long black hair, red qipao dress, gun holster, spy, elegant, cold expression, resident evil series"
 ```
@@ -74,7 +74,7 @@ neta-cli update_character \
 Change character from private to public, or vice versa:
 
 ```bash
-neta-cli update_character \
+npx -y @talesofai/neta-skills update_character \
   --tcp_uuid "character's tcp_uuid" \
   --accessibility "PUBLIC"
 ```
@@ -84,7 +84,7 @@ neta-cli update_character \
 Pass empty string `""` to clear fields:
 
 ```bash
-neta-cli update_character \
+npx -y @talesofai/neta-skills update_character \
   --tcp_uuid "character's tcp_uuid" \
   --interests ""
 ```
@@ -97,7 +97,7 @@ After update, verify with `make_image`:
 
 ```bash
 # Generate test image with updated character
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@Ada Wong, white background, full body, showing updated appearance" \
   --aspect "3:4"
 ```

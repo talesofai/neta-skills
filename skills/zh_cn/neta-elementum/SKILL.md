@@ -9,18 +9,6 @@ description: Neta 元素(Elementum)炼金技能 - 引导用户创建或更新风
 
 > 本技能需要配合 **neta-creative** 技能使用 `make_image` 进行视觉预览。
 
-## 前置条件
-
-确保已安装最新版本的 Neta Cli
-```
-neta-cli --version
-0.11.0
-```
-
-```
-npm i @talesofai/neta-skills@latest -g
-```
-
 ## 命令使用
 
 ### 创建元素
@@ -32,7 +20,7 @@ npm i @talesofai/neta-skills@latest -g
 📖 [炼金引导](./references/elementum-alchemy.md) - 完整炼金工作流程与最佳实践
 
 ```bash
-neta-cli create_elementum \
+npx -y @talesofai/neta-skills create_elementum \
   --name "RE4村庄" \
   --artifact_uuid "make_image返回的artifacts[0].uuid" \
   --prompt "生化危机4风格欧洲中世纪村庄，破旧石屋，燃烧篝火，浓雾弥漫，枯木，恐怖压抑氛围，写实风格" \
@@ -48,13 +36,13 @@ neta-cli create_elementum \
 
 ```bash
 # 重新生图后更换代表图
-neta-cli update_elementum \
+npx -y @talesofai/neta-skills update_elementum \
   --tcp_uuid "元素的tcp_uuid" \
   --artifact_uuid "新make_image返回的artifacts[0].uuid" \
   --prompt "更新后的生图指令"
 
 # 只更新 Agent 使用说明
-neta-cli update_elementum \
+npx -y @talesofai/neta-skills update_elementum \
   --tcp_uuid "元素的tcp_uuid" \
   --description "更新后的使用说明"
 ```
@@ -63,14 +51,14 @@ neta-cli update_elementum \
 
 ```bash
 # 列出我的元素（当前用户创建的元素）
-neta-cli list_my_elementum
-neta-cli list_my_elementum --keyword "村庄" --page_size 10
+npx -y @talesofai/neta-skills list_my_elementum
+npx -y @talesofai/neta-skills list_my_elementum --keyword "村庄" --page_size 10
 
 # 搜索元素（全站关键词匹配）
-neta-cli search_character_or_elementum --keywords "元素名" --parent_type "elementum"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "元素名" --parent_type "elementum"
 
 # 获取元素完整详情（含 tcp_uuid）
-neta-cli request_character_or_elementum --name "元素名"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "元素名"
 ```
 
 ## 参考文档

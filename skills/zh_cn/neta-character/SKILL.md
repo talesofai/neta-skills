@@ -9,18 +9,6 @@ description: Neta 角色锻造技能 - 引导用户创建或更新动漫/文化I
 
 > 本技能需要配合 **neta-creative** 技能使用 `make_image` 进行视觉预览。
 
-## 前置条件
-
-确保已安装最新版本的 Neta Cli
-```
-neta-cli --version
-0.11.0
-```
-
-```
-npm i @talesofai/neta-skills@latest -g
-```
-
 ## 命令使用
 
 ### 创建角色
@@ -32,7 +20,7 @@ npm i @talesofai/neta-skills@latest -g
 📖 [创建引导](./references/character-creation.md) - 完整创作工作流程与最佳实践
 
 ```bash
-neta-cli create_character \
+npx -y @talesofai/neta-skills create_character \
   --name "Ada Wong" \
   --avatar_artifact_uuid "make_image返回的artifacts[0].uuid" \
   --prompt "long black hair, red qipao dress, blue eyes, gun holster on thigh, slender figure" \
@@ -54,18 +42,18 @@ neta-cli create_character \
 
 ```bash
 # 重新生图后更换视觉外观
-neta-cli update_character \
+npx -y @talesofai/neta-skills update_character \
   --tcp_uuid "角色的tcp_uuid" \
   --avatar_artifact_uuid "新make_image返回的artifacts[0].uuid" \
   --prompt "新的视觉特征描述"
 
 # 只更新背景故事
-neta-cli update_character \
+npx -y @talesofai/neta-skills update_character \
   --tcp_uuid "角色的tcp_uuid" \
   --description "更新后的角色背景故事"
 
 # 更新多个字段
-neta-cli update_character \
+npx -y @talesofai/neta-skills update_character \
   --tcp_uuid "角色的tcp_uuid" \
   --persona "新的性格描述" \
   --interests "新的兴趣" \
@@ -76,14 +64,14 @@ neta-cli update_character \
 
 ```bash
 # 列出我的角色（当前用户创建的角色）
-neta-cli list_my_characters
-neta-cli list_my_characters --keyword "艾达" --page_size 10
+npx -y @talesofai/neta-skills list_my_characters
+npx -y @talesofai/neta-skills list_my_characters --keyword "艾达" --page_size 10
 
 # 搜索角色（全站关键词匹配）
-neta-cli search_character_or_elementum --keywords "角色名" --parent_type "character"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "角色名" --parent_type "character"
 
 # 获取角色完整详情（含 tcp_uuid）
-neta-cli request_character_or_elementum --name "角色名"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "角色名"
 ```
 
 ## 参考文档

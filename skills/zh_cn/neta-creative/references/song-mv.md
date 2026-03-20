@@ -17,7 +17,7 @@
 ### 1. 生成歌曲
 
 ```bash
-neta-cli make_song \
+npx -y @talesofai/neta-skills make_song \
   --prompt "欢快的 J-Pop 风格，充满活力的少女感，中快节奏，电子合成器" \
   --lyrics "[歌词内容...]"
 ```
@@ -37,7 +37,7 @@ neta-cli make_song \
 ### 3. 生成 MV 封面
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "根据歌曲主题设计封面，16:9 横版，适合视频封面" \
   --aspect "16:9"
 ```
@@ -45,7 +45,7 @@ neta-cli make_image \
 ### 4. 生成视频片段
 
 ```bash
-neta-cli make_video \
+npx -y @talesofai/neta-skills make_video \
   --image_source "<封面图片 URL>" \
   --prompt "与歌曲情绪匹配的动态效果，如粒子飘动、光影变化" \
   --model "model_w"
@@ -59,7 +59,7 @@ neta-cli make_video \
 
 ```bash
 # 1. 生成歌曲
-neta-cli make_song \
+npx -y @talesofai/neta-skills make_song \
   --prompt "青春活力的 J-Pop，明快节奏，电子合成器，关于友情和梦想" \
   --lyrics "[Verse 1]
   清晨阳光洒在窗前
@@ -67,12 +67,12 @@ neta-cli make_song \
   ..."
 
 # 2. 生成 MV 主视觉
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "青春少女站在天台上，蓝天白云，校服裙摆飞扬，阳光洒下，希望感，动漫风格" \
   --aspect "16:9"
 
 # 3. 生成动态效果
-neta-cli make_video \
+npx -y @talesofai/neta-skills make_video \
   --image_source "<上一步图片 URL>" \
   --prompt "云朵缓缓流动，裙摆轻轻摆动，发丝随风飘动，阳光闪烁" \
   --model "model_w"
@@ -82,17 +82,17 @@ neta-cli make_video \
 
 ```bash
 # 1. 生成歌曲
-neta-cli make_song \
+npx -y @talesofai/neta-skills make_song \
   --prompt "温柔的抒情歌曲，钢琴伴奏，舒缓节奏，淡淡忧伤" \
   --lyrics "[歌词内容...]"
 
 # 2. 生成氛围图
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "雨夜的街道，路灯下的雨丝，孤独的身影，深蓝色调，电影感" \
   --aspect "16:9"
 
 # 3. 生成动态效果
-neta-cli make_video \
+npx -y @talesofai/neta-skills make_video \
   --image_source "<图片 URL>" \
   --prompt "雨丝缓缓落下，路灯微微闪烁，水汽朦胧" \
   --model "model_w"
@@ -106,16 +106,16 @@ neta-cli make_video \
 
 ```bash
 # 场景 1：主歌
-neta-cli make_image --prompt "场景 1 描述" --aspect "16:9"
-neta-cli make_video --image_source "<URL1>" --prompt "场景 1 动态"
+npx -y @talesofai/neta-skills make_image --prompt "场景 1 描述" --aspect "16:9"
+npx -y @talesofai/neta-skills make_video --image_source "<URL1>" --prompt "场景 1 动态"
 
 # 场景 2：副歌
-neta-cli make_image --prompt "场景 2 描述，更热烈的氛围" --aspect "16:9"
-neta-cli make_video --image_source "<URL2>" --prompt "场景 2 动态，更强烈的效果"
+npx -y @talesofai/neta-skills make_image --prompt "场景 2 描述，更热烈的氛围" --aspect "16:9"
+npx -y @talesofai/neta-skills make_video --image_source "<URL2>" --prompt "场景 2 动态，更强烈的效果"
 
 # 场景 3：桥段
-neta-cli make_image --prompt "场景 3 描述，情绪转折" --aspect "16:9"
-neta-cli make_video --image_source "<URL3>" --prompt "场景 3 动态"
+npx -y @talesofai/neta-skills make_image --prompt "场景 3 描述，情绪转折" --aspect "16:9"
+npx -y @talesofai/neta-skills make_video --image_source "<URL3>" --prompt "场景 3 动态"
 ```
 
 ---

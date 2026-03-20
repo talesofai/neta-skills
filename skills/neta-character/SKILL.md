@@ -9,18 +9,6 @@ Guide users from inspiration to forging, completing the creation and management 
 
 > This skill requires the **neta-creative** skill to use `make_image` for visual previews.
 
-## Prerequisites
-
-Ensure the latest version of Neta CLI is installed:
-```
-neta-cli --version
-0.11.0
-```
-
-```
-npm i @talesofai/neta-skills@latest -g
-```
-
 ## Command Usage
 
 ### Create Character
@@ -32,7 +20,7 @@ Follow the three-stage workflow: "Visual Preview → Character Documentation →
 📖 [Creation Guide](./references/character-creation.md) - Complete creative workflow and best practices
 
 ```bash
-neta-cli create_character \
+npx -y @talesofai/neta-skills create_character \
   --name "Ada Wong" \
   --avatar_artifact_uuid "artifacts[0].uuid from make_image response" \
   --prompt "long black hair, red qipao dress, blue eyes, gun holster on thigh, slender figure" \
@@ -54,18 +42,18 @@ neta-cli create_character \
 
 ```bash
 # Update visual appearance after regenerating image
-neta-cli update_character \
+npx -y @talesofai/neta-skills update_character \
   --tcp_uuid "character's tcp_uuid" \
   --avatar_artifact_uuid "new artifacts[0].uuid from make_image" \
   --prompt "updated visual feature description"
 
 # Only update backstory
-neta-cli update_character \
+npx -y @talesofai/neta-skills update_character \
   --tcp_uuid "character's tcp_uuid" \
   --description "updated character backstory"
 
 # Update multiple fields
-neta-cli update_character \
+npx -y @talesofai/neta-skills update_character \
   --tcp_uuid "character's tcp_uuid" \
   --persona "new personality description" \
   --interests "new interests" \
@@ -76,14 +64,14 @@ neta-cli update_character \
 
 ```bash
 # List my characters (created by current user)
-neta-cli list_my_characters
-neta-cli list_my_characters --keyword "Ada" --page_size 10
+npx -y @talesofai/neta-skills list_my_characters
+npx -y @talesofai/neta-skills list_my_characters --keyword "Ada" --page_size 10
 
 # Search characters (global search, keyword matching)
-neta-cli search_character_or_elementum --keywords "character name" --parent_type "character"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "character name" --parent_type "character"
 
 # Get full character details (including tcp_uuid)
-neta-cli request_character_or_elementum --name "character name"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "character name"
 ```
 
 ## Reference Documentation

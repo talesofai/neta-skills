@@ -17,7 +17,7 @@ Applies to the `get_hashtag_info`, `get_hashtag_characters`, and `get_hashtag_co
 ### Basic info
 
 ```bash
-neta-cli get_hashtag_info --hashtag "tag_name"
+npx -y @talesofai/neta-skills get_hashtag_info --hashtag "tag_name"
 ```
 
 **Response includes:**
@@ -56,7 +56,7 @@ The `lore` section contains worldbuilding and setting information and is a criti
 ### Fetch popular characters
 
 ```bash
-neta-cli get_hashtag_characters \
+npx -y @talesofai/neta-skills get_hashtag_characters \
   --hashtag "tag_name" \
   --sort_by "hot" \
   --page_size 20
@@ -65,7 +65,7 @@ neta-cli get_hashtag_characters \
 ### Fetch newest characters
 
 ```bash
-neta-cli get_hashtag_characters \
+npx -y @talesofai/neta-skills get_hashtag_characters \
   --hashtag "tag_name" \
   --sort_by "newest" \
   --page_size 20
@@ -75,12 +75,12 @@ neta-cli get_hashtag_characters \
 
 ```bash
 # OC characters only
-neta-cli get_hashtag_characters \
+npx -y @talesofai/neta-skills get_hashtag_characters \
   --hashtag "tag_name" \
   --parent_type "oc"
 
 # Elementums only
-neta-cli get_hashtag_characters \
+npx -y @talesofai/neta-skills get_hashtag_characters \
   --hashtag "tag_name" \
   --parent_type "elementum"
 ```
@@ -89,7 +89,7 @@ neta-cli get_hashtag_characters \
 
 ```bash
 # 1. Fetch character list
-neta-cli get_hashtag_characters --hashtag "tag_name" > characters.json
+npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "tag_name" > characters.json
 
 # 2. Analyze traits of top characters:
 #   - Hair styles/colors
@@ -97,7 +97,7 @@ neta-cli get_hashtag_characters --hashtag "tag_name" > characters.json
 #   - Common visual elements
 
 # 3. Get details of top characters
-neta-cli request_character_or_elementum --name "Popular Character Name"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "Popular Character Name"
 ```
 
 ---
@@ -107,7 +107,7 @@ neta-cli request_character_or_elementum --name "Popular Character Name"
 ### Fetch featured works
 
 ```bash
-neta-cli get_hashtag_collections --hashtag "tag_name"
+npx -y @talesofai/neta-skills get_hashtag_collections --hashtag "tag_name"
 ```
 
 **Response includes:**
@@ -121,7 +121,7 @@ neta-cli get_hashtag_collections --hashtag "tag_name"
 
 ```bash
 # 1. Fetch collections
-neta-cli get_hashtag_collections --hashtag "tag_name" > collections.json
+npx -y @talesofai/neta-skills get_hashtag_collections --hashtag "tag_name" > collections.json
 
 # 2. Analyze high‑like works:
 #   - Characters used
@@ -149,22 +149,22 @@ From featured collections you can learn:
 
 ```bash
 # 1. Understand overall tag info
-neta-cli get_hashtag_info --hashtag "Magical Girl"
+npx -y @talesofai/neta-skills get_hashtag_info --hashtag "Magical Girl"
 
 # 2. View top 20 characters
-neta-cli get_hashtag_characters \
+npx -y @talesofai/neta-skills get_hashtag_characters \
   --hashtag "Magical Girl" \
   --sort_by "hot" \
   --page_size 20
 
 # 3. View featured works
-neta-cli get_hashtag_collections --hashtag "Magical Girl"
+npx -y @talesofai/neta-skills get_hashtag_collections --hashtag "Magical Girl"
 
 # 4. Get details of interesting characters
-neta-cli request_character_or_elementum --name "Character Name"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "Character Name"
 
 # 5. Create based on research
-neta-cli make_image --prompt "Prompt consistent with the tag's tone and lore..."
+npx -y @talesofai/neta-skills make_image --prompt "Prompt consistent with the tag's tone and lore..."
 ```
 
 ---
@@ -200,9 +200,9 @@ Based on research, plan to create...
 
 ```bash
 mkdir -p research/tag_name
-neta-cli get_hashtag_info --hashtag "tag_name" > research/tag_name/info.json
-neta-cli get_hashtag_characters --hashtag "tag_name" > research/tag_name/characters.json
-neta-cli get_hashtag_collections --hashtag "tag_name" > research/tag_name/collections.json
+npx -y @talesofai/neta-skills get_hashtag_info --hashtag "tag_name" > research/tag_name/info.json
+npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "tag_name" > research/tag_name/characters.json
+npx -y @talesofai/neta-skills get_hashtag_collections --hashtag "tag_name" > research/tag_name/collections.json
 ```
 
 ---
@@ -213,12 +213,12 @@ neta-cli get_hashtag_collections --hashtag "tag_name" > research/tag_name/collec
 
 ```bash
 # 1. Research existing characters to avoid duplication
-neta-cli search_character_or_elementum \
+npx -y @talesofai/neta-skills search_character_or_elementum \
   --keywords "character traits" \
   --parent_type "character"
 
 # 2. Explore popular characters under related tags
-neta-cli get_hashtag_characters --hashtag "RelatedTag"
+npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "RelatedTag"
 
 # 3. Use findings to design a unique new character
 ```
@@ -227,10 +227,10 @@ neta-cli get_hashtag_characters --hashtag "RelatedTag"
 
 ```bash
 # 1. Research lore and settings of a tag
-neta-cli get_hashtag_info --hashtag "tag_name"
+npx -y @talesofai/neta-skills get_hashtag_info --hashtag "tag_name"
 
 # 2. Analyze themes of featured works
-neta-cli get_hashtag_collections --hashtag "tag_name"
+npx -y @talesofai/neta-skills get_hashtag_collections --hashtag "tag_name"
 
 # 3. Plan a series of event content aligned with the tag
 ```
@@ -239,12 +239,12 @@ neta-cli get_hashtag_collections --hashtag "tag_name"
 
 ```bash
 # 1. Collect multiple popular tags
-neta-cli get_hashtag_info --hashtag "Tag1"
-neta-cli get_hashtag_info --hashtag "Tag2"
+npx -y @talesofai/neta-skills get_hashtag_info --hashtag "Tag1"
+npx -y @talesofai/neta-skills get_hashtag_info --hashtag "Tag2"
 
 # 2. Compare popular characters across tags
-neta-cli get_hashtag_characters --hashtag "Tag1" --sort_by "hot"
-neta-cli get_hashtag_characters --hashtag "Tag2" --sort_by "hot"
+npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "Tag1" --sort_by "hot"
+npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "Tag2" --sort_by "hot"
 
 # 3. Analyze differences and opportunity areas
 ```

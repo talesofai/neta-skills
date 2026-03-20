@@ -50,12 +50,12 @@ Choose appropriate generation strategy based on element category.
 
 ```bash
 # Panorama view
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "Resident Evil 4 style European medieval village, dilapidated stone houses, burning bonfire, thick fog, dead trees, horror atmosphere, realistic style, no people" \
   --aspect "16:9"
 
 # Atmosphere close-up
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "Dilapidated stone house wall, moss, torch, thick fog, close-up, realistic style" \
   --aspect "3:4"
 ```
@@ -64,7 +64,7 @@ neta-cli make_image \
 
 ```bash
 # Item showcase (white background, clear detail)
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "Ancient leather magic book, golden seal runes, slightly worn, white background, game item icon style" \
   --aspect "1:1"
 ```
@@ -73,7 +73,7 @@ neta-cli make_image \
 
 ```bash
 # Style test (verify style with generic scene)
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "Ink wash painting style, mountains and water, bamboo forest, negative space, traditional Chinese painting aesthetics, minimalist" \
   --aspect "3:4"
 ```
@@ -82,7 +82,7 @@ neta-cli make_image \
 
 ```bash
 # Pose showcase (with character)
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "Female character, battle stance, two-handed sword, side profile, dynamic composition, white background, full body" \
   --aspect "3:4"
 ```
@@ -91,7 +91,7 @@ neta-cli make_image \
 
 ```bash
 # Meme recreation
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "Anime style female, slight frown, pointing to right, 'this is destiny' expression, lighthearted and humorous" \
   --aspect "1:1"
 ```
@@ -174,7 +174,7 @@ Representative Image: artifacts[0].uuid = xxxxxxxx
 After confirmation, execute:
 
 ```bash
-neta-cli create_elementum \
+npx -y @talesofai/neta-skills create_elementum \
   --name "RE4 Village" \
   --artifact_uuid "representative image's artifacts[0].uuid" \
   --prompt "Resident Evil 4 style European medieval village, dilapidated stone houses, burning bonfire, thick fog, dead trees, horror atmosphere, realistic style" \
@@ -187,7 +187,7 @@ neta-cli create_elementum \
 After successful creation, API returns `tcp_uuid`. Inform user:
 - Element UUID (tcp_uuid), for future updates
 - How to reference in make_image: `/RE4 Village`
-- Example usage: `neta-cli make_image --prompt "@Ada Wong, /RE4 Village, night, battle stance" --aspect "3:4"`
+- Example usage: `npx -y @talesofai/neta-skills make_image --prompt "@Ada Wong, /RE4 Village, night, battle stance" --aspect "3:4"`
 
 ---
 

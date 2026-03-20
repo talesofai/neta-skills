@@ -43,18 +43,18 @@ For preview stage **only use plain text descriptions**, no `@CharacterName` or `
 
 ```bash
 # Full body preview (recommended for first time)
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "Long black hair, red qipao dress, blue eyes, thigh gun holster, slender figure, cold expression, white background, full body, anime style" \
   --aspect "3:4"
 
 # Portrait close-up
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "Long black hair, blue eyes, cold expression, delicate features, portrait close-up, anime style" \
   --aspect "1:1"
 
 # Three views (after appearance confirmation)
-neta-cli make_image --prompt "Long black hair, red qipao dress, blue eyes, front view, white background, full body" --aspect "3:4"
-neta-cli make_image --prompt "Long black hair, red qipao dress, blue eyes, side view, white background, full body" --aspect "3:4"
+npx -y @talesofai/neta-skills make_image --prompt "Long black hair, red qipao dress, blue eyes, front view, white background, full body" --aspect "3:4"
+npx -y @talesofai/neta-skills make_image --prompt "Long black hair, red qipao dress, blue eyes, side view, white background, full body" --aspect "3:4"
 ```
 
 ### Iteration Suggestions
@@ -147,7 +147,7 @@ Avatar: artifacts[0].uuid = xxxxxxxx
 After user confirmation, execute creation:
 
 ```bash
-neta-cli create_character \
+npx -y @talesofai/neta-skills create_character \
   --name "Ada Wong" \
   --avatar_artifact_uuid "preview image's artifacts[0].uuid" \
   --prompt "long black hair, red qipao dress, blue eyes, gun holster on thigh, slender figure" \
@@ -175,7 +175,7 @@ After successful creation, API returns `tcp_uuid`. Inform user:
 
 For recreating existing IP characters (e.g., game, anime characters):
 
-1. First search if character Token already exists: `neta-cli search_character_or_elementum --keywords "character name" --parent_type "character"`
+1. First search if character Token already exists: `npx -y @talesofai/neta-skills search_character_or_elementum --keywords "character name" --parent_type "character"`
 2. If exists, can use directly or create derivative based on existing Token
 3. If not, follow above workflow, note IP series in trigger
 

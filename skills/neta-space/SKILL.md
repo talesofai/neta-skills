@@ -17,23 +17,6 @@ Used to interact with the Neta API to browse space‑level content.
    - If needed, fetch characters and playable content inside the space.
 3. If the user says “now generate an image/video/song for this space”, first collect the relevant space/collection info here, then switch to `neta-creative` for creation.
 
-## Prerequisites
-
-Install the latest version of the Neta CLI:
-
-```bash
-neta-cli --version
-0.11.0
-```
-
-```bash
-npm i @talesofai/neta-skills@latest -g
-```
-
-```bash
-pnpm add -g @talesofai/neta-skills@latest
-```
-
 ## Space concepts
 
 > A space is a themed collection of gameplay experiences — a scene where content is produced and consumed.
@@ -64,7 +47,7 @@ pnpm add -g @talesofai/neta-skills@latest
 ## List available spaces
 
 ```bash
-neta-cli list_spaces
+npx -y @talesofai/neta-skills list_spaces
 ```
 
 **Response fields**
@@ -77,7 +60,7 @@ neta-cli list_spaces
 ## Get detailed space info
 
 ```bash
-neta-cli get_hashtag_info --hashtag "space_tag_name"
+npx -y @talesofai/neta-skills get_hashtag_info --hashtag "space_tag_name"
 ```
 
 **Response includes:**
@@ -90,7 +73,7 @@ neta-cli get_hashtag_info --hashtag "space_tag_name"
 ## Get sub‑spaces
 
 ```bash
-neta-cli list_space_topics --space_uuid "space UUID"
+npx -y @talesofai/neta-skills list_space_topics --space_uuid "space UUID"
 ```
 
 **Response includes:**
@@ -102,19 +85,19 @@ neta-cli list_space_topics --space_uuid "space UUID"
 ## Get characters in a space
 
 ```bash
-neta-cli get_hashtag_characters --hashtag "space_tag_name" --sort_by "hot"
+npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "space_tag_name" --sort_by "hot"
 ```
 
 ## Get scenes/events/content in a space
 
 ```bash
-neta-cli get_hashtag_collections --hashtag "tag_name"
+npx -y @talesofai/neta-skills get_hashtag_collections --hashtag "tag_name"
 ```
 
 ## Get detailed info for a specific gameplay
 
 ```bash
-neta-cli read_collection --uuid "official_collections in topic | collections in hashtag"
+npx -y @talesofai/neta-skills read_collection --uuid "official_collections in topic | collections in hashtag"
 ```
 
 ## Content creation

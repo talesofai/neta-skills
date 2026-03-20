@@ -14,23 +14,6 @@ Used to interact with the Neta API for multimedia content creation and creation�
    - To reverse‑engineer creative ideas from an existing work, call `read_collection` and combine the result with the guidance in the reference docs.
 2. If, during creation, you discover that the real need is more like “browse recommendations / casually explore / research topics”, combine this skill with `neta-community` or `neta-suggest` instead of overloading this skill.
 
-## Prerequisites
-
-Also ensure the latest Neta CLI is installed:
-
-```bash
-neta-cli --version
-0.11.0
-```
-
-```bash
-npm i @talesofai/neta-skills@latest -g
-```
-
-```bash
-pnpm add -g @talesofai/neta-skills@latest
-```
-
 ## Commands
 
 ### Content creation
@@ -38,7 +21,7 @@ pnpm add -g @talesofai/neta-skills@latest
 **Generate image**
 
 ```bash
-neta-cli make_image --prompt "@character_name, /elementum_name, ref_img-uuid, description1, description2" --aspect "3:4"
+npx -y @talesofai/neta-skills make_image --prompt "@character_name, /elementum_name, ref_img-uuid, description1, description2" --aspect "3:4"
 ```
 
 📖 [Detailed guide](./references/image-generation.md) — prompt structure, aspect ratio choices, examples.
@@ -46,7 +29,7 @@ neta-cli make_image --prompt "@character_name, /elementum_name, ref_img-uuid, de
 **Generate video**
 
 ```bash
-neta-cli make_video --image_source "image URL" --prompt "action description" --model "model_s"
+npx -y @talesofai/neta-skills make_video --image_source "image URL" --prompt "action description" --model "model_s"
 ```
 
 📖 [Detailed guide](./references/video-generation.md) — motion description principles, model selection.
@@ -54,7 +37,7 @@ neta-cli make_video --image_source "image URL" --prompt "action description" --m
 **Generate song**
 
 ```bash
-neta-cli make_song --prompt "style description" --lyrics "lyrics content"
+npx -y @talesofai/neta-skills make_song --prompt "style description" --lyrics "lyrics content"
 ```
 
 📖 [Detailed guide](./references/song-creation.md) — style prompts, lyrics format.
@@ -68,7 +51,7 @@ Combine an audio track and video to create a full MV.
 **Remove background**
 
 ```bash
-neta-cli remove_background --input_image "image_url"
+npx -y @talesofai/neta-skills remove_background --input_image "image_url"
 ```
 
 ### Character queries
@@ -76,7 +59,7 @@ neta-cli remove_background --input_image "image_url"
 **Search characters**
 
 ```bash
-neta-cli search_character_or_elementum --keywords "keywords" --parent_type "character" --sort_scheme "exact"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "keywords" --parent_type "character" --sort_scheme "exact"
 ```
 
 📖 [Detailed guide](./references/character-search.md) — search strategies and parameter choices.
@@ -84,13 +67,13 @@ neta-cli search_character_or_elementum --keywords "keywords" --parent_type "char
 **Get character details**
 
 ```bash
-neta-cli request_character_or_elementum --name "character_name"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "character_name"
 ```
 
 **Query by UUID**
 
 ```bash
-neta-cli request_character_or_elementum --uuid "uuid"
+npx -y @talesofai/neta-skills request_character_or_elementum --uuid "uuid"
 ```
 
 ### Creative idea deconstruction
@@ -98,7 +81,7 @@ neta-cli request_character_or_elementum --uuid "uuid"
 **Derive creative ideas from a work**
 
 ```bash
-neta-cli read_collection --uuid "collection-uuid"
+npx -y @talesofai/neta-skills read_collection --uuid "collection-uuid"
 ```
 
 📖 [Detailed guide](./references/collection-remix.md)

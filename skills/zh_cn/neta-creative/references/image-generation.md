@@ -37,7 +37,7 @@
 生成角色的风格化立绘
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@奈塔#996，/漫画风格，角色立绘" \
   --aspect "3:4" \
   --model_series "3_noobxl"
@@ -48,7 +48,7 @@ neta-cli make_image \
 生成角色的多格漫画
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@奈塔#996，多格搞笑漫画" \
   --aspect "3:4" \
   --model_series "8_image_edit"
@@ -69,7 +69,7 @@ neta-cli make_image \
 生成3:4的角色立绘
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@奈塔#996，角色立绘" \
   --aspect "3:4"
 ```
@@ -79,7 +79,7 @@ neta-cli make_image \
 生成2:1的宽幅海报
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@奈塔#996，宽幅海报" \
   --width "1536" \
   --height "768"
@@ -94,7 +94,7 @@ neta-cli make_image \
 ### 角色立绘
 
 ```bash
-neta-cli make_image \
+npx -y @talesofai/neta-skills make_image \
   --prompt "@奈塔#996，水手服，站在教室门口，阳光从窗户洒进来，清新自然" \
   --aspect "3:4"
 ```
@@ -103,28 +103,28 @@ neta-cli make_image \
 
 ```bash
 # 正面
-neta-cli make_image --prompt "@角色名，正面视图，白色背景，全身像" --aspect "3:4"
+npx -y @talesofai/neta-skills make_image --prompt "@角色名，正面视图，白色背景，全身像" --aspect "3:4"
 
 # 侧面
-neta-cli make_image --prompt "@角色名，侧面视图，白色背景，全身像" --aspect "3:4"
+npx -y @talesofai/neta-skills make_image --prompt "@角色名，侧面视图，白色背景，全身像" --aspect "3:4"
 
 # 背面
-neta-cli make_image --prompt "@角色名，背面视图，白色背景，全身像" --aspect "3:4"
+npx -y @talesofai/neta-skills make_image --prompt "@角色名，背面视图，白色背景，全身像" --aspect "3:4"
 ```
 
 ### 表情集
 
 ```bash
-neta-cli make_image --prompt "@角色名，开心表情，特写，白色背景" --aspect "1:1"
-neta-cli make_image --prompt "@角色名，生气表情，特写，白色背景" --aspect "1:1"
-neta-cli make_image --prompt "@角色名，惊讶表情，特写，白色背景" --aspect "1:1"
-neta-cli make_image --prompt "@角色名，害羞表情，特写，白色背景" --aspect "1:1"
+npx -y @talesofai/neta-skills make_image --prompt "@角色名，开心表情，特写，白色背景" --aspect "1:1"
+npx -y @talesofai/neta-skills make_image --prompt "@角色名，生气表情，特写，白色背景" --aspect "1:1"
+npx -y @talesofai/neta-skills make_image --prompt "@角色名，惊讶表情，特写，白色背景" --aspect "1:1"
+npx -y @talesofai/neta-skills make_image --prompt "@角色名，害羞表情，特写，白色背景" --aspect "1:1"
 ```
 
 ### 去背景（抠图）
 
 ```bash
-neta-cli remove_background --input_image "image_uuid"
+npx -y @talesofai/neta-skills remove_background --input_image "image_uuid"
 ```
 ---
 
@@ -153,7 +153,7 @@ neta-cli remove_background --input_image "image_uuid"
 2. 保存成功的提示词模板
 3. 先查询角色详情获取标准描述
    ```bash
-   neta-cli request_character_or_elementum --name "角色名"
+   npx -y @talesofai/neta-skills request_character_or_elementum --name "角色名"
    ```
 4. 基于角色描述生成提示词
 

@@ -17,22 +17,6 @@ description: Neta API 空间与世界观浏览技能——按空间/标签维度
    - 视需要获取空间内角色列表或具体玩法信息。
 3. 若用户在空间下提出「要生成图片/视频/歌曲」，可在拿到空间/玩法信息后，切换到 `neta-creative` 进行创作。
 
-## 前置条件
-
-确保已安装最新版本的 Neta Cli
-```
-neta-cli --version
-0.11.0
-```
-
-```
-npm i @talesofai/neta-skills@latest -g
-```
-
-```
-pnpm add -g @talesofai/neta-skills@latest
-```
-
 ## 空间
 
 > 空间是一系列有主题的玩法的集合，一个进行内容生产与消费的场域
@@ -63,7 +47,7 @@ pnpm add -g @talesofai/neta-skills@latest
 ## 获取可供游览的空间
 
 ```bash
-neta-cli list_spaces
+npx -y @talesofai/neta-skills list_spaces
 ```
 
 **返回内容**
@@ -76,7 +60,7 @@ neta-cli list_spaces
 ## 获取空间详细信息
 
 ```bash
-neta-cli get_hashtag_info --hashtag "空间标签名"
+npx -y @talesofai/neta-skills get_hashtag_info --hashtag "空间标签名"
 ```
 
 **返回内容：**
@@ -88,7 +72,7 @@ neta-cli get_hashtag_info --hashtag "空间标签名"
 ## 获取子空间
 
 ```bash
-neta-cli list_space_topics --space_uuid "空间 UUID"
+npx -y @talesofai/neta-skills list_space_topics --space_uuid "空间 UUID"
 ```
 
 **返回内容**
@@ -100,19 +84,19 @@ neta-cli list_space_topics --space_uuid "空间 UUID"
 ## 获取空间内角色
 
 ```bash
-neta-cli get_hashtag_characters --hashtag "空间标签名" --sort_by "hot"
+npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "空间标签名" --sort_by "hot"
 ```
 
 ## 获取空间内的场景、事件、内容（可供游玩的部分）
 
 ```bash
-neta-cli get_hashtag_collections --hashtag "标签名"
+npx -y @talesofai/neta-skills get_hashtag_collections --hashtag "标签名"
 ```
 
 ## 获取空间中的某个玩法信息
 
 ```bash
-neta-cli read_collection --uuid "official_collections in topic | collections in hashtag"
+npx -y @talesofai/neta-skills read_collection --uuid "official_collections in topic | collections in hashtag"
 ```
 
 ## 内容创作

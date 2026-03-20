@@ -17,23 +17,6 @@ Used to interact with the Neta API for community feed browsing, interactions, an
 3. If the user needs **systematic research or complex filtering by categories/keywords**, switch to `neta-suggest`.
 4. If the user wants to **create new content** (images/videos/songs/MVs), switch to `neta-creative`.
 
-## Prerequisites
-
-Install the latest version of the Neta CLI:
-
-```bash
-neta-cli --version
-0.11.0
-```
-
-```bash
-npm i @talesofai/neta-skills@latest -g
-```
-
-```bash
-pnpm add -g @talesofai/neta-skills@latest
-```
-
 ## Commands
 
 ### Collection
@@ -41,7 +24,7 @@ pnpm add -g @talesofai/neta-skills@latest
 **Get collection details**
 
 ```bash
-neta-cli read_collection --uuid "collection-uuid"
+npx -y @talesofai/neta-skills read_collection --uuid "collection-uuid"
 ```
 
 📖 [Detailed guide](./references/interactive-feed.md)
@@ -49,7 +32,7 @@ neta-cli read_collection --uuid "collection-uuid"
 ### Community interactions
 
 ```bash
-neta-cli like_collection --uuid "target collection UUID"
+npx -y @talesofai/neta-skills like_collection --uuid "target collection UUID"
 ```
 
 📖 [Detailed guide](./references/social-interactive.md)
@@ -59,7 +42,7 @@ neta-cli like_collection --uuid "target collection UUID"
 **Get tag info**
 
 ```bash
-neta-cli get_hashtag_info --hashtag "tag_name"
+npx -y @talesofai/neta-skills get_hashtag_info --hashtag "tag_name"
 ```
 
 📖 [Detailed guide](./references/hashtag-research.md) — research flow and analysis methods.
@@ -67,13 +50,13 @@ neta-cli get_hashtag_info --hashtag "tag_name"
 **Get characters under a tag**
 
 ```bash
-neta-cli get_hashtag_characters --hashtag "tag_name" --sort_by "hot"
+npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "tag_name" --sort_by "hot"
 ```
 
 **Get collections under a tag**
 
 ```bash
-neta-cli get_hashtag_collections --hashtag "tag_name"
+npx -y @talesofai/neta-skills get_hashtag_collections --hashtag "tag_name"
 ```
 
 ### Character queries
@@ -81,7 +64,7 @@ neta-cli get_hashtag_collections --hashtag "tag_name"
 **Search characters**
 
 ```bash
-neta-cli search_character_or_elementum --keywords "keywords" --parent_type "character" --sort_scheme "exact"
+npx -y @talesofai/neta-skills search_character_or_elementum --keywords "keywords" --parent_type "character" --sort_scheme "exact"
 ``]
 
 📖 [Detailed guide](./references/character-search.md) — search strategies and parameter choices.
@@ -89,13 +72,13 @@ neta-cli search_character_or_elementum --keywords "keywords" --parent_type "char
 **Get character details**
 
 ```bash
-neta-cli request_character_or_elementum --name "character_name"
+npx -y @talesofai/neta-skills request_character_or_elementum --name "character_name"
 ```
 
 **Query by UUID**
 
 ```bash
-neta-cli request_character_or_elementum --uuid "uuid"
+npx -y @talesofai/neta-skills request_character_or_elementum --uuid "uuid"
 ```
 
 ## Reference docs
