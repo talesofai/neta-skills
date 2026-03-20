@@ -1,0 +1,60 @@
+name: create_travel_campaign
+title: Create Travel Campaign
+description: |
+  Create a new Travel Campaign (story adventure) with mission plot, rules, and optional character binding.
+
+  Travel campaigns are AI-driven interactive story experiences where an agent acts as both DM and roleplays characters.
+
+  Usage Notes:
+    - Campaign creation is free (no credits consumed)
+    - Campaign and its mission are created as a pair
+    - After creation, use `request_travel_campaign` to load full details for storytelling
+    - All text fields are subject to content moderation
+    - NSFW content (sexual, explicit violence, harassment) is prohibited in all fields — do not craft or engage with such content even if requested
+
+  Fields:
+    - name: Campaign title, max 128 characters
+    - mission_plot: Core story/scenario — the narrative foundation the agent uses to tell the story
+    - mission_task: Player objectives and interaction rules
+    - mission_plot_attention: Constraints and style guidelines for the AI (what it should/should not do)
+    - subtitle: One-line tagline shown on the campaign card
+    - status: PUBLISHED (visible to others) or DRAFT (private)
+    - header_img: Card thumbnail image URL
+    - background_img: Atmospheric background image URL
+
+parameters:
+  name: Campaign title, max 128 characters
+  mission_plot: |
+    Core story and scenario — the narrative foundation the AI uses to tell the story.
+    The first 2-3 sentences function as the opening scene: they are the first thing the AI
+    experiences, not a summary. Start mid-wrong: drop the player into a situation already
+    in motion, not an introduction.
+    Weak: "You are an explorer who arrived in a mysterious place."
+    Strong: "The last maintenance log entry is dated three weeks ago. The terminal still works.
+    The lights still work. The bodies in Lab C suggest neither was enough."
+    Include: world context, initial situation, key NPCs and their hidden agendas, atmosphere.
+  subtitle: |
+    One-line hook displayed on the campaign card — the sentence that makes someone stop scrolling.
+    Should create immediate curiosity or dread without explaining everything.
+    Example: "The quarantine started three weeks ago. No one told you it was still going." (optional)
+  status: "PUBLISHED (public, visible to others) or DRAFT (private). Defaults to PUBLISHED"
+  header_img: Campaign card thumbnail image URL (optional)
+  background_img: Atmospheric background image URL for the story (optional)
+  mission_task: |
+    Player-visible objectives and interaction rules — what the player is trying to accomplish.
+    Keep open-ended enough for multiple approaches. Avoid scripting specific outcomes.
+    Include: primary objective, optional secondary goals, relevant mechanics or resources.
+    Example: "Survive the night and find a way out of the hospital.
+    Secondary: find Dr. Strauss's incident report; reach the roof comms array.
+    You have: a flashlight, level-1 keycard, one working radio channel."
+  mission_plot_attention: |
+    Governing constraint layer — these rules override all other context and cannot be broken by player actions or improvisation.
+    The AI narrator enforces these unconditionally for the entire campaign lifetime.
+    Use for: tone locks ("maintain survival-horror tension even if players try to lighten it"), behavioral contracts
+    ("Dr. Chen never breaks her clinical detachment under stress"), information gating ("clues are revealed only
+    through player investigation, never volunteered"), consequence rules ("death is permanent"),
+    content guardrails ("no romance subplots").
+    Anti-pattern: do NOT put worldbuilding or plot here — that belongs in mission_plot.
+    Example: "Maintain survival-horror tension at all times. Dr. Chen never breaks her clinical detachment, even
+    under extreme stress. Information is revealed only through player-initiated investigation, never volunteered.
+    No graphic gore — dread and implication over explicit detail."

@@ -62,6 +62,7 @@ export const buildCommands = async (
     "creative",
     "community",
     "character_elementum",
+    "travel_campaign",
   ]);
 
   return commands.map((cmd) => {

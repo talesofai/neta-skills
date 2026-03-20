@@ -16,6 +16,7 @@
 - 查询与管理角色（Character）与风格元素（Elementum）
 - 进行标签（Hashtag）与空间玩法探索
 - 通过推荐引擎和互动 Feed 进行玩法内容发现
+- 创作与游玩 AI 驱动的交互式故事冒险（奇遇剧本），Agent 担任 DM 与角色扮演者
 
 你可以在 [Neta 开放平台](https://www.neta.art/open/) 获取访问令牌 `NETA_TOKEN`。
 也可以在[国内登陆账号后台](https://app.nieta.art/security) 获取访问令牌 `NETA_TOKEN`。
@@ -61,14 +62,21 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-character
 
 # 元素 VToken 创建与管理
 npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
+
+# AI 驱动的交互式故事冒险（奇遇剧本）
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-travel
 ```
 
 ### 可用指令总览
 
-当前技能共包含 **30 个命令**，覆盖创作、角色与社区探索等场景：
+当前技能共包含 **34 个命令**，覆盖创作、奇遇、角色与社区探索等场景：
 
 | 分类 | 命令 | 说明 |
 |------|------|------|
+| **奇遇剧本 Travel** | `create_travel_campaign` | 创建 AI 驱动的交互式故事冒险剧本 |
+| | `update_travel_campaign` | 更新已有奇遇剧本 |
+| | `list_my_travel_campaigns` | 列出你创建的奇遇剧本 |
+| | `request_travel_campaign` | 加载完整剧本详情（游玩模式） |
 | **创作 Creation** | `make_image` | 基于提示词生成图片 |
 | | `make_video` | 基于图片与动作描述生成视频 |
 | | `make_song` | 基于风格与歌词生成歌曲 |
@@ -161,6 +169,7 @@ neta-skills/
 │   ├── neta-space/                 # 英文空间与话题导航 / 探索技能
 │   ├── neta-character/             # 英文角色 VToken 创建与管理技能
 │   ├── neta-elementum/             # 英文元素 VToken 创建与管理技能
+│   ├── neta-travel/                # 英文交互式故事冒险（奇遇剧本）技能
 │   └── zh_cn/                      # 中文本地化技能与参考文档
 │       ├── neta/
 │       ├── neta-community/
@@ -168,7 +177,8 @@ neta-skills/
 │       ├── neta-suggest/
 │       ├── neta-space/
 │       ├── neta-character/
-│       └── neta-elementum/
+│       ├── neta-elementum/
+│       └── neta-travel/
 ├── src/                            # CLI 对应的 TypeScript 源码
 │   ├── apis/                       # 封装后的 Neta API 调用
 │   ├── commands/                   # CLI 命令定义（TS + YAML 描述）
@@ -200,6 +210,7 @@ neta-skills/
 - **角色与标签调研**：如何通过角色 / 标签 / 空间找到合适的创作方向。
 - **角色与元素创建**：角色创建和元素炼金的工作流。
 - **玩法内容探索**：使用 `suggest_*` 与 `suggest_content` 构建渐进式探索闭环。
+- **奇遇剧本创作与游玩**：多轮协作故事创作工作流（创作模式）、交互式会话管理（游玩模式）、字段手册，以及含历史穿越、末世生存、武侠江湖的完整类型范例。见 `skills/zh_cn/neta-travel/references/`。
 
 ---
 
