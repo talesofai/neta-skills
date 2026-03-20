@@ -7,4 +7,4 @@ parameters:
 
 errors:
   file_type_not_supported: 文件类型不支持
-  file_size_too_large: 文件大小超过最大限制
+  file_size_too_large: 文件大小超过最大限制, 最大支持 {max_size} 字节

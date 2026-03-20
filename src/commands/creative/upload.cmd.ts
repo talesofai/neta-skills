@@ -236,7 +236,12 @@ export const upload = createCommand(
 
     if (SUPPORTED_IMAGE_TYPES.includes(info.extension)) {
       if (file.length > DEFAULT_IMAGE_LIMIT_SIZE) {
-        throw new Error(meta.errors.file_size_too_large);
+        throw new Error(
+          meta.errors.file_size_too_large.replace(
+            "{max_size}",
+            DEFAULT_IMAGE_LIMIT_SIZE.toString(),
+          ),
+        );
       }
 
       const credentials = await apis.oss.getStsCredentials(info.extension);
@@ -256,7 +261,12 @@ export const upload = createCommand(
 
     if (SUPPORTED_VIDEO_TYPES.includes(info.extension)) {
       if (file.length > DEFAULT_VIDEO_LIMIT_SIZE) {
-        throw new Error(meta.errors.file_size_too_large);
+        throw new Error(
+          meta.errors.file_size_too_large.replace(
+            "{max_size}",
+            DEFAULT_VIDEO_LIMIT_SIZE.toString(),
+          ),
+        );
       }
 
       const credentials = await apis.oss.getVideoStsCredentials(info.extension);
