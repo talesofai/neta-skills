@@ -15,7 +15,7 @@ Scenarios and workflow for modifying existing elements.
 Before updating, first get the element's `tcp_uuid`:
 
 ```bash
-npx -y @talesofai/neta-skills request_character_or_elementum --name "element name"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --name "element name"
 ```
 
 The `uuid` field in the response is the `tcp_uuid`.
@@ -33,7 +33,7 @@ Element's representative image doesn't accurately express concept, needs to rege
 2. After confirmation, update both `artifact_uuid` and `prompt` with new values
 
 ```bash
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "element's tcp_uuid" \
   --artifact_uuid "new image's artifacts[0].uuid" \
   --prompt "updated image generation instruction"
@@ -44,7 +44,7 @@ npx -y @talesofai/neta-skills update_elementum \
 Image generation results using `/ElementName` are unsatisfactory, need to optimize generation instruction.
 
 ```bash
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "element's tcp_uuid" \
   --prompt "optimized image generation instruction with more precise visual description"
 ```
@@ -60,7 +60,7 @@ npx -y @talesofai/neta-skills update_elementum \
 Agent doesn't understand element accurately when using, need to improve guide.
 
 ```bash
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "element's tcp_uuid" \
   --description "Updated usage guide: This element represents [X], use by [method], reference image shows [description]. [Notes]."
 ```
@@ -70,7 +70,7 @@ npx -y @talesofai/neta-skills update_elementum \
 Need to add a reference image to anchor visual style.
 
 ```bash
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "element's tcp_uuid" \
   --ref_image_uuid "reference image's artifact_uuid"
 ```
@@ -82,7 +82,7 @@ Reference image sources:
 ### Scenario 5: Change Visibility
 
 ```bash
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "element's tcp_uuid" \
   --accessibility "PRIVATE"
 ```
@@ -95,12 +95,12 @@ After updating prompt, verify with `make_image`:
 
 ```bash
 # Test element alone
-npx -y @talesofai/neta-skills make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "/RE4 Village, night, realistic style" \
   --aspect "16:9"
 
 # Test combination with character
-npx -y @talesofai/neta-skills make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "@Ada Wong, /RE4 Village, battle stance, night" \
   --aspect "3:4"
 ```

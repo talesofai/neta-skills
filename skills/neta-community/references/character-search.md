@@ -20,7 +20,7 @@ When you know the exact character name:
 
 ```bash
 # Use exact sorting
-npx -y @talesofai/neta-skills search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "Full Character Name" \
   --sort_scheme "exact" \
   --parent_type "character"
@@ -32,7 +32,7 @@ When you only remember part of the name or descriptive keywords:
 
 ```bash
 # Use relevance‑based sorting
-npx -y @talesofai/neta-skills search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "keywords" \
   --sort_scheme "best" \
   --parent_type "both"
@@ -42,13 +42,13 @@ npx -y @talesofai/neta-skills search_character_or_elementum \
 
 ```bash
 # Page 0
-npx -y @talesofai/neta-skills search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "magical girl" \
   --page_index 0 \
   --page_size 10
 
 # Page 1
-npx -y @talesofai/neta-skills search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "magical girl" \
   --page_index 1 \
   --page_size 10
@@ -80,13 +80,13 @@ npx -y @talesofai/neta-skills search_character_or_elementum \
 ### By name
 
 ```bash
-npx -y @talesofai/neta-skills request_character_or_elementum --name "character_name"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --name "character_name"
 ```
 
 ### By UUID
 
 ```bash
-npx -y @talesofai/neta-skills request_character_or_elementum --uuid "character-uuid"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --uuid "character-uuid"
 ```
 
 ### Example response
@@ -116,10 +116,10 @@ npx -y @talesofai/neta-skills request_character_or_elementum --uuid "character-u
 
 ```bash
 # 1. Get canonical character information
-npx -y @talesofai/neta-skills request_character_or_elementum --name "Hatsune Miku"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --name "Hatsune Miku"
 
 # 2. Create illustration to post
-npx -y @talesofai/neta-skills make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "@Hatsune Miku, wearing her iconic outfit, holding a leek, stage background" \
   --aspect "3:4"
 ```
@@ -128,10 +128,10 @@ npx -y @talesofai/neta-skills make_image \
 
 ```bash
 # 1. Get characters under a tag
-npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "PopularTag" --sort_by "hot"
+npx -y @talesofai/neta-skills@latest get_hashtag_characters --hashtag "PopularTag" --sort_by "hot"
 
 # 2. Fetch details for interesting characters
-npx -y @talesofai/neta-skills request_character_or_elementum --name "Character Name"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --name "Character Name"
 
 # 3. Decide which characters to use in new community posts
 ```
@@ -140,12 +140,12 @@ npx -y @talesofai/neta-skills request_character_or_elementum --name "Character N
 
 ```bash
 # Search style elementums
-npx -y @talesofai/neta-skills search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "cyberpunk" \
   --parent_type "elementum"
 
 # Get element details
-npx -y @talesofai/neta-skills request_character_or_elementum --name "Cyberpunk Style"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --name "Cyberpunk Style"
 ```
 
 ---
@@ -157,11 +157,11 @@ npx -y @talesofai/neta-skills request_character_or_elementum --name "Cyberpunk S
 Some characters may be known under multiple names:
 
 ```bash
-npx -y @talesofai/neta-skills search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "Full Character Name" \
   --sort_scheme "exact"
 
-npx -y @talesofai/neta-skills search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "Nickname" \
   --sort_scheme "exact"
 ```
@@ -170,12 +170,12 @@ npx -y @talesofai/neta-skills search_character_or_elementum \
 
 ```bash
 # Traits + type
-npx -y @talesofai/neta-skills search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "pink hair magical girl" \
   --parent_type "character"
 
 # Work title + character
-npx -y @talesofai/neta-skills search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "SeriesName CharacterName" \
   --sort_scheme "exact"
 ```
@@ -184,10 +184,10 @@ npx -y @talesofai/neta-skills search_character_or_elementum \
 
 ```bash
 # 1. Inspect hashtag
-npx -y @talesofai/neta-skills get_hashtag_info --hashtag "tag_name"
+npx -y @talesofai/neta-skills@latest get_hashtag_info --hashtag "tag_name"
 
 # 2. List characters under that hashtag
-npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "tag_name"
+npx -y @talesofai/neta-skills@latest get_hashtag_characters --hashtag "tag_name"
 ```
 
 ---
@@ -198,7 +198,7 @@ npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "tag_name"
 
 ```bash
 # Save once
-npx -y @talesofai/neta-skills request_character_or_elementum \
+npx -y @talesofai/neta-skills@latest request_character_or_elementum \
   --name "character_name" \
   > character_cache/character_name.json
 
@@ -209,7 +209,7 @@ cat character_cache/character_name.json
 ### Cache search results
 
 ```bash
-npx -y @talesofai/neta-skills search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "keyword" \
   > search_cache/keyword.json
 ```

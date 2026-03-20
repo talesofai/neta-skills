@@ -16,7 +16,7 @@
 
 ```bash
 # 通过角色名搜索
-npx -y @talesofai/neta-skills request_character_or_elementum --name "Ada Wong"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --name "Ada Wong"
 ```
 
 返回结果中的 `uuid` 字段即为 `tcp_uuid`。
@@ -34,7 +34,7 @@ npx -y @talesofai/neta-skills request_character_or_elementum --name "Ada Wong"
 2. 确认满意后，用新的 `artifacts[0].uuid` 更新头像和 prompt
 
 ```bash
-npx -y @talesofai/neta-skills update_character \
+npx -y @talesofai/neta-skills@latest update_character \
   --tcp_uuid "角色的tcp_uuid" \
   --avatar_artifact_uuid "新生成图的artifacts[0].uuid" \
   --prompt "更新后的视觉特征，如：long black hair, updated outfit details"
@@ -45,7 +45,7 @@ npx -y @talesofai/neta-skills update_character \
 角色设定已有变化，或初次创建时背景故事不完整。
 
 ```bash
-npx -y @talesofai/neta-skills update_character \
+npx -y @talesofai/neta-skills@latest update_character \
   --tcp_uuid "角色的tcp_uuid" \
   --description "更新后的完整角色背景故事" \
   --persona "更新后的性格描述" \
@@ -58,7 +58,7 @@ npx -y @talesofai/neta-skills update_character \
 如果使用 `@角色名` 生图时角色特征不准确，可能需要优化 trigger。
 
 ```bash
-npx -y @talesofai/neta-skills update_character \
+npx -y @talesofai/neta-skills@latest update_character \
   --tcp_uuid "角色的tcp_uuid" \
   --trigger "1girl, Ada Wong, long black hair, red qipao dress, gun holster, spy, elegant, cold expression, resident evil series"
 ```
@@ -74,7 +74,7 @@ npx -y @talesofai/neta-skills update_character \
 将角色从私密改为公开，或反之：
 
 ```bash
-npx -y @talesofai/neta-skills update_character \
+npx -y @talesofai/neta-skills@latest update_character \
   --tcp_uuid "角色的tcp_uuid" \
   --accessibility "PUBLIC"
 ```
@@ -84,7 +84,7 @@ npx -y @talesofai/neta-skills update_character \
 传入空字符串 `""` 可清空字段：
 
 ```bash
-npx -y @talesofai/neta-skills update_character \
+npx -y @talesofai/neta-skills@latest update_character \
   --tcp_uuid "角色的tcp_uuid" \
   --interests ""
 ```
@@ -97,7 +97,7 @@ npx -y @talesofai/neta-skills update_character \
 
 ```bash
 # 用更新后的角色生成测试图
-npx -y @talesofai/neta-skills make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "@Ada Wong，白色背景，全身像，展示更新后的外观" \
   --aspect "3:4"
 ```

@@ -14,7 +14,7 @@ Use existing information, toolsets, and reference materials to precisely execute
 Use the `read_collection` command to fetch reference information for remixing, reproducing, or adapting existing works to meet user needs:
 
 ```bash
-npx -y @talesofai/neta-skills read_collection --uuid "collection-uuid"
+npx -y @talesofai/neta-skills@latest read_collection --uuid "collection-uuid"
 ```
 
 **Response contents (key fields)**

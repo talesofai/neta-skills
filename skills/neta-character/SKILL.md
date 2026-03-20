@@ -20,7 +20,7 @@ Follow the three-stage workflow: "Visual Preview → Character Documentation →
 📖 [Creation Guide](./references/character-creation.md) - Complete creative workflow and best practices
 
 ```bash
-npx -y @talesofai/neta-skills create_character \
+npx -y @talesofai/neta-skills@latest create_character \
   --name "Ada Wong" \
   --avatar_artifact_uuid "artifacts[0].uuid from make_image response" \
   --prompt "long black hair, red qipao dress, blue eyes, gun holster on thigh, slender figure" \
@@ -42,18 +42,18 @@ npx -y @talesofai/neta-skills create_character \
 
 ```bash
 # Update visual appearance after regenerating image
-npx -y @talesofai/neta-skills update_character \
+npx -y @talesofai/neta-skills@latest update_character \
   --tcp_uuid "character's tcp_uuid" \
   --avatar_artifact_uuid "new artifacts[0].uuid from make_image" \
   --prompt "updated visual feature description"
 
 # Only update backstory
-npx -y @talesofai/neta-skills update_character \
+npx -y @talesofai/neta-skills@latest update_character \
   --tcp_uuid "character's tcp_uuid" \
   --description "updated character backstory"
 
 # Update multiple fields
-npx -y @talesofai/neta-skills update_character \
+npx -y @talesofai/neta-skills@latest update_character \
   --tcp_uuid "character's tcp_uuid" \
   --persona "new personality description" \
   --interests "new interests" \
@@ -64,14 +64,14 @@ npx -y @talesofai/neta-skills update_character \
 
 ```bash
 # List my characters (created by current user)
-npx -y @talesofai/neta-skills list_my_characters
-npx -y @talesofai/neta-skills list_my_characters --keyword "Ada" --page_size 10
+npx -y @talesofai/neta-skills@latest list_my_characters
+npx -y @talesofai/neta-skills@latest list_my_characters --keyword "Ada" --page_size 10
 
 # Search characters (global search, keyword matching)
-npx -y @talesofai/neta-skills search_character_or_elementum --keywords "character name" --parent_type "character"
+npx -y @talesofai/neta-skills@latest search_character_or_elementum --keywords "character name" --parent_type "character"
 
 # Get full character details (including tcp_uuid)
-npx -y @talesofai/neta-skills request_character_or_elementum --name "character name"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --name "character name"
 ```
 
 ## Reference Documentation

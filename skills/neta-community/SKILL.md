@@ -24,7 +24,7 @@ Used to interact with the Neta API for community feed browsing, interactions, an
 **Get collection details**
 
 ```bash
-npx -y @talesofai/neta-skills read_collection --uuid "collection-uuid"
+npx -y @talesofai/neta-skills@latest read_collection --uuid "collection-uuid"
 ```
 
 📖 [Detailed guide](./references/interactive-feed.md)
@@ -32,7 +32,7 @@ npx -y @talesofai/neta-skills read_collection --uuid "collection-uuid"
 ### Community interactions
 
 ```bash
-npx -y @talesofai/neta-skills like_collection --uuid "target collection UUID"
+npx -y @talesofai/neta-skills@latest like_collection --uuid "target collection UUID"
 ```
 
 📖 [Detailed guide](./references/social-interactive.md)
@@ -42,7 +42,7 @@ npx -y @talesofai/neta-skills like_collection --uuid "target collection UUID"
 **Get tag info**
 
 ```bash
-npx -y @talesofai/neta-skills get_hashtag_info --hashtag "tag_name"
+npx -y @talesofai/neta-skills@latest get_hashtag_info --hashtag "tag_name"
 ```
 
 📖 [Detailed guide](./references/hashtag-research.md) — research flow and analysis methods.
@@ -50,13 +50,13 @@ npx -y @talesofai/neta-skills get_hashtag_info --hashtag "tag_name"
 **Get characters under a tag**
 
 ```bash
-npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "tag_name" --sort_by "hot"
+npx -y @talesofai/neta-skills@latest get_hashtag_characters --hashtag "tag_name" --sort_by "hot"
 ```
 
 **Get collections under a tag**
 
 ```bash
-npx -y @talesofai/neta-skills get_hashtag_collections --hashtag "tag_name"
+npx -y @talesofai/neta-skills@latest get_hashtag_collections --hashtag "tag_name"
 ```
 
 ### Character queries
@@ -64,7 +64,7 @@ npx -y @talesofai/neta-skills get_hashtag_collections --hashtag "tag_name"
 **Search characters**
 
 ```bash
-npx -y @talesofai/neta-skills search_character_or_elementum --keywords "keywords" --parent_type "character" --sort_scheme "exact"
+npx -y @talesofai/neta-skills@latest search_character_or_elementum --keywords "keywords" --parent_type "character" --sort_scheme "exact"
 ``]
 
 📖 [Detailed guide](./references/character-search.md) — search strategies and parameter choices.
@@ -72,13 +72,13 @@ npx -y @talesofai/neta-skills search_character_or_elementum --keywords "keywords
 **Get character details**
 
 ```bash
-npx -y @talesofai/neta-skills request_character_or_elementum --name "character_name"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --name "character_name"
 ```
 
 **Query by UUID**
 
 ```bash
-npx -y @talesofai/neta-skills request_character_or_elementum --uuid "uuid"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --uuid "uuid"
 ```
 
 ## Reference docs

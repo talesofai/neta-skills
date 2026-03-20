@@ -130,7 +130,7 @@ Our story will keep being written
 ### Character theme song
 
 ```bash
-npx -y @talesofai/neta-skills make_song \
+npx -y @talesofai/neta-skills@latest make_song \
   --prompt "Character theme song, J‑Pop style, lively and cute, magical girl vibe, electronic synths, bright tempo" \
   --lyrics "[lyrics content...]"
 ```
@@ -138,7 +138,7 @@ npx -y @talesofai/neta-skills make_song \
 ### Background music
 
 ```bash
-npx -y @talesofai/neta-skills make_song \
+npx -y @talesofai/neta-skills@latest make_song \
   --prompt "Soft piano background music, calm and peaceful, suitable for reading, gentle tempo" \
   --lyrics "[For instrumental tracks you can omit lyrics or use simple humming]"
 ```
@@ -146,7 +146,7 @@ npx -y @talesofai/neta-skills make_song \
 ### Battle track
 
 ```bash
-npx -y @talesofai/neta-skills make_song \
+npx -y @talesofai/neta-skills@latest make_song \
   --prompt "Epic battle track, rock style, electric guitars, strong drums, blood‑pumping" \
   --lyrics "[Verse 1]
   Burn with fighting spirit
@@ -157,7 +157,7 @@ npx -y @talesofai/neta-skills make_song \
 ### Ballad
 
 ```bash
-npx -y @talesofai/neta-skills make_song \
+npx -y @talesofai/neta-skills@latest make_song \
   --prompt "Gentle ballad, folk style, guitar backing, fresh and natural, lightly melancholic" \
   --lyrics "[Verse 1]
   After the rain, the streets glisten

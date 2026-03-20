@@ -38,7 +38,7 @@
 
 ```bash
 # 获取首页推荐
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 --page_size 10
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 0 --page_size 10
 ```
 
 **特点：**
@@ -52,7 +52,7 @@ npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 --page_siz
 
 ```bash
 # 获取单个作品详情
-npx -y @talesofai/neta-skills read_collection --uuid "目标作品 UUID"
+npx -y @talesofai/neta-skills@latest read_collection --uuid "目标作品 UUID"
 ```
 
 ### 3. 获取相似作品推荐
@@ -61,7 +61,7 @@ npx -y @talesofai/neta-skills read_collection --uuid "目标作品 UUID"
 
 ```bash
 # 获取相似作品（从第 1 页开始）
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 1 \
   --page_size 10 \
   --collection_uuid "种子作品 UUID"
@@ -77,7 +77,7 @@ npx -y @talesofai/neta-skills request_interactive_feed \
 
 ```bash
 # 获取原作及全部同款
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 0 \
   --page_size 20 \
   --scene 'relation_feed_child' \
@@ -96,7 +96,7 @@ npx -y @talesofai/neta-skills request_interactive_feed \
 
 ```bash
 # 获取用户主页
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 0 \
   --page_size 20 \
   --scene 'personal_feed' \
@@ -114,7 +114,7 @@ npx -y @talesofai/neta-skills request_interactive_feed \
 
 ```bash
 # 获取评论区子作品
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 0 \
   --page_size 20 \
   --scene 'relation_feed_same' \
@@ -136,7 +136,7 @@ npx -y @talesofai/neta-skills request_interactive_feed \
 
 ```bash
 # 第 1 次请求（首页）
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 0 \
   --page_size 10 > /tmp/page0.json
 
@@ -144,13 +144,13 @@ npx -y @talesofai/neta-skills request_interactive_feed \
 BIZ_TRACE_ID=$(cat /tmp/page0.json | jq -r '.page_data.biz_trace_id')
 
 # 第 2 次请求（下一页）- 使用相同的 biz_trace_id
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 1 \
   --page_size 10 \
   --biz_trace_id "$BIZ_TRACE_ID"
 
 # 第 3 次请求 - 继续使用同一个 biz_trace_id
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 2 \
   --page_size 10 \
   --biz_trace_id "$BIZ_TRACE_ID"
@@ -161,23 +161,23 @@ npx -y @talesofai/neta-skills request_interactive_feed \
 **❌ 错误 1：每次都用上一次的返回值**
 ```bash
 # 第 1 页
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 > /tmp/page0.json
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 0 > /tmp/page0.json
 BIZ_TRACE_ID_0=$(cat /tmp/page0.json | jq -r '.page_data.biz_trace_id')
 
 # 第 2 页（正确：使用第 1 页返回的）
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 1 --biz_trace_id "$BIZ_TRACE_ID_0" > /tmp/page1.json
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 1 --biz_trace_id "$BIZ_TRACE_ID_0" > /tmp/page1.json
 BIZ_TRACE_ID_1=$(cat /tmp/page1.json | jq -r '.page_data.biz_trace_id')
 
 # 第 3 页（错误：使用了第 2 页返回的，应该一直用第 1 页的）
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 2 --biz_trace_id "$BIZ_TRACE_ID_1"
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 2 --biz_trace_id "$BIZ_TRACE_ID_1"
 ```
 
 **❌ 错误 2：完全不传 biz_trace_id**
 ```bash
 # 每次都开启新的会话，推荐内容会不连续
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 0
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 1  # 没有 biz_trace_id
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 2  # 没有 biz_trace_id
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 0
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 1  # 没有 biz_trace_id
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 2  # 没有 biz_trace_id
 ```
 
 ## 参数组合技巧
@@ -185,7 +185,7 @@ npx -y @talesofai/neta-skills request_interactive_feed --page_index 2  # 没有 
 ### 组合 1：基础浏览
 
 ```bash
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 0 \
   --page_size 10
 ```
@@ -194,14 +194,14 @@ npx -y @talesofai/neta-skills request_interactive_feed \
 
 ```bash
 # 第 1 页
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 0 \
   --page_size 20 \
   --scene 'personal_feed' \
   --target_user_uuid "user-uuid"
 
 # 第 2 页（使用返回的 biz_trace_id）
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 1 \
   --page_size 20 \
   --scene 'personal_feed' \
@@ -213,7 +213,7 @@ npx -y @talesofai/neta-skills request_interactive_feed \
 
 ```bash
 # 查看某作品的同款二创
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 0 \
   --page_size 15 \
   --scene 'relation_feed_same' \
@@ -266,7 +266,7 @@ npx -y @talesofai/neta-skills request_interactive_feed \
 
 ```bash
 # 缓存第一页结果
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 > /tmp/feed_cache.json
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 0 > /tmp/feed_cache.json
 
 # 使用缓存（从文件读取）
 cat /tmp/feed_cache.json | jq '.module_list'
@@ -280,10 +280,10 @@ cat /tmp/feed_cache.json | jq '.module_list'
 
 ```bash
 # 获取当前页
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 > /tmp/page0.json &
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 0 > /tmp/page0.json &
 
 # 同时预加载下一页（后台任务）
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 1 > /tmp/page1.prefetch.json &
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 1 > /tmp/page1.prefetch.json &
 wait
 ```
 
@@ -304,7 +304,7 @@ wait
 
 ```bash
 # 请求时指定 biz_trace_id
-npx -y @talesofai/neta-skills request_interactive_feed \
+npx -y @talesofai/neta-skills@latest request_interactive_feed \
   --page_index 1 \
   --biz_trace_id "your-biz-trace-id" > /tmp/response.json
 
@@ -318,7 +318,7 @@ cat /tmp/response.json | jq '.page_data.biz_trace_id'
 
 ```bash
 # 开启 debug 日志查看请求参数
-DEBUG=* npx -y @talesofai/neta-skills request_interactive_feed --page_index 0
+DEBUG=* npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 0
 ```
 
 ## 常见问题
@@ -341,20 +341,20 @@ DEBUG=* npx -y @talesofai/neta-skills request_interactive_feed --page_index 0
 
 ```bash
 # ✅ 正确：一直使用第一次返回的 biz_trace_id
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 > /tmp/page0.json
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 0 > /tmp/page0.json
 BIZ_TRACE_ID=$(cat /tmp/page0.json | jq -r '.page_data.biz_trace_id')
 
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 1 --biz_trace_id "$BIZ_TRACE_ID"
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 2 --biz_trace_id "$BIZ_TRACE_ID"
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 1 --biz_trace_id "$BIZ_TRACE_ID"
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 2 --biz_trace_id "$BIZ_TRACE_ID"
 
 # ❌ 错误：每次都用上一次的返回值
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 0 > /tmp/page0.json
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 0 > /tmp/page0.json
 BIZ_TRACE_ID_0=$(cat /tmp/page0.json | jq -r '.page_data.biz_trace_id')
 
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 1 --biz_trace_id "$BIZ_TRACE_ID_0" > /tmp/page1.json
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 1 --biz_trace_id "$BIZ_TRACE_ID_0" > /tmp/page1.json
 BIZ_TRACE_ID_1=$(cat /tmp/page1.json | jq -r '.page_data.biz_trace_id')
 
-npx -y @talesofai/neta-skills request_interactive_feed --page_index 2 --biz_trace_id "$BIZ_TRACE_ID_1"  # 错误！应该用 BIZ_TRACE_ID_0
+npx -y @talesofai/neta-skills@latest request_interactive_feed --page_index 2 --biz_trace_id "$BIZ_TRACE_ID_1"  # 错误！应该用 BIZ_TRACE_ID_0
 ```
 
 ### Q3: 如何区分 NORMAL 模块中的不同内容类型？

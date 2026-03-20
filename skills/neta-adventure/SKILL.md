@@ -25,7 +25,7 @@ Once mode is established, do not re-ask.
 **Create a campaign**
 
 ```bash
-npx -y @talesofai/neta-skills create_adventure_campaign \
+npx -y @talesofai/neta-skills@latest create_adventure_campaign \
   --name "Raccoon General: Final Shift" \
   --mission_plot "The last maintenance log entry is dated three weeks ago..." \
   --mission_task "Survive the night. Find Dr. Strauss. Discover what Umbrella did." \
@@ -37,7 +37,7 @@ npx -y @talesofai/neta-skills create_adventure_campaign \
 **Update a campaign** (only provided fields are changed)
 
 ```bash
-npx -y @talesofai/neta-skills update_adventure_campaign \
+npx -y @talesofai/neta-skills@latest update_adventure_campaign \
   --campaign_uuid "campaign-uuid-here" \
   --mission_plot_attention "Updated governing rules..."
 ```
@@ -45,14 +45,14 @@ npx -y @talesofai/neta-skills update_adventure_campaign \
 **List your campaigns**
 
 ```bash
-npx -y @talesofai/neta-skills list_my_adventure_campaigns
-npx -y @talesofai/neta-skills list_my_adventure_campaigns --page_index 0 --page_size 10
+npx -y @talesofai/neta-skills@latest list_my_adventure_campaigns
+npx -y @talesofai/neta-skills@latest list_my_adventure_campaigns --page_index 0 --page_size 10
 ```
 
 **Get campaign details**
 
 ```bash
-npx -y @talesofai/neta-skills request_adventure_campaign --campaign_uuid "campaign-uuid-here"
+npx -y @talesofai/neta-skills@latest request_adventure_campaign --campaign_uuid "campaign-uuid-here"
 ```
 
 📖 [Play workflow](./references/adventure-playing.md) — initialization, proactive advance, steering mechanics.

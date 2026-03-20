@@ -14,7 +14,7 @@
 你需要使用 `read_collection` 指令获取参考信息进行 Remix（二创）、复现或改编，以满足用户需求
 
 ```bash
-npx -y @talesofai/neta-skills read_collection --uuid "作品-uuid"
+npx -y @talesofai/neta-skills@latest read_collection --uuid "作品-uuid"
 ```
 
 **返回内容**

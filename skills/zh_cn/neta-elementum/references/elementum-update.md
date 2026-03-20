@@ -15,7 +15,7 @@
 更新前需先获取元素的 `tcp_uuid`：
 
 ```bash
-npx -y @talesofai/neta-skills request_character_or_elementum --name "元素名"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --name "元素名"
 ```
 
 返回结果中的 `uuid` 字段即为 `tcp_uuid`。
@@ -33,7 +33,7 @@ npx -y @talesofai/neta-skills request_character_or_elementum --name "元素名"
 2. 确认满意后，同时更新 `artifact_uuid` 和 `prompt`
 
 ```bash
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "元素的tcp_uuid" \
   --artifact_uuid "新生成图的artifacts[0].uuid" \
   --prompt "更新后的生图指令"
@@ -44,7 +44,7 @@ npx -y @talesofai/neta-skills update_elementum \
 使用 `/元素名` 生图时效果不理想，需要优化生图指令。
 
 ```bash
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "元素的tcp_uuid" \
   --prompt "优化后的生图指令，更精准的视觉描述"
 ```
@@ -60,7 +60,7 @@ npx -y @talesofai/neta-skills update_elementum \
 Agent 在使用该元素时理解不准确，需要完善说明。
 
 ```bash
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "元素的tcp_uuid" \
   --description "更新后的使用说明：此元素表示[X]，使用时[方法]，参考图展示[说明]。[注意事项]"
 ```
@@ -70,7 +70,7 @@ npx -y @talesofai/neta-skills update_elementum \
 需要添加一张参考图来锚定视觉风格。
 
 ```bash
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "元素的tcp_uuid" \
   --ref_image_uuid "参考图的artifact_uuid"
 ```
@@ -82,7 +82,7 @@ npx -y @talesofai/neta-skills update_elementum \
 ### 场景五：改变可见性
 
 ```bash
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "元素的tcp_uuid" \
   --accessibility "PRIVATE"
 ```
@@ -95,12 +95,12 @@ npx -y @talesofai/neta-skills update_elementum \
 
 ```bash
 # 单独测试元素效果
-npx -y @talesofai/neta-skills make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "/RE4村庄，夜晚，写实风格" \
   --aspect "16:9"
 
 # 搭配角色测试组合效果
-npx -y @talesofai/neta-skills make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "@Ada Wong, /RE4村庄，战斗姿态，夜晚" \
   --aspect "3:4"
 ```

@@ -134,7 +134,7 @@
 ### 角色主题曲
 
 ```bash
-npx -y @talesofai/neta-skills make_song \
+npx -y @talesofai/neta-skills@latest make_song \
   --prompt "角色专属主题曲，J-Pop 风格，活泼可爱，魔法少女感，电子合成器，明快节奏" \
   --lyrics "[歌词内容...]"
 ```
@@ -142,7 +142,7 @@ npx -y @talesofai/neta-skills make_song \
 ### 背景音乐
 
 ```bash
-npx -y @talesofai/neta-skills make_song \
+npx -y @talesofai/neta-skills@latest make_song \
   --prompt "轻柔的钢琴背景音乐，宁静安详，适合阅读，舒缓节奏" \
   --lyrics "[纯音乐可省略歌词或使用简单的哼唱]"
 ```
@@ -150,7 +150,7 @@ npx -y @talesofai/neta-skills make_song \
 ### 战斗曲
 
 ```bash
-npx -y @talesofai/neta-skills make_song \
+npx -y @talesofai/neta-skills@latest make_song \
   --prompt "激昂的战斗曲，摇滚风格，电吉他，强烈鼓点，热血沸腾" \
   --lyrics "[Verse 1]
   燃烧吧斗志
@@ -161,7 +161,7 @@ npx -y @talesofai/neta-skills make_song \
 ### 抒情歌曲
 
 ```bash
-npx -y @talesofai/neta-skills make_song \
+npx -y @talesofai/neta-skills@latest make_song \
   --prompt "温柔的抒情歌曲，民谣风格，吉他伴奏，清新自然，淡淡忧伤" \
   --lyrics "[Verse 1]
   雨后的街道

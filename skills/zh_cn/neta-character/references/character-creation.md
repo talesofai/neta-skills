@@ -43,18 +43,18 @@
 
 ```bash
 # 全身预览（推荐首次）
-npx -y @talesofai/neta-skills make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "长黑发，红色旗袍，蓝色眼睛，大腿枪套，修长身形，冷峻神情，白色背景，全身像，动漫风格" \
   --aspect "3:4"
 
 # 头像特写
-npx -y @talesofai/neta-skills make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "长黑发，蓝色眼睛，冷峻神情，精致五官，头像特写，动漫风格" \
   --aspect "1:1"
 
 # 三视图（外观确认后）
-npx -y @talesofai/neta-skills make_image --prompt "长黑发，红色旗袍，蓝色眼睛，正面视图，白色背景，全身像" --aspect "3:4"
-npx -y @talesofai/neta-skills make_image --prompt "长黑发，红色旗袍，蓝色眼睛，侧面视图，白色背景，全身像" --aspect "3:4"
+npx -y @talesofai/neta-skills@latest make_image --prompt "长黑发，红色旗袍，蓝色眼睛，正面视图，白色背景，全身像" --aspect "3:4"
+npx -y @talesofai/neta-skills@latest make_image --prompt "长黑发，红色旗袍，蓝色眼睛，侧面视图，白色背景，全身像" --aspect "3:4"
 ```
 
 ### 迭代建议
@@ -147,7 +147,7 @@ description：艾达·王，黑发红裙的神秘间谍…
 确认用户满意后，执行创建：
 
 ```bash
-npx -y @talesofai/neta-skills create_character \
+npx -y @talesofai/neta-skills@latest create_character \
   --name "Ada Wong" \
   --avatar_artifact_uuid "预览图的artifacts[0].uuid" \
   --prompt "long black hair, red qipao dress, blue eyes, gun holster on thigh, slender figure" \
@@ -175,7 +175,7 @@ npx -y @talesofai/neta-skills create_character \
 
 适用于复现已有 IP 角色（如游戏、动漫角色）：
 
-1. 先搜索是否已有该角色的 Token：`npx -y @talesofai/neta-skills search_character_or_elementum --keywords "角色名" --parent_type "character"`
+1. 先搜索是否已有该角色的 Token：`npx -y @talesofai/neta-skills@latest search_character_or_elementum --keywords "角色名" --parent_type "character"`
 2. 如果有，可直接使用或基于现有 Token 二创
 3. 如果没有，按上述流程创建，trigger 中注明 IP 系列
 

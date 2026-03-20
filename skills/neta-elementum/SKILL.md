@@ -20,7 +20,7 @@ Follow the four-stage workflow: "Concept Confirmation → Visual Preview → Ref
 📖 [Alchemy Guide](./references/elementum-alchemy.md) - Complete alchemy workflow and best practices
 
 ```bash
-npx -y @talesofai/neta-skills create_elementum \
+npx -y @talesofai/neta-skills@latest create_elementum \
   --name "RE4 Village" \
   --artifact_uuid "artifacts[0].uuid from make_image response" \
   --prompt "Resident Evil 4 style European medieval village, dilapidated stone houses, burning bonfire, thick fog, dead trees, horror atmosphere, realistic style" \
@@ -36,13 +36,13 @@ npx -y @talesofai/neta-skills create_elementum \
 
 ```bash
 # Update representative image after regenerating
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "element's tcp_uuid" \
   --artifact_uuid "new artifacts[0].uuid from make_image" \
   --prompt "updated image generation instruction"
 
 # Only update Agent usage guide
-npx -y @talesofai/neta-skills update_elementum \
+npx -y @talesofai/neta-skills@latest update_elementum \
   --tcp_uuid "element's tcp_uuid" \
   --description "updated usage guide"
 ```
@@ -51,14 +51,14 @@ npx -y @talesofai/neta-skills update_elementum \
 
 ```bash
 # List my elementa (created by current user)
-npx -y @talesofai/neta-skills list_my_elementum
-npx -y @talesofai/neta-skills list_my_elementum --keyword "village" --page_size 10
+npx -y @talesofai/neta-skills@latest list_my_elementum
+npx -y @talesofai/neta-skills@latest list_my_elementum --keyword "village" --page_size 10
 
 # Search elements (global search, keyword matching)
-npx -y @talesofai/neta-skills search_character_or_elementum --keywords "element name" --parent_type "elementum"
+npx -y @talesofai/neta-skills@latest search_character_or_elementum --keywords "element name" --parent_type "elementum"
 
 # Get full element details (including tcp_uuid)
-npx -y @talesofai/neta-skills request_character_or_elementum --name "element name"
+npx -y @talesofai/neta-skills@latest request_character_or_elementum --name "element name"
 ```
 
 ## Reference Documentation

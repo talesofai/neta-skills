@@ -19,7 +19,7 @@ description: Neta API research and recommendation skill — provide keyword/tag/
 Provide popular search keyword suggestions based on an input prefix, helping users discover directions of interest.
 
 ```bash
-npx -y @talesofai/neta-skills suggest_keywords --prefix "game" --size 20
+npx -y @talesofai/neta-skills@latest suggest_keywords --prefix "game" --size 20
 ```
 
 **Parameters**
@@ -38,7 +38,7 @@ npx -y @talesofai/neta-skills suggest_keywords --prefix "game" --size 20
 Recommend related taxonomy tags based on a full keyword.
 
 ```bash
-npx -y @talesofai/neta-skills suggest_tags --keyword "character design" --size 15
+npx -y @talesofai/neta-skills@latest suggest_tags --keyword "character design" --size 15
 ```
 
 **Parameters**
@@ -58,13 +58,13 @@ Provide navigation suggestions in a 3‑level category hierarchy, supporting ste
 
 ```bash
 # Level 1 (top‑level categories)
-npx -y @talesofai/neta-skills suggest_categories --level 1
+npx -y @talesofai/neta-skills@latest suggest_categories --level 1
 
 # Level 2 (requires parent path)
-npx -y @talesofai/neta-skills suggest_categories --level 2 --parent_path "Derivative Creation"
+npx -y @talesofai/neta-skills@latest suggest_categories --level 2 --parent_path "Derivative Creation"
 
 # Level 3 (most granular)
-npx -y @talesofai/neta-skills suggest_categories --level 3 --parent_path "Derivative Creation>Fan Works"
+npx -y @talesofai/neta-skills@latest suggest_categories --level 3 --parent_path "Derivative Creation>Fan Works"
 ```
 
 **Parameters**
@@ -96,7 +96,7 @@ Level 1
 Validate that a taxonomy path string is valid before using it.
 
 ```bash
-npx -y @talesofai/neta-skills validate_tax_path --tax_path "Derivative Creation>Fan Works>Honkai: Star Rail"
+npx -y @talesofai/neta-skills@latest validate_tax_path --tax_path "Derivative Creation>Fan Works>Honkai: Star Rail"
 ```
 
 **Parameters**
@@ -114,14 +114,14 @@ Powerful content recommendation tool supporting three modes: **recommend**, **se
 
 ```bash
 # Mode 1: recommend (broad exploration)
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 0 \
   --page_size 20 \
   --scene agent_intent \
   --intent recommend
 
 # Mode 2: search (keyword‑based)
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 0 \
   --page_size 20 \
   --scene agent_intent \
@@ -129,7 +129,7 @@ npx -y @talesofai/neta-skills suggest_content \
   --search_keywords "character,creativity"
 
 # Mode 3: exact (category filtering)
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 0 \
   --page_size 20 \
   --scene agent_intent \
@@ -137,7 +137,7 @@ npx -y @talesofai/neta-skills suggest_content \
   --tax_paths "Derivative Creation>Fan Works"
 
 # Combined filters
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 0 \
   --page_size 20 \
   --scene agent_intent \
@@ -177,11 +177,11 @@ graph LR
 
 ```bash
 # View all level‑1 categories
-npx -y @talesofai/neta-skills suggest_categories --level 1
+npx -y @talesofai/neta-skills@latest suggest_categories --level 1
 # Example output: ["Derivative Creation", "Digital Art", "Lifestyle"]
 
 # Dive into an interesting category
-npx -y @talesofai/neta-skills suggest_categories --level 2 --parent_path "Derivative Creation"
+npx -y @talesofai/neta-skills@latest suggest_categories --level 2 --parent_path "Derivative Creation"
 # Example: ["Fan Works", "Original Stories", "Interactive Fiction"]
 ```
 
@@ -189,17 +189,17 @@ npx -y @talesofai/neta-skills suggest_categories --level 2 --parent_path "Deriva
 
 ```bash
 # Find tags from a keyword
-npx -y @talesofai/neta-skills suggest_tags --keyword "Fan Works" --size 15
+npx -y @talesofai/neta-skills@latest suggest_tags --keyword "Fan Works" --size 15
 # Example: ["Honkai: Star Rail", "Genshin Impact", "Arknights"]
 
 # Use keyword suggestions to help
-npx -y @talesofai/neta-skills suggest_keywords --prefix "Hon" --size 10
+npx -y @talesofai/neta-skills@latest suggest_keywords --prefix "Hon" --size 10
 ```
 
 #### Step 3: validate taxonomy path
 
 ```bash
-npx -y @talesofai/neta-skills validate_tax_path \
+npx -y @talesofai/neta-skills@latest validate_tax_path \
   --tax_path "Derivative Creation>Fan Works>Honkai: Star Rail"
 ```
 
@@ -207,13 +207,13 @@ npx -y @talesofai/neta-skills validate_tax_path \
 
 ```bash
 # Exact mode: filter by taxonomy only
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent exact \
   --tax_paths "Derivative Creation>Fan Works>Honkai: Star Rail" \
   --page_size 20
 
 # Search mode: combine keyword and taxonomy
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent search \
   --search_keywords "Honkai: Star Rail,fan art" \
   --tax_paths "Derivative Creation>Fan Works" \
@@ -227,7 +227,7 @@ npx -y @talesofai/neta-skills suggest_content \
 User is just browsing with no specific goal.
 
 ```bash
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent recommend \
   --page_size 20
 ```
@@ -244,13 +244,13 @@ User has a rough topic in mind but not specific content.
 
 ```bash
 # Step 1: keyword suggestions
-npx -y @talesofai/neta-skills suggest_keywords --prefix "game" --size 15
+npx -y @talesofai/neta-skills@latest suggest_keywords --prefix "game" --size 15
 
 # Step 2: tag suggestions
-npx -y @talesofai/neta-skills suggest_tags --keyword "game" --size 15
+npx -y @talesofai/neta-skills@latest suggest_tags --keyword "game" --size 15
 
 # Step 3: search mode
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent search \
   --search_keywords "Genshin Impact" \
   --page_size 20
@@ -260,15 +260,15 @@ npx -y @talesofai/neta-skills suggest_content \
 
 ```bash
 # Step 1: confirm taxonomy path
-npx -y @talesofai/neta-skills suggest_categories --level 1
-npx -y @talesofai/neta-skills suggest_categories --level 2 --parent_path "Derivative Creation"
+npx -y @talesofai/neta-skills@latest suggest_categories --level 1
+npx -y @talesofai/neta-skills@latest suggest_categories --level 2 --parent_path "Derivative Creation"
 
 # Step 2: validate path
-npx -y @talesofai/neta-skills validate_tax_path \
+npx -y @talesofai/neta-skills@latest validate_tax_path \
   --tax_path "Derivative Creation>Fan Works>Honkai: Star Rail"
 
 # Step 3: exact filter
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent exact \
   --tax_paths "Derivative Creation>Fan Works>Honkai: Star Rail" \
   --page_size 20
@@ -278,13 +278,13 @@ npx -y @talesofai/neta-skills suggest_content \
 
 ```bash
 # Step 1: understand popular tags
-npx -y @talesofai/neta-skills suggest_tags --keyword "character writing" --size 20
+npx -y @talesofai/neta-skills@latest suggest_tags --keyword "character writing" --size 20
 
 # Step 2: inspect related categories
-npx -y @talesofai/neta-skills suggest_categories --level 2 --parent_path "Derivative Creation"
+npx -y @talesofai/neta-skills@latest suggest_categories --level 2 --parent_path "Derivative Creation"
 
 # Step 3: view popular content under that category
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent search \
   --search_keywords "character,setting" \
   --tax_paths "Derivative Creation>Fan Works" \
@@ -294,7 +294,7 @@ npx -y @talesofai/neta-skills suggest_content \
 ### Scenario 5: excluding unwanted content
 
 ```bash
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent search \
   --search_keywords "AI,painting" \
   --tax_paths "Digital Art" \
@@ -308,7 +308,7 @@ npx -y @talesofai/neta-skills suggest_content \
 ### Combination 1: keyword + taxonomy
 
 ```bash
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent search \
   --search_keywords "video,editing" \
   --tax_paths "Digital Art>Video Production" \
@@ -318,7 +318,7 @@ npx -y @talesofai/neta-skills suggest_content \
 ### Combination 2: multi‑level taxonomy
 
 ```bash
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent exact \
   --tax_paths "Derivative Creation>Fan Works>Honkai: Star Rail" \
   --page_size 20
@@ -327,7 +327,7 @@ npx -y @talesofai/neta-skills suggest_content \
 ### Combination 3: recommend + exclusions
 
 ```bash
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent recommend \
   --exclude_keywords "tutorial, repost" \
   --exclude_tax_paths "Courses" \
@@ -338,7 +338,7 @@ npx -y @talesofai/neta-skills suggest_content \
 
 ```bash
 # Page 1
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 0 \
   --page_size 20 \
   --intent search \
@@ -348,7 +348,7 @@ npx -y @talesofai/neta-skills suggest_content \
 BIZ_TRACE_ID=$(cat /tmp/page0.json | jq -r '.page_data.biz_trace_id')
 
 # Page 2 (reuse same biz_trace_id)
-npx -y @talesofai/neta-skills suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 1 \
   --page_size 20 \
   --intent search \

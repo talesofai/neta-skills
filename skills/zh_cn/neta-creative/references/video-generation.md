@@ -106,7 +106,7 @@
 ### 角色动态立绘
 
 ```bash
-npx -y @talesofai/neta-skills make_video \
+npx -y @talesofai/neta-skills@latest make_video \
   --image_source "https://example.com/character.jpg" \
   --prompt "角色轻轻呼吸，头发随风飘动，温暖的微笑，眼睛微微眨动" \
   --model "model_s"
@@ -115,7 +115,7 @@ npx -y @talesofai/neta-skills make_video \
 ### 动态壁纸
 
 ```bash
-npx -y @talesofai/neta-skills make_video \
+npx -y @talesofai/neta-skills@latest make_video \
   --image_source "https://example.com/scenery.jpg" \
   --prompt "星空缓缓旋转，流星缓慢划过，梦幻的光点闪烁，宁静祥和" \
   --model "model_w"
@@ -124,7 +124,7 @@ npx -y @talesofai/neta-skills make_video \
 ### 视频封面动效
 
 ```bash
-npx -y @talesofai/neta-skills make_video \
+npx -y @talesofai/neta-skills@latest make_video \
   --image_source "https://example.com/cover.jpg" \
   --prompt "标题文字微微发光，背景有粒子飘动，电影感" \
   --model "model_s"
@@ -134,14 +134,14 @@ npx -y @talesofai/neta-skills make_video \
 
 ```bash
 # 1. 生成图片（16:9 适合视频）
-npx -y @talesofai/neta-skills make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "梦幻的星空背景，流星划过，深蓝色调" \
   --aspect "16:9"
 
 # 2. 从输出中获取图片 URL
 
 # 3. 生成视频
-npx -y @talesofai/neta-skills make_video \
+npx -y @talesofai/neta-skills@latest make_video \
   --image_source "<图片 URL>" \
   --prompt "星空缓缓旋转，流星缓慢划过" \
   --model "model_w"

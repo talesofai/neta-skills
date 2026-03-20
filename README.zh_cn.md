@@ -140,16 +140,16 @@ export NETA_TOKEN=your_token_here
 
 ```bash
 # 查看帮助
-npx -y @talesofai/neta-skills --help
-npx -y @talesofai/neta-skills make_image --help
+npx -y @talesofai/neta-skills@latest --help
+npx -y @talesofai/neta-skills@latest make_image --help
 
 # 示例：生成一张图片
-npx -y @talesofai/neta-skills make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "夜晚的赛博朋克城市，霓虹灯，高楼大厦，雨中街道" \
   --aspect "16:9"
 
 # 示例：搜索角色或元素
-npx -y @talesofai/neta-skills search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "幻想" \
   --parent_type "character"
 ```
@@ -238,8 +238,8 @@ CLI 与 Skills 会根据系统与环境变量自动选择使用的语言：
 在需要强制指定语言时，推荐在运行命令前显式设置环境变量，例如：
 
 ```bash
-LC_ALL=zh_CN.UTF-8 npx -y @talesofai/neta-skills make_image --help
-LANG=en_US.UTF-8 npx -y @talesofai/neta-skills make_image --help
+LC_ALL=zh_CN.UTF-8 npx -y @talesofai/neta-skills@latest make_image --help
+LANG=en_US.UTF-8 npx -y @talesofai/neta-skills@latest make_image --help
 ```
 
 ---

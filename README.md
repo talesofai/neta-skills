@@ -136,14 +136,14 @@ export NETA_TOKEN=your_token_here
 
 ```bash
 # Get general help or specific command help
-npx -y @talesofai/neta-skills --help
-npx -y @talesofai/neta-skills make_image --help
+npx -y @talesofai/neta-skills@latest --help
+npx -y @talesofai/neta-skills@latest make_image --help
 
 # Example: Generate an image
-npx -y @talesofai/neta-skills make_image --prompt "A cyberpunk cityscape at night" --aspect "16:9"
+npx -y @talesofai/neta-skills@latest make_image --prompt "A cyberpunk cityscape at night" --aspect "16:9"
 
 # Example: Search for characters or elementum
-npx -y @talesofai/neta-skills search_character_or_elementum --keywords "fantasy"
+npx -y @talesofai/neta-skills@latest search_character_or_elementum --keywords "fantasy"
 ```
 
 ---
@@ -231,8 +231,8 @@ In terminal environments, locale is typically controlled by:
 If you want to force a specific language for a single command, you can prefix it with the desired locale, for example:
 
 ```bash
-LC_ALL=zh_CN.UTF-8 npx -y @talesofai/neta-skills make_image --help
-LANG=en_US.UTF-8 npx -y @talesofai/neta-skills make_image --help
+LC_ALL=zh_CN.UTF-8 npx -y @talesofai/neta-skills@latest make_image --help
+LANG=en_US.UTF-8 npx -y @talesofai/neta-skills@latest make_image --help
 ```
 
 ---

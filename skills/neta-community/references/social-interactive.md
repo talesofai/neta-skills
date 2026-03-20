@@ -6,20 +6,20 @@
 
 ```bash
 # Like a collection
-npx -y @talesofai/neta-skills like_collection --uuid "TARGET_COLLECTION_UUID"
+npx -y @talesofai/neta-skills@latest like_collection --uuid "TARGET_COLLECTION_UUID"
 
 # Unlike a collection
-npx -y @talesofai/neta-skills like_collection --uuid "TARGET_COLLECTION_UUID" --is_cancel true
+npx -y @talesofai/neta-skills@latest like_collection --uuid "TARGET_COLLECTION_UUID" --is_cancel true
 ```
 
 #### `favor_collection` — favorite/unfavorite a collection
 
 ```bash
 # Favorite a collection
-npx -y @talesofai/neta-skills favor_collection --uuid "TARGET_COLLECTION_UUID"
+npx -y @talesofai/neta-skills@latest favor_collection --uuid "TARGET_COLLECTION_UUID"
 
 # Remove from favorites
-npx -y @talesofai/neta-skills favor_collection --uuid "TARGET_COLLECTION_UUID" --is_cancel true
+npx -y @talesofai/neta-skills@latest favor_collection --uuid "TARGET_COLLECTION_UUID" --is_cancel true
 ```
 
 #### `create_comment` — post a comment
@@ -34,13 +34,13 @@ Supports commenting on collections and on other comments (threaded replies).
 
 ```bash
 # Post a top-level comment on a collection
-npx -y @talesofai/neta-skills create_comment \
+npx -y @talesofai/neta-skills@latest create_comment \
   --parent_uuid "TARGET_COLLECTION_UUID" \
   --parent_type "collection" \
   --content "This work is amazing!"
 
 # Reply to an existing comment (threaded reply)
-npx -y @talesofai/neta-skills create_comment \
+npx -y @talesofai/neta-skills@latest create_comment \
   --parent_uuid "TARGET_COMMENT_UUID" \
   --parent_type "comment" \
   --content "Totally agree with you!"
@@ -54,21 +54,21 @@ npx -y @talesofai/neta-skills create_comment \
 
 ```bash
 # Follow a user
-npx -y @talesofai/neta-skills subscribe_user --user_uuid "TARGET_USER_UUID" --is_cancel false
+npx -y @talesofai/neta-skills@latest subscribe_user --user_uuid "TARGET_USER_UUID" --is_cancel false
 
 # Unfollow a user
-npx -y @talesofai/neta-skills subscribe_user --user_uuid "TARGET_USER_UUID" --is_cancel true
+npx -y @talesofai/neta-skills@latest subscribe_user --user_uuid "TARGET_USER_UUID" --is_cancel true
 ```
 
 #### `get_subscribe_list` — view users I follow
 
 ```bash
-npx -y @talesofai/neta-skills get_subscribe_list --page_index 0 --page_size 10
+npx -y @talesofai/neta-skills@latest get_subscribe_list --page_index 0 --page_size 10
 ```
 
 #### `get_fan_list` — view my followers
 
 ```bash
-npx -y @talesofai/neta-skills get_fan_list --page_index 0 --page_size 10
+npx -y @talesofai/neta-skills@latest get_fan_list --page_index 0 --page_size 10
 ```
 

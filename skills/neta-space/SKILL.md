@@ -47,7 +47,7 @@ Used to interact with the Neta API to browse space‑level content.
 ## List available spaces
 
 ```bash
-npx -y @talesofai/neta-skills list_spaces
+npx -y @talesofai/neta-skills@latest list_spaces
 ```
 
 **Response fields**
@@ -60,7 +60,7 @@ npx -y @talesofai/neta-skills list_spaces
 ## Get detailed space info
 
 ```bash
-npx -y @talesofai/neta-skills get_hashtag_info --hashtag "space_tag_name"
+npx -y @talesofai/neta-skills@latest get_hashtag_info --hashtag "space_tag_name"
 ```
 
 **Response includes:**
@@ -73,7 +73,7 @@ npx -y @talesofai/neta-skills get_hashtag_info --hashtag "space_tag_name"
 ## Get sub‑spaces
 
 ```bash
-npx -y @talesofai/neta-skills list_space_topics --space_uuid "space UUID"
+npx -y @talesofai/neta-skills@latest list_space_topics --space_uuid "space UUID"
 ```
 
 **Response includes:**
@@ -85,19 +85,19 @@ npx -y @talesofai/neta-skills list_space_topics --space_uuid "space UUID"
 ## Get characters in a space
 
 ```bash
-npx -y @talesofai/neta-skills get_hashtag_characters --hashtag "space_tag_name" --sort_by "hot"
+npx -y @talesofai/neta-skills@latest get_hashtag_characters --hashtag "space_tag_name" --sort_by "hot"
 ```
 
 ## Get scenes/events/content in a space
 
 ```bash
-npx -y @talesofai/neta-skills get_hashtag_collections --hashtag "tag_name"
+npx -y @talesofai/neta-skills@latest get_hashtag_collections --hashtag "tag_name"
 ```
 
 ## Get detailed info for a specific gameplay
 
 ```bash
-npx -y @talesofai/neta-skills read_collection --uuid "official_collections in topic | collections in hashtag"
+npx -y @talesofai/neta-skills@latest read_collection --uuid "official_collections in topic | collections in hashtag"
 ```
 
 ## Content creation
