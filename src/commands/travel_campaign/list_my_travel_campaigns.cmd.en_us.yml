@@ -8,3 +8,7 @@ description: |
   Notes:
     - Returns both PUBLISHED and DRAFT campaigns for the authenticated user
     - Results are ordered by last modified time (newest first)
+
+parameters:
+  page_index: Page index for pagination, defaults to 0
+  page_size: Number of results per page (1-50), defaults to 20

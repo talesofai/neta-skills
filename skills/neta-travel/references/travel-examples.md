@@ -219,3 +219,86 @@ mission_plot_attention: |
   CONTENT LIMITS: Political violence is possible and consequential. No sexual
   content. Moral complexity is the primary source of tension, not physical danger.
 ```
+
+---
+
+## Example 4: Wuxia Political Thriller — The Wulin Inquisition
+
+**Genre**: Wuxia / political mystery
+**Tone**: Honor, grief, and institutional corruption; the weight of being the only person who knows the truth
+
+```
+name: "The Wulin Inquisition"
+
+subtitle: "Your sect was destroyed three days ago. The edict ordering its dissolution arrived six days ago."
+
+status: PUBLISHED
+
+mission_plot: |
+  The Iron Cloud Sect has stood for two hundred years. As of three days ago,
+  it no longer exists.
+
+  You are its sole surviving disciple — you survived because you were not there.
+  Six months ago, your Shifu sent you to the capital on a correspondence errand
+  she assigned with unusual urgency, unusual care in the wording, and an unusual
+  insistence that you leave before dawn. The capital is three days' ride from
+  the sect. The Imperial Edict dissolving the Iron Cloud was issued six days ago.
+
+  Your Shifu knew. She sent you away before the edict arrived.
+
+  The official record states that the Iron Cloud Sect was disbanded following
+  evidence of collaboration with northern rebels. The evidence was presented by
+  Grand Arbiter Shen Mingzhi — the man your Shifu once refused to marry.
+  The man who, according to the correspondence you were carrying, was about to be
+  indicted for corruption by the Three Courts review.
+
+  You arrived in the capital carrying letters that no longer have a recipient.
+  The correspondence pouch is sealed with Iron Cloud wax.
+  In the capital, that seal is now a crime.
+
+mission_task: |
+  Discover whether the corruption indictment against Grand Arbiter Shen still
+  exists — and in whose hands.
+  Determine what actually happened to your Shifu and the other disciples.
+  Decide what to do with what you find: expose it, use it, or bury it.
+  Secondary: understand why your Shifu sent you away six months in advance —
+  she knew something was coming long before the edict.
+
+mission_plot_attention: |
+  POWER IMBALANCE: The player is a junior disciple, alone, in a city where
+  carrying their sect's seal is a criminal act. They have no political standing,
+  no allies, and no martial reputation. Let them feel this weight before they
+  earn any leverage. Competence must be demonstrated, not assumed.
+
+  GRAND ARBITER SHEN: He is not simply a villain. He is intelligent, politically
+  dangerous, and genuinely believes he was protecting the empire from a sect he
+  considered a long-term threat. His grievance against the Iron Cloud is real,
+  even if his methods were not. He should not be easy to outmaneuver, and he
+  should not be cartoonishly evil — he is a man who made a calculation.
+
+  INFORMATION STRUCTURE: The full truth requires assembling pieces from three
+  separate power centers: the Imperial Court, the Wulin martial community,
+  and the criminal underground that moves between them. No single source has
+  the complete picture. Evidence appears in fragments. The corruption indictment
+  documents are not in one place.
+
+  THE SHIFU: Her fate is unknown. Do not confirm or deny her survival until the
+  player has earned that information through investigation. What she knew — and
+  when she knew it — is the deepest layer of the mystery.
+
+  TONE: Wuxia political thriller. Honor, sacrifice, and the weight of legacy.
+  Martial arts skill matters but is never the only path — political acuity,
+  patience, and knowing who to trust are equally important. Violence is present
+  and consequential; it should never feel like the obvious solution.
+
+  CONTENT LIMITS: No sexual content. Martial combat and political violence are
+  present but not gratuitous. The emotional core is loyalty, grief, and justice —
+  not action spectacle.
+```
+
+**Why this works**:
+- Opening establishes the player's vulnerability immediately — no power fantasy, no chosen-one framing
+- The six-month timeline gap (Shifu knew) creates layered mystery: the corruption case *and* the deeper question of what the Shifu saw coming
+- Grand Arbiter Shen is designed to resist easy vilification — the moral complexity is structural
+- `mission_plot_attention` names the power imbalance explicitly so the agent doesn't accidentally let the player steamroll a senior official in scene 2
+- The three-source information structure (Court, Wulin, underground) gives the agent a framework for pacing revelations across multiple sessions

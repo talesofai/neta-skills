@@ -8,3 +8,7 @@ description: |
   说明：
     - 为已认证用户返回 PUBLISHED 和 DRAFT 剧本
     - 结果按最后修改时间排序（最新在前）
+
+parameters:
+  page_index: 分页页码，默认为 0
+  page_size: 每页结果数量（1-50），默认为 20

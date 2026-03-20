@@ -1,171 +1,45 @@
 # Travel Campaign Field Guide
 
-Complete reference for all Travel Campaign fields and their usage.
+Reference for non-obvious field behaviors. Consult when a specific field question arises — not loaded by default.
 
-## Campaign Fields
+---
 
-### name
-- **Type**: String
-- **Max Length**: 128 characters
-- **Required**: Yes
-- **Description**: The title of the travel campaign
-- **Usage Tips**:
-  - Keep it evocative but concise
-  - Should hint at genre/tone
-  - Examples: "The Forgotten Mansion", "Neon Shadows: Tokyo 2087"
+## `mission_plot_attention` vs `mission_plot`
 
-### subtitle
-- **Type**: String
-- **Required**: No
-- **Description**: Brief tagline or one-line hook
-- **Usage Tips**:
-  - One sentence displayed on campaign cards
-  - Examples: "A Gothic horror mystery", "Survive the neon apocalypse"
+These fields do different jobs and must not bleed into each other.
 
-### status
-- **Type**: Enum ("PUBLISHED" | "DRAFT")
-- **Default**: "PUBLISHED"
-- **Required**: No
-- **Description**: Visibility status of the campaign
-- **Usage**:
-  - `PUBLISHED`: Visible to others, can be shared
-  - `DRAFT`: Private, only creator can see
+- `mission_plot` = narrative content: world, situation, NPCs, hook
+- `mission_plot_attention` = behavioral rules: how the AI acts, what it enforces unconditionally
 
-### header_img
-- **Type**: String (URL)
-- **Required**: No
-- **Description**: Card thumbnail image for display
-- **Usage Tips**:
-  - Use `make_image` to generate if needed
-  - Should represent the campaign's tone
-  - URL format: `https://oss.talesofai.cn/picture/{uuid}.webp`
+**Rules win over story logic.** If `mission_plot` says an NPC is warm and `mission_plot_attention` says that NPC never breaks clinical detachment — the attention rule holds. The agent should find in-world explanations for the constraint, not surface the conflict.
 
-### background_img
-- **Type**: String (URL)
-- **Required**: No
-- **Description**: Background image for story atmosphere
-- **Usage Tips**:
-  - Sets visual mood during storytelling
-  - Often more atmospheric than header_img
+---
 
-## Mission Fields
+## `default_tcp_uuid` Priority
 
-### mission_plot
-- **Type**: String
-- **Required**: Yes
-- **Description**: Core story/scenario description — the narrative foundation the agent uses
-- **Length**: Can be substantial (1000+ characters recommended for complex stories)
-- **Content Guidelines**:
-  - World setting and context
-  - Initial scenario/hook
-  - Key story elements without predetermined outcomes
-  - Atmospheric details
-- **Writing Style**:
-  - Second person (addressing the player) or third person omniscient
-  - Descriptive and immersive
-  - Sets stakes but not conclusions
+When a bound character profile is loaded via `request_character_or_elementum`, the campaign's own fields take precedence over the character's profile defaults:
 
-### mission_task
-- **Type**: String
-- **Required**: No
-- **Description**: Player objectives and interaction rules
-- **Content Guidelines**:
-  - What the player should accomplish
-  - How they interact with the world
-  - Win/lose conditions (if applicable)
-  - Open-ended enough for player agency
-- **Examples**:
-  - "Explore the mansion and uncover three secrets"
-  - "Negotiate peace between three warring factions"
-  - "Survive seven days while searching for the cure"
+- Campaign `mission_plot_attention` overrides character default behavior rules
+- Campaign tone overrides character default voice register
+- Character bio/backstory enriches narration but does not override campaign structure
 
-### mission_plot_attention
-- **Type**: String
-- **Required**: No
-- **Description**: Governing constraint layer — these rules override all other context and cannot be broken by player actions or improvisation. The AI narrator enforces them unconditionally for the entire campaign lifetime.
-- **Purpose**: The "roleplay constitution" of your campaign. Write rules here that must hold regardless of what the player does or how the story evolves.
-- **Content Categories**:
-  - **Tone Lock**: "Maintain survival-horror tension at all times, even if players try to lighten the mood"
-  - **Behavioral Contract**: "Dr. Chen never breaks her clinical detachment, even under extreme stress"
-  - **Information Gating**: "Clues are revealed only through player-initiated investigation, never volunteered"
-  - **Consequence Rules**: "Player death is permanent — no resurrection or do-overs"
-  - **Content Guardrails**: "No romance subplots; no graphic gore — use dread and implication"
-- **Anti-pattern**: Do NOT put worldbuilding or plot here — that belongs in `mission_plot`
-- **Best Practice**: Cover the 3 most likely ways a player could break immersion or drift from your intent
+If the character profile and campaign fields contradict, follow the campaign field.
 
-## Response Fields (Read-Only)
+---
 
-### uuid
-- **Type**: String (UUID)
-- **Description**: Unique identifier for the campaign
+## Absent Fields
 
-### mission_uuid / mission_slug
-- **Type**: String
-- **Description**: Internal identifiers linking campaign and mission (for reference only)
+| Field absent | Behavior |
+|-------------|----------|
+| `mission_plot_attention` | Derive tone and constraints naturally from `mission_plot` |
+| `mission_task` | Open-ended mode — no explicit win/loss condition; player drives direction |
+| `default_tcp_uuid` | Clean DM voice; no character persona applied |
+| `subtitle` | No tagline displayed; no impact on play |
 
-### ctime / mtime
-- **Type**: String (ISO 8601 timestamp)
-- **Description**: Creation and modification times (returned by `request_travel_campaign`)
+---
 
-### creator
-- **Type**: Object `{ uuid, nick_name }`
-- **Description**: User who created the campaign (returned by `request_travel_campaign`)
+## Field Update Semantics
 
-### default_tcp_uuid (response field)
-- **Type**: String (UUID) or null
-- **Description**: UUID of the Neta character (TCP) bound to this campaign. Use `request_character_or_elementum` from the neta-creative skill to load the full character profile (bio, persona, traits) before roleplaying.
+`update_travel_campaign` is partial: only provided fields are modified. Omitted fields retain current values. Updates apply atomically to both campaign and linked mission.
 
-## Field Relationships
-
-```
-TravelCampaign
-├── Basic Info (name, subtitle, status, header_img, background_img)
-└── Mission (linked 1:1)
-    ├── mission_plot (story foundation)
-    ├── mission_task (player goals)
-    └── mission_plot_attention (AI constraints)
-```
-
-## Common Patterns
-
-### Minimal Viable Campaign
-```
-name: "Adventure Title"
-mission_plot: "You find yourself in..."
-```
-
-### Standard Campaign
-```
-name: "The Mystery of Blackwood"
-subtitle: "A Gothic horror experience"
-mission_plot: "Detailed story setup..."
-mission_task: "Explore and discover three secrets"
-mission_plot_attention: "Maintain horror atmosphere, avoid graphic violence"
-```
-
-### Full Featured Campaign
-```
-name: "Neon Shadows: Tokyo 2087"
-subtitle: "Cyberpunk survival thriller"
-status: "PUBLISHED"
-header_img: "https://oss.talesofai.cn/picture/..."
-background_img: "https://oss.talesofai.cn/picture/..."
-mission_plot: "Extensive world building..."
-mission_task: "Survive 7 days, find the prototype, choose who to trust"
-mission_plot_attention: "Tone: gritty but hopeful. No sexual content. Player agency paramount."
-```
-
-## Validation Rules
-
-1. **name**: Required, max 128 characters
-2. **mission_plot**: Required, trimmed on input, must not be empty
-3. **status**: Must be "PUBLISHED" or "DRAFT"
-4. **All text fields**: Subject to content moderation (HTTP 422 on violation)
-5. **Images**: Subject to image content moderation (HTTP 420 on violation)
-
-## Update Behavior
-
-When using `update_travel_campaign`:
-- Only provided fields are modified
-- Omitted fields retain current values
-- Updates affect both campaign and linked mission atomically
+After tightening `mission_plot_attention` via update, the new rules apply immediately to all subsequent play sessions. Prior sessions are unaffected.

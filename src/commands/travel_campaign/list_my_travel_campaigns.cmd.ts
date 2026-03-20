@@ -7,13 +7,26 @@ const meta = parseMeta(
     name: Type.String(),
     title: Type.String(),
     description: Type.String(),
+    parameters: Type.Object({
+      page_index: Type.String(),
+      page_size: Type.String(),
+    }),
   }),
   import.meta,
 );
 
 const listMyTravelCampaignsParameters = Type.Object({
-  page_index: Type.Integer({ minimum: 0, default: 0 }),
-  page_size: Type.Integer({ minimum: 1, maximum: 50, default: 20 }),
+  page_index: Type.Integer({
+    minimum: 0,
+    default: 0,
+    description: meta.parameters.page_index,
+  }),
+  page_size: Type.Integer({
+    minimum: 1,
+    maximum: 50,
+    default: 20,
+    description: meta.parameters.page_size,
+  }),
 });
 
 export const listMyTravelCampaigns = createCommand(
