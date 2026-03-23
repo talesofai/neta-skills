@@ -1,0 +1,6 @@
+name: pay_premium_order
+title: 支付会员订单
+description: 通过指定支付渠道为待支付的会员订单发起支付。
+parameters:
+  order_uuid: 要支付的会员订单 UUID
+  channel: 支付渠道（如 stripe-checkout）

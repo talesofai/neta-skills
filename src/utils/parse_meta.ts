@@ -24,5 +24,5 @@ export const parseMeta = <T extends TSchema>(
   );
 
   const data = yaml.parse(file);
-  return Value.Decode(schema, data);
+  return Value.Parse(schema, data);
 };

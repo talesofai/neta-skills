@@ -6,7 +6,7 @@ import {
   Option,
 } from "@commander-js/extra-typings";
 import { type TLiteral, Type } from "@sinclair/typebox";
-import { Default, Value } from "@sinclair/typebox/value";
+import { AssertError, Value } from "@sinclair/typebox/value";
 import { createApis } from "../apis/index.ts";
 import { ApiResponseError } from "../utils/errors.ts";
 import { setLocale } from "../utils/parse_meta.ts";
@@ -63,6 +63,7 @@ export const buildCommands = async (
     "community",
     "character_elementum",
     "adventure_campaign",
+    "premium",
   ]);
 
   return commands.map((cmd) => {
@@ -143,7 +144,7 @@ export const buildCommands = async (
       });
 
       const type = cmd.inputSchema ?? Type.Object({});
-      const input = Value.Decode(type, Default(type, args));
+      const input = Value.Parse(type, args);
 
       if (IS_DEV) {
         logger.debug("command: %s, params: %o", cmd.name, input);
@@ -163,6 +164,18 @@ export const buildCommands = async (
               },
         })
         .catch((e: unknown) => {
+          if (e instanceof AssertError) {
+            logger.error({
+              error: {
+                type: e.name,
+                message: e.message,
+                path: e.error?.path,
+                schema: e.error?.schema,
+              },
+            });
+            return null;
+          }
+
           if (e instanceof ApiResponseError) {
             logger.error({
               error: {
@@ -191,7 +204,7 @@ export const buildCommands = async (
       if (!result) return;
 
       if (IS_DEV) {
-        logger.debug(result);
+        logger.debug(JSON.stringify(result, null, 2));
       } else {
         logger.info(JSON.stringify(result));
       }

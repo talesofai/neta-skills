@@ -1,0 +1,5 @@
+name: get_premium_order
+title: Get Premium Order
+description: Fetch details of a premium order by its UUID.
+parameters:
+  order_uuid: Premium order UUID

@@ -1,0 +1,3 @@
+name: list_premium_plans
+title: 会员订阅方案列表
+description: 列出可用的会员订阅方案与价格（按语言环境的配置）。

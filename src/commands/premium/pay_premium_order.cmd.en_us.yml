@@ -1,0 +1,6 @@
+name: pay_premium_order
+title: Pay Premium Order
+description: Start payment for an unpaid premium order using the given channel.
+parameters:
+  order_uuid: Premium order UUID to pay
+  channel: Payment channel (e.g. stripe-checkout)

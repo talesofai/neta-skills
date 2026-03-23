@@ -1,0 +1,5 @@
+name: create_premium_order
+title: 创建会员订单
+description: 为订阅套餐（SPU）创建新的会员订单。
+parameters:
+  spu_uuid: 要购买的会员套餐 SPU 的 UUID

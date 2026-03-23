@@ -1,11 +1,11 @@
 ---
 name: neta-creative
-description: Neta API creative skill — generate images, videos, songs, and MVs, and deconstruct creative ideas from existing works. Use this skill when the user wants to create or edit images/videos/songs/MVs, or create based on character settings and existing works. Do not use it for feed browsing or tag/category research (those are handled by neta-community and neta-suggest).
+description: Neta API creative skill — generate images, videos, songs, and MVs, deconstruct creative ideas from existing works, and manage premium subscription plans (list plans, orders, checkout). Use this skill when the user wants to create or edit images/videos/songs/MVs, create based on character settings and existing works, or handle Neta premium / subscription purchase flows. Do not use it for feed browsing or tag/category research (those are handled by neta-community and neta-suggest).
 ---
 
 # Neta Creative Skill
 
-Used to interact with the Neta API for multimedia content creation and creation‑related character queries.
+Used to interact with the Neta API for multimedia content creation, creation‑related character queries, and premium subscription flows where supported.
 
 ## Instructions
 
@@ -13,6 +13,7 @@ Used to interact with the Neta API for multimedia content creation and creation�
    - Before creation, use **character queries** to fetch canonical character settings, then generate images/videos/songs based on them.
    - To reverse‑engineer creative ideas from an existing work, call `read_collection` and combine the result with the guidance in the reference docs.
 2. If, during creation, you discover that the real need is more like “browse recommendations / casually explore / research topics”, combine this skill with `neta-community` or `neta-suggest` instead of overloading this skill.
+3. **Premium** (plans, orders, Stripe): use the commands below. Run **`get_current_premium_plan`** before and after checkout so the user can confirm tier (and end time if returned). Commerce needs the **global** Neta API—see the premium reference. If creation is blocked by **quota / credits (电量)** or **usage frequency (频率)**, say why in one beat; if an upgrade fits their goal, offer the path once (list plans → create order → pay)—**do not** repeat upgrade nudges in the same conversation unless the user asks.
 
 ## Commands
 
@@ -86,6 +87,48 @@ npx -y @talesofai/neta-skills@latest read_collection --uuid "collection-uuid"
 
 📖 [Detailed guide](./references/collection-remix.md)
 
+### Premium subscription
+
+**Current plan (verify before / after upgrade)**
+
+```bash
+npx -y @talesofai/neta-skills@latest get_current_premium_plan
+```
+
+Returns the signed-in user’s **current tier** (e.g. Basic, Starter, Pro, Master) and **subscription end** when applicable. Use it **before** starting checkout to record the baseline, and **again after** payment or renewal completes so the user can confirm the plan changed as expected.
+
+**List plans and SPU UUIDs**
+
+```bash
+npx -y @talesofai/neta-skills@latest list_premium_plans
+```
+
+**Create an order**
+
+```bash
+npx -y @talesofai/neta-skills@latest create_premium_order --spu_uuid "spu-uuid"
+```
+
+**Get one order**
+
+```bash
+npx -y @talesofai/neta-skills@latest get_premium_order --order_uuid "order-uuid"
+```
+
+**List orders (paginated)**
+
+```bash
+npx -y @talesofai/neta-skills@latest list_premium_orders --page_index 0 --page_size 20
+```
+
+**Pay an unpaid order (Stripe Checkout)**
+
+```bash
+npx -y @talesofai/neta-skills@latest pay_premium_order --order_uuid "order-uuid" --channel "stripe-checkout"
+```
+
+📖 [Premium workflow and limits](./references/premium.md)
+
 ## Reference docs
 
 | Scenario              | Doc                                      |
@@ -96,4 +139,5 @@ npx -y @talesofai/neta-skills@latest read_collection --uuid "collection-uuid"
 | 🎞️ MV creation       | [song-mv.md](./references/song-mv.md)                   |
 | 👤 Character queries  | [character-search.md](./references/character-search.md) |
 | 🖊️ Creative remixing | [collection-remix.md](./references/collection-remix.md) |
+| ⭐ Premium / subscribe | [premium.md](./references/premium.md)                   |
 

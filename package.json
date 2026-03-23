@@ -47,6 +47,7 @@
     "@sinclair/typebox": "^0.34.48",
     "axios": "^1.7.9",
     "commander": "^14.0.0",
+    "dayjs": "^1.11.20",
     "dotenv": "^16.4.7",
     "dotenv-flow": "^4.1.0",
     "os-locale": "^8.0.0",
