@@ -19,6 +19,7 @@ You can get your access token / NETA TOKEN from the [Neta Open Portal](https://w
 ## ✨ Features
 
 - 🎨 **Multimedia Creation:** Generate stunning images, videos, and songs using state-of-the-art AI models.
+- ⭐ **Premium & Subscriptions:** List plans, create orders, start Stripe checkout, and verify the active tier via dedicated CLI commands (global API environment).
 - 🔧 **Image & Video Processing:** Effortlessly remove backgrounds and merge video assets.
 - 👤 **Character & Style Management:** Search, fetch details, and manage characters and stylistic elements.
 - 🏷️ **Community Integrations:** Explore trending hashtags, popular characters, and curated collections.
@@ -46,7 +47,7 @@ You can also install the specialized skills separately if your agent prefers mor
 # Community exploration (hashtags, spaces, interactive feed)
 npx skills add talesofai/neta-skills/skills/neta-community
 
-# Creation workflows (image / video / song)
+# Creation workflows (image / video / song) and premium subscription flows
 npx skills add talesofai/neta-skills/skills/neta-creative
 
 # Discovery & suggestions (keywords, tags, categories, content)
@@ -67,7 +68,7 @@ npx skills add talesofai/neta-skills/skills/neta-adventure
 
 ### Available Commands
 
-The skill includes **34 commands** for various tasks:
+The skill includes **42 commands** for various tasks:
 
 | Category | Command | Description |
 |----------|---------|-------------|
@@ -82,6 +83,12 @@ The skill includes **34 commands** for various tasks:
 | | `edit_collection` | Edit an existing collection (name, description, tags, status, etc.) |
 | | `publish_collection` | Publish or update a collection |
 | | `search_character_or_elementum` | Search reusable TCP building blocks (characters / elements / flows) |
+| **Premium** | `get_current_premium_plan` | Get the signed-in user’s current tier and subscription end when applicable |
+| | `list_premium_plans` | List available premium plans and SPU UUIDs |
+| | `create_premium_order` | Create an order for a plan (by SPU UUID) |
+| | `get_premium_order` | Fetch details for a single premium order |
+| | `list_premium_orders` | List premium orders (paginated) |
+| | `pay_premium_order` | Start payment for an unpaid order (e.g. Stripe Checkout) |
 | **VToken Management** | `create_character` | Create a character VToken (consumes credits) |
 | | `update_character` | Update an existing character VToken |
 | | `list_my_characters` | List all characters created by the current user |
@@ -172,8 +179,8 @@ neta-skills/
 │       ├── neta-elementum/
 │       └── neta-adventure/
 ├── src/                            # TypeScript source for the CLI
-│   ├── apis/                       # Typed Neta API client helpers
-│   ├── commands/                   # CLI command definitions (TS + YAML meta)
+│   ├── apis/                       # Typed Neta API client helpers (incl. commerce)
+│   ├── commands/                   # CLI command groups: creative, community, adventure, VToken, premium, …
 │   ├── utils/                      # Shared utilities
 │   └── cli.ts                      # CLI entrypoint (TypeScript)
 ├── bin/                            # Built JavaScript output for the CLI
@@ -203,6 +210,7 @@ Agents use these references to learn the optimal sequence of actions, parameter 
 - **Song & MV Creation:** Workflows for composing songs and creating music videos with synchronized visuals.
 - **Character & Hashtag Research:** Processes for finding trending content, searching characters, and utilizing community trends.
 - **Character & Elementum Creation:** Character creation and elementum alchemy workflows.
+- **Premium / Subscriptions:** Plan listing, order lifecycle, checkout channels, and environment limits. See `skills/neta-creative/references/premium.md`.
 - **Adventure Campaign Crafting & Play:** Multi-turn story creation workflow (Craft Mode), interactive session management (Play Mode), field reference, and complete genre examples. See `skills/neta-adventure/references/`.
 
 ---

@@ -1,0 +1,6 @@
+name: list_premium_orders
+title: List Premium Orders
+description: List your premium orders with pagination.
+parameters:
+  page_index: Zero-based page index
+  page_size: Page size (1–50)

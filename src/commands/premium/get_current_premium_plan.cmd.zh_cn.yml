@@ -1,0 +1,3 @@
+name: get_current_premium_plan
+title: 当前会员方案
+description: 获取当前登录用户的会员档位与到期时间。

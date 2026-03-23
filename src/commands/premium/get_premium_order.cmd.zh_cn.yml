@@ -1,0 +1,5 @@
+name: get_premium_order
+title: 获取会员订单
+description: 根据订单 UUID 查询会员订单详情。
+parameters:
+  order_uuid: 会员订单 UUID

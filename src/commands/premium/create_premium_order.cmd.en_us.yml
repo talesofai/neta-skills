@@ -1,0 +1,5 @@
+name: create_premium_order
+title: Create Premium Order
+description: Create a new premium order for a subscription plan (SPU).
+parameters:
+  spu_uuid: UUID of the premium plan SPU to purchase

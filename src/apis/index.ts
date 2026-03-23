@@ -4,6 +4,7 @@ import { createActivityApis, type SelectedCollection } from "./activity.ts";
 import { createArtifactApis } from "./artifact.ts";
 import { createAudioApis } from "./audio.ts";
 import { createCollectionApis } from "./collection.ts";
+import { createCommerceApis } from "./commerce.ts";
 import { createConfigApis } from "./config.ts";
 import { createFeedsApis } from "./feeds.ts";
 import { createGptApis } from "./gpt.ts";
@@ -58,8 +59,10 @@ export const createApis = (option: {
   const space = createSpaceApis(client);
   const recsys = createRecsysApis(client);
   const travelCampaign = createTravelCampaignApis(client);
+  const commerce = createCommerceApis(client);
 
   return {
+    baseUrl,
     tcp,
     prompt,
     artifact,
@@ -76,6 +79,7 @@ export const createApis = (option: {
     space,
     recsys,
     travelCampaign,
+    commerce,
   };
 };
 

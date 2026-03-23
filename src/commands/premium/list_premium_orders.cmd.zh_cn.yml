@@ -1,0 +1,6 @@
+name: list_premium_orders
+title: 会员订单列表
+description: 分页列出当前用户的会员订单。
+parameters:
+  page_index: 从 0 开始的页码
+  page_size: 每页条数（1–50）
