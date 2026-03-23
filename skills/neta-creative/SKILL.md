@@ -1,6 +1,6 @@
 ---
 name: neta-creative
-description: Neta API creative skill — generate images, videos, songs, and MVs, deconstruct creative ideas from existing works, and manage premium subscription plans (list plans, orders, checkout). Use this skill when the user wants to create or edit images/videos/songs/MVs, create based on character settings and existing works, or handle Neta premium / subscription purchase flows. Do not use it for feed browsing or tag/category research (those are handled by neta-community and neta-suggest).
+description: Neta API creative skill — generate images, videos, songs, and MVs, and deconstruct creative ideas from existing works. Use this skill when the user wants to create or edit images/videos/songs/MVs, or create based on character settings and existing works. Do not use it for feed browsing or tag/category research (those are handled by neta-community and neta-suggest).
 ---
 
 # Neta Creative Skill
