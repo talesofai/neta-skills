@@ -25,12 +25,15 @@ export const getCurrentPremiumPlan = createCommand(
     title: meta.title,
     description: meta.description,
   },
-  async (_, { apis }) => {
+  async (_, { apis, user }) => {
     if (!apis.baseUrl.endsWith("talesofai.com")) {
       throw new Error("This command is not supported in the current region");
     }
 
-    const user = await apis.user.me();
+    if (!user) {
+      throw new Error("Not authenticated. Please check your NETA_TOKEN.");
+    }
+
     const level = user.properties?.vip_level ?? 0;
     return {
       plan: PlanningMap[level],

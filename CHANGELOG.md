@@ -1,5 +1,14 @@
 # @neta/skills-neta
 
+## 0.14.1
+
+### Patch Changes
+
+- - Add api logs for debug.
+  - Add api timeout with 10000ms.
+
+  - Fixed error info about remove_background input_image param in docs.
+
 ## 0.14.0
 
 ### Minor Changes

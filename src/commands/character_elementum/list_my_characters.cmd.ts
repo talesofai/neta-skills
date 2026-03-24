@@ -26,9 +26,8 @@ export const listMyCharacters = createCommand(
     description: meta.description,
     inputSchema: listMyCharactersParameters,
   },
-  async ({ keyword, page_index, page_size }, { apis }) => {
+  async ({ keyword, page_index, page_size }, { apis, user }) => {
     // Get current user info to obtain UUID
-    const user = await apis.user.me();
     if (!user) {
       throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
     }

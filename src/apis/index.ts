@@ -1,5 +1,5 @@
-import axios from "axios";
-import { handleAxiosError } from "../utils/errors.ts";
+import axios, { AxiosError } from "axios";
+import { catchErrorResponse, handleAxiosError } from "../utils/errors.ts";
 import { createActivityApis, type SelectedCollection } from "./activity.ts";
 import { createArtifactApis } from "./artifact.ts";
 import { createAudioApis } from "./audio.ts";
@@ -23,22 +23,59 @@ import type { PromiseResult } from "./types.ts";
 import { createUserApis } from "./user.ts";
 import { createVerseApis } from "./verse.ts";
 
+declare module "axios" {
+  interface InternalAxiosRequestConfig {
+    start_time?: number;
+  }
+}
+
 export const createApis = (option: {
   headers: Record<string, string | string[] | undefined>;
   baseUrl: string;
+  logger: Pick<Console, "error" | "warn" | "info" | "debug">;
 }) => {
   const baseUrl = option.baseUrl;
+  const logger = option.logger;
   const client = axios.create({
     adapter: "fetch",
     baseURL: baseUrl,
     headers: {
       ...option.headers,
     },
+    timeout: 10 * 1000,
+  });
+
+  client.interceptors.request.use((config) => {
+    const now = Date.now();
+    config.start_time = now;
+    logger.debug("[api] request: %s %s", config.method, config.url);
+    return config;
   });
 
   client.interceptors.response.use(
-    (response) => response,
+    (response) => {
+      const now = Date.now();
+      const startTime = response.config.start_time ?? now;
+      const duration = now - startTime;
+      logger.debug(
+        "[api] response: %s %s %s %dms",
+        response.config.method,
+        response.status,
+        response.config.url,
+        duration,
+      );
+      return response;
+    },
     (error) => {
+      if (error instanceof AxiosError) {
+        logger.debug(
+          "[api] response error: %s %s %s %s",
+          error.request?.method,
+          error.request?.url,
+          error.response?.status,
+          catchErrorResponse(error.response?.data),
+        );
+      }
       handleAxiosError(error);
     },
   );

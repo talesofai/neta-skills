@@ -12,6 +12,7 @@ import {
   Type,
 } from "@sinclair/typebox";
 import type { Apis } from "../apis/index.ts";
+import type { UserInfo } from "../apis/user.ts";
 
 export type SupportedSchema = TObject<{
   [key: string]:
@@ -30,13 +31,8 @@ export const Nullable = <T extends TSchema>(schema: T) =>
     nullable: true,
   });
 
-export interface UserData {
-  id: number;
-  uuid: string;
-}
-
 export interface CommandExtra {
-  user: UserData | null;
+  user: UserInfo | null;
   apis: Apis;
   log: Pick<Console, "error" | "warn" | "info" | "debug">;
 }

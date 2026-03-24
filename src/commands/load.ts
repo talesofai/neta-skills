@@ -128,6 +128,7 @@ export const buildCommands = async (
           : (process.env["NETA_API_BASE_URL"] ?? "https://api.talesofai.com");
 
       const apis = createApis({
+        logger,
         baseUrl,
         headers: {
           "x-token": process.env["NETA_TOKEN"] ?? "",
@@ -147,7 +148,7 @@ export const buildCommands = async (
       const input = Value.Parse(type, args);
 
       if (IS_DEV) {
-        logger.debug("command: %s, params: %o", cmd.name, input);
+        logger.debug("[command] %s, params: %o", cmd.name, input);
       }
 
       const result = await cmd
