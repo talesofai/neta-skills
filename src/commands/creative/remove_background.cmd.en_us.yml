@@ -2,6 +2,8 @@ remove_background:
   name: remove_background
   title: Remove Image Background
   description: Remove the background of an input image while preserving the main subject, and return an image with a transparent background.
+  parameters:
+    input_image: The UUID of the input image artifact.
 
 remove_background_nocrop:
   name: remove_background_nocrop

@@ -124,7 +124,7 @@ npx -y @talesofai/neta-skills@latest make_image --prompt "@character_name, shy e
 ### Background Removal
 
 ```bash
-npx -y @talesofai/neta-skills@latest remove_background --input_image "image_uuid"
+npx -y @talesofai/neta-skills@latest remove_background --input_image "image_artifact_uuid"
 ```
 ---
 

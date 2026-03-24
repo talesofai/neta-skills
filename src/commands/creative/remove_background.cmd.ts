@@ -9,6 +9,9 @@ const meta = parseMeta(
       name: Type.String(),
       title: Type.String(),
       description: Type.String(),
+      parameters: Type.Object({
+        input_image: Type.String(),
+      }),
     }),
     remove_background_nocrop: Type.Object({
       name: Type.String(),
@@ -20,7 +23,9 @@ const meta = parseMeta(
 );
 
 const removeBackgroundV1Parameters = Type.Object({
-  input_image: Type.String(),
+  input_image: Type.String({
+    description: meta.remove_background.parameters.input_image,
+  }),
 });
 
 export const removeBackground = createCommand(
@@ -32,6 +37,15 @@ export const removeBackground = createCommand(
   },
   async ({ input_image }, { apis, log }) => {
     const createTask = async () => {
+      const artifacts = await apis.artifact.artifactDetail([input_image]);
+      if (
+        !artifacts ||
+        !artifacts[0] ||
+        artifacts[0].modality !== "PICTURE" ||
+        artifacts[0].status !== "SUCCESS"
+      ) {
+        throw new Error("Input is not a valid picture artifact UUID");
+      }
       return apis.artifact.postProcess(input_image, "0_null/抠图SEG", {
         entrance: "PICTURE,CLI",
       });
@@ -75,6 +89,16 @@ export const removeBackgroundNoCrop = createCommand(
   },
   async ({ input_image }, { apis, log }) => {
     const createTask = async () => {
+      const artifacts = await apis.artifact.artifactDetail([input_image]);
+      if (
+        !artifacts ||
+        !artifacts[0] ||
+        artifacts[0].modality !== "PICTURE" ||
+        artifacts[0].status !== "SUCCESS"
+      ) {
+        throw new Error("Input is not a valid picture artifact UUID");
+      }
+
       return apis.artifact.postProcess(input_image, "0_null/抠图SEG", {
         entrance: "PICTURE,CLI",
       });

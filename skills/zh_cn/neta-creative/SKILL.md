@@ -44,7 +44,7 @@ npx -y @talesofai/neta-skills@latest make_song --prompt "风格描述" --lyrics 
 
 **移除背景**
 ```bash
-npx -y @talesofai/neta-skills@latest remove_background --input_image "image_url"
+npx -y @talesofai/neta-skills@latest remove_background --input_image "image_artifact_uuid"
 ```
 
 ### 角色查询

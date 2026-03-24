@@ -52,7 +52,7 @@ Combine an audio track and video to create a full MV.
 **Remove background**
 
 ```bash
-npx -y @talesofai/neta-skills@latest remove_background --input_image "image_url"
+npx -y @talesofai/neta-skills@latest remove_background --input_image "image_artifact_uuid"
 ```
 
 ### Character queries

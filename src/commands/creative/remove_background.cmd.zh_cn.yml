@@ -2,6 +2,8 @@ remove_background:
   name: remove_background
   title: 去除图片背景
   description: 输入图片保留主体去除背景，返回透明通道图片
+  parameters:
+    input_image: 输入图片的 artifact UUID。
 
 remove_background_nocrop:
   name: remove_background_nocrop

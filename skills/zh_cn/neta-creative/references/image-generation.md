@@ -124,7 +124,7 @@ npx -y @talesofai/neta-skills@latest make_image --prompt "@角色名，害羞表
 ### 去背景（抠图）
 
 ```bash
-npx -y @talesofai/neta-skills@latest remove_background --input_image "image_uuid"
+npx -y @talesofai/neta-skills@latest remove_background --input_image "image_artifact_uuid"
 ```
 ---
 
