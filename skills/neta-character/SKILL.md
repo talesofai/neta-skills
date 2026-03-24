@@ -1,11 +1,11 @@
 ---
 name: neta-character
-description: Neta Character Forging Skill - Guides users through creating or updating anime/cultural IP/original character (OC) VTokens (Virtual Tokens, TCP). Includes visual preview, character documentation, backstory confirmation, and complete creative workflow. Use this skill when users want to create new characters, modify existing ones, or begin character design.
+description: "Guides users through creating or updating anime, cultural IP, or original characters (OCs) as Virtual Tokens (VTokens/TCP) on the Neta platform. Walks through a three-stage workflow: visual preview, character documentation, and backstory confirmation. Use when users want to design a character, make a character sheet, build an OC, create an OC maker profile, or modify an existing character."
 ---
 
 # Neta Character Skill
 
-Guide users from inspiration to forging, completing the creation and management of exclusive character VTokens (Virtual Tokens, TCP/OC). Characters can be referenced in `make_image` via `@CharacterName` after creation.
+Guide users from inspiration to a finished character token. This skill handles creating and managing character Virtual Tokens (VTokens, also known as TCP or OCs) on the Neta platform. Once created, characters can be referenced in `make_image` via `@CharacterName`.
 
 > This skill requires the **neta-creative** skill to use `make_image` for visual previews.
 
@@ -16,6 +16,10 @@ Guide users from inspiration to forging, completing the creation and management 
 **Full Creation Flow (Recommended)**
 
 Follow the three-stage workflow: "Visual Preview → Character Documentation → Confirmation".
+
+1. **Visual Preview** — Use `make_image` with a plain-text description to generate a preview image. Iterate until the look is right.
+2. **Character Documentation** — Fill in identity fields (name, prompt, trigger, persona, backstory) and call `create_character` with the preview's `artifacts[0].uuid` as the avatar.
+3. **Confirmation** — Review the created character profile and make any final adjustments via `update_character`.
 
 📖 [Creation Guide](./references/character-creation.md) - Complete creative workflow and best practices
 

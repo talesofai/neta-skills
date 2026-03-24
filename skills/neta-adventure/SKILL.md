@@ -1,6 +1,6 @@
 ---
 name: neta-adventure
-description: Neta Adventure Campaign skill - Create and play AI-driven interactive story adventures. Adventure campaigns provide story-crafting and story-telling modes where agents act as DM and roleplay characters following plot, rules, and special guidelines.
+description: "Creates and plays AI-driven interactive story adventures (Adventure Campaigns). The agent acts as game master and character, crafting plots, generating NPCs, managing combat, and tracking quest progression across RPG, tabletop, D&D, and freeform campaign genres. Use when the user wants to design, build, or play a narrative adventure, run a campaign session, or generate story content."
 ---
 
 # Neta Adventure Skill
@@ -34,6 +34,8 @@ npx -y @talesofai/neta-skills@latest create_adventure_campaign \
 
 📖 [Craft workflow](./references/adventure-crafting.md) — draft-first loop, field system, quality checklist.
 
+**Craft workflow summary:** Draft the mission plot and objectives first, then iteratively refine fields (plot attention, task, genre tags). Generate NPCs, locations, and lore as needed. Run through the quality checklist before finalizing the campaign.
+
 **Update a campaign** (only provided fields are changed)
 
 ```bash
@@ -56,6 +58,8 @@ npx -y @talesofai/neta-skills@latest request_adventure_campaign --campaign_uuid 
 ```
 
 📖 [Play workflow](./references/adventure-playing.md) — initialization, proactive advance, steering mechanics.
+
+**Play workflow summary:** Load the campaign by UUID, initialize the scene and active characters, then advance the narrative proactively. Manage combat encounters, track character progression, and apply steering mechanics (pacing, tension, branching choices) to keep the session engaging.
 
 ## neta-creative Integration
 

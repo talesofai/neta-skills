@@ -1,6 +1,6 @@
 ---
 name: neta-suggest
-description: Neta API research and recommendation skill — provide keyword/tag/category suggestions, validate taxonomy paths, and power multi‑mode content feeds, supporting progressive exploration from broad to precise. Use this skill when the user has no clear goal, wants topic/idea suggestions, or needs systematic content filtering by keywords/categories. It does not directly generate media (handled by neta-creative); community interactions are handled by neta-community.
+description: "Neta API research and recommendation skill — browse categories, discover content, explore topics, and find ideas through keyword/tag/category suggestions, taxonomy validation, and multi-mode content feeds. Supports progressive exploration from broad to precise. Use when the user wants to browse, discover content, explore topics, find ideas, or filter by keywords/categories. Media creation is handled by neta-creative; community interactions by neta-community."
 ---
 
 # Neta Suggest Skill
@@ -303,57 +303,21 @@ npx -y @talesofai/neta-skills@latest suggest_content \
   --page_size 20
 ```
 
-## Parameter combination tips
+## Pagination
 
-### Combination 1: keyword + taxonomy
-
-```bash
-npx -y @talesofai/neta-skills@latest suggest_content \
-  --intent search \
-  --search_keywords "video,editing" \
-  --tax_paths "Digital Art>Video Production" \
-  --page_size 20
-```
-
-### Combination 2: multi‑level taxonomy
-
-```bash
-npx -y @talesofai/neta-skills@latest suggest_content \
-  --intent exact \
-  --tax_paths "Derivative Creation>Fan Works>Honkai: Star Rail" \
-  --page_size 20
-```
-
-### Combination 3: recommend + exclusions
-
-```bash
-npx -y @talesofai/neta-skills@latest suggest_content \
-  --intent recommend \
-  --exclude_keywords "tutorial, repost" \
-  --exclude_tax_paths "Courses" \
-  --page_size 20
-```
-
-### Combination 4: pagination continuity
+For multi-page results, capture and reuse the `biz_trace_id` from the first page response:
 
 ```bash
 # Page 1
 npx -y @talesofai/neta-skills@latest suggest_content \
-  --page_index 0 \
-  --page_size 20 \
-  --intent search \
+  --page_index 0 --page_size 20 --intent search \
   --search_keywords "ideas" > /tmp/page0.json
 
-# Extract biz_trace_id
+# Page 2 — reuse biz_trace_id from page 1
 BIZ_TRACE_ID=$(cat /tmp/page0.json | jq -r '.page_data.biz_trace_id')
-
-# Page 2 (reuse same biz_trace_id)
 npx -y @talesofai/neta-skills@latest suggest_content \
-  --page_index 1 \
-  --page_size 20 \
-  --intent search \
-  --search_keywords "ideas" \
-  --biz_trace_id "$BIZ_TRACE_ID"
+  --page_index 1 --page_size 20 --intent search \
+  --search_keywords "ideas" --biz_trace_id "$BIZ_TRACE_ID"
 ```
 
 ## Output formats
@@ -407,41 +371,9 @@ Invalid path:
 }
 ```
 
-## Performance tips
+## Quick reference
 
-1. **Choose page_size wisely**
-   - Exploration: 10–15 for quick iteration.
-   - Deep browsing: 20–30 to reduce page switches.
-   - Precise lookup: 20–40 to fetch enough content at once.
-2. **Cache suggestions**
-   - Cache taxonomy and tag suggestions to avoid repeated calls.
-3. **Preload next‑level categories**
-   - While the user is viewing level‑1 categories, preload level‑2 categories in the background.
-4. **Batch‑validate taxonomy paths**
-   - Validate multiple candidate paths in parallel or via a simple script.
-
-## Debugging tips
-
-1. Turn on debug logs for `suggest_content` to verify parameters.
-2. Use exact mode with only taxonomy to test whether a path actually returns content.
-3. Compare `recommend`, `search`, and `exact` with the same topic to understand their differences.
-
-## FAQ
-
-### Q1: What’s the difference between suggest_keywords and suggest_tags?
-
-- `suggest_keywords`: prefix‑based fuzzy matching, good for early exploration.
-- `suggest_tags`: relevance‑based matching on full keywords, more precise.
-
-### Q2: Why does validate_tax_path succeed but suggest_content return empty?
-
-Possible reasons:
-
-1. The taxonomy path is valid but currently has no content.
-2. Wrong intent mode (e.g., using `recommend` instead of `exact`).
-3. Other filters conflict.
-
-### Q3: How to choose the right intent?
+### Intent selection
 
 | Intent      | Use case                    | Required params           |
 |------------|-----------------------------|---------------------------|
@@ -449,23 +381,15 @@ Possible reasons:
 | `search`   | Keyword‑driven search       | `search_keywords`         |
 | `exact`    | Strict category filtering   | `tax_paths` or taxonomy params |
 
-### Q4: How to use exclude_keywords and exclude_tax_paths?
+### suggest_keywords vs suggest_tags
 
-Use them to aggressively filter noise content, but note they can significantly reduce result count.
+- `suggest_keywords`: prefix-based fuzzy matching — use for early exploration.
+- `suggest_tags`: relevance-based matching on full keywords — use for precise discovery.
 
-### Q5: How to maintain biz_trace_id across pages?
+### Tips
 
-Always keep and reuse the **first** `biz_trace_id` returned for a given query instead of chaining from page to page.
-
-## Summary
-
-Key points for using the exploration skill:
-
-1. **Progressive exploration**: Categories → Tags → Validation → Content.
-2. **Intent selection**: `recommend` for aimless browsing, `search` for keyword queries, `exact` for strict taxonomy.
-3. **Combination filters**: combine keywords with taxonomy for precise control.
-4. **Exclusions**: use `exclude_*` parameters judiciously to filter noise.
-5. **Session continuity**: maintain a consistent `biz_trace_id` for stable paging behavior.
-
-By following these practices, you can explore and discover high‑quality content on the platform efficiently.
+- **page_size**: use 10-15 for exploration, 20-30 for browsing, 20-40 for precise lookup.
+- **Exclusions**: `exclude_keywords` and `exclude_tax_paths` filter noise but can significantly reduce result count.
+- **Validated path, empty results?** The path may have no content yet, or the intent mode may be wrong (try `exact` instead of `recommend`).
+- **Debugging**: use exact mode with only taxonomy to test whether a path returns content.
 
