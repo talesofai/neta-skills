@@ -57,10 +57,11 @@ npx -y @talesofai/neta-skills@latest remove_background --input_image "image_arti
 
 **Upload local image or video**
 
-Registers a file from disk as a Neta artifact (after upload and moderation). Use the returned **`uuid`** or **`url`** in `make_image` (`ref_img-…`), `make_video` (`--image_source` URL), `remove_background`, or collection commands.
+Registers a file from disk **or from an `http://` / `https://` URL** as a Neta artifact (after upload and moderation). Use the returned **`uuid`** or **`url`** in `make_image` (`ref_img-…`), `make_video` (`--image_source` URL), `remove_background`, or collection commands.
 
 ```bash
 npx -y @talesofai/neta-skills@latest upload --file_path "/path/to/file.png"
+# or: --file_path "https://example.com/asset.png"
 ```
 
 📖 [Media upload](./references/media-upload.md) — supported types, size limits, and how outputs map to each downstream command.

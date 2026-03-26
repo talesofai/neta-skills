@@ -209,6 +209,10 @@ const createArtifact = async (
   return res.result[0]!;
 };
 
+const checkIsNetworkUrl = (url: string) => {
+  return url.startsWith("http://") || url.startsWith("https://");
+};
+
 export const upload = createCommand(
   {
     name: meta.name,
@@ -226,7 +230,12 @@ export const upload = createCommand(
     const regionOptions = apis.baseUrl.endsWith(".cn")
       ? OSS_STS_OPTIONS_CN
       : OSS_STS_OPTIONS_US;
-    const file = await readFile(file_path);
+
+    const file = await (checkIsNetworkUrl(file_path)
+      ? fetch(file_path)
+          .then((res) => res.arrayBuffer())
+          .then((buffer) => Buffer.from(buffer))
+      : readFile(file_path));
 
     const infos = filetypeinfo(file);
     const info = infos[0]; // always use first extension

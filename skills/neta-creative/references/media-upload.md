@@ -11,7 +11,9 @@ npx -y @talesofai/neta-skills@latest upload --file_path "/absolute/or/relative/p
 **Requirements**
 
 - **`NETA_TOKEN`** must be set (same as other authenticated commands). Unauthenticated runs fail with an explicit error.
-- **`file_path`**: absolute path, or path relative to the **current working directory** when the command runs.
+- **`file_path`**: either
+  - a **local path** — absolute, or relative to the **current working directory** when the command runs; or
+  - a **direct media URL** — `http://` or `https://` to a resource the CLI can `fetch` (same supported types and size limits apply after download).
 
 ---
 
@@ -89,6 +91,14 @@ npx -y @talesofai/neta-skills@latest make_image \
 npx -y @talesofai/neta-skills@latest upload --file_path "./character.png"
 
 npx -y @talesofai/neta-skills@latest remove_background --input_image "<UUID_FROM_UPLOAD_OUTPUT>"
+```
+
+### Remote file by URL
+
+When the asset is already hosted, pass a direct `https://` (or `http://`) link as `file_path`. The CLI downloads it, then runs the same type/size checks and OSS upload as for a local file.
+
+```bash
+npx -y @talesofai/neta-skills@latest upload --file_path "https://example.com/reference.jpg"
 ```
 
 ---
