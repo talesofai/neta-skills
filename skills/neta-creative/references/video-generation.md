@@ -2,6 +2,8 @@
 
 Applies to the `make_video` command.
 
+**User-uploaded stills:** `make_video --image_source` expects an **image URL** string. After **`upload`**, use the artifact’s **`url`** field from the command output (not the bare UUID). See [Media upload](./media-upload.md).
+
 ---
 
 ## Prompt principles
@@ -238,5 +240,6 @@ She slowly blinks, the corners of her mouth lifting slightly, strands of hair sw
 ## Related docs
 
 - [Image generation](./image-generation.md) — generating still images for video conversion.
+- [Media upload](./media-upload.md) — using local stills as `image_source`.
 - [Song MV](./song-mv.md) — combining songs and videos to build full music videos.
 

@@ -158,6 +158,10 @@ npx -y @talesofai/neta-skills@latest make_video --image_source "<URL3>" --prompt
 - Use `16:9` aspect ratio for images.
 - Works well for mainstream video platforms.
 
+### Local cover or key art
+
+If the user already has a cover image file, **`upload`** it and pass the returned **`url`** into `make_video --image_source` (or use `ref_img-<uuid>` in `make_image` when compositing). Details: [Media upload](./media-upload.md).
+
 ### Model selection
 
 - Prototyping: `model_s` (faster).

@@ -68,6 +68,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-adventure
 
 负责：
 - 生成图片、视频、歌曲、MV
+- 上传本地图片/视频为平台素材（`upload`，供参考图、图生视频、抠图等使用）
 - 移除图片背景
 - 角色搜索与详情（创作语境下使用）
 - 通过 `read_collection` 从作品反向拆解创作思路

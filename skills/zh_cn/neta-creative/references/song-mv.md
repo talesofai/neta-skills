@@ -162,6 +162,10 @@ npx -y @talesofai/neta-skills@latest make_video --image_source "<URL3>" --prompt
 - 单个视频片段适合 5-15 秒
 - 完整 MV 需要多个片段组合
 
+### 本地封面或主视觉
+
+若用户已有封面图文件，先 **`upload`**，再将返回的 **`url`** 传给 `make_video --image_source`；若要在 `make_image` 里与其它元素合成，可使用 **`参考图-<uuid>`** 或 **`ref_img-<uuid>`**。详见 [媒体上传](./media-upload.md)。
+
 ---
 
 ## 常见问题
@@ -196,3 +200,4 @@ npx -y @talesofai/neta-skills@latest make_video --image_source "<URL3>" --prompt
 
 - [歌曲生成](./song-creation.md) - 生成歌曲和歌词
 - [视频生成](./video-generation.md) - 图片转视频技巧
+- [媒体上传](./media-upload.md) - 本地封面 / 素材接入流程

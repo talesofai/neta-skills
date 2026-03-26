@@ -1,0 +1,10 @@
+name: upload
+title: Media File Upload
+description: Upload a media file (image or video) to create a media artifact.
+
+parameters:
+  file_path: Media file path (absolute path or relative path to command execution directory)
+
+errors:
+  file_type_not_supported: Media file type not supported
+  file_size_too_large: Media file size too large, maximum size is {max_size} bytes

@@ -110,6 +110,26 @@ export const createArtifactApis = (client: AxiosInstance) => {
       .then((res) => res.data);
   };
 
+  const createPicture = (data: { url: string }) => {
+    return client
+      .post<{
+        uuid: string;
+      }>(`/v1/artifact/picture`, {
+        url: data.url,
+      })
+      .then((res) => res.data);
+  };
+
+  const createVideo = (data: { url: string }) => {
+    return client
+      .post<{
+        uuid: string;
+      }>(`/v1/artifact/video`, {
+        url: data.url,
+      })
+      .then((res) => res.data);
+  };
+
   return {
     makeImage,
     makeVideo,
@@ -119,5 +139,7 @@ export const createArtifactApis = (client: AxiosInstance) => {
     postProcess,
     task,
     artifactDetail,
+    createPicture,
+    createVideo,
   };
 };
