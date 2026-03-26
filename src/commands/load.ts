@@ -140,7 +140,14 @@ export const buildCommands = async (
       });
 
       const apis = createApis({
-        logger,
+        logger: IS_DEV
+          ? logger
+          : {
+              error: () => {},
+              warn: () => {},
+              info: () => {},
+              debug: () => {},
+            },
         baseUrl,
         headers: {
           "x-token": process.env["NETA_TOKEN"] ?? "",

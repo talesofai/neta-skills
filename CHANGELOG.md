@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.14.3
+
+### Patch Changes
+
+- fix api logger env problem
+
 ## 0.14.2
 
 ### Patch Changes
