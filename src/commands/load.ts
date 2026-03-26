@@ -51,7 +51,14 @@ export const loadCommands = async (domains: string[]) => {
 
 const IS_DEV = process.env["NODE_ENV"] === "development";
 
-const logger = console;
+const logger: Pick<Console, "error" | "warn" | "info" | "debug"> = IS_DEV
+  ? console
+  : {
+      error: () => {},
+      warn: () => {},
+      info: () => {},
+      debug: () => {},
+    };
 
 export const buildCommands = async (
   cli: CommanderCommand<
@@ -140,14 +147,7 @@ export const buildCommands = async (
       });
 
       const apis = createApis({
-        logger: IS_DEV
-          ? logger
-          : {
-              error: () => {},
-              warn: () => {},
-              info: () => {},
-              debug: () => {},
-            },
+        logger,
         baseUrl,
         headers: {
           "x-token": process.env["NETA_TOKEN"] ?? "",
@@ -183,14 +183,7 @@ export const buildCommands = async (
         .execute(input, {
           apis,
           user,
-          log: IS_DEV
-            ? logger
-            : {
-                error: () => {},
-                warn: () => {},
-                info: () => {},
-                debug: () => {},
-              },
+          log: logger,
         })
         .then((result) => {
           const duration = Date.now() - startTime;

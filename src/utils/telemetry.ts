@@ -7,6 +7,8 @@ type TrackParams = Record<string, TrackValue>;
 
 const DISABLE_TELEMETRY = process.env["DISABLE_TELEMETRY"] === "1";
 
+const IS_DEV = process.env["NODE_ENV"] === "development";
+
 const api = axios.create({
   baseURL: "https://gator.volces.com/v2/event/json",
   headers: {
@@ -54,13 +56,13 @@ export const track = (event: string, params: TrackParams) => {
       ],
     })
     .then((e) => {
-      if (process.env["NODE_ENV"] !== "development") return;
+      if (!IS_DEV) return;
 
       if (e.status === 200) return;
       logger.warn("[telemetry] track error: %s %o", e.status, e.data);
     })
     .catch((e) => {
-      if (process.env["NODE_ENV"] !== "development") return;
+      if (!IS_DEV) return;
       logger.warn("[telemetry] track error: %o", e);
     });
 };
