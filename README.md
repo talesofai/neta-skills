@@ -223,6 +223,13 @@ Both the AI agent skills and the CLI require the following environment configura
 |----------|----------|---------|-------------|
 | `NETA_TOKEN` | ✅ | - | Your Neta Art API access token. |
 | `NETA_API_BASE_URL` | ❌ | default: `https://api.talesofai.com` | Base URL for the Neta API. |
+| `DISABLE_TELEMETRY` | ❌ | unset | Set to `1` to disable CLI usage analytics (see below). |
+
+### CLI usage analytics (telemetry)
+
+The `@talesofai/neta-skills` CLI sends lightweight usage data—such as which command ran, the options you passed, CLI version and locale, a coarse API-region hint, outcomes and timing, and your user UUID when signed in (not your API token)—so we can measure reliability and improve the experience.
+
+To disable analytics entirely, set `DISABLE_TELEMETRY=1` in your environment; no telemetry HTTP requests are sent.
 
 ### i18n and locale detection
 

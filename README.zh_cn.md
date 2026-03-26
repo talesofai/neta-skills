@@ -222,6 +222,13 @@ neta-skills/
 |--------|------|--------|------|
 | `NETA_TOKEN` | ✅ | - | Neta Art API 访问令牌 |
 | `NETA_API_BASE_URL` | ❌ | default: `https://api.talesofai.com` | Neta API 网关地址 |
+| `DISABLE_TELEMETRY` | ❌ | 未设置 | 设为 `1` 可关闭 CLI 使用数据统计（见下文） |
+
+### CLI 使用数据（埋点 / 遥测）
+
+`@talesofai/neta-skills` CLI 会上报轻量使用数据（例如执行的命令、命令行参数、CLI 版本与语言、大致 API 区域、执行结果与耗时、登录时的用户 UUID 等；**不包含** API Token），用于衡量稳定性并改进产品体验。
+
+若不希望参与统计，请在环境中设置 `DISABLE_TELEMETRY=1`，此时不会发起相关上报请求。
 
 ### 多语言与本地化（i18n）
 

@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.14.2
+
+### Patch Changes
+
+- usage analytics
+
 ## 0.14.1
 
 ### Patch Changes

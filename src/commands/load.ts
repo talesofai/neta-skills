@@ -9,7 +9,14 @@ import { type TLiteral, Type } from "@sinclair/typebox";
 import { AssertError, Value } from "@sinclair/typebox/value";
 import { createApis } from "../apis/index.ts";
 import { ApiResponseError } from "../utils/errors.ts";
+import { getLocale } from "../utils/lang.ts";
 import { setLocale } from "../utils/parse_meta.ts";
+import {
+  formatCommandParams,
+  track,
+  trackConfig,
+  trackConfigUser,
+} from "../utils/telemetry.ts";
 import { type Command, isCommand, type SupportedSchema } from "./factory.ts";
 
 export const loadCommands = async (domains: string[]) => {
@@ -127,6 +134,11 @@ export const buildCommands = async (
           ? api_base_url
           : (process.env["NETA_API_BASE_URL"] ?? "https://api.talesofai.com");
 
+      trackConfig({
+        app_region: baseUrl.endsWith("cn") ? "cn" : "global",
+        app_language: getLocale(),
+      });
+
       const apis = createApis({
         logger,
         baseUrl,
@@ -143,6 +155,15 @@ export const buildCommands = async (
 
         return null;
       });
+      const startTime = Date.now();
+      logger.debug("[telemetry] user: %s", user?.uuid);
+
+      trackConfigUser(user ? { user_unique_id: user.uuid } : null);
+
+      track("command_call", {
+        command: cmd.name,
+        ...formatCommandParams(args),
+      });
 
       const type = cmd.inputSchema ?? Type.Object({});
       const input = Value.Parse(type, args);
@@ -151,7 +172,7 @@ export const buildCommands = async (
         logger.debug("[command] %s, params: %o", cmd.name, input);
       }
 
-      const result = await cmd
+      await cmd
         .execute(input, {
           apis,
           user,
@@ -164,8 +185,31 @@ export const buildCommands = async (
                 debug: () => {},
               },
         })
+        .then((result) => {
+          const duration = Date.now() - startTime;
+          track("command_result", {
+            command: cmd.name,
+            ...formatCommandParams(args),
+            duration,
+          });
+
+          if (!result) return;
+
+          if (IS_DEV) {
+            logger.debug(JSON.stringify(result, null, 2));
+          } else {
+            logger.info(JSON.stringify(result));
+          }
+        })
         .catch((e: unknown) => {
           if (e instanceof AssertError) {
+            track("command_error", {
+              command: cmd.name,
+              ...formatCommandParams(args),
+              error_type: e.name,
+              error_message: e.message,
+            });
+
             logger.error({
               error: {
                 type: e.name,
@@ -178,6 +222,14 @@ export const buildCommands = async (
           }
 
           if (e instanceof ApiResponseError) {
+            track("command_error", {
+              command: cmd.name,
+              ...formatCommandParams(args),
+              error_type: e.name,
+              error_message: e.message,
+              error_code: e.code,
+            });
+
             logger.error({
               error: {
                 type: e.name,
@@ -189,6 +241,13 @@ export const buildCommands = async (
           }
 
           if (e instanceof Error) {
+            track("command_error", {
+              command: cmd.name,
+              ...formatCommandParams(args),
+              error_type: e.name,
+              error_message: e.message,
+            });
+
             logger.error({
               error: {
                 type: e.name,
@@ -198,17 +257,16 @@ export const buildCommands = async (
             return null;
           }
 
+          track("command_error", {
+            command: cmd.name,
+            ...formatCommandParams(args),
+            error_type: "unknown",
+            error_message: typeof e === "string" ? e : JSON.stringify(e),
+          });
+
           logger.error(e);
           return null;
         });
-
-      if (!result) return;
-
-      if (IS_DEV) {
-        logger.debug(JSON.stringify(result, null, 2));
-      } else {
-        logger.info(JSON.stringify(result));
-      }
     });
 
     return command;
