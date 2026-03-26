@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.15.0
+
+### Minor Changes
+
+- support media assets upload
+
 ## 0.14.3
 
 ### Patch Changes
