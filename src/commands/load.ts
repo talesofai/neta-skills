@@ -54,9 +54,12 @@ const IS_DEV = process.env["NODE_ENV"] === "development";
 const logger: Pick<Console, "error" | "warn" | "info" | "debug"> = IS_DEV
   ? console
   : {
-      error: () => {},
-      warn: () => {},
-      info: () => {},
+      // biome-ignore lint/suspicious/noConsole: use console
+      error: console.error,
+      // biome-ignore lint/suspicious/noConsole: use console
+      warn: console.warn,
+      // biome-ignore lint/suspicious/noConsole: use console
+      info: console.info,
       debug: () => {},
     };
 

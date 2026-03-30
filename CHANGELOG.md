@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.15.3
+
+### Patch Changes
+
+- fix logger
+
 ## 0.15.2
 
 ### Patch Changes
