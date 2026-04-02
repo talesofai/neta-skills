@@ -15,6 +15,23 @@ Used to interact with the Neta API for multimedia content creation, creation‑r
 2. If, during creation, you discover that the real need is more like “browse recommendations / casually explore / research topics”, combine this skill with `neta-community` or `neta-suggest` instead of overloading this skill.
 3. **Premium** (plans, orders, Stripe): use the commands below. Run **`get_current_premium_plan`** before and after checkout so the user can confirm tier (and end time if returned). Commerce needs the **global** Neta API—see the premium reference. If creation is blocked by **quota / credits (电量)** or **usage frequency (频率)**, say why in one beat; if an upgrade fits their goal, offer the path once (list plans → create order → pay)—**do not** repeat upgrade nudges in the same conversation unless the user asks.
 
+## Authorization
+
+Use this when the user needs a **logged-in Neta identity** for CLI-backed flows and no valid session exists (or you would otherwise rely on `NETA_TOKEN`).
+
+1. **Start the flow**: run **`neta login`** (default action is `request-code`). 
+```bash
+npx -y @talesofai/neta-skills@latest login --action request-code
+```
+This begins the OAuth **device authorization** flow stored by the CLI.
+
+2. **Browser step**: When the command returns device-authorization fields, show the user **`verification_uri_complete`** (the ready-to-open URL), tell them to open it in a browser and finish sign-in/consent there, then **return to the chat and explicitly say the browser step is done** so you know when to continue.
+
+3. **Complete login**: After they confirm in chat, run **`neta login --action verify-code`** to exchange the device code for tokens. On success, show the returned **account basics**: **`uuid`** (long user id), **`nick_name`**, and **`avatar_url`**.
+```bash
+npx -y @talesofai/neta-skills@latest login --action verify-code
+```
+
 ## Commands
 
 ### Content creation

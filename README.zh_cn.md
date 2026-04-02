@@ -1,7 +1,7 @@
 # NETA Skills
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node](https://img.shields.io/badge/Node-%3E%3D20-green)](https://nodejs.org/)
+[![Node](https://img.shields.io/badge/Node-%3E%3D22-green)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 
 [简体中文](./README.md) · [English](./README.en.md)
@@ -18,8 +18,7 @@
 - 通过推荐引擎和互动 Feed 进行玩法内容发现
 - 创作与游玩 AI 驱动的交互式故事冒险（奇遇剧本），Agent 担任 DM 与角色扮演者
 
-你可以在 [Neta 开放平台](https://www.neta.art/open/) 获取访问令牌 `NETA_TOKEN`。
-也可以在[国内登陆账号后台](https://app.nieta.art/security) 获取访问令牌 `NETA_TOKEN`。
+你可以在 [Neta 开放平台](https://www.neta.art/open/) 或[国内账号后台](https://app.nieta.art/security) 获取访问令牌 `NETA_TOKEN`。在**全球** API 环境下，也可使用 CLI 的 `login`（OAuth 设备流）登录，详见下文「身份验证」小节。
 
 ---
 
@@ -31,6 +30,7 @@
 - 🏷️ **社区与标签集成**：浏览热门标签、空间、玩法合集与角色。
 - 🧭 **智能内容探索**：通过关键词建议、标签推荐、分类导航与智能内容流，渐进式发现玩法与内容。
 - 🤖 **Agent 优先设计**：面向 AI Agent 场景设计，易于在各类 Agent 框架中集成调用。
+- 🔐 **CLI 登录（可选）**：在**全球** API 环境（`api.talesofai.com`）下，可通过 `login` 使用 OAuth **设备授权**登录，无需在每台环境手动配置 `NETA_TOKEN`。
 
 ---
 
@@ -69,10 +69,12 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-adventure
 
 ### 可用指令总览
 
-当前技能共包含 **34 个命令**，覆盖创作、奇遇、角色与社区探索等场景：
+当前技能共包含 **36 个命令**，覆盖创作、奇遇、角色与社区探索等场景：
 
 | 分类 | 命令 | 说明 |
 |------|------|------|
+| **用户 User** | `login` | OAuth 设备流：默认 `request-code` 发起登录；浏览器完成后用 `verify-code` 换票并写入本地会话 |
+| | `logout` | 清除本地保存的访问令牌及未完成的设备授权状态 |
 | **奇遇剧本 Adventure** | `create_adventure_campaign` | 创建 AI 驱动的交互式故事冒险剧本 |
 | | `update_adventure_campaign` | 更新已有奇遇剧本 |
 | | `list_my_adventure_campaigns` | 列出你创建的奇遇剧本 |
@@ -136,6 +138,30 @@ pnpm dlx @talesofai/neta-skills --help
 export NETA_TOKEN=your_token_here
 ```
 
+### 身份验证（`NETA_TOKEN` 与 `login`）
+
+任选其一即可：
+
+1. **环境变量令牌（通用）**  
+   在 [Neta 开放平台](https://www.neta.art/open/) 或国内后台获取 `NETA_TOKEN`。未建立 CLI 会话时，客户端会将其作为 `x-token` 发送。
+
+2. **CLI 设备授权登录（仅全球 API）**  
+   当 `NETA_API_BASE_URL` 为全球域名（`…talesofai.com`）时，可执行：
+
+   ```bash
+   npx -y @talesofai/neta-skills@latest login
+   ```
+
+   命令会返回 OAuth 设备授权字段。请让用户在浏览器中打开 **`verification_uri_complete`** 完成登录与授权，完成后执行：
+
+   ```bash
+   npx -y @talesofai/neta-skills@latest login --action verify-code
+   ```
+
+   成功后令牌保存在本机配置目录（见下文 `NETA_CONFIG_DIR`）。之后在会话有效期内，请求会携带 `Authorization: Bearer …`，直至执行 `logout` 或刷新失效。
+
+若 CLI 提示**当前区域不支持**设备登录（非全球 API），请改用 `NETA_TOKEN`。
+
 ### 运行示例
 
 ```bash
@@ -181,7 +207,7 @@ neta-skills/
 │       └── neta-adventure/
 ├── src/                            # CLI 对应的 TypeScript 源码
 │   ├── apis/                       # 封装后的 Neta API 调用
-│   ├── commands/                   # CLI 命令定义（TS + YAML 描述）
+│   ├── commands/                   # CLI 命令定义（含 user / creative / community 等）
 │   ├── utils/                      # 通用工具方法
 │   └── cli.ts                      # CLI 入口（TypeScript）
 ├── bin/                            # 构建后的 JavaScript 产物
@@ -220,9 +246,14 @@ neta-skills/
 
 | 变量名 | 必需 | 默认值 | 说明 |
 |--------|------|--------|------|
-| `NETA_TOKEN` | ✅ | - | Neta Art API 访问令牌 |
-| `NETA_API_BASE_URL` | ❌ | default: `https://api.talesofai.com` | Neta API 网关地址 |
+| `NETA_TOKEN` | 视情况* | - | 从开放平台或国内后台获取的 API 令牌；未使用 `login` 会话时必填 |
+| `NETA_API_BASE_URL` | ❌ | `https://api.talesofai.com` | Neta API 网关；设备登录仅在指向**全球**域名（`…talesofai.com`）时可用 |
+| `NETA_AUTH_API_BASE_URL` | ❌ | 由 `NETA_API_BASE_URL` 推导 | OIDC / 换票端点；自建环境可显式覆盖 |
+| `NETA_CLIENT_ID` | ❌ | 内置公共客户端 ID | 设备流与刷新令牌使用的 OAuth `client_id` |
+| `NETA_CONFIG_DIR` | ❌ | 系统配置目录 | CLI 存放 OAuth 令牌与设备流状态的目录（`env-paths` + `neta-cli`） |
 | `DISABLE_TELEMETRY` | ❌ | 未设置 | 设为 `1` 可关闭 CLI 使用数据统计（见下文） |
+
+\* 若你已在**全球** API 上成功执行 `login` / `verify-code`，在会话有效期间可不设 `NETA_TOKEN`，直至 `logout` 或刷新会话失效。
 
 ### CLI 使用数据（埋点 / 遥测）
 

@@ -1,5 +1,6 @@
 import { Type } from "@sinclair/typebox";
 import { parseDate } from "../../utils/date.ts";
+import { IS_GLOBAL } from "../../utils/env.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
@@ -25,7 +26,7 @@ export const getPremiumOrder = createCommand(
     }),
   },
   async ({ order_uuid }, { apis }) => {
-    if (!apis.baseUrl.endsWith("talesofai.com")) {
+    if (!IS_GLOBAL) {
       throw new Error("This command is not supported in the current region");
     }
 

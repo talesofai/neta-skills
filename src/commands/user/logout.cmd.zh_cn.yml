@@ -1,0 +1,5 @@
+name: logout
+title: 退出登录
+description: 退出登录你的 Neta 账户
+
+success: 退出登录成功

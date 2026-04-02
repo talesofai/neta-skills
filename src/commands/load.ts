@@ -8,8 +8,10 @@ import {
 import { type TLiteral, Type } from "@sinclair/typebox";
 import { AssertError, Value } from "@sinclair/typebox/value";
 import { createApis } from "../apis/index.ts";
+import { API_BASE_URL, IS_DEV } from "../utils/env.ts";
 import { ApiResponseError } from "../utils/errors.ts";
-import { getLocale } from "../utils/lang.ts";
+import { getSysLocale } from "../utils/lang.ts";
+import { logger } from "../utils/logger.ts";
 import { setLocale } from "../utils/parse_meta.ts";
 import {
   formatCommandParams,
@@ -49,26 +51,11 @@ export const loadCommands = async (domains: string[]) => {
   ).then((commands) => commands.flat());
 };
 
-const IS_DEV = process.env["NODE_ENV"] === "development";
-
-const logger: Pick<Console, "error" | "warn" | "info" | "debug"> = IS_DEV
-  ? console
-  : {
-      // biome-ignore lint/suspicious/noConsole: use console
-      error: console.error,
-      // biome-ignore lint/suspicious/noConsole: use console
-      warn: console.warn,
-      // biome-ignore lint/suspicious/noConsole: use console
-      info: console.info,
-      debug: () => {},
-    };
-
 export const buildCommands = async (
   cli: CommanderCommand<
     [],
-    {
-      api_base_url?: string;
-    },
+    // biome-ignore lint/complexity/noBannedTypes: ignore type error
+    {},
     // biome-ignore lint/complexity/noBannedTypes: ignore type error
     {}
   >,
@@ -81,9 +68,10 @@ export const buildCommands = async (
     "character_elementum",
     "adventure_campaign",
     "premium",
+    "user",
   ]);
 
-  return commands.map((cmd) => {
+  commands.forEach((cmd) => {
     const command = cli.command(cmd.name);
     command.description(cmd.title || cmd.description || "");
     const inputSchema = cmd.inputSchema;
@@ -91,7 +79,7 @@ export const buildCommands = async (
     if (inputSchema && "properties" in inputSchema) {
       const properties = inputSchema.properties;
 
-      if (!properties) return command;
+      if (!properties) return;
 
       Object.entries(properties).forEach(([key, property]) => {
         if (typeof property !== "object") return;
@@ -137,34 +125,29 @@ export const buildCommands = async (
     }
 
     command.action(async (args) => {
-      const { api_base_url } = cli.opts();
-
-      const baseUrl =
-        typeof api_base_url === "string"
-          ? api_base_url
-          : (process.env["NETA_API_BASE_URL"] ?? "https://api.talesofai.com");
-
       trackConfig({
-        app_region: baseUrl.endsWith("cn") ? "cn" : "global",
-        app_language: getLocale(),
+        app_region: API_BASE_URL.endsWith("cn") ? "cn" : "global",
+        app_language: getSysLocale(),
       });
 
       const apis = createApis({
         logger,
-        baseUrl,
+        baseUrl: API_BASE_URL,
         headers: {
-          "x-token": process.env["NETA_TOKEN"] ?? "",
           "x-platform": "nieta-app/web",
         },
       });
 
-      const user = await apis.user.me().catch((e) => {
-        if (e instanceof ApiResponseError) {
-          return null;
-        }
+      const user =
+        cmd.name === "login" || cmd.name === "logout"
+          ? null
+          : await apis.user.me().catch((e) => {
+              if (e instanceof ApiResponseError) {
+                return null;
+              }
+              return null;
+            });
 
-        return null;
-      });
       const startTime = Date.now();
       logger.debug("[telemetry] user: %s", user?.uuid);
 
@@ -178,9 +161,7 @@ export const buildCommands = async (
       const type = cmd.inputSchema ?? Type.Object({});
       const input = Value.Parse(type, args);
 
-      if (IS_DEV) {
-        logger.debug("[command] %s, params: %o", cmd.name, input);
-      }
+      logger.debug("[command] %s, params: %o", cmd.name, input);
 
       await cmd
         .execute(input, {
@@ -218,7 +199,7 @@ export const buildCommands = async (
                 type: e.name,
                 message: e.message,
                 path: e.error?.path,
-                schema: e.error?.schema,
+                schema: JSON.stringify(e.error?.schema),
               },
             });
             return null;
@@ -271,7 +252,5 @@ export const buildCommands = async (
           return null;
         });
     });
-
-    return command;
   });
 };

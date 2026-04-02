@@ -1,5 +1,6 @@
 import { Type } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
+import { IS_GLOBAL } from "../../utils/env.ts";
 import { safeParseJson } from "../../utils/json.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
@@ -59,7 +60,7 @@ export const listPremiumPlans = createCommand(
     description: meta.description,
   },
   async (_, { apis }) => {
-    if (!apis.baseUrl.endsWith("talesofai.com")) {
+    if (!IS_GLOBAL) {
       throw new Error("This command is not supported in the current region");
     }
 

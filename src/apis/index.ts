@@ -1,4 +1,6 @@
 import axios, { AxiosError } from "axios";
+import { isTokenExpired, readToken, refreshToken } from "../utils/auth.ts";
+import { NETA_TOKEN } from "../utils/env.ts";
 import { catchErrorResponse, handleAxiosError } from "../utils/errors.ts";
 import { createActivityApis, type SelectedCollection } from "./activity.ts";
 import { createArtifactApis } from "./artifact.ts";
@@ -46,10 +48,25 @@ export const createApis = (option: {
     timeout: 10 * 1000,
   });
 
-  client.interceptors.request.use((config) => {
+  client.interceptors.request.use(async (config) => {
     const now = Date.now();
     config.start_time = now;
     logger.debug("[api] request: %s %s", config.method, config.url);
+
+    let token = await readToken();
+    if (token && isTokenExpired(token)) {
+      token = await refreshToken().catch((e) => {
+        logger.warn("[api] refresh token error: %o", e);
+        return null;
+      });
+    }
+
+    if (!token) {
+      config.headers.set("x-token", NETA_TOKEN);
+    } else {
+      config.headers.set("Authorization", `Bearer ${token.access_token}`);
+    }
+
     return config;
   });
 

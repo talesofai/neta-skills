@@ -57,6 +57,10 @@ export const catchErrorResponse = (data?: unknown): string => {
 };
 
 export const handleAxiosError = (error: unknown) => {
+  if (error instanceof ApiResponseError) {
+    throw error;
+  }
+
   if (error instanceof AxiosError) {
     if (error.response?.status) {
       let message = error.message;

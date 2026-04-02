@@ -224,7 +224,9 @@ export const upload = createCommand(
   },
   async ({ file_path }, { apis, user, log }) => {
     if (!user) {
-      throw new Error("Not authenticated. Please check your NETA_TOKEN.");
+      throw new Error(
+        "Not authenticated. Please check your NETA_TOKEN or login.",
+      );
     }
 
     const regionOptions = apis.baseUrl.endsWith(".cn")

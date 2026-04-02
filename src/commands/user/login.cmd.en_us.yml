@@ -1,0 +1,8 @@
+name: login
+title: Login
+description: Login to your Neta account
+parameters:
+  action: Action to perform (request-code or verify-code)
+
+errors:
+  not_supported_in_current_region: This command is not supported in the current region, please set NETA_TOKEN environment variable for authentication.

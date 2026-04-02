@@ -1,7 +1,7 @@
 # NETA Skills
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node](https://img.shields.io/badge/Node-%3E%3D20-green)](https://nodejs.org/)
+[![Node](https://img.shields.io/badge/Node-%3E%3D22-green)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 
 [English](./README.md) · [简体中文](./README.zh_cn.md)
@@ -12,7 +12,7 @@
 
 **NETA Skills** is a collection of powerful AI agent skills and accompanying CLI tools designed for interacting with the [Neta Art](https://www.neta.art/) API. Built for developers and AI agents, it seamlessly extends any agent's capabilities to generate multimedia, manage characters, and process audio/video workflows.
 
-You can get your access token / NETA TOKEN from the [Neta Open Portal](https://www.neta.art/open/).
+You can get your access token (`NETA_TOKEN`) from the [Neta Open Portal](https://www.neta.art/open/). On the **global** API host, you may also sign in with the CLI `login` command (OAuth device flow) instead of pasting a token into every environment—see [Authentication](#authentication-neta_token-vs-login) below.
 
 ---
 
@@ -26,6 +26,7 @@ You can get your access token / NETA TOKEN from the [Neta Open Portal](https://w
 - 🧭 **Smart Discovery & Suggestions:** Explore interactive feeds and get keyword, tag, and category suggestions for progressive content discovery.
 - 📖 **Interactive Story Adventures:** Craft and play AI-driven narrative campaigns (Adventure) — the agent acts as DM and character roleplayer for immersive interactive fiction.
 - 🤖 **Agent First:** Designed from the ground up to plug into your favorite AI agent frameworks.
+- 🔐 **CLI sign-in (optional):** On the **global** API host (`api.talesofai.com`), you can use OAuth **device authorization** via `neta login` instead of copying `NETA_TOKEN` into every environment.
 
 ---
 
@@ -68,10 +69,12 @@ npx skills add talesofai/neta-skills/skills/neta-adventure
 
 ### Available Commands
 
-The skill includes **42 commands** for various tasks:
+The skill includes **45 commands** for various tasks:
 
 | Category | Command | Description |
 |----------|---------|-------------|
+| **User** | `login` | Start OAuth device login (`request-code`) or complete it (`verify-code`); stores tokens locally on success |
+| | `logout` | Clear stored CLI session (access token and any in-progress device flow) |
 | **Adventure Campaigns** | `create_adventure_campaign` | Create an AI-driven interactive story adventure |
 | | `update_adventure_campaign` | Update an existing adventure campaign |
 | | `list_my_adventure_campaigns` | List your created adventure campaigns |
@@ -139,6 +142,30 @@ Configure your environment:
 export NETA_TOKEN=your_token_here
 ```
 
+### Authentication (`NETA_TOKEN` vs `login`)
+
+You can authenticate in either of these ways:
+
+1. **Environment token (works everywhere)**  
+   Set `NETA_TOKEN` from the [Neta Open Portal](https://www.neta.art/open/). The CLI and API client send it as the `x-token` header when no stored session exists.
+
+2. **CLI device login (global API only)**  
+   When `NETA_API_BASE_URL` points at the **global** host (`…talesofai.com`), you can run:
+
+   ```bash
+   npx -y @talesofai/neta-skills@latest login
+   ```
+
+   The command returns OAuth device fields. Open **`verification_uri_complete`** in a browser, finish sign-in, then run:
+
+   ```bash
+   npx -y @talesofai/neta-skills@latest login --action verify-code
+   ```
+
+   On success, tokens are stored under the app config directory (see `NETA_CONFIG_DIR` below). Subsequent API calls use `Authorization: Bearer …` until the session expires or you run `logout`.
+
+If the CLI reports that login is not supported for your **region** (non-global API), use `NETA_TOKEN` instead.
+
 ### Running Commands
 
 ```bash
@@ -180,7 +207,7 @@ neta-skills/
 │       └── neta-adventure/
 ├── src/                            # TypeScript source for the CLI
 │   ├── apis/                       # Typed Neta API client helpers (incl. commerce)
-│   ├── commands/                   # CLI command groups: creative, community, adventure, VToken, premium, …
+│   ├── commands/                   # CLI command groups: user, creative, community, adventure, VToken, premium, …
 │   ├── utils/                      # Shared utilities
 │   └── cli.ts                      # CLI entrypoint (TypeScript)
 ├── bin/                            # Built JavaScript output for the CLI
@@ -221,9 +248,14 @@ Both the AI agent skills and the CLI require the following environment configura
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `NETA_TOKEN` | ✅ | - | Your Neta Art API access token. |
-| `NETA_API_BASE_URL` | ❌ | default: `https://api.talesofai.com` | Base URL for the Neta API. |
+| `NETA_TOKEN` | Conditional* | - | API access token from the [Neta Open Portal](https://www.neta.art/open/). Required when not using a CLI session from `login`. |
+| `NETA_API_BASE_URL` | ❌ | `https://api.talesofai.com` | Base URL for the Neta API. Device login is only available when this resolves to the **global** host (`…talesofai.com`). |
+| `NETA_AUTH_API_BASE_URL` | ❌ | derived from `NETA_API_BASE_URL` | OIDC / token endpoints for `login` and refresh (override for custom stacks). |
+| `NETA_CLIENT_ID` | ❌ | built-in public client id | OAuth client id for device login and refresh. |
+| `NETA_CONFIG_DIR` | ❌ | OS-specific config path | Directory where the CLI stores OAuth tokens and device-flow state (see `env-paths` + `neta-cli`). |
 | `DISABLE_TELEMETRY` | ❌ | unset | Set to `1` to disable CLI usage analytics (see below). |
+
+\* If you have completed `login` / `verify-code` successfully on the global API, the CLI can run without `NETA_TOKEN` until you `logout` or the refresh session is cleared.
 
 ### CLI usage analytics (telemetry)
 

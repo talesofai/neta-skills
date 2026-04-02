@@ -1,13 +1,13 @@
 import axios from "axios";
 import pkg from "../../package.json" with { type: "json" };
+import { IS_DEV } from "./env.ts";
+import { logger } from "./logger.ts";
 
 type TrackValue = string | number | boolean | string[] | number[] | null;
 
 type TrackParams = Record<string, TrackValue>;
 
 const DISABLE_TELEMETRY = process.env["DISABLE_TELEMETRY"] === "1";
-
-const IS_DEV = process.env["NODE_ENV"] === "development";
 
 const api = axios.create({
   baseURL: "https://gator.volces.com/v2/event/json",
@@ -36,10 +36,9 @@ export const trackConfig = (config: Record<string, string>) => {
   };
 };
 
-const logger = console;
-
 export const track = (event: string, params: TrackParams) => {
   if (DISABLE_TELEMETRY) return;
+  if (!_user) return;
 
   api
     .post("/", {

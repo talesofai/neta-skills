@@ -79,7 +79,9 @@ export const updateAdventureCampaign = createCommand(
     { user, apis },
   ) => {
     if (!user) {
-      throw new Error("Not authenticated. Please check your NETA_TOKEN.");
+      throw new Error(
+        "Not authenticated. Please check your NETA_TOKEN or login.",
+      );
     }
 
     const patch = Object.fromEntries(

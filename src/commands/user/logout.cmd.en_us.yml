@@ -1,0 +1,5 @@
+name: logout
+title: Logout
+description: Logout from your Neta account
+
+success: Logout success

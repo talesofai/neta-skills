@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import type { TSchema } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
 import yaml from "yaml";
-import { getLocale as getLocaleFromLang } from "./lang.ts";
+import { getSysLocale as getLocaleFromLang } from "./lang.ts";
 
 let _locale: "zh_cn" | "en_us" = "en_us";
 

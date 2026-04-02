@@ -1,5 +1,17 @@
 # @neta/skills-neta
 
+## 0.16.1
+
+### Patch Changes
+
+- fix some env problems
+
+## 0.16.0
+
+### Minor Changes
+
+- support oauth2 device flow with login command
+
 ## 0.15.3
 
 ### Patch Changes
