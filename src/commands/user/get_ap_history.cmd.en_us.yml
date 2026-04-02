@@ -1,0 +1,14 @@
+name: get_ap_history
+title: Get My AP History
+description: |
+  Get the current user's AP (Action Points) transaction history, paginated by cursor.
+
+  Each record shows: type (operation type), ap_delta (negative = spent, positive = gained),
+  ctime (timestamp), and extra_data.display_name (human-readable label).
+
+  Pagination: pass the returned next_cursor as cursor_id to fetch the next page.
+  When has_next is false, you have reached the end of history.
+
+parameters:
+  cursor_id: Cursor ID for pagination — pass the last record id from the previous page to get the next page (optional)
+  page_size: Number of records per page, defaults to 10 (optional)

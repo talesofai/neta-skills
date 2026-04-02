@@ -1,0 +1,15 @@
+name: update_profile
+title: Update My Profile
+description: |
+  Update the current user's profile. At least one field must be provided.
+
+  Updatable fields: nick_name (display name), bio (profile bio), avatar_url (avatar image URL).
+  Returns the updated profile on success.
+
+  Note: avatar_url must be a valid URL to an already-uploaded image. To upload a new avatar
+  image first, use the OSS upload flow before calling this command.
+
+parameters:
+  nick_name: New display name (optional)
+  bio: New profile bio / description (optional)
+  avatar_url: New avatar image URL — must be a valid uploaded image URL (optional)

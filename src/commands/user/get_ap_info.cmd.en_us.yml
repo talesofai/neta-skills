@@ -1,0 +1,13 @@
+name: get_ap_info
+title: Get My AP Info
+description: |
+  Get the current user's AP (Action Points / Energy) balance details.
+
+  AP is the credit currency used to generate images, videos, and other AI content.
+  Returns: ap (available to spend), ap_limit (daily cap), temp_ap (daily free quota for
+  overseas users), paid_ap (purchased AP), and unlimited_until (timestamp if on unlimited plan).
+
+  Use this before starting a generation task to check if you have sufficient AP.
+  For transaction history, use get_ap_history instead.
+
+parameters: {}
