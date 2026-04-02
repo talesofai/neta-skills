@@ -36,16 +36,11 @@ export const getApHistory = createCommand(
     description: meta.description,
     inputSchema: getApHistoryParameters,
   },
-  async ({ cursor_id, page_size }, { apis }) => {
-    const result = await apis.user.apDeltaInfo({
-      cursor_id,
-      page_size,
-    });
+  async ({ cursor_id, page_size }, { apis, user }) => {
+    if (!user) {
+      throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
+    }
 
-    return {
-      items: result.items,
-      has_next: result.has_next,
-      next_cursor: result.next_cursor,
-    };
+    return apis.user.apDeltaInfo({ cursor_id, page_size });
   },
 );

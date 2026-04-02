@@ -42,27 +42,11 @@ export const listMyStories = createCommand(
     description: meta.description,
     inputSchema: listMyStoriesParameters,
   },
-  async ({ uuid, page_index, page_size }, { apis }) => {
-    const result = await apis.collection.userStories(uuid, {
-      page_index,
-      page_size,
-    });
+  async ({ uuid, page_index, page_size }, { apis, user }) => {
+    if (!user) {
+      throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
+    }
 
-    return {
-      total: result.total,
-      page_index: result.page_index,
-      page_size: result.page_size,
-      list: result.list.map((story) => ({
-        storyId: story.storyId,
-        name: story.name,
-        coverUrl: story.coverUrl,
-        status: story.status,
-        ctime: story.ctime,
-        likeCount: story.likeCount,
-        commentCount: story.commentCount,
-        is_pinned: story.is_pinned,
-        has_video: story.has_video,
-      })),
-    };
+    return apis.collection.userStories(uuid, { page_index, page_size });
   },
 );

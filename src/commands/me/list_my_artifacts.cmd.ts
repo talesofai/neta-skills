@@ -47,25 +47,16 @@ export const listMyArtifacts = createCommand(
     description: meta.description,
     inputSchema: listMyArtifactsParameters,
   },
-  async ({ page_index, page_size, modality, is_starred }, { apis }) => {
-    const result = await apis.artifact.listArtifacts({
+  async ({ page_index, page_size, modality, is_starred }, { apis, user }) => {
+    if (!user) {
+      throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
+    }
+
+    return apis.artifact.listArtifacts({
       page_index,
       page_size,
       modality,
       is_starred,
     });
-
-    return {
-      total: result.total,
-      list: result.list.map((item) => ({
-        uuid: item.uuid,
-        status: item.status,
-        url: item.url,
-        modality: item.modality,
-        is_starred: item.is_starred,
-        ctime: item.ctime,
-        audio_name: item.audio_name,
-      })),
-    };
   },
 );

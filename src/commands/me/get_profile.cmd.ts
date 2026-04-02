@@ -17,9 +17,7 @@ export const getProfile = createCommand(
     title: meta.title,
     description: meta.description,
   },
-  async (_args, { apis }) => {
-    const user = await apis.user.me();
-
+  async (_args, { user }) => {
     if (!user) {
       throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
     }

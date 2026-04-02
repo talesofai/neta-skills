@@ -17,7 +17,11 @@ export const getApInfo = createCommand(
     title: meta.title,
     description: meta.description,
   },
-  async (_args, { apis }) => {
+  async (_args, { apis, user }) => {
+    if (!user) {
+      throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
+    }
+
     const info = await apis.user.apInfo();
     return {
       ap: info.ap,

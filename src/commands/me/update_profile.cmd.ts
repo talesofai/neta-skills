@@ -33,7 +33,11 @@ export const updateProfile = createCommand(
     description: meta.description,
     inputSchema: updateProfileParameters,
   },
-  async ({ nick_name, bio, avatar_url }, { apis }) => {
+  async ({ nick_name, bio, avatar_url }, { apis, user }) => {
+    if (!user) {
+      throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
+    }
+
     if (!nick_name && !bio && !avatar_url) {
       throw new Error(
         "At least one field must be provided: nick_name, bio, or avatar_url.",
