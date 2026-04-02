@@ -69,6 +69,7 @@ export const buildCommands = async (
     "adventure_campaign",
     "premium",
     "user",
+    "me",
   ]);
 
   commands.forEach((cmd) => {

@@ -210,11 +210,57 @@ export interface UserListResponse {
   has_review_permission: boolean | null;
 }
 
+export interface UserUpdateParams {
+  nick_name?: string;
+  bio?: string;
+  avatar_url?: string;
+}
+
+export interface ApDeltaRecord {
+  type: string;
+  ap_delta: number;
+  ctime: string;
+  extra_data: {
+    display_name: string | null;
+    ap_delta_original: number | null;
+    discount_percent: number | null;
+  } | null;
+}
+
+export interface ApDeltaInfoResponse {
+  items: ApDeltaRecord[];
+  has_next: boolean;
+  next_cursor: number | null;
+}
+
 export const createUserApis = (client: AxiosInstance) => {
   return {
     me: async () => {
       const res = await client.get<UserInfo>("/v1/user/");
       return res.data ?? null;
+    },
+    apInfo: async (): Promise<UserApInfo> => {
+      const res = await client.get<UserApInfo>("/v2/user/ap_info");
+      return res.data;
+    },
+    apDeltaInfo: async (params?: {
+      cursor_id?: number;
+      page_size?: number;
+    }): Promise<ApDeltaInfoResponse> => {
+      const res = await client.get<ApDeltaInfoResponse>(
+        "/v2/users/ap-delta-info",
+        {
+          params: {
+            cursor_id: params?.cursor_id,
+            page_size: params?.page_size ?? 10,
+          },
+        },
+      );
+      return res.data;
+    },
+    updateUser: async (payload: UserUpdateParams): Promise<UserInfo> => {
+      const res = await client.put<UserInfo>("/v1/user/user", payload);
+      return res.data;
     },
     subscribeUser: async (params: {
       user_uuid: string;

@@ -456,6 +456,26 @@ export const isVerseCTA = (
   return "interactive_config" in cta_info;
 };
 
+export interface StoryShowcase {
+  storyId: string;
+  name: string | null;
+  coverUrl: string | null;
+  status: CollectionStatus | null;
+  ctime: string | null;
+  likeCount: number | null;
+  commentCount: number | null;
+  is_pinned: boolean | null;
+  has_video: boolean | null;
+  user_uuid: string | null;
+}
+
+export interface UserStoriesResponse {
+  total: number;
+  page_index: number;
+  page_size: number;
+  list: StoryShowcase[];
+}
+
 export const createCollectionApis = (client: AxiosInstance) => {
   const createCollection = async () => {
     return client
@@ -566,6 +586,23 @@ export const createCollectionApis = (client: AxiosInstance) => {
     };
   };
 
+  const userStories = async (
+    uuid: string,
+    params?: { page_index?: number; page_size?: number },
+  ): Promise<UserStoriesResponse> => {
+    const res = await client.get<UserStoriesResponse>(
+      "/v2/story/user-stories",
+      {
+        params: {
+          uuid,
+          page_index: params?.page_index ?? 0,
+          page_size: params?.page_size ?? 20,
+        },
+      },
+    );
+    return res.data;
+  };
+
   return {
     createCollection,
     saveCollection,
@@ -574,5 +611,6 @@ export const createCollectionApis = (client: AxiosInstance) => {
     likeCollection,
     createComment,
     favorCollection,
+    userStories,
   };
 };
