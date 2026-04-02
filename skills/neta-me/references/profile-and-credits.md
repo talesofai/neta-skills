@@ -1,6 +1,6 @@
 # Profile and Credits
 
-Guide for managing identity, AP balance, and login sessions via the `neta-user` skill.
+Guide for managing identity, AP balance, and login sessions via the `neta-me` skill.
 
 ## get_profile
 

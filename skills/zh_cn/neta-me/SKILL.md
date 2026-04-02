@@ -1,5 +1,5 @@
 ---
-name: neta-user
+name: neta-me
 description: Neta API 用户技能 — 管理自己的身份、积分和个人资产（资料、AP、故事、作品）。当用户询问「我的账号」「我的故事」「我的图片」「我的 AP」或与自身 Neta 身份及创作相关的问题时使用此技能。
 ---
 

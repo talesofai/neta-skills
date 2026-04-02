@@ -1,9 +1,9 @@
 ---
-name: neta-user
+name: neta-me
 description: Neta API user skill — manage your own identity, credits, and personal assets (profile, AP balance, stories, artifacts). Use this skill when the user asks about "my account", "my stories", "my pictures", "my AP", or anything related to their own Neta identity and creations.
 ---
 
-# Neta User Skill
+# Neta Me Skill
 
 Self-service dashboard for the current Neta user. Provides access to identity, credit balance/history, and personal content assets (stories and artifacts).
 
