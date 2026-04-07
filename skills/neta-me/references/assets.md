@@ -4,16 +4,14 @@ Guide for listing the current user's stories (collections) and generated artifac
 
 ## list_my_stories
 
-List stories/collections created by the user. When called while authenticated, `uuid` defaults to the current user — no need to pass it explicitly.
+List stories/collections created by the authenticated user.
 
 ```bash
 npx -y @talesofai/neta-skills@latest list_my_stories --page_size 10
-npx -y @talesofai/neta-skills@latest list_my_stories --uuid "03a363af-b33b-4c11-95a3-084bdb400f85" --page_size 10
 ```
 
 ### Parameters
 
-- **`uuid`** (optional) — target user UUID; defaults to the currently logged-in user
 - **`page_index`** (optional, default `0`)
 - **`page_size`** (optional, default `20`, max `100`)
 

@@ -17,6 +17,5 @@ description: |
     - read_collection（社区）：读取作品完整内容
 
 parameters:
-  uuid: 目标用户 UUID —— 默认为当前登录用户（可选）
   page_index: 分页页码，默认 0（可选）
   page_size: 每页数量，1–100，默认 20（可选）
