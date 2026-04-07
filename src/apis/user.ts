@@ -210,12 +210,6 @@ export interface UserListResponse {
   has_review_permission: boolean | null;
 }
 
-export interface UserUpdateParams {
-  nick_name?: string;
-  bio?: string;
-  avatar_url?: string;
-}
-
 export interface ApDeltaRecord {
   type: string;
   ap_delta: number;
@@ -256,10 +250,6 @@ export const createUserApis = (client: AxiosInstance) => {
           },
         },
       );
-      return res.data;
-    },
-    updateUser: async (payload: UserUpdateParams): Promise<UserInfo> => {
-      const res = await client.put<UserInfo>("/v1/user/user", payload);
       return res.data;
     },
     subscribeUser: async (params: {
