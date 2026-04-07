@@ -19,7 +19,9 @@ export const getApInfo = createCommand(
   },
   async (_args, { apis, user }) => {
     if (!user) {
-      throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
+      throw new Error(
+        "Not authenticated. Please check your NETA_TOKEN or login.",
+      );
     }
 
     const info = await apis.user.apInfo();

@@ -17,7 +17,7 @@ const meta = parseMeta(
 );
 
 const listMyStoriesParameters = Type.Object({
-  uuid: Type.String({ description: meta.parameters.uuid }),
+  uuid: Type.Optional(Type.String({ description: meta.parameters.uuid })),
   page_index: Type.Optional(
     Type.Integer({
       minimum: 0,
@@ -44,9 +44,12 @@ export const listMyStories = createCommand(
   },
   async ({ uuid, page_index, page_size }, { apis, user }) => {
     if (!user) {
-      throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
+      throw new Error(
+        "Not authenticated. Please check your NETA_TOKEN or login.",
+      );
     }
 
-    return apis.collection.userStories(uuid, { page_index, page_size });
+    const resolvedUuid = uuid ?? user.uuid;
+    return apis.collection.userStories(resolvedUuid, { page_index, page_size });
   },
 );

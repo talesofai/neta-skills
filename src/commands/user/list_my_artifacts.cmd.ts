@@ -49,7 +49,9 @@ export const listMyArtifacts = createCommand(
   },
   async ({ page_index, page_size, modality, is_starred }, { apis, user }) => {
     if (!user) {
-      throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
+      throw new Error(
+        "Not authenticated. Please check your NETA_TOKEN or login.",
+      );
     }
 
     return apis.artifact.listArtifacts({

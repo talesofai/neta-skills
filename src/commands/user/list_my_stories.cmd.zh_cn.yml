@@ -6,9 +6,6 @@ description: |
   以作者身份调用时，同时返回已发布（PUBLISHED）和私密（PRIVATE）作品。
   结果优先展示置顶作品，其次按时间倒序排列。
 
-  前置条件：必须提供你的 uuid。如果没有，请先执行 get_profile —— 返回结果中的
-  uuid 字段即为此处所需。建议 Agent 在会话中缓存 uuid 以供跨命令复用。
-
   列表中每条作品包含：storyId（可传入 read_collection 或 publish_collection）、
   name、coverUrl（封面图）、status（PUBLISHED / PRIVATE）、ctime、likeCount、is_pinned。
 
@@ -17,6 +14,6 @@ description: |
     - read_collection（社区）：读取作品完整内容
 
 parameters:
-  uuid: 你的用户 UUID，从 get_profile 获取（必填）
+  uuid: 目标用户 UUID —— 默认为当前登录用户（可选）
   page_index: 分页页码，默认 0（可选）
   page_size: 每页数量，1–20，默认 20（可选）

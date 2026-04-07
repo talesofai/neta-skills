@@ -4,15 +4,16 @@
 
 ## list_my_stories
 
-列出用户创建的故事/合集。**需要提供 `uuid`** — 先通过 `get_profile` 获取。
+列出用户创建的故事/合集。已登录状态下调用时，`uuid` 默认为当前用户，无需显式传入。
 
 ```bash
+npx -y @talesofai/neta-skills@latest list_my_stories --page_size 10
 npx -y @talesofai/neta-skills@latest list_my_stories --uuid "03a363af-b33b-4c11-95a3-084bdb400f85" --page_size 10
 ```
 
 ### 参数
 
-- **`uuid`**（必填）— 用户自己的 UUID
+- **`uuid`**（可选）— 目标用户 UUID；默认为当前登录用户
 - **`page_index`**（可选，默认 `0`）
 - **`page_size`**（可选，默认 `20`，最大 `20`）
 

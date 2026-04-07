@@ -47,7 +47,7 @@ npx -y @talesofai/neta-skills@latest logout
 npx -y @talesofai/neta-skills@latest get_profile
 ```
 
-返回 `uuid`、`nick_name`、`avatar_url`、AP 概览和资产统计。**请记住 `uuid`** — `list_my_stories` 等身份关联命令需要显式提供它。
+返回 `uuid`、`nick_name`、`avatar_url`、AP 概览和资产统计。
 
 **获取 AP 余额**
 
@@ -74,7 +74,7 @@ npx -y @talesofai/neta-skills@latest update_profile --nick_name "新昵称"
 **列出你的故事**
 
 ```bash
-npx -y @talesofai/neta-skills@latest list_my_stories --uuid "从 get_profile 获取的 uuid" --page_size 10
+npx -y @talesofai/neta-skills@latest list_my_stories --page_size 10
 ```
 
 **列出你的作品**

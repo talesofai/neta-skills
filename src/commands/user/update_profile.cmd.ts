@@ -35,7 +35,9 @@ export const updateProfile = createCommand(
   },
   async ({ nick_name, bio, avatar_url }, { apis, user }) => {
     if (!user) {
-      throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
+      throw new Error(
+        "Not authenticated. Please check your NETA_TOKEN or login.",
+      );
     }
 
     if (!nick_name && !bio && !avatar_url) {

@@ -47,7 +47,7 @@ npx -y @talesofai/neta-skills@latest logout
 npx -y @talesofai/neta-skills@latest get_profile
 ```
 
-Returns `uuid`, `nick_name`, `avatar_url`, AP summary, and asset totals. **Memorize the `uuid`** — it is required by `list_my_stories` and other identity-linked calls.
+Returns `uuid`, `nick_name`, `avatar_url`, AP summary, and asset totals.
 
 **Get AP balance**
 
@@ -74,7 +74,7 @@ npx -y @talesofai/neta-skills@latest update_profile --nick_name "New Name"
 **List your stories**
 
 ```bash
-npx -y @talesofai/neta-skills@latest list_my_stories --uuid "your-uuid-from-get_profile" --page_size 10
+npx -y @talesofai/neta-skills@latest list_my_stories --page_size 10
 ```
 
 **List your artifacts**
