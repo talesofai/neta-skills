@@ -17,6 +17,6 @@ description: |
 
 parameters:
   page_index: Page index for pagination, defaults to 0 (optional)
-  page_size: Results per page, defaults to 20 (optional)
+  page_size: Results per page, 1–100, defaults to 20 (optional)
   modality: Filter by type — PICTURE, VIDEO, or AUDIO; comma-separate for multiple (optional)
   is_starred: Filter to starred/favourited artifacts only — true or false (optional)

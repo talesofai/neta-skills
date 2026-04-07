@@ -15,7 +15,7 @@ npx -y @talesofai/neta-skills@latest list_my_stories --uuid "03a363af-b33b-4c11-
 
 - **`uuid`** (optional) — target user UUID; defaults to the currently logged-in user
 - **`page_index`** (optional, default `0`)
-- **`page_size`** (optional, default `20`, max `20`)
+- **`page_size`** (optional, default `20`, max `100`)
 
 ### Pagination
 
@@ -51,7 +51,7 @@ npx -y @talesofai/neta-skills@latest list_my_artifacts --page_size 5 --is_starre
 ### Parameters
 
 - **`page_index`** (optional, default `0`)
-- **`page_size`** (optional, default `20`)
+- **`page_size`** (optional, default `20`, max `100`)
 - **`modality`** (optional) — filter by `PICTURE`, `VIDEO`, `AUDIO`; comma-separated for multiple
 - **`is_starred`** (optional boolean) — filter starred items
 

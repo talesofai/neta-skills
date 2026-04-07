@@ -15,7 +15,7 @@ npx -y @talesofai/neta-skills@latest list_my_stories --uuid "03a363af-b33b-4c11-
 
 - **`uuid`**（可选）— 目标用户 UUID；默认为当前登录用户
 - **`page_index`**（可选，默认 `0`）
-- **`page_size`**（可选，默认 `20`，最大 `20`）
+- **`page_size`**（可选，默认 `20`，最大 `100`）
 
 ### 翻页
 
@@ -51,7 +51,7 @@ npx -y @talesofai/neta-skills@latest list_my_artifacts --page_size 5 --is_starre
 ### 参数
 
 - **`page_index`**（可选，默认 `0`）
-- **`page_size`**（可选，默认 `20`）
+- **`page_size`**（可选，默认 `20`，最大 `100`）
 - **`modality`**（可选）— 按 `PICTURE`、`VIDEO`、`AUDIO` 过滤；多值用逗号分隔
 - **`is_starred`**（可选布尔值）— 仅显示收藏项
 

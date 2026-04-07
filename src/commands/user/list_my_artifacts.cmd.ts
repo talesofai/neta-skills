@@ -28,6 +28,7 @@ const listMyArtifactsParameters = Type.Object({
   page_size: Type.Optional(
     Type.Integer({
       minimum: 1,
+      maximum: 100,
       default: 20,
       description: meta.parameters.page_size,
     }),

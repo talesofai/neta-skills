@@ -19,4 +19,4 @@ description: |
 parameters:
   uuid: Target user UUID — defaults to the currently logged-in user (optional)
   page_index: Page index for pagination, defaults to 0 (optional)
-  page_size: Results per page, 1–20, defaults to 20 (optional)
+  page_size: Results per page, 1–100, defaults to 20 (optional)

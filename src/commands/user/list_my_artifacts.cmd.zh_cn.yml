@@ -18,6 +18,6 @@ description: |
 
 parameters:
   page_index: 分页页码，默认 0（可选）
-  page_size: 每页数量，默认 20（可选）
+  page_size: 每页数量，1–100，默认 20（可选）
   modality: 按类型过滤 —— PICTURE、VIDEO 或 AUDIO；多选用逗号分隔（可选）
   is_starred: 仅返回已收藏的素材 —— true 或 false（可选）
