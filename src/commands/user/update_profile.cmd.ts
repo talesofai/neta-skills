@@ -36,7 +36,7 @@ export const updateProfile = createCommand(
   async ({ nick_name, bio, avatar_url }, { apis, user }) => {
     if (!user) {
       throw new Error(
-        "Not authenticated. Please check your NETA_TOKEN or login.",
+        "neta-me commands require login. Please run /login first.",
       );
     }
 

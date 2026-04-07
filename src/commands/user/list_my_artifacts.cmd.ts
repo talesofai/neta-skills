@@ -51,7 +51,7 @@ export const listMyArtifacts = createCommand(
   async ({ page_index, page_size, modality, is_starred }, { apis, user }) => {
     if (!user) {
       throw new Error(
-        "Not authenticated. Please check your NETA_TOKEN or login.",
+        "neta-me commands require login. Please run /login first.",
       );
     }
 
