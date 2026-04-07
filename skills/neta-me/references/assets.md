@@ -17,9 +17,13 @@ npx -y @talesofai/neta-skills@latest list_my_stories --uuid "03a363af-b33b-4c11-
 - **`page_index`** (optional, default `0`)
 - **`page_size`** (optional, default `20`, max `20`)
 
+### Pagination
+
+Keep incrementing `page_index` while `has_more` is `true`. Stop when `has_more` is `false`, or when `list` is empty.
+
 ### Response
 
-- **`total`** — total count (backend may return `999999` as a performance placeholder; trust `get_profile.total_collections` for the real count)
+- **`has_more`** — `true` if more pages exist; `false` when all results have been returned
 - **`list`** — array of story records with fields such as:
   - `storyId` — collection identifier
   - `name` — title
@@ -51,9 +55,13 @@ npx -y @talesofai/neta-skills@latest list_my_artifacts --page_size 5 --is_starre
 - **`modality`** (optional) — filter by `PICTURE`, `VIDEO`, `AUDIO`; comma-separated for multiple
 - **`is_starred`** (optional boolean) — filter starred items
 
+### Pagination
+
+Keep incrementing `page_index` while `has_more` is `true`. Stop when `has_more` is `false`, or when `list` is empty.
+
 ### Response
 
-- **`total`** — total count (may be placeholder `999999`; trust `get_profile.total_pictures` for real image count)
+- **`has_more`** — `true` if more pages exist; `false` when all results have been returned
 - **`list`** — array of artifact records:
   - `uuid` — artifact id
   - `status` — e.g. `SUCCESS`, `PENDING`, `FAILED`

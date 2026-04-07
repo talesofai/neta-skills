@@ -3,8 +3,11 @@ title: List My Artifacts
 description: |
   List AI-generated assets (images, videos, audio) created by the current user.
 
-  Returns a paginated list of artifacts. Each item includes: uuid, status, url (image/video
-  thumbnail), modality (PICTURE / VIDEO / AUDIO), is_starred, ctime, and audio_name (for audio).
+  Returns: has_more (true = more pages exist, increment page_index and fetch again; false = done),
+  and list of artifacts. If has_more is true but next page returns an empty list, stop.
+
+  Each item includes: uuid, status, url (image/video thumbnail), modality (PICTURE / VIDEO / AUDIO),
+  is_starred, ctime, and audio_name (for audio).
 
   Filter by modality to narrow results — e.g. pass "PICTURE" for images only, "VIDEO" for
   videos only, or "PICTURE,VIDEO" for both. Leave empty to return all types.

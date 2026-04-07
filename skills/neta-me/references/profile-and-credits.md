@@ -12,7 +12,7 @@ npx -y @talesofai/neta-skills@latest get_profile
 
 ### Response fields (memorize)
 
-- **`uuid`** — long user identifier. **You must memorize this.** Many asset commands (e.g. `list_my_stories`) require it explicitly.
+- **`uuid`** — long user identifier
 - **`nick_name`** — display name
 - **`avatar_url`** — profile picture URL
 - **`ap`** / **`ap_limit`** — current available AP vs daily limit

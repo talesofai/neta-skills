@@ -6,12 +6,9 @@ description: |
   返回：uuid、昵称、头像、AP 电量（ap / ap_limit）、内容数量
   （作品数、生图数、奇遇角色数）以及当前有效的权益。
 
-  重要：请保存返回的 uuid 字段 —— list_my_stories 及其他需要识别用户身份的命令
-  都需要它。建议 Agent 在会话中将此值缓存备用。
-
   相关命令：
     - get_ap_info：详细的 AP 电量明细
     - list_my_characters / list_my_elementum：你创建的捏宝角色和元素
-    - list_my_stories：你的作品列表（需要 uuid）
+    - list_my_stories：你的作品列表
 
 parameters: {}

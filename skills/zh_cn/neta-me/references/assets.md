@@ -17,9 +17,13 @@ npx -y @talesofai/neta-skills@latest list_my_stories --uuid "03a363af-b33b-4c11-
 - **`page_index`**（可选，默认 `0`）
 - **`page_size`**（可选，默认 `20`，最大 `20`）
 
+### 翻页
+
+持续递增 `page_index` 直到 `has_more` 为 `false`，或 `list` 为空时停止。
+
 ### 响应
 
-- **`total`** — 总数（后端可能返回 `999999` 作为性能占位符；真实数量以 `get_profile.total_collections` 为准）
+- **`has_more`** — `true` 表示还有更多页；`false` 表示已全部返回
 - **`list`** — 故事记录数组，包含：
   - `storyId` — 合集标识符
   - `name` — 标题
@@ -51,9 +55,13 @@ npx -y @talesofai/neta-skills@latest list_my_artifacts --page_size 5 --is_starre
 - **`modality`**（可选）— 按 `PICTURE`、`VIDEO`、`AUDIO` 过滤；多值用逗号分隔
 - **`is_starred`**（可选布尔值）— 仅显示收藏项
 
+### 翻页
+
+持续递增 `page_index` 直到 `has_more` 为 `false`，或 `list` 为空时停止。
+
 ### 响应
 
-- **`total`** — 总数（可能为占位符 `999999`；真实图片数量以 `get_profile.total_pictures` 为准）
+- **`has_more`** — `true` 表示还有更多页；`false` 表示已全部返回
 - **`list`** — 作品记录数组：
   - `uuid` — 作品 ID
   - `status` — 例如 `SUCCESS`、`PENDING`、`FAILED`

@@ -54,11 +54,16 @@ export const listMyArtifacts = createCommand(
       );
     }
 
-    return apis.artifact.listArtifacts({
+    const resolvedPageSize = page_size ?? 20;
+    const result = await apis.artifact.listArtifacts({
       page_index,
       page_size,
       modality,
       is_starred,
     });
+    return {
+      has_more: result.list.length === resolvedPageSize,
+      list: result.list,
+    };
   },
 );

@@ -12,7 +12,7 @@ npx -y @talesofai/neta-skills@latest get_profile
 
 ### 响应字段（请记住）
 
-- **`uuid`** — 长用户标识符。**你必须记住它。** 很多资产命令（例如 `list_my_stories`）需要显式提供。
+- **`uuid`** — 长用户标识符
 - **`nick_name`** — 显示昵称
 - **`avatar_url`** — 头像图片 URL
 - **`ap`** / **`ap_limit`** — 当前可用 AP 与每日上限

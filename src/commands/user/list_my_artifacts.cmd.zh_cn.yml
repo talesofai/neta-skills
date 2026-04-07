@@ -3,7 +3,10 @@ title: 获取我的素材列表
 description: |
   获取当前用户生成的 AI 素材（图片、视频、音频）列表。
 
-  返回分页列表，每条素材包含：uuid、status、url（图片/视频首帧）、
+  返回：has_more（true = 还有更多页，递增 page_index 继续获取；false = 已全部返回），
+  以及素材列表。若 has_more 为 true 但下一页返回空列表，则停止翻页。
+
+  每条素材包含：uuid、status、url（图片/视频首帧）、
   modality（PICTURE / VIDEO / AUDIO）、is_starred（是否收藏）、ctime、
   audio_name（音频名称，仅音频类型）。
 

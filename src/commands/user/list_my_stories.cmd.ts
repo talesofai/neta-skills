@@ -50,6 +50,14 @@ export const listMyStories = createCommand(
     }
 
     const resolvedUuid = uuid ?? user.uuid;
-    return apis.collection.userStories(resolvedUuid, { page_index, page_size });
+    const resolvedPageSize = page_size ?? 20;
+    const result = await apis.collection.userStories(resolvedUuid, {
+      page_index,
+      page_size,
+    });
+    return {
+      has_more: result.list.length === resolvedPageSize,
+      list: result.list,
+    };
   },
 );
