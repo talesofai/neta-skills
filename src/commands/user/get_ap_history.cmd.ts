@@ -39,7 +39,7 @@ export const getApHistory = createCommand(
   async ({ cursor_id, page_size }, { apis, user }) => {
     if (!user) {
       throw new Error(
-        "neta-me commands require login. Please run /login first.",
+        "Not authenticated. Please check your NETA_TOKEN or login.",
       );
     }
 

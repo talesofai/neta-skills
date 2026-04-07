@@ -53,18 +53,6 @@ npx -y @talesofai/neta-skills@latest get_ap_history --cursor_id 0 --page_size 10
 - **`extra_data.ap_delta_original`** — 折扣前原始花费
 - **`has_next`** / **`next_cursor`** — 分页控制字段
 
-## update_profile
-
-更新当前用户的资料。必须提供至少一个字段。
-
-```bash
-npx -y @talesofai/neta-skills@latest update_profile --nick_name "新昵称"
-npx -y @talesofai/neta-skills@latest update_profile --bio "简短简介"
-npx -y @talesofai/neta-skills@latest update_profile --avatar_url "https://..."
-```
-
-返回更新后的 `uuid`、`nick_name` 和 `avatar_url`。
-
 ## login / logout
 
 用于 CLI 会话管理的 OAuth 设备流。

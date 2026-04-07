@@ -20,7 +20,7 @@ export const getProfile = createCommand(
   async (_args, { user }) => {
     if (!user) {
       throw new Error(
-        "neta-me commands require login. Please run /login first.",
+        "Not authenticated. Please check your NETA_TOKEN or login.",
       );
     }
 

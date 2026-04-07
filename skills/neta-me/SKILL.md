@@ -12,7 +12,6 @@ Self-service dashboard for the current Neta user. Provides access to identity, c
 - The user asks about **their own** profile, account, or identity
 - The user asks about **AP balance**, credit usage, or daily limits
 - The user wants to **list their own stories/collections** or **artifacts**
-- The user wants to **update profile info** (nickname, bio, avatar)
 - You need to establish or clear a **logged-in CLI session** via OAuth device flow
 
 ## Authorization
@@ -59,12 +58,6 @@ npx -y @talesofai/neta-skills@latest get_ap_info
 
 ```bash
 npx -y @talesofai/neta-skills@latest get_ap_history --page_size 10
-```
-
-**Update profile**
-
-```bash
-npx -y @talesofai/neta-skills@latest update_profile --nick_name "New Name"
 ```
 
 📖 [Detailed guide](./references/profile-and-credits.md)

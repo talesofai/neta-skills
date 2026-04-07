@@ -53,18 +53,6 @@ Each record includes:
 - **`extra_data.ap_delta_original`** — original cost before discounts
 - **`has_next`** / **`next_cursor`** — pagination controls
 
-## update_profile
-
-Update the current user's profile. At least one field is required.
-
-```bash
-npx -y @talesofai/neta-skills@latest update_profile --nick_name "New Name"
-npx -y @talesofai/neta-skills@latest update_profile --bio "A short bio"
-npx -y @talesofai/neta-skills@latest update_profile --avatar_url "https://..."
-```
-
-Returns the updated `uuid`, `nick_name`, and `avatar_url`.
-
 ## login / logout
 
 OAuth device flow for CLI session management.
