@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.16.2
+
+### Patch Changes
+
+- fix auth api endpoint
+
 ## 0.16.1
 
 ### Patch Changes
