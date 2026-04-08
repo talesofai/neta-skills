@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.16.4
+
+### Patch Changes
+
+- fix build
+
 ## 0.16.3
 
 ### Patch Changes
