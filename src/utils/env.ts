@@ -11,7 +11,7 @@ export const API_BASE_URL =
   process.env["NETA_API_BASE_URL"] ?? "https://api.talesofai.com";
 
 export const AUTH_API_BASE_URL =
-  process.env["NETA_AUTH_API_BASE_URL"] ?? "https://auth.talesofai.com";
+  process.env["NETA_AUTH_API_BASE_URL"] ?? "https://auth.neta.art";
 
 export const CLIENT_ID =
   process.env["NETA_CLIENT_ID"] ?? "ft6zb5zp7fqmq8y807okv";

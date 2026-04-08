@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.16.5
+
+### Patch Changes
+
+- update auth api base url
+
 ## 0.16.4
 
 ### Patch Changes
