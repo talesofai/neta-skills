@@ -1,7 +1,7 @@
 import { type Static, Type } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
 import { deleteConfig, readConfig, writeConfig } from "./config.ts";
-import { API_BASE_URL, AUTH_API_BASE_URL, CLIENT_ID } from "./env.ts";
+import { AUTH_API_BASE_URL, CLIENT_ID } from "./env.ts";
 import { ApiResponseError } from "./errors.ts";
 import { safeParseJson } from "./json.ts";
 import { logger } from "./logger.ts";
@@ -141,7 +141,7 @@ export const requestDeviceCode = async () => {
     body: new URLSearchParams({
       client_id: CLIENT_ID,
       scope: "profile email offline_access",
-      resource: API_BASE_URL,
+      resource: "https://api.talesofai",
     }),
   });
 
@@ -197,7 +197,7 @@ export const refreshToken = async () => {
       grant_type: "refresh_token",
       refresh_token: tokenConfig.refresh_token,
       scope: "profile email offline_access",
-      resource: API_BASE_URL,
+      resource: "https://api.talesofai",
     }),
   });
 
