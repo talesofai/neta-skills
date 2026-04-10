@@ -86,6 +86,32 @@ npx -y @talesofai/neta-skills@latest read_collection --uuid "作品-uuid"
 
 📖 [详细指南](./references/collection-remix.md)
 
+### 积分与我的作品
+
+AP（Action Points，行动电量）在每次生成命令时消耗。使用以下命令查看余额和回顾生成记录。
+
+**AP 余额**
+
+```bash
+npx -y @talesofai/neta-skills@latest get_ap_info
+```
+
+**AP 消耗历史**
+
+```bash
+npx -y @talesofai/neta-skills@latest get_ap_history --page_size 10
+```
+
+**列出我的作品**
+
+```bash
+npx -y @talesofai/neta-skills@latest list_my_artifacts --page_size 20
+npx -y @talesofai/neta-skills@latest list_my_artifacts --modality PICTURE
+npx -y @talesofai/neta-skills@latest list_my_artifacts --is_starred true
+```
+
+📖 [AP 积分指南](./references/ap-credits.md) · [作品指南](./references/my-artifacts.md)
+
 ## 参考文档
 
 | 场景 | 文档 |
@@ -97,3 +123,5 @@ npx -y @talesofai/neta-skills@latest read_collection --uuid "作品-uuid"
 | 📤 本地上传 | [media-upload.md](./references/media-upload.md) |
 | 👤 角色查询 | [character-search.md](./references/character-search.md) |
 | 🖊️ 内容创作思路 | [collection-remix.md](./references/collection-remix.md) |
+| 💡 AP 积分 | [ap-credits.md](./references/ap-credits.md) |
+| 🖼️ 我的作品 | [my-artifacts.md](./references/my-artifacts.md) |

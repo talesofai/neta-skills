@@ -4,7 +4,7 @@
 [![Node](https://img.shields.io/badge/Node-%3E%3D22-green)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 
-[简体中文](./README.md) · [English](./README.en.md)
+[简体中文](./README.zh_cn.md) · [English](./README.md)
 
 ---
 
@@ -25,6 +25,7 @@
 ## ✨ 功能特性
 
 - 🎨 **多媒体创作**：使用最新的 AI 模型生成图片、视频和歌曲。
+- ⭐ **会员与订阅**：列出套餐、创建订单、发起 Stripe 结账，并通过 CLI 校验当前档位（全球 API 环境）。
 - 🔧 **图像与视频处理**：支持移除背景、视频合并等常见素材处理流程。
 - 👤 **角色与风格管理**：搜索、获取角色与风格元素详情，在创作中标准化复用。
 - 🏷️ **社区与标签集成**：浏览热门标签、空间、玩法合集与角色。
@@ -69,12 +70,13 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-adventure
 
 ### 可用指令总览
 
-当前技能共包含 **36 个命令**，覆盖创作、奇遇、角色与社区探索等场景：
+当前技能共包含 **49 个命令**，覆盖用户身份、创作、会员、奇遇、VToken 与社区探索等场景：
 
 | 分类 | 命令 | 说明 |
 |------|------|------|
 | **用户 User** | `login` | OAuth 设备流：默认 `request-code` 发起登录；浏览器完成后用 `verify-code` 换票并写入本地会话 |
 | | `logout` | 清除本地保存的访问令牌及未完成的设备授权状态 |
+| | `me` | 查看当前登录用户的资料、AP 汇总与作品统计 |
 | **奇遇剧本 Adventure** | `create_adventure_campaign` | 创建 AI 驱动的交互式故事冒险剧本 |
 | | `update_adventure_campaign` | 更新已有奇遇剧本 |
 | | `list_my_adventure_campaigns` | 列出你创建的奇遇剧本 |
@@ -86,6 +88,16 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-adventure
 | | `edit_collection` | 编辑已有玩法合集（名称、描述、标签、状态等） |
 | | `publish_collection` | 发布或更新玩法合集内容 |
 | | `search_character_or_elementum` | 搜索可复用的 TCP（角色 / 元素 / 玩法模块） |
+| | `get_ap_info` | 查询 AP（电量）余额明细（临时 / 付费 / 无限期等） |
+| | `get_ap_history` | 分页查询 AP 消耗与充值流水（游标分页） |
+| | `list_my_artifacts` | 分页列出你生成的媒体产物，可按类型 / 是否收藏筛选 |
+| | `upload` | 上传本地或远程媒体文件以创建媒体产物 |
+| **会员 Premium** | `get_current_premium_plan` | 查询当前用户档位与订阅到期时间（如适用） |
+| | `list_premium_plans` | 列出可购套餐与 SPU UUID |
+| | `create_premium_order` | 按 SPU 创建订单 |
+| | `get_premium_order` | 查询单笔订单详情 |
+| | `list_premium_orders` | 分页列出订单 |
+| | `pay_premium_order` | 为未支付订单发起支付（如 Stripe Checkout） |
 | **VToken 管理** | `create_character` | 创建角色 VToken（消耗电量） |
 | | `update_character` | 更新现有角色 VToken |
 | | `list_my_characters` | 列出当前用户创建的所有角色 |
@@ -297,8 +309,11 @@ pnpm type-check
 # 代码检查（lint）
 pnpm lint
 
-# 本地调试技能（watch / dev）
-pnpm dev <command> [options]
+# 本地调试（无额外参数时）
+pnpm dev -- <command>
+
+# 带子命令参数时，pnpm 可能在 argv 中插入 `--`，可直接调用入口，例如：
+# NODE_ENV=development node src/cli.ts get_ap_history --page_size 5
 
 # 构建 bin 脚本
 pnpm build

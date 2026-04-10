@@ -69,12 +69,13 @@ npx skills add talesofai/neta-skills/skills/neta-adventure
 
 ### Available Commands
 
-The skill includes **45 commands** for various tasks:
+The skill includes **49 commands** for various tasks:
 
 | Category | Command | Description |
 |----------|---------|-------------|
 | **User** | `login` | Start OAuth device login (`request-code`) or complete it (`verify-code`); stores tokens locally on success |
 | | `logout` | Clear stored CLI session (access token and any in-progress device flow) |
+| | `me` | Show the authenticated user's profile, AP balance, and asset totals |
 | **Adventure Campaigns** | `create_adventure_campaign` | Create an AI-driven interactive story adventure |
 | | `update_adventure_campaign` | Update an existing adventure campaign |
 | | `list_my_adventure_campaigns` | List your created adventure campaigns |
@@ -86,6 +87,10 @@ The skill includes **45 commands** for various tasks:
 | | `edit_collection` | Edit an existing collection (name, description, tags, status, etc.) |
 | | `publish_collection` | Publish or update a collection |
 | | `search_character_or_elementum` | Search reusable TCP building blocks (characters / elements / flows) |
+| | `get_ap_info` | Get detailed AP (Action Points) balance breakdown |
+| | `get_ap_history` | Get paginated AP consumption and recharge history |
+| | `list_my_artifacts` | List your generated media assets with filters |
+| | `upload` | Upload a local or remote media file to create a media artifact |
 | **Premium** | `get_current_premium_plan` | Get the signed-in user’s current tier and subscription end when applicable |
 | | `list_premium_plans` | List available premium plans and SPU UUIDs |
 | | `create_premium_order` | Create an order for a plan (by SPU UUID) |
@@ -299,8 +304,11 @@ pnpm type-check
 # Run lint
 pnpm lint
 
-# Test CLI commands locally
-pnpm dev <command> [options]
+# Test CLI commands locally (commands without extra flags)
+pnpm dev -- <command>
+
+# Subcommands with options: `pnpm` may insert `--` before argv; use the entrypoint directly, e.g.:
+# NODE_ENV=development node src/cli.ts get_ap_history --page_size 5
 
 # Build bin scripts
 pnpm build

@@ -140,6 +140,32 @@ npx -y @talesofai/neta-skills@latest pay_premium_order --order_uuid "order-uuid"
 
 📖 [Premium workflow and limits](./references/premium.md)
 
+### Credits & your artifacts
+
+AP (Action Points) is consumed by every generation command. Use these to monitor your balance and review generated output.
+
+**AP balance**
+
+```bash
+npx -y @talesofai/neta-skills@latest get_ap_info
+```
+
+**AP consumption history**
+
+```bash
+npx -y @talesofai/neta-skills@latest get_ap_history --page_size 10
+```
+
+**List your generated artifacts**
+
+```bash
+npx -y @talesofai/neta-skills@latest list_my_artifacts --page_size 20
+npx -y @talesofai/neta-skills@latest list_my_artifacts --modality PICTURE
+npx -y @talesofai/neta-skills@latest list_my_artifacts --is_starred true
+```
+
+📖 [AP credits guide](./references/ap-credits.md) · [Artifacts guide](./references/my-artifacts.md)
+
 ## Reference docs
 
 | Scenario              | Doc                                      |
@@ -152,4 +178,6 @@ npx -y @talesofai/neta-skills@latest pay_premium_order --order_uuid "order-uuid"
 | 👤 Character queries  | [character-search.md](./references/character-search.md) |
 | 🖊️ Creative remixing | [collection-remix.md](./references/collection-remix.md) |
 | ⭐ Premium / subscribe | [premium.md](./references/premium.md)                   |
+| 💡 AP credits         | [ap-credits.md](./references/ap-credits.md)             |
+| 🖼️ My artifacts      | [my-artifacts.md](./references/my-artifacts.md)         |
 

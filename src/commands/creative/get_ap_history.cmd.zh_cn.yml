@@ -1,0 +1,14 @@
+name: get_ap_history
+title: 获取我的 AP 电量变动记录
+description: |
+  获取当前用户的 AP 电量变动历史，支持游标分页。
+
+  每条记录包含：type（操作类型）、ap_delta（负数=消耗，正数=获得）、
+  ctime（时间戳）、extra_data.display_name（可读的操作名称）。
+
+  分页：将返回的 next_cursor 作为 cursor_id 传入即可获取下一页。
+  当 has_next 为 false 时，表示已到达历史末尾。
+
+parameters:
+  cursor_id: 分页游标，传入上一页最后一条记录的 id 以获取下一页（可选）
+  page_size: 每页记录数，默认 10（可选）
