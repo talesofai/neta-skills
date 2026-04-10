@@ -9,6 +9,5 @@ description: |
   相关命令：
     - get_ap_info：详细的 AP 电量明细
     - list_my_characters / list_my_elementum：你创建的捏宝角色和元素
-    - list_my_stories：你的作品列表
 
 parameters: {}

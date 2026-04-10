@@ -9,6 +9,5 @@ description: |
   Related commands:
     - get_ap_info: detailed AP balance breakdown
     - list_my_characters / list_my_elementum: your created characters and elementum
-    - list_my_stories: your published and private stories
 
 parameters: {}

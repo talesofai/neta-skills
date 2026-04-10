@@ -1,17 +1,17 @@
 ---
 name: neta-me
-description: Neta API user skill — manage your own identity, credits, and personal assets (profile, AP balance, stories, artifacts). Use this skill when the user asks about "my account", "my stories", "my pictures", "my AP", or anything related to their own Neta identity and creations.
+description: Neta API user skill — manage your own identity, credits, and personal assets (profile, AP balance, artifacts). Use this skill when the user asks about "my account", "my pictures", "my AP", or anything related to their own Neta identity and creations.
 ---
 
 # Neta Me Skill
 
-Self-service dashboard for the current Neta user. Provides access to identity, credit balance/history, and personal content assets (stories and artifacts).
+Self-service dashboard for the current Neta user. Provides access to identity, credit balance/history, and personal content assets (artifacts).
 
 ## When to use
 
 - The user asks about **their own** profile, account, or identity
 - The user asks about **AP balance**, credit usage, or daily limits
-- The user wants to **list their own stories/collections** or **artifacts**
+- The user wants to **list their own artifacts**
 - You need to establish or clear a **logged-in CLI session** via OAuth device flow
 
 ## Authorization
@@ -64,12 +64,6 @@ npx -y @talesofai/neta-skills@latest get_ap_history --page_size 10
 
 ### Personal assets
 
-**List your stories**
-
-```bash
-npx -y @talesofai/neta-skills@latest list_my_stories --page_size 10
-```
-
 **List your artifacts**
 
 ```bash
@@ -83,6 +77,7 @@ npx -y @talesofai/neta-skills@latest list_my_artifacts --page_size 10 --modality
 | Task | Skill to use |
 |------|--------------|
 | Like, favorite, or comment on a story | `neta-community` (`like_collection`, `favor_collection`, `create_comment`) |
+| Browse or list stories / collections | `neta-community` |
 | Publish a new story / collection | `neta-creative` (`publish_collection`) |
 | Browse community feeds | `neta-community` (`fetch_feed`) |
 | Manage characters or elementum | `neta-character` / `neta-elementum` (or `list_my_characters` / `list_my_elementum`) |
@@ -92,4 +87,4 @@ npx -y @talesofai/neta-skills@latest list_my_artifacts --page_size 10 --modality
 | Scenario | Document |
 |----------|----------|
 | 👤 Profile, AP, login/logout | [profile-and-credits.md](./references/profile-and-credits.md) |
-| 🖼️ Stories and artifacts | [assets.md](./references/assets.md) |
+| 🖼️ Artifacts | [assets.md](./references/assets.md) |
