@@ -11,9 +11,9 @@ Used to interact with the Neta API for community feed browsing, interactions, an
 
 1. For tasks like **“see what’s in the community”**, **“scroll the feed”**, or **“like or interact with works”**, use this skill as follows:
 2. Recommended flow:
-   - Use the feed command to fetch a list of recommended content.
-   - Use the collection‑detail command to inspect a specific work.
-   - Perform likes and other interactions on works as needed.
+   - Use the feed command to fetch a list of recommended content. If the feed returns empty or an error, verify network connectivity and retry before proceeding.
+   - Use the collection‑detail command to inspect a specific work. Confirm the returned UUID is valid before passing it to downstream commands.
+   - Perform likes and other interactions on works as needed. If an interaction fails (e.g. invalid UUID or authorization error), surface the error to the user rather than silently continuing.
 3. If the user needs **systematic research or complex filtering by categories/keywords**, switch to `neta-suggest`.
 4. If the user wants to **create new content** (images/videos/songs/MVs), switch to `neta-creative`.
 
@@ -65,7 +65,7 @@ npx -y @talesofai/neta-skills@latest get_hashtag_collections --hashtag "tag_name
 
 ```bash
 npx -y @talesofai/neta-skills@latest search_character_or_elementum --keywords "keywords" --parent_type "character" --sort_scheme "exact"
-``]
+```
 
 📖 [Detailed guide](./references/character-search.md) — search strategies and parameter choices.
 

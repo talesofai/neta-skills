@@ -1,6 +1,6 @@
 ---
 name: neta-space
-description: Neta API space and world‑view browsing skill — browse worldbuilding, sub‑spaces, and playable content by space/hashtag. Use this skill when the user talks about worlds/spaces/universes/scenes, or wants to browse characters and gameplay based on space and activity structure. Do not use it for concrete media creation (handled by neta-creative).
+description: "Neta API space and world-view skill — list available spaces, search by hashtag, view space hierarchy and lore, and retrieve characters or collections within a space. Use this skill when the user talks about worlds/spaces/universes/scenes, or wants to explore characters and gameplay based on space and activity structure. Do not use it for concrete media creation (handled by neta-creative)."
 ---
 
 # Neta Space Skill
@@ -9,13 +9,13 @@ Used to interact with the Neta API to browse space‑level content.
 
 ## Instructions
 
-1. For tasks like **“what spaces/activities exist?”** or **“what is the structure and lore of a given space?”**, organize queries as follows:
-2. Recommended workflow:
-   - List all spaces.
-   - For a chosen space, fetch its details (lore, activities, metrics).
-   - Fetch sub‑spaces and their official/user collections.
-   - If needed, fetch characters and playable content inside the space.
-3. If the user says “now generate an image/video/song for this space”, first collect the relevant space/collection info here, then switch to `neta-creative` for creation.
+Follow a progressive-disclosure approach — start broad and drill down only as the user requests more detail:
+
+1. **Start with a high-level overview**: For tasks like “what spaces exist?”, list all spaces first (`list_spaces`). Present a concise summary before offering to drill deeper.
+2. **Drill into a specific space on request**: When the user selects or asks about a space, fetch its details (lore, activities, metrics) via `get_hashtag_info`.
+3. **Explore sub-spaces and collections only when needed**: Fetch sub-spaces (`list_space_topics`) and their official/user collections only if the user wants to go deeper into the hierarchy.
+4. **Fetch characters and playable content last**: Retrieve characters and gameplay content (`get_hashtag_characters`, `get_hashtag_collections`) only when explicitly requested or contextually relevant.
+5. **Hand off creation tasks**: If the user says “now generate an image/video/song for this space”, first collect the relevant space/collection info here, then switch to `neta-creative` for creation.
 
 ## Space concepts
 
@@ -39,10 +39,14 @@ Used to interact with the Neta API to browse space‑level content.
 
 ## Workflow
 
-- List all spaces: `list_spaces`
-- Get space details: `get_hashtag_info`
-- Get sub‑spaces: `list_space_topics`
-- Get content in a space or sub‑space: `get_hashtag_collections`, `get_hashtag_characters`
+1. **List all spaces**: `list_spaces`
+   - Validate that the response contains at least one space before proceeding.
+2. **Get space details**: `get_hashtag_info`
+   - Confirm the hashtag exists in the space list. If not found, suggest similar hashtags or re-list spaces.
+3. **Get sub-spaces**: `list_space_topics`
+   - Requires a valid `space_uuid` from step 1 or 2. If the space has no sub-spaces (`topic_count` is 0), skip this step and proceed directly to content retrieval.
+4. **Get content in a space or sub-space**: `get_hashtag_collections`, `get_hashtag_characters`
+   - If a collection or character query returns empty results, inform the user and suggest trying a different space or hashtag.
 
 ## List available spaces
 
