@@ -49,15 +49,16 @@ export const listMyArtifacts = createCommand(
     inputSchema: listMyArtifactsParameters,
   },
   async ({ page_index, page_size, modality, is_starred }, { apis }) => {
+    const resolvedPageIndex = page_index ?? 0;
     const resolvedPageSize = page_size ?? 20;
     const result = await apis.artifact.listArtifacts({
-      page_index,
+      page_index: resolvedPageIndex,
       page_size: resolvedPageSize,
       modality,
       is_starred,
     });
     return {
-      has_more: result.list.length === resolvedPageSize,
+      has_more: (resolvedPageIndex + 1) * resolvedPageSize < result.total,
       list: result.list,
     };
   },
