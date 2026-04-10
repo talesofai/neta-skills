@@ -58,7 +58,9 @@ export const listMyArtifacts = createCommand(
       is_starred,
     });
     return {
-      has_more: (resolvedPageIndex + 1) * resolvedPageSize < result.total,
+      has_more:
+        result.list.length > 0 &&
+        (resolvedPageIndex + 1) * resolvedPageSize < result.total,
       list: result.list,
     };
   },

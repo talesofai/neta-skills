@@ -3,9 +3,9 @@ title: Who Am I
 description: |
   Show the current authenticated user's profile and account summary.
 
-  Returns: uuid, nick_name, avatar_url, AP balance (ap / ap_limit),
-  content counts (total_collections, total_pictures, total_travel_characters),
-  and active privileges.
+  Returns: uuid, nick_name (nullable), avatar_url (nullable), AP balance
+  (ap / ap_limit, nullable if not available), content counts
+  (total_collections, total_pictures, total_travel_characters), and active privileges.
 
   Related commands:
     - get_ap_info: detailed AP balance breakdown
