@@ -1,5 +1,11 @@
 # @neta/skills-neta
 
+## 0.16.7
+
+### Patch Changes
+
+- update config dir path
+
 ## 0.16.6
 
 ### Patch Changes

@@ -5,7 +5,7 @@ import envPaths from "env-paths";
 import { IS_DEV } from "./env.ts";
 import { logger } from "./logger.ts";
 
-const paths = envPaths("neta-cli", {
+const paths = envPaths("neta", {
   suffix: IS_DEV ? "dev" : "",
 });
 
