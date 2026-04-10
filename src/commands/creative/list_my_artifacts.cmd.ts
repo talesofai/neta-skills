@@ -52,7 +52,7 @@ export const listMyArtifacts = createCommand(
     const resolvedPageSize = page_size ?? 20;
     const result = await apis.artifact.listArtifacts({
       page_index,
-      page_size,
+      page_size: resolvedPageSize,
       modality,
       is_starred,
     });
