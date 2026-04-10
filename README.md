@@ -90,6 +90,7 @@ The skill includes **49 commands** for various tasks:
 | | `get_ap_info` | Get detailed AP (Action Points) balance breakdown |
 | | `get_ap_history` | Get paginated AP consumption and recharge history |
 | | `list_my_artifacts` | List your generated media assets with filters |
+| | `upload` | Upload a local or remote media file to create a media artifact |
 | **Premium** | `get_current_premium_plan` | Get the signed-in user’s current tier and subscription end when applicable |
 | | `list_premium_plans` | List available premium plans and SPU UUIDs |
 | | `create_premium_order` | Create an order for a plan (by SPU UUID) |
@@ -303,8 +304,11 @@ pnpm type-check
 # Run lint
 pnpm lint
 
-# Test CLI commands locally
-pnpm dev <command> [options]
+# Test CLI commands locally (commands without extra flags)
+pnpm dev -- <command>
+
+# Subcommands with options: `pnpm` may insert `--` before argv; use the entrypoint directly, e.g.:
+# NODE_ENV=development node src/cli.ts get_ap_history --page_size 5
 
 # Build bin scripts
 pnpm build
