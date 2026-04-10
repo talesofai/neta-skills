@@ -1,0 +1,25 @@
+need_login: Need to login to the NETA account, run command "login --help" for more information or set NETA_TOKEN environment variable for authentication.
+not_supported_in_current_region: This command is not supported in the current region, please set NETA_TOKEN environment variable for authentication.
+premium_plans_config_not_found: Premium subscription plans config not found
+premium_plans_config_invalid: Premium subscription plans config is invalid
+order_not_unpaid: Order is not unpaid
+order_expired: Order is expired
+sts_token_expired: STS token expired
+artifact_not_found: Artifact not found
+operation_timeout: Timeout
+upload_file_type_not_supported: Media file type not supported
+upload_file_size_too_large: Media file size too large, maximum size is {max_size} bytes
+invalid_picture_artifact_uuid: Input is not a valid picture artifact UUID
+tcp_missing_id_or_name: Either name or uuid must be provided.
+tcp_not_found: Character or elementum not found {identifier}
+tcp_type_mismatch_character: The resolved type is "character", but parent_type="elementum" was specified. Please adjust parent_type or use a different name to search.
+tcp_type_mismatch_elementum: The resolved type is "elementum", but parent_type="character" was specified. Please adjust parent_type or use a different name to search.
+tcp_unknown_type: Unknown TCP type {type}
+hashtag_not_linked_to_activity_space: Hashtag "{hashtag}" is not linked to any activity space.
+collection_artifact_count_range: artifacts must be between 1 and 12
+collection_artifact_not_found: artifact {artifact_uuid} not found
+collection_artifact_not_success: artifact {artifact_uuid} status is not success
+creative_collection_not_found: collection {uuid} not found
+action_fail: "{action} fail"
+create_comment_fail: create_comment fail
+collection_not_found: Collection "{uuid}" not found

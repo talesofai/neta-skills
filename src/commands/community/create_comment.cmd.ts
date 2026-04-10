@@ -1,4 +1,5 @@
 import { Type } from "@sinclair/typebox";
+import { errors } from "../../utils/errors.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
@@ -39,7 +40,7 @@ export const createCommentCmd = createCommand(
     });
 
     if (!result.success) {
-      throw new Error("create_comment fail");
+      throw new Error(errors.create_comment_fail);
     }
 
     return {

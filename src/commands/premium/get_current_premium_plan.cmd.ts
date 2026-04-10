@@ -1,6 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import { parseDate } from "../../utils/date.ts";
 import { IS_GLOBAL } from "../../utils/env.ts";
+import { errors } from "../../utils/errors.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
@@ -28,13 +29,7 @@ export const getCurrentPremiumPlan = createCommand(
   },
   async (_, { user }) => {
     if (!IS_GLOBAL) {
-      throw new Error("This command is not supported in the current region");
-    }
-
-    if (!user) {
-      throw new Error(
-        "Not authenticated. Please check your NETA_TOKEN or login.",
-      );
+      throw new Error(errors.not_supported_in_current_region);
     }
 
     const level = user.properties?.vip_level ?? 0;

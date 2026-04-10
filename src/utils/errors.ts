@@ -1,5 +1,7 @@
+import { Type } from "@sinclair/typebox";
 import { AxiosError } from "axios";
 import { safeParseJson } from "./json.ts";
+import { parseMeta } from "./parse_meta.ts";
 
 export class ApiResponseError extends Error {
   public readonly code: number;
@@ -90,3 +92,34 @@ export const handleAxiosError = (error: unknown) => {
     cause: error,
   });
 };
+
+export const errors = parseMeta(
+  Type.Object({
+    need_login: Type.String(),
+    not_supported_in_current_region: Type.String(),
+    premium_plans_config_not_found: Type.String(),
+    premium_plans_config_invalid: Type.String(),
+    order_not_unpaid: Type.String(),
+    order_expired: Type.String(),
+    sts_token_expired: Type.String(),
+    artifact_not_found: Type.String(),
+    operation_timeout: Type.String(),
+    upload_file_type_not_supported: Type.String(),
+    upload_file_size_too_large: Type.String(),
+    invalid_picture_artifact_uuid: Type.String(),
+    tcp_missing_id_or_name: Type.String(),
+    tcp_not_found: Type.String(),
+    tcp_type_mismatch_character: Type.String(),
+    tcp_type_mismatch_elementum: Type.String(),
+    tcp_unknown_type: Type.String(),
+    hashtag_not_linked_to_activity_space: Type.String(),
+    collection_artifact_count_range: Type.String(),
+    collection_artifact_not_found: Type.String(),
+    collection_artifact_not_success: Type.String(),
+    creative_collection_not_found: Type.String(),
+    action_fail: Type.String(),
+    create_comment_fail: Type.String(),
+    collection_not_found: Type.String(),
+  }),
+  import.meta,
+);

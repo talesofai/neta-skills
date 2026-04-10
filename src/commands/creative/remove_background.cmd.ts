@@ -1,4 +1,5 @@
 import { Type } from "@sinclair/typebox";
+import { errors } from "../../utils/errors.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { polling } from "../../utils/polling.ts";
 import { createCommand } from "../factory.ts";
@@ -44,7 +45,7 @@ export const removeBackground = createCommand(
         artifacts[0].modality !== "PICTURE" ||
         artifacts[0].status !== "SUCCESS"
       ) {
-        throw new Error("Input is not a valid picture artifact UUID");
+        throw new Error(errors.invalid_picture_artifact_uuid);
       }
       return apis.artifact.postProcess(input_image, "0_null/抠图SEG", {
         entrance: "PICTURE,CLI",
@@ -96,7 +97,7 @@ export const removeBackgroundNoCrop = createCommand(
         artifacts[0].modality !== "PICTURE" ||
         artifacts[0].status !== "SUCCESS"
       ) {
-        throw new Error("Input is not a valid picture artifact UUID");
+        throw new Error(errors.invalid_picture_artifact_uuid);
       }
 
       return apis.artifact.postProcess(input_image, "0_null/抠图SEG", {

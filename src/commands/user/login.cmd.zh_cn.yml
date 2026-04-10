@@ -1,8 +1,5 @@
 name: login
 title: 登录
-description: 登录到你的 Neta 账户
+description: 通过 OAuth2 设备授权码流登录到你的 Neta 账户。 1. 运行命令 "login --action request-code" 请求验证码。 2. 打开浏览器并访问命令提供的 URL 完成校验。 3. 运行命令 "login --action verify-code" 验证验证码并完成登录流程。
 parameters:
   action: 要执行的操作 (request-code 请求验证码, verify-code 验证验证码)
-
-errors:
-  not_supported_in_current_region: 当前区域不支持此命令, 请设置 NETA_TOKEN 环境变量进行身份验证

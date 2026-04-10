@@ -1,12 +1,6 @@
 name: request_character_or_elementum
 title: Get Character or Elementum
 description: Fetch detailed information about a character or elementum by exact name or UUID.
-errors:
-  missing_id: Either name or uuid must be provided.
-  not_found: Character or elementum not found {identifier}
-  type_mismatch_character: The resolved type is "character", but parent_type="elementum" was specified. Please adjust parent_type or use a different name to search.
-  type_mismatch_elementum: The resolved type is "elementum", but parent_type="character" was specified. Please adjust parent_type or use a different name to search.
-  unknown_type: Unknown TCP type {type}
 parameters:
   name: |
     Exact name of the character or elementum.

@@ -11,6 +11,7 @@ import { filetypeinfo } from "magic-bytes.js";
 import plimit from "p-limit";
 import type { Apis } from "../../apis/index.ts";
 import type { Credentials } from "../../apis/oss.ts";
+import { errors } from "../../utils/errors.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { polling } from "../../utils/polling.ts";
 import { createCommand } from "../factory.ts";
@@ -59,10 +60,6 @@ const meta = parseMeta(
     parameters: Type.Object({
       file_path: Type.String(),
     }),
-    errors: Type.Object({
-      file_type_not_supported: Type.String(),
-      file_size_too_large: Type.String(),
-    }),
   }),
   import.meta,
 );
@@ -85,7 +82,7 @@ const s3Upload = async (
   const expires = new Date(expiration).getTime();
 
   if (now > expires) {
-    throw new Error("STS token expired");
+    throw new Error(errors.sts_token_expired);
   }
 
   const client = new S3Client({
@@ -193,7 +190,7 @@ const createArtifact = async (
     () => apis.artifact.artifactDetail([uuid]),
     (result) => {
       const artifact = result[0];
-      if (!artifact) throw new Error("Artifact not found");
+      if (!artifact) throw new Error(errors.artifact_not_found);
       logger.debug("polling: %o", artifact);
       return artifact.status !== "PENDING" && artifact.status !== "MODERATION";
     },
@@ -202,7 +199,7 @@ const createArtifact = async (
   );
 
   if (res.isTimeout) {
-    throw new Error("Timeout");
+    throw new Error(errors.operation_timeout);
   }
 
   // biome-ignore lint/style/noNonNullAssertion: checked
@@ -222,13 +219,7 @@ export const upload = createCommand(
       file_path: Type.String({ description: meta.parameters.file_path }),
     }),
   },
-  async ({ file_path }, { apis, user, log }) => {
-    if (!user) {
-      throw new Error(
-        "Not authenticated. Please check your NETA_TOKEN or login.",
-      );
-    }
-
+  async ({ file_path }, { apis, log }) => {
     const regionOptions = apis.baseUrl.endsWith(".cn")
       ? OSS_STS_OPTIONS_CN
       : OSS_STS_OPTIONS_US;
@@ -242,13 +233,13 @@ export const upload = createCommand(
     const infos = filetypeinfo(file);
     const info = infos[0]; // always use first extension
     if (!info || !info.extension || !info.mime) {
-      throw new Error(meta.errors.file_type_not_supported);
+      throw new Error(errors.upload_file_type_not_supported);
     }
 
     if (SUPPORTED_IMAGE_TYPES.includes(info.extension)) {
       if (file.length > DEFAULT_IMAGE_LIMIT_SIZE) {
         throw new Error(
-          meta.errors.file_size_too_large.replace(
+          errors.upload_file_size_too_large.replace(
             "{max_size}",
             DEFAULT_IMAGE_LIMIT_SIZE.toString(),
           ),
@@ -273,7 +264,7 @@ export const upload = createCommand(
     if (SUPPORTED_VIDEO_TYPES.includes(info.extension)) {
       if (file.length > DEFAULT_VIDEO_LIMIT_SIZE) {
         throw new Error(
-          meta.errors.file_size_too_large.replace(
+          errors.upload_file_size_too_large.replace(
             "{max_size}",
             DEFAULT_VIDEO_LIMIT_SIZE.toString(),
           ),
@@ -295,6 +286,6 @@ export const upload = createCommand(
       });
     }
 
-    throw new Error(meta.errors.file_type_not_supported);
+    throw new Error(errors.upload_file_type_not_supported);
   },
 );

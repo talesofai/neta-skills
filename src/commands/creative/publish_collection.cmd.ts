@@ -1,4 +1,5 @@
 import { Type } from "@sinclair/typebox";
+import { errors } from "../../utils/errors.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import type { CharacterPrompt } from "../../utils/prompts.ts";
 import { createCommand } from "../factory.ts";
@@ -52,21 +53,30 @@ export const publishCollection = createCommand(
     const activity =
       tagDetails.find((tag) => tag?.activity_detail?.uuid) ?? null;
 
-    const artifactDetails = await apis.artifact.artifactDetail(
-      artifacts.split(","),
-    );
+    const artifactIds = artifacts.split(",");
+    const artifactDetails = await apis.artifact.artifactDetail(artifactIds);
 
     if (artifactDetails.length < 1 || artifactDetails.length > 12) {
-      throw new Error("artifacts must be between 1 and 12");
+      throw new Error(errors.collection_artifact_count_range);
     }
 
     artifactDetails.forEach((artifact, index) => {
       if (!artifact) {
-        throw new Error(`artifact ${artifacts[index]} not found`);
+        throw new Error(
+          errors.collection_artifact_not_found.replace(
+            "{artifact_uuid}",
+            artifactIds[index] ?? "",
+          ),
+        );
       }
 
       if (artifact.status !== "SUCCESS") {
-        throw new Error(`artifact ${artifacts[index]} status is not success`);
+        throw new Error(
+          errors.collection_artifact_not_success.replace(
+            "{artifact_uuid}",
+            artifactIds[index] ?? "",
+          ),
+        );
       }
     });
 

@@ -1,0 +1,25 @@
+need_login: 需要登录到 NETA 账户, 请运行 "login --help" 获取更多信息或设置 NETA_TOKEN 环境变量进行身份验证
+not_supported_in_current_region: 当前区域不支持此命令, 请设置 NETA_TOKEN 环境变量进行身份验证
+premium_plans_config_not_found: 未找到会员订阅方案配置
+premium_plans_config_invalid: 会员订阅方案配置无效
+order_not_unpaid: 订单不是未支付状态
+order_expired: 订单已过期
+sts_token_expired: STS 凭证已过期
+artifact_not_found: 未找到素材
+operation_timeout: 操作超时
+upload_file_type_not_supported: 文件类型不支持
+upload_file_size_too_large: 文件大小超过最大限制, 最大支持 {max_size} 字节
+invalid_picture_artifact_uuid: 输入不是有效的图片素材 UUID
+tcp_missing_id_or_name: 必须提供 name 或 uuid 参数之一
+tcp_not_found: 未找到角色或元素 {identifier}
+tcp_type_mismatch_character: 找到的类型为 "character"（角色），但指定了 parent_type="elementum"（风格元素）。请调整 parent_type 参数或使用不同的名称搜索。
+tcp_type_mismatch_elementum: 找到的类型为 "elementum"（风格元素），但指定了 parent_type="character"（角色）。请调整 parent_type 参数或使用不同的名称搜索。
+tcp_unknown_type: 未知 TCP 类型 {type}
+hashtag_not_linked_to_activity_space: Hashtag "{hashtag}" 未关联任何活动空间
+collection_artifact_count_range: 素材数量必须在 1 到 12 之间
+collection_artifact_not_found: 未找到素材 {artifact_uuid}
+collection_artifact_not_success: 素材 {artifact_uuid} 状态不是成功
+creative_collection_not_found: 未找到合集 {uuid}
+action_fail: "{action} 失败"
+create_comment_fail: 发表评论失败
+collection_not_found: 未找到合集 "{uuid}"

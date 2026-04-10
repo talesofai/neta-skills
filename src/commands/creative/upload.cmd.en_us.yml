@@ -4,7 +4,3 @@ description: Upload a media file (image or video) to create a media artifact.
 
 parameters:
   file_path: Local media path (absolute or relative to cwd), or http(s) URL to fetch the file
-
-errors:
-  file_type_not_supported: Media file type not supported
-  file_size_too_large: Media file size too large, maximum size is {max_size} bytes

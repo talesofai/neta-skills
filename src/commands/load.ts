@@ -9,7 +9,7 @@ import { type TLiteral, Type } from "@sinclair/typebox";
 import { AssertError, Value } from "@sinclair/typebox/value";
 import { createApis } from "../apis/index.ts";
 import { API_BASE_URL, IS_DEV } from "../utils/env.ts";
-import { ApiResponseError } from "../utils/errors.ts";
+import { ApiResponseError, errors } from "../utils/errors.ts";
 import { getSysLocale } from "../utils/lang.ts";
 import { logger } from "../utils/logger.ts";
 import { setLocale } from "../utils/parse_meta.ts";
@@ -73,7 +73,8 @@ export const buildCommands = async (
 
   commands.forEach((cmd) => {
     const command = cli.command(cmd.name);
-    command.description(cmd.title || cmd.description || "");
+    command.description(cmd.description || "");
+    command.summary(cmd.title || "");
     const inputSchema = cmd.inputSchema;
 
     if (inputSchema && "properties" in inputSchema) {
@@ -139,19 +140,24 @@ export const buildCommands = async (
       });
 
       const user =
-        cmd.name === "login" || cmd.name === "logout"
+        cmd.name === "login"
           ? null
           : await apis.user.me().catch((e) => {
               if (e instanceof ApiResponseError) {
-                return null;
+                logger.info(`${e.name}[${e.code}]: ${e.message}`);
+              } else {
+                logger.warn(e);
               }
-              return null;
+
+              throw new Error(errors.need_login);
             });
 
       const startTime = Date.now();
-      logger.debug("[telemetry] user: %s", user?.uuid);
 
-      trackConfigUser(user ? { user_unique_id: user.uuid } : null);
+      if (user) {
+        logger.debug("[telemetry] user: %s", user.uuid);
+        trackConfigUser({ user_unique_id: user.uuid });
+      }
 
       track("command_call", {
         command: cmd.name,
@@ -166,7 +172,8 @@ export const buildCommands = async (
       await cmd
         .execute(input, {
           apis,
-          user,
+          // biome-ignore lint/style/noNonNullAssertion: ignore type error when user is null by login command
+          user: user!,
           log: logger,
         })
         .then((result) => {

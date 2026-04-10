@@ -32,7 +32,7 @@ export const Nullable = <T extends TSchema>(schema: T) =>
   });
 
 export interface CommandExtra {
-  user: UserInfo | null;
+  user: UserInfo;
   apis: Apis;
   log: Pick<Console, "error" | "warn" | "info" | "debug">;
 }

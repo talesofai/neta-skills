@@ -1,4 +1,5 @@
 import { Type } from "@sinclair/typebox";
+import { errors } from "../../utils/errors.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
@@ -29,7 +30,7 @@ export const likeCollectionCmd = createCommand(
     const success = await apis.collection.likeCollection(uuid, { is_cancel });
 
     if (!success) {
-      throw new Error(`${action} fail`);
+      throw new Error(errors.action_fail.replace("{action}", action));
     }
 
     return {

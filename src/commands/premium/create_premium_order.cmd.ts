@@ -1,6 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import { parseDate } from "../../utils/date.ts";
 import { IS_GLOBAL } from "../../utils/env.ts";
+import { errors } from "../../utils/errors.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
@@ -27,7 +28,7 @@ export const createPremiumOrder = createCommand(
   },
   async ({ spu_uuid }, { apis }) => {
     if (!IS_GLOBAL) {
-      throw new Error("This command is not supported in the current region");
+      throw new Error(errors.not_supported_in_current_region);
     }
 
     const order = await apis.commerce.createOrder({

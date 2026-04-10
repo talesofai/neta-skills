@@ -1,6 +1,3 @@
 name: get_hashtag_collections
 title: Get Featured Collections Under Hashtag
 description: Retrieve featured collections associated with a given hashtag.
-errors:
-  no_activity_space: Hashtag "{hashtag}" is not linked to any activity space.
-

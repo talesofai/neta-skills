@@ -1,5 +1,14 @@
 # @neta/skills-neta
 
+## 0.16.6
+
+### Patch Changes
+
+- update read_collection commands api
+- add user check for all commands exclude "login"
+- move inline error text to utils/errors.ts file
+- remove authorization from SKILL.md, add login usage to not authorization error and login -h command
+
 ## 0.16.5
 
 ### Patch Changes

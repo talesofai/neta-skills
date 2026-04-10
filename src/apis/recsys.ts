@@ -114,11 +114,24 @@ export const createRecsysApis = (client: AxiosInstance) => {
     return response.data;
   };
 
+  const detail = async (uuid: string) => {
+    const response = await client.get<FeedInteractionList>(
+      "/v1/recsys/interactive/details",
+      {
+        params: {
+          uuid,
+        },
+      },
+    );
+    return response.data.module_list[0];
+  };
+
   return {
     suggestKeywords,
     suggestTags,
     suggestCategories,
     suggestContent,
     validateTaxPath,
+    detail,
   };
 };

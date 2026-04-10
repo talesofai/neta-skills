@@ -37,12 +37,6 @@ export const listMyAdventureCampaigns = createCommand(
     inputSchema: listMyAdventureCampaignsParameters,
   },
   async ({ page_index, page_size }, { user, apis }) => {
-    if (!user) {
-      throw new Error(
-        "Not authenticated. Please check your NETA_TOKEN or login.",
-      );
-    }
-
     const result = await apis.travelCampaign.listMyCampaigns({
       user_uuid: user.uuid,
       page_index,

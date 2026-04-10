@@ -1,4 +1,5 @@
 import { Type } from "@sinclair/typebox";
+import { errors } from "../../utils/errors.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
@@ -7,9 +8,6 @@ const meta = parseMeta(
     name: Type.String(),
     title: Type.String(),
     description: Type.String(),
-    errors: Type.Object({
-      no_activity_space: Type.String(),
-    }),
   }),
   import.meta,
 );
@@ -46,7 +44,7 @@ export const getHashtagCollections = createCommand(
 
     if (!activity_uuid) {
       throw new Error(
-        meta.errors.no_activity_space.replace(
+        errors.hashtag_not_linked_to_activity_space.replace(
           "{hashtag}",
           String(hashtag ?? "").trim(),
         ),

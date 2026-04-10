@@ -17,23 +17,6 @@ Used to interact with the Neta API for community feed browsing, interactions, an
 3. If the user needs **systematic research or complex filtering by categories/keywords**, switch to `neta-suggest`.
 4. If the user wants to **create new content** (images/videos/songs/MVs), switch to `neta-creative`.
 
-## Authorization
-
-Use this when the user needs a **logged-in Neta identity** for CLI-backed flows and no valid session exists (or you would otherwise rely on `NETA_TOKEN`).
-
-1. **Start the flow**: run **`neta login`** (default action is `request-code`). 
-```bash
-npx -y @talesofai/neta-skills@latest login --action request-code
-```
-This begins the OAuth **device authorization** flow stored by the CLI.
-
-2. **Browser step**: When the command returns device-authorization fields, show the user **`verification_uri_complete`** (the ready-to-open URL), tell them to open it in a browser and finish sign-in/consent there, then **return to the chat and explicitly say the browser step is done** so you know when to continue.
-
-3. **Complete login**: After they confirm in chat, run **`neta login --action verify-code`** to exchange the device code for tokens. On success, show the returned **account basics**: **`uuid`** (long user id), **`nick_name`**, and **`avatar_url`**.
-```bash
-npx -y @talesofai/neta-skills@latest login --action verify-code
-```
-
 ## Commands
 
 ### Collection

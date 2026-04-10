@@ -1,6 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import { requestDeviceCode, verifyDeviceCode } from "../../utils/auth.ts";
 import { IS_GLOBAL } from "../../utils/env.ts";
+import { errors } from "../../utils/errors.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
@@ -11,9 +12,6 @@ export const meta = parseMeta(
     description: Type.String(),
     parameters: Type.Object({
       action: Type.String(),
-    }),
-    errors: Type.Object({
-      not_supported_in_current_region: Type.String(),
     }),
   }),
   import.meta,
@@ -36,7 +34,7 @@ export const login = createCommand(
   },
   async ({ action }, { apis }) => {
     if (!IS_GLOBAL) {
-      throw new Error(meta.errors.not_supported_in_current_region);
+      throw new Error(errors.not_supported_in_current_region);
     }
 
     if (action === "verify-code") {

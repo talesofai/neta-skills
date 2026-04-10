@@ -27,11 +27,6 @@ export const listMyCharacters = createCommand(
     inputSchema: listMyCharactersParameters,
   },
   async ({ keyword, page_index, page_size }, { apis, user }) => {
-    // Get current user info to obtain UUID
-    if (!user) {
-      throw new Error("Failed to get user info. Please check your NETA_TOKEN.");
-    }
-
     const result = await apis.tcp.listMyTCPs({
       user_uuid: user.uuid,
       parent_type: "oc",

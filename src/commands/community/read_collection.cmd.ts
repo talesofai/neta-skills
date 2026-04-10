@@ -1,5 +1,6 @@
 import { Type } from "@sinclair/typebox";
 import { isVerseCTA } from "../../apis/collection.ts";
+import { errors } from "../../utils/errors.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 
@@ -22,10 +23,10 @@ export const readCollectionCmd = createCommand(
     }),
   },
   async ({ uuid }, { apis }) => {
-    const res = await apis.feeds.interactiveItem({ collection_uuid: uuid });
+    const res = await apis.recsys.detail(uuid);
 
     if (!res || res.template_id !== "NORMAL") {
-      throw new Error(`Collection "${uuid}" not found`);
+      throw new Error(errors.collection_not_found.replace("{uuid}", uuid));
     }
 
     const name = res.json_data.name;

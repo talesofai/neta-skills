@@ -1,6 +1,7 @@
 import { Type } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
 import { IS_GLOBAL } from "../../utils/env.ts";
+import { errors } from "../../utils/errors.ts";
 import { safeParseJson } from "../../utils/json.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
@@ -61,12 +62,12 @@ export const listPremiumPlans = createCommand(
   },
   async (_, { apis }) => {
     if (!IS_GLOBAL) {
-      throw new Error("This command is not supported in the current region");
+      throw new Error(errors.not_supported_in_current_region);
     }
 
     const plansConfigValue = await apis.commerce.listPlansConfig();
     if (!plansConfigValue || plansConfigValue.type !== "json") {
-      throw new Error("Premium subscription plans config not found");
+      throw new Error(errors.premium_plans_config_not_found);
     }
 
     const json = safeParseJson(plansConfigValue.value);
@@ -79,7 +80,7 @@ export const listPremiumPlans = createCommand(
         plans,
       };
     } catch (error) {
-      throw new Error("Premium subscription plans config is invalid", {
+      throw new Error(errors.premium_plans_config_invalid, {
         cause: error,
       });
     }
