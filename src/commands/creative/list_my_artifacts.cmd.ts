@@ -48,13 +48,7 @@ export const listMyArtifacts = createCommand(
     description: meta.description,
     inputSchema: listMyArtifactsParameters,
   },
-  async ({ page_index, page_size, modality, is_starred }, { apis, user }) => {
-    if (!user) {
-      throw new Error(
-        "Not authenticated. Please check your NETA_TOKEN or login.",
-      );
-    }
-
+  async ({ page_index, page_size, modality, is_starred }, { apis }) => {
     const resolvedPageSize = page_size ?? 20;
     const result = await apis.artifact.listArtifacts({
       page_index,

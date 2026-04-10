@@ -1,0 +1,14 @@
+name: me
+title: Who Am I
+description: |
+  Show the current authenticated user's profile and account summary.
+
+  Returns: uuid, nick_name, avatar_url, AP balance (ap / ap_limit),
+  content counts (total_collections, total_pictures, total_travel_characters),
+  and active privileges.
+
+  Related commands:
+    - get_ap_info: detailed AP balance breakdown
+    - list_my_characters / list_my_elementum: your created characters and elementum
+
+parameters: {}

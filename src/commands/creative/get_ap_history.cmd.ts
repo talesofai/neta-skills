@@ -36,13 +36,7 @@ export const getApHistory = createCommand(
     description: meta.description,
     inputSchema: getApHistoryParameters,
   },
-  async ({ cursor_id, page_size }, { apis, user }) => {
-    if (!user) {
-      throw new Error(
-        "Not authenticated. Please check your NETA_TOKEN or login.",
-      );
-    }
-
+  async ({ cursor_id, page_size }, { apis }) => {
     return apis.user.apDeltaInfo({ cursor_id, page_size });
   },
 );

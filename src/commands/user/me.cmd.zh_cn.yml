@@ -1,7 +1,7 @@
-name: get_profile
-title: 获取我的个人资料
+name: me
+title: 我是谁
 description: |
-  获取当前用户的个人资料、统计数据和账户概览。
+  显示当前已登录用户的个人资料和账户概览。
 
   返回：uuid、昵称、头像、AP 电量（ap / ap_limit）、内容数量
   （作品数、生图数、奇遇角色数）以及当前有效的权益。

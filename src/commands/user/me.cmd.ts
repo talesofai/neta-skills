@@ -11,19 +11,13 @@ const meta = parseMeta(
   import.meta,
 );
 
-export const getProfile = createCommand(
+export const me = createCommand(
   {
     name: meta.name,
     title: meta.title,
     description: meta.description,
   },
   async (_args, { user }) => {
-    if (!user) {
-      throw new Error(
-        "Not authenticated. Please check your NETA_TOKEN or login.",
-      );
-    }
-
     return {
       uuid: user.uuid,
       nick_name: user.nick_name ?? null,
