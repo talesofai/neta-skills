@@ -24,7 +24,7 @@ export const getApInfo = createCommand(
       ap_limit: info.ap_limit,
       temp_ap: info.temp_ap ?? null,
       paid_ap: info.paid_ap ?? null,
-      unlimited_until: info.unlimited_until ?? null,
+      unlimited_until: info.unlimited_until,
     };
   },
 );
