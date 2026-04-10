@@ -1,5 +1,13 @@
 # @neta/skills-neta
 
+## 0.17.0
+
+### Minor Changes
+
+- Add authenticated user commands: `me` (profile/identity check), `get_ap_info` (AP balance breakdown), `get_ap_history` (cursor-paginated AP transactions), and `list_my_artifacts` (offset-paginated generated media with modality/starred filters)
+- API layer: add `apInfo()`, `apDeltaInfo()` to user APIs; add `listArtifacts()` to artifact APIs
+- Documentation: add "Credits & your artifacts" section to neta-creative SKILL.md (EN/ZH); add reference docs `ap-credits.md` and `my-artifacts.md` (EN/ZH)
+
 ## 0.16.7
 
 ### Patch Changes
