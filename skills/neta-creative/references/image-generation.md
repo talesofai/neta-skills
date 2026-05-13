@@ -54,6 +54,8 @@ npx -y @talesofai/neta-skills@latest make_image \
   --model_series "8_image_edit"
 ```
 
+- **9_image_edit_bravo**: Updated experimental model. Only use when explicitly requested by the user.
+
 ## Aspect Ratio Selection
 
 | Ratio | Resolution | Use Cases |
