@@ -54,6 +54,8 @@ npx -y @talesofai/neta-skills@latest make_image \
   --model_series "8_image_edit"
 ```
 
+- 9_image_edit_bravo: 更新的试验性模型，仅在用户明确要求时使用。
+
 ## 宽高比选择
 
 | 比例 | 分辨率 | 适用场景 |

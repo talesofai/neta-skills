@@ -50,7 +50,11 @@ const makeImageV1Parameters = Type.Object({
     }),
   ),
   model_series: Type.Union(
-    [Type.Literal("8_image_edit"), Type.Literal("3_noobxl")],
+    [
+      Type.Literal("8_image_edit"),
+      Type.Literal("3_noobxl"),
+      Type.Literal("9_image_edit_bravo"),
+    ],
     {
       default: "8_image_edit",
       description: meta.parameters.model_series,
