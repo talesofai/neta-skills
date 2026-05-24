@@ -1,6 +1,6 @@
 ---
 name: neta
-description: Neta capability index and routing skill - help choose the appropriate Neta-related skill (neta-space / neta-creative / neta-adventure / neta-community / neta-suggest). Use this skill when you need to understand Neta's overall capabilities, decide which skill fits the current task, or migrate from older documentation that referenced the monolithic neta skill.
+description: "Neta capability overview and routing guide. Routes requests to the right Neta sub-skill for spaces, content creation, adventures, community, characters, visual styles, and suggestions. Triggers: what can Neta do, Neta help, which Neta feature, show Neta capabilities, list Neta tools, Neta overview. Use when the task does not clearly fit one sub-skill or when migrating from legacy monolithic Neta documentation."
 ---
 
 # Neta Skill

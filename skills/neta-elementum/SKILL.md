@@ -1,11 +1,11 @@
 ---
 name: neta-elementum
-description: Neta Elementum Alchemy Skill - Guides users through creating or updating style element (Elementum) VTokens (Virtual Tokens, TCP). Elementum encapsulates a visual concept (scene, prop, clothing, weapon, pose, atmosphere, meme, etc.) and can be referenced in make_image via /ElementName after creation. Use this skill when users want to create new Elementa, encapsulate visual styles or concepts, or modify existing Elementa.
+description: "Guides users through creating, updating, searching, and refining reusable style tokens (Elementum VTokens) that encapsulate visual concepts like scenes, clothing, poses, or art styles. Follows a four-stage alchemy workflow. After creation, tokens are referenced in make_image via /ElementName. Use when users want to save a style, create a visual template, or modify existing Elementa."
 ---
 
 # Neta Elementum Skill
 
-Through the "Elementum Alchemy" workflow, forge any visual concept into a reusable VToken (Virtual Token, TCP/Elementum). Can be referenced in `make_image` via `/ElementName` after creation.
+Through the "Elementum Alchemy" workflow, forge any visual concept into a reusable style token (VToken/TCP/Elementum). Save a style, create a visual template, or build a reusable style that can be referenced in `make_image` via `/ElementName` after creation.
 
 > This skill requires the **neta-creative** skill to use `make_image` for visual previews.
 
@@ -15,7 +15,12 @@ Through the "Elementum Alchemy" workflow, forge any visual concept into a reusab
 
 **Full Alchemy Flow (Recommended)**
 
-Follow the four-stage workflow: "Concept Confirmation → Visual Preview → Refinement → Confirmation".
+Follow the four-stage workflow:
+
+1. **Concept Confirmation** — Clarify what visual concept the user wants to capture (e.g. a scene, art style, pose).
+2. **Visual Preview** — Generate a representative image with `make_image` so the user can see the style token before committing.
+3. **Refinement** — Iterate on the prompt and preview until the result matches the intended concept.
+4. **Final Confirmation** — Lock in the Elementum via `create_elementum` with the approved artifact.
 
 📖 [Alchemy Guide](./references/elementum-alchemy.md) - Complete alchemy workflow and best practices
 
@@ -87,5 +92,5 @@ Elementum encapsulates a **visual concept**, with wide applicability:
 
 1. **Preview before forging** - Use `make_image` to generate element representative images, confirm satisfaction before calling `create_elementum`; `artifact_uuid` is the `artifacts[0].uuid` from the representative image
 2. **prompt for image models** - `prompt` is the direct image generation instruction passed to `make_image`, should be clear, composable, concise and precise; after writing, it should be pasteable directly into `make_image --prompt`
-3. **description for Agents** - `description` tells Agents what this element is, how to use it, and any注意事项; recommended format: "This element represents [concept], use by [method], reference image shows [description]"
+3. **description for Agents** - `description` tells Agents what this element is, how to use it, and any usage notes; recommended format: "This element represents [concept], use by [method], reference image shows [description]"
 4. **ref_image for style anchoring** - If there's a specific reference image (e.g., game screenshot, reference scene), pass `ref_image_uuid` to let image models anchor the visual style
